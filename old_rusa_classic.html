@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rusa Adventure - 2D Physics Platformer</title>
+    <meta name="description" content="Mini game web 2D Physics Platformer klasik dengan HTML5 Canvas, Vanilla JavaScript, dan Tailwind CSS.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0b0f19;
+            font-family: 'Outfit', sans-serif;
+        }
+        .font-game {
+            font-family: 'Fredoka', cursive;
+        }
+        #gameCanvas, .touch-control {
+            touch-action: none;
+        }
+        /* Glassmorphism helpers */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+        }
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .glass-btn:active {
+            transform: translateY(0px) scale(0.97);
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: floatSlow 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative w-full h-full flex items-center justify-center bg-slate-950 text-white select-none overflow-hidden">
+
+    <!-- GAME CANVAS CONTAINER -->
+    <div id="canvasContainer" class="relative w-full h-full flex items-center justify-center overflow-hidden">
+        <canvas id="gameCanvas" class="block cursor-default shadow-2xl rounded-none md:rounded-lg"></canvas>
+
+        <!-- TOP HUD (FIXED/OVERLAY) -->
+        <header id="hud" class="absolute top-0 left-0 right-0 p-3 md:p-4 flex justify-between items-center pointer-events-none z-20 transition-opacity duration-300 opacity-0">
+            <!-- Left: Lives & Level Badge -->
+            <div class="flex items-center space-x-2 md:space-x-3 pointer-events-auto">
+                <div class="glass-panel px-3 py-1.5 md:px-4 md:py-2 rounded-xl flex items-center space-x-2 text-sm md:text-base font-bold">
+                    <span class="text-rose-500 text-lg md:text-xl">❤️</span>
+                    <span id="hudLives" class="font-game text-rose-300">× 3</span>
+                </div>
+                <div class="glass-panel px-3 py-1.5 md:px-4 md:py-2 rounded-xl flex items-center space-x-2 text-xs md:text-sm font-semibold tracking-wide">
+                    <span id="hudWorld" class="text-emerald-400 font-game">WORLD 1-1</span>
+                </div>
+            </div>
+
+            <!-- Center: Score & Coins -->
+            <div class="flex items-center space-x-2 md:space-x-3 pointer-events-auto">
+                <div class="glass-panel px-3 py-1.5 md:px-4 md:py-2 rounded-xl flex items-center space-x-2 text-xs md:text-sm font-bold">
+                    <span class="text-amber-400 text-base md:text-lg">⭐</span>
+                    <span class="hidden sm:inline text-slate-400 text-[10px] uppercase tracking-wider">SKOR:</span>
+                    <span id="hudScore" class="font-game text-amber-300 font-mono tracking-wider">000000</span>
+                </div>
+                <div class="glass-panel px-3 py-1.5 md:px-4 md:py-2 rounded-xl flex items-center space-x-2 text-xs md:text-sm font-bold">
+                    <span class="text-yellow-400 text-base md:text-lg">🪙</span>
+                    <span id="hudCoins" class="font-game text-yellow-300 font-mono">00</span>
+                </div>
+            </div>
+
+            <!-- Right: Time, Sound Toggle, Pause -->
+            <div class="flex items-center space-x-1.5 md:space-x-2 pointer-events-auto">
+                <div class="glass-panel px-2.5 py-1.5 md:px-4 md:py-2 rounded-xl flex items-center space-x-1.5 text-xs md:text-sm font-bold">
+                    <span class="text-sky-400">⏱️</span>
+                    <span id="hudTime" class="font-mono text-sky-300">000</span>
+                </div>
+                <button id="btnAudioToggle" class="glass-btn w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-base md:text-lg" title="Mute/Unmute Audio (M)">
+                    <span id="audioIcon">🔊</span>
+                </button>
+                <button id="btnPauseToggle" class="glass-btn w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-base md:text-lg" title="Pause Game (ESC)">
+                    ⏸️
+                </button>
+            </div>
+        </header>
+
+        <!-- MOBILE VIRTUAL CONTROLS (Pointer Events) -->
+        <div id="virtualControls" class="absolute bottom-4 left-0 right-0 px-4 md:px-8 flex justify-between items-end pointer-events-none z-20 select-none hidden opacity-0 transition-opacity duration-300">
+            <!-- D-Pad Left / Right -->
+            <div class="flex space-x-3 pointer-events-auto">
+                <button id="btnLeft" class="touch-control w-16 h-16 rounded-2xl bg-white/15 active:bg-emerald-500/40 border border-white/25 backdrop-blur-md flex items-center justify-center text-2xl shadow-xl transition-transform active:scale-95" aria-label="Gerak Kiri">
+                    ◀
+                </button>
+                <button id="btnRight" class="touch-control w-16 h-16 rounded-2xl bg-white/15 active:bg-emerald-500/40 border border-white/25 backdrop-blur-md flex items-center justify-center text-2xl shadow-xl transition-transform active:scale-95" aria-label="Gerak Kanan">
+                    ▶
+                </button>
+            </div>
+            <!-- Jump Button -->
+            <div class="pointer-events-auto">
+                <button id="btnJump" class="touch-control w-20 h-20 rounded-3xl bg-emerald-500/30 active:bg-emerald-500/60 border border-emerald-400/40 backdrop-blur-md flex flex-col items-center justify-center text-xl shadow-2xl transition-transform active:scale-95" aria-label="Lompat">
+                    <span class="text-2xl font-bold">▲</span>
+                    <span class="text-[10px] font-game uppercase tracking-wider text-emerald-200">LOMPAT</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- UI MODAL OVERLAYS -->
+        <!-- 1. START MENU MODAL -->
+        <div id="menuModal" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-30 transition-all duration-300">
+            <div class="glass-panel max-w-md w-full p-6 md:p-8 rounded-3xl text-center flex flex-col items-center relative overflow-hidden border border-emerald-500/30 shadow-2xl">
+                <!-- Decorative Glow -->
+                <div class="absolute -top-16 -left-16 w-36 h-36 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-16 -right-16 w-36 h-36 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                <!-- Game Title -->
+                <div class="mb-3">
+                    <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold uppercase tracking-widest mb-2">
+                        2D Physics Platformer
+                    </span>
+                    <h1 class="text-3xl md:text-4xl font-game font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 drop-shadow-md">
+                        RUSA ADVENTURE
+                    </h1>
+                    <p class="text-xs md:text-sm text-slate-300 mt-1">Petualangan platformer klasik yang seru & responsif</p>
+                </div>
+
+                <!-- Character Preview Card -->
+                <div class="w-32 h-36 my-2 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 relative overflow-hidden group shadow-inner">
+                    <img id="menuPlayerPreview" src="assets/player.png" onerror="this.src='karakterrusa.png'; this.onerror=null;" alt="Karakter Rusa" class="h-28 object-contain animate-float drop-shadow-lg transition-transform">
+                </div>
+
+                <!-- Stats Summary -->
+                <div class="w-full grid grid-cols-2 gap-2 my-3 text-xs">
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-2.5">
+                        <span class="text-slate-400 block mb-0.5">Skor Tertinggi</span>
+                        <span id="menuHighScore" class="font-game text-amber-300 text-base font-bold">0</span>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-2.5">
+                        <span class="text-slate-400 block mb-0.5">Koin Terkumpul</span>
+                        <span id="menuTotalCoins" class="font-game text-yellow-300 text-base font-bold">0</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="w-full flex flex-col space-y-2.5 mt-2">
+                    <button id="btnPlayGame" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 active:scale-[0.98] font-game font-bold text-lg md:text-xl text-slate-950 shadow-lg shadow-emerald-500/25 transition-all">
+                        ▶ MULAI MAIN
+                    </button>
+                    <div class="flex space-x-2">
+                        <button id="btnHowToPlay" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold text-slate-200">
+                            CARA MAIN
+                        </button>
+                        <button id="btnLevelSelect" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold text-slate-200">
+                            PILIH LEVEL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. HOW TO PLAY MODAL -->
+        <div id="howToPlayModal" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-md w-full p-6 md:p-8 rounded-3xl text-left border border-white/20 shadow-2xl">
+                <h2 class="text-2xl font-game font-bold text-emerald-300 mb-4 text-center">CARA BERMAIN</h2>
+
+                <div class="space-y-3.5 text-xs md:text-sm text-slate-300">
+                    <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                        <div class="flex space-x-1 font-mono font-bold text-xs bg-black/40 px-2 py-1.5 rounded-lg text-emerald-400">
+                            <span>A / D</span>
+                            <span>atau</span>
+                            <span>◀ ▶</span>
+                        </div>
+                        <span class="flex-1">Berjalan ke kiri & kanan</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                        <div class="font-mono font-bold text-xs bg-black/40 px-2.5 py-1.5 rounded-lg text-emerald-400">
+                            SPACE / W / ▲
+                        </div>
+                        <span class="flex-1">Melompat (tahan tombol untuk lompatan lebih tinggi)</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3 bg-white/5 p-3 rounded-xl border border-white/10">
+                        <div class="font-mono font-bold text-xs bg-black/40 px-2.5 py-1.5 rounded-lg text-emerald-400">
+                            ESC
+                        </div>
+                        <span class="flex-1">Jeda Game (Pause)</span>
+                    </div>
+
+                    <div class="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                        <h4 class="font-bold text-emerald-300 mb-1">Tips Permainan:</h4>
+                        <ul class="list-disc list-inside space-y-1 text-slate-300 text-xs">
+                            <li>Injak musuh dari atas untuk mengalahkannya dan memantul ke atas!</li>
+                            <li>Sentuh tiang bendera untuk menyimpan Checkpoint respawn.</li>
+                            <li>Ambil koin emas bintang untuk menambah skor.</li>
+                            <li>Tekan tombol tanda petik (~) untuk mengaktifkan Debug Mode.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <button id="btnCloseHowTo" class="mt-5 w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 font-game font-semibold text-white transition-all">
+                    MENGERTI
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. LEVEL SELECT MODAL -->
+        <div id="levelSelectModal" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-md w-full p-6 md:p-8 rounded-3xl text-center border border-white/20 shadow-2xl">
+                <h2 class="text-2xl font-game font-bold text-emerald-300 mb-2">PILIH LEVEL</h2>
+                <p class="text-xs text-slate-300 mb-5">Pilih level yang telah berhasil Anda buka</p>
+
+                <div class="grid grid-cols-1 gap-2.5 mb-5" id="levelButtonsContainer"></div>
+
+                <div class="flex space-x-3">
+                    <button id="btnResetProgress" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs font-semibold text-rose-300 border-rose-500/30 hover:bg-rose-500/10">
+                        RESET PROGRESS
+                    </button>
+                    <button id="btnCloseLevelSelect" class="flex-1 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-game font-semibold text-white">
+                        KEMBALI
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. PAUSE MODAL -->
+        <div id="pauseModal" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-sm w-full p-6 rounded-3xl text-center border border-white/20 shadow-2xl">
+                <h2 class="text-3xl font-game font-bold text-amber-300 mb-1">GAME DIJEDA</h2>
+                <p class="text-xs text-slate-400 mb-5">Waktu dan pergerakan dihentikan</p>
+
+                <div class="flex flex-col space-y-2.5">
+                    <button id="btnResume" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 font-game font-bold text-slate-950 shadow-md">
+                        LANJUTKAN
+                    </button>
+                    <button id="btnRestartLevel" class="glass-btn w-full py-2.5 rounded-xl text-sm font-semibold text-slate-200">
+                        ULANGI LEVEL
+                    </button>
+                    <button id="btnPauseMainMenu" class="glass-btn w-full py-2.5 rounded-xl text-sm font-semibold text-slate-300">
+                        MENU UTAMA
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. LEVEL COMPLETE MODAL -->
+        <div id="levelCompleteModal" class="absolute inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-md w-full p-6 md:p-8 rounded-3xl text-center border border-emerald-500/40 shadow-2xl">
+                <div class="text-4xl mb-2">🎉</div>
+                <h2 class="text-3xl font-game font-bold text-emerald-300 mb-1">LEVEL SELESAI!</h2>
+                <p id="completeLevelTitle" class="text-xs text-slate-300 mb-4">Luar biasa! Kamu berhasil menuntaskan level ini.</p>
+
+                <div class="grid grid-cols-3 gap-2 bg-white/5 border border-white/10 p-3 rounded-2xl mb-5 text-xs">
+                    <div>
+                        <span class="text-slate-400 block">Skor</span>
+                        <span id="completeScore" class="font-game text-amber-300 text-base font-bold">0</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Koin</span>
+                        <span id="completeCoins" class="font-game text-yellow-300 text-base font-bold">0</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Waktu</span>
+                        <span id="completeTime" class="font-mono text-sky-300 text-base font-bold">0s</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col space-y-2.5">
+                    <button id="btnNextLevel" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 font-game font-bold text-lg text-slate-950 shadow-lg shadow-emerald-500/25">
+                        LEVEL BERIKUTNYA ▶
+                    </button>
+                    <button id="btnCompleteMenu" class="glass-btn w-full py-2.5 rounded-xl text-xs font-semibold text-slate-300">
+                        MENU UTAMA
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. GAME OVER MODAL -->
+        <div id="gameOverModal" class="absolute inset-0 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-sm w-full p-6 md:p-8 rounded-3xl text-center border border-rose-500/30 shadow-2xl">
+                <div class="text-4xl mb-2">💀</div>
+                <h2 class="text-3xl font-game font-bold text-rose-400 mb-1">GAME OVER</h2>
+                <p class="text-xs text-slate-300 mb-5">Nyawa Anda telah habis!</p>
+
+                <div class="bg-white/5 border border-white/10 p-3 rounded-2xl mb-5 text-sm">
+                    <span class="text-slate-400 block text-xs">Skor Akhir:</span>
+                    <span id="gameOverScore" class="font-game text-amber-300 text-2xl font-bold">0</span>
+                </div>
+
+                <div class="flex flex-col space-y-2.5">
+                    <button id="btnTryAgain" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-400 font-game font-bold text-lg text-white shadow-lg shadow-rose-500/25">
+                        COBA LAGI (TRY AGAIN)
+                    </button>
+                    <button id="btnGameOverMenu" class="glass-btn w-full py-2.5 rounded-xl text-xs font-semibold text-slate-300">
+                        MENU UTAMA
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. WIN MODAL (ALL LEVELS CLEARED) -->
+        <div id="winModal" class="absolute inset-0 bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 z-40 hidden">
+            <div class="glass-panel max-w-md w-full p-6 md:p-8 rounded-3xl text-center border border-yellow-400/40 shadow-2xl">
+                <div class="text-5xl mb-2">🏆</div>
+                <h2 class="text-3xl md:text-4xl font-game font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-200 to-emerald-300 mb-1">
+                    YOU WIN!
+                </h2>
+                <p class="text-xs md:text-sm text-slate-200 mb-5">Selamat! Semua level berhasil kamu selesaikan dengan luar biasa!</p>
+
+                <div class="bg-white/5 border border-white/10 p-4 rounded-2xl mb-5 text-center space-y-2">
+                    <div class="flex justify-between items-center text-xs border-b border-white/10 pb-2">
+                        <span class="text-slate-400">Total Skor Akhir:</span>
+                        <span id="winTotalScore" class="font-game text-amber-300 text-lg font-bold">0</span>
+                    </div>
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="text-slate-400">Total Koin Terkumpul:</span>
+                        <span id="winTotalCoins" class="font-game text-yellow-300 text-lg font-bold">0</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col space-y-2.5">
+                    <button id="btnPlayAgain" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-400 hover:from-emerald-300 font-game font-bold text-lg text-slate-950 shadow-lg shadow-emerald-500/30">
+                        MAIN LAGI
+                    </button>
+                    <button id="btnWinMainMenu" class="glass-btn w-full py-2.5 rounded-xl text-xs font-semibold text-slate-300">
+                        MENU UTAMA
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PURE JAVASCRIPT GAME ENGINE -->
+    <script>
+    /* ==========================================================================
+       1. CONFIG & CONSTANTS
+       ========================================================================== */
+    const DEBUG = false; // Toggle via code or tilde '~' / 'P' key for hitboxes & telemetry
+
+    // Custom Player Configuration (supports static PNG, multi-pose sprites, & sprite sheets)
+    const PLAYER_CONFIG = {
+        sprite: "assets/player_idle.png",
+        fallbackSprite: "karakterrusa.png",
+        sprites: {
+            idle: "assets/player_idle.png",
+            run: "assets/player_run1.png",
+            runFrames: [
+                "assets/player_run1.png",
+                "assets/player_run2.png",
+                "assets/player_run3.png",
+                "assets/player_run4.png"
+            ],
+            jump: "assets/player_run2.png",
+            fall: "assets/player_run1.png"
+        },
+        width: 48,
+        height: 72, // Matches natural 2:3 aspect ratio
+        scale: 1,
+        frameWidth: 48,
+        frameHeight: 64,
+        isSpriteSheet: false,
+        animations: {
+            idle: [],
+            run: [],
+            jump: [],
+            fall: []
+        }
+    };
+
+    // Platformer Physics Constants (Snappy, Fluid, & Responsive)
+    const PHYSICS = {
+        gravity: 0.60,
+        acceleration: 0.85,
+        friction: 0.84,
+        airFriction: 0.94,
+        maxSpeed: 7.2,
+        jumpForce: -12.5,
+        jumpCutMultiplier: 0.5,
+        coyoteTimeFrames: 8,
+        jumpBufferFrames: 7
+    };
+
+    // Game States
+    const GAME_STATE = {
+        MENU: "menu",
+        PLAYING: "playing",
+        PAUSED: "paused",
+        LEVEL_COMPLETE: "level_complete",
+        GAME_OVER: "game_over",
+        WIN: "win"
+    };
+
+    let currentState = GAME_STATE.MENU;
+    let debugEnabled = DEBUG;
+
+    /* ==========================================================================
+       2. ASSET LOADER (Multi-pose & Single Sprite Support)
+       ========================================================================== */
+    const playerImages = {
+        idle: new Image(),
+        run: new Image(),
+        runFrames: [new Image(), new Image(), new Image(), new Image()],
+        jump: new Image(),
+        fall: new Image()
+    };
+    const playerImage = playerImages.idle;
+    let playerSpriteSource = playerImage;
+    let isPlayerImageLoaded = false;
+    let playerImageLoadError = false;
+
+    function initAssetLoader() {
+        let loadedCount = 0;
+        const total = 4 + 4;
+        const checkDone = () => {
+            loadedCount++;
+            isPlayerImageLoaded = true;
+            playerImageLoadError = false;
+        };
+
+        const setupImg = (img, path, fallback) => {
+            img.onload = checkDone;
+            img.onerror = () => {
+                if (img.src.includes(path) && fallback) {
+                    img.src = fallback;
+                } else {
+                    console.warn(`Asset ${path} could not be loaded.`);
+                    checkDone();
+                }
+            };
+            img.src = path;
+        };
+
+        const cfg = PLAYER_CONFIG.sprites || {};
+        setupImg(playerImages.idle, cfg.idle || PLAYER_CONFIG.sprite, PLAYER_CONFIG.fallbackSprite);
+        setupImg(playerImages.run, cfg.run || cfg.idle || PLAYER_CONFIG.sprite, PLAYER_CONFIG.fallbackSprite);
+        setupImg(playerImages.jump, cfg.jump || cfg.run || PLAYER_CONFIG.sprite, PLAYER_CONFIG.fallbackSprite);
+        setupImg(playerImages.fall, cfg.fall || cfg.jump || PLAYER_CONFIG.sprite, PLAYER_CONFIG.fallbackSprite);
+
+        if (cfg.runFrames && Array.isArray(cfg.runFrames)) {
+            cfg.runFrames.forEach((framePath, idx) => {
+                if (!playerImages.runFrames[idx]) {
+                    playerImages.runFrames[idx] = new Image();
+                }
+                setupImg(playerImages.runFrames[idx], framePath, cfg.run || PLAYER_CONFIG.fallbackSprite);
+            });
+        }
+    }
+
+    /* ==========================================================================
+       3. AUDIO SYSTEM (Synthesized via Web Audio API - Zero External Files)
+       ========================================================================== */
+    class SoundSynth {
+        constructor() {
+            this.ctx = null;
+            this.muted = localStorage.getItem("rusa_game_muted") === "true";
+            this.masterGain = null;
+        }
+
+        initContext() {
+            if (!this.ctx) {
+                try {
+                    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioCtx) return;
+                    this.ctx = new AudioCtx();
+                    this.masterGain = this.ctx.createGain();
+                    this.masterGain.gain.setValueAtTime(this.muted ? 0 : 0.28, this.ctx.currentTime);
+                    this.masterGain.connect(this.ctx.destination);
+                } catch (e) {
+                    console.warn("AudioContext could not be initialized:", e);
+                }
+            }
+            if (this.ctx && this.ctx.state === "suspended") {
+                this.ctx.resume().catch(() => {});
+            }
+        }
+
+        toggleMute() {
+            this.initContext();
+            this.muted = !this.muted;
+            localStorage.setItem("rusa_game_muted", this.muted);
+            if (this.masterGain) {
+                this.masterGain.gain.setValueAtTime(this.muted ? 0 : 0.28, this.ctx.currentTime);
+            }
+            return this.muted;
+        }
+
+        playJump() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(160, now);
+            osc.frequency.exponentialRampToValueAtTime(460, now + 0.16);
+            gain.gain.setValueAtTime(0.35, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.16);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(now);
+            osc.stop(now + 0.17);
+        }
+
+        playCoin() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc1 = this.ctx.createOscillator();
+            const osc2 = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc1.type = "triangle";
+            osc2.type = "sine";
+            osc1.frequency.setValueAtTime(987.77, now); // B5
+            osc2.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+            osc1.connect(gain);
+            osc2.connect(gain);
+            gain.connect(this.masterGain);
+            osc1.start(now);
+            osc2.start(now + 0.08);
+            osc1.stop(now + 0.35);
+            osc2.stop(now + 0.35);
+        }
+
+        playStomp() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(220, now);
+            osc.frequency.exponentialRampToValueAtTime(55, now + 0.18);
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.18);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(now);
+            osc.stop(now + 0.19);
+        }
+
+        playHurt() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(190, now);
+            osc.frequency.linearRampToValueAtTime(70, now + 0.25);
+            gain.gain.setValueAtTime(0.4, now);
+            gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(now);
+            osc.stop(now + 0.26);
+        }
+
+        playCheckpoint() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+            notes.forEach((freq, idx) => {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                const t = now + idx * 0.08;
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(freq, t);
+                gain.gain.setValueAtTime(0.25, t);
+                gain.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+                osc.start(t);
+                osc.stop(t + 0.26);
+            });
+        }
+
+        playLevelComplete() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const fanfare = [
+                { f: 523.25, d: 0.12 },
+                { f: 659.25, d: 0.12 },
+                { f: 783.99, d: 0.12 },
+                { f: 1046.5, d: 0.35 }
+            ];
+            let offset = 0;
+            fanfare.forEach((n) => {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                const t = now + offset;
+                osc.type = "triangle";
+                osc.frequency.setValueAtTime(n.f, t);
+                gain.gain.setValueAtTime(0.35, t);
+                gain.gain.linearRampToValueAtTime(0.01, t + n.d);
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+                osc.start(t);
+                osc.stop(t + n.d + 0.02);
+                offset += n.d * 0.9;
+            });
+        }
+
+        playGameOver() {
+            if (this.muted) return;
+            this.initContext();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const notes = [311.13, 293.66, 261.63, 233.08];
+            notes.forEach((freq, idx) => {
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                const t = now + idx * 0.18;
+                osc.type = "sawtooth";
+                osc.frequency.setValueAtTime(freq, t);
+                gain.gain.setValueAtTime(0.25, t);
+                gain.gain.linearRampToValueAtTime(0.01, t + 0.22);
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+                osc.start(t);
+                osc.stop(t + 0.23);
+            });
+        }
+    }
+
+    const sound = new SoundSynth();
+
+    /* ==========================================================================
+       4. INPUT SYSTEM (Keyboard & Pointer Events for Touch)
+       ========================================================================== */
+    const input = {
+        left: false,
+        right: false,
+        jump: false,
+        jumpPressed: false,
+        jumpReleased: false
+    };
+
+    function setupInputListeners() {
+        window.addEventListener("keydown", (e) => {
+            if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.code)) {
+                e.preventDefault();
+            }
+            sound.initContext();
+
+            if (e.code === "ArrowLeft" || e.code === "KeyA") input.left = true;
+            if (e.code === "ArrowRight" || e.code === "KeyD") input.right = true;
+            if (e.code === "Space" || e.code === "KeyW" || e.code === "ArrowUp") {
+                if (!input.jump) input.jumpPressed = true;
+                input.jump = true;
+            }
+            if (e.code === "Escape") {
+                togglePause();
+            }
+            if (e.code === "Backquote" || e.code === "KeyP") {
+                debugEnabled = !debugEnabled;
+            }
+        });
+
+        window.addEventListener("keyup", (e) => {
+            if (e.code === "ArrowLeft" || e.code === "KeyA") input.left = false;
+            if (e.code === "ArrowRight" || e.code === "KeyD") input.right = false;
+            if (e.code === "Space" || e.code === "KeyW" || e.code === "ArrowUp") {
+                input.jump = false;
+                input.jumpReleased = true;
+            }
+        });
+
+        // Virtual Touch Controls using Pointer Events
+        const btnLeft = document.getElementById("btnLeft");
+        const btnRight = document.getElementById("btnRight");
+        const btnJump = document.getElementById("btnJump");
+
+        function bindTouch(element, onDown, onUp) {
+            element.addEventListener("pointerdown", (e) => {
+                e.preventDefault();
+                sound.initContext();
+                onDown();
+            });
+            element.addEventListener("pointerup", (e) => {
+                e.preventDefault();
+                onUp();
+            });
+            element.addEventListener("pointercancel", (e) => {
+                e.preventDefault();
+                onUp();
+            });
+            element.addEventListener("pointerleave", (e) => {
+                e.preventDefault();
+                onUp();
+            });
+        }
+
+        bindTouch(btnLeft, () => { input.left = true; }, () => { input.left = false; });
+        bindTouch(btnRight, () => { input.right = true; }, () => { input.right = false; });
+        bindTouch(btnJump, () => {
+            if (!input.jump) input.jumpPressed = true;
+            input.jump = true;
+        }, () => {
+            input.jump = false;
+            input.jumpReleased = true;
+        });
+
+        checkMobileControlsVisibility();
+        window.addEventListener("resize", checkMobileControlsVisibility);
+    }
+
+    function checkMobileControlsVisibility() {
+        const controls = document.getElementById("virtualControls");
+        const isTouchOrSmall = ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 860);
+        if (isTouchOrSmall && currentState === GAME_STATE.PLAYING) {
+            controls.classList.remove("hidden");
+            controls.classList.remove("opacity-0");
+        } else {
+            controls.classList.add("hidden");
+            controls.classList.add("opacity-0");
+        }
+    }
+
+    /* ==========================================================================
+       5. PARTICLES & EFFECTS
+       ========================================================================== */
+    class Particle {
+        constructor() {
+            this.active = false;
+            this.x = 0;
+            this.y = 0;
+            this.vx = 0;
+            this.vy = 0;
+            this.color = "#ffffff";
+            this.size = 4;
+            this.life = 1;
+            this.decay = 0.03;
+            this.gravity = 0;
+            this.shape = "circle";
+        }
+
+        spawn(x, y, vx, vy, color, size, life, decay, gravity = 0, shape = "circle") {
+            this.active = true;
+            this.x = x;
+            this.y = y;
+            this.vx = vx;
+            this.vy = vy;
+            this.color = color;
+            this.size = size;
+            this.life = life;
+            this.decay = decay;
+            this.gravity = gravity;
+            this.shape = shape;
+        }
+
+        update() {
+            if (!this.active) return;
+            this.x += this.vx;
+            this.y += this.vy;
+            this.vy += this.gravity;
+            this.life -= this.decay;
+            if (this.life <= 0) this.active = false;
+        }
+
+        draw(ctx) {
+            if (!this.active) return;
+            ctx.globalAlpha = Math.max(0, this.life);
+            ctx.fillStyle = this.color;
+            if (this.shape === "circle") {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * this.life, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (this.shape === "square") {
+                const s = this.size * this.life;
+                ctx.fillRect(this.x - s / 2, this.y - s / 2, s, s);
+            } else if (this.shape === "star") {
+                const s = this.size * this.life;
+                ctx.fillRect(this.x - s / 2, this.y - s / 6, s, s / 3);
+                ctx.fillRect(this.x - s / 6, this.y - s / 2, s / 3, s);
+            }
+            ctx.globalAlpha = 1;
+        }
+    }
+
+    class FloatingText {
+        constructor() {
+            this.active = false;
+            this.x = 0;
+            this.y = 0;
+            this.text = "";
+            this.color = "#fbbf24";
+            this.life = 1;
+            this.vy = -1.5;
+        }
+
+        spawn(x, y, text, color = "#fbbf24") {
+            this.active = true;
+            this.x = x;
+            this.y = y;
+            this.text = text;
+            this.color = color;
+            this.life = 1;
+            this.vy = -1.5;
+        }
+
+        update() {
+            if (!this.active) return;
+            this.y += this.vy;
+            this.life -= 0.022;
+            if (this.life <= 0) this.active = false;
+        }
+
+        draw(ctx) {
+            if (!this.active) return;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, this.life);
+            ctx.font = "bold 15px 'Fredoka', cursive";
+            ctx.fillStyle = this.color;
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 3;
+            ctx.textAlign = "center";
+            ctx.strokeText(this.text, this.x, this.y);
+            ctx.fillText(this.text, this.x, this.y);
+            ctx.restore();
+        }
+    }
+
+    const particles = Array.from({ length: 200 }, () => new Particle());
+    const floatingTexts = Array.from({ length: 25 }, () => new FloatingText());
+
+    function createDustPuff(x, y, count = 5) {
+        for (let i = 0; i < count; i++) {
+            const p = particles.find(pt => !pt.active);
+            if (!p) break;
+            const angle = Math.PI + (Math.random() - 0.5) * 1.2;
+            const speed = Math.random() * 1.8 + 0.5;
+            p.spawn(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed - 0.4, "rgba(240, 240, 240, 0.7)", Math.random() * 4 + 3, 1, 0.05, 0.05, "circle");
+        }
+    }
+
+    function createSparkleBurst(x, y, color = "#fcd34d", count = 10) {
+        for (let i = 0; i < count; i++) {
+            const p = particles.find(pt => !pt.active);
+            if (!p) break;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 3 + 1.2;
+            p.spawn(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, color, Math.random() * 5 + 4, 1, 0.035, 0.04, "star");
+        }
+    }
+
+    function createStompBurst(x, y) {
+        for (let i = 0; i < 14; i++) {
+            const p = particles.find(pt => !pt.active);
+            if (!p) break;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 4 + 1.5;
+            p.spawn(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed, "#fb7185", Math.random() * 6 + 3, 1, 0.04, 0.08, "square");
+        }
+    }
+
+    function createConfetti(x, y, count = 45) {
+        const colors = ["#34d399", "#38bdf8", "#fbbf24", "#f43f5e", "#a855f7"];
+        for (let i = 0; i < count; i++) {
+            const p = particles.find(pt => !pt.active);
+            if (!p) break;
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 5 + 2;
+            const col = colors[Math.floor(Math.random() * colors.length)];
+            p.spawn(x, y, Math.cos(angle) * speed, Math.sin(angle) * speed - 2, col, Math.random() * 6 + 4, 1, 0.015, 0.08, "square");
+        }
+    }
+
+    function spawnFloatingText(x, y, text, color) {
+        const ft = floatingTexts.find(t => !t.active);
+        if (ft) ft.spawn(x, y, text, color);
+    }
+
+    /* ==========================================================================
+       6. CAMERA SYSTEM (Smooth tracking, lookahead, screen shake)
+       ========================================================================== */
+    class Camera {
+        constructor() {
+            this.x = 0;
+            this.y = 0;
+            this.targetX = 0;
+            this.targetY = 0;
+            this.currentLookahead = 40;
+            this.lerp = 0.12;
+            this.shake = 0;
+            this.shakeIntensity = 0;
+            this.width = 960;
+            this.height = 540;
+            this.levelWidth = 3000;
+            this.levelHeight = 540;
+        }
+
+        update(player) {
+            // Smooth lookahead prevents camera whipping/jitter when player turns
+            const targetLookahead = player.facing * 45;
+            this.currentLookahead += (targetLookahead - this.currentLookahead) * 0.08;
+
+            this.targetX = player.x + player.width / 2 - this.width / 2 + this.currentLookahead;
+            this.targetY = player.y + player.height / 2 - this.height / 2;
+
+            const maxX = Math.max(0, this.levelWidth - this.width);
+            const maxY = Math.max(0, this.levelHeight - this.height);
+
+            this.targetX = Math.max(0, Math.min(this.targetX, maxX));
+            this.targetY = Math.max(0, Math.min(this.targetY, maxY));
+
+            this.x += (this.targetX - this.x) * this.lerp;
+            this.y += (this.targetY - this.y) * this.lerp;
+
+            if (this.shake > 0) this.shake--;
+        }
+
+        getShakeOffset() {
+            if (this.shake <= 0) return { x: 0, y: 0 };
+            const mag = (this.shake / 18) * this.shakeIntensity;
+            return {
+                x: (Math.random() - 0.5) * mag * 2,
+                y: (Math.random() - 0.5) * mag * 2
+            };
+        }
+
+        triggerShake(duration = 16, intensity = 8) {
+            this.shake = duration;
+            this.shakeIntensity = intensity;
+        }
+    }
+
+    const camera = new Camera();
+
+    /* ==========================================================================
+       7. ENTITIES & GAME OBJECTS
+       ========================================================================== */
+    class Collectible {
+        constructor(x, y, type = "coin") {
+            this.x = x;
+            this.y = y;
+            this.baseY = y;
+            this.width = 24;
+            this.height = 24;
+            this.type = type;
+            this.collected = false;
+            this.bobOffset = Math.random() * Math.PI * 2;
+        }
+
+        update(time) {
+            if (this.collected) return;
+            this.y = this.baseY + Math.sin(time * 0.005 + this.bobOffset) * 5;
+        }
+
+        draw(ctx, time) {
+            if (this.collected) return;
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height / 2;
+            const spin = Math.sin(time * 0.007 + this.bobOffset);
+
+            ctx.translate(cx, cy);
+            ctx.scale(spin, 1);
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 11, 0, Math.PI * 2);
+            ctx.fillStyle = "#f59e0b";
+            ctx.fill();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = "#fbbf24";
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.arc(0, 0, 7, 0, Math.PI * 2);
+            ctx.fillStyle = "#fde047";
+            ctx.fill();
+
+            ctx.restore();
+        }
+    }
+
+    class Checkpoint {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.width = 30;
+            this.height = 64;
+            this.activated = false;
+            this.flagHeight = 0;
+        }
+
+        activate() {
+            if (!this.activated) {
+                this.activated = true;
+                sound.playCheckpoint();
+                createSparkleBurst(this.x + 15, this.y + 15, "#34d399", 16);
+                spawnFloatingText(this.x + 15, this.y - 10, "CHECKPOINT!", "#34d399");
+            }
+        }
+
+        update() {
+            if (this.activated && this.flagHeight < 1) {
+                this.flagHeight = Math.min(1, this.flagHeight + 0.06);
+            }
+        }
+
+        draw(ctx) {
+            ctx.save();
+            ctx.fillStyle = "#94a3b8";
+            ctx.fillRect(this.x + 4, this.y, 4, this.height);
+            ctx.fillStyle = "#475569";
+            ctx.fillRect(this.x, this.y + this.height - 6, 12, 6);
+
+            ctx.beginPath();
+            ctx.arc(this.x + 6, this.y - 2, 4, 0, Math.PI * 2);
+            ctx.fillStyle = this.activated ? "#f59e0b" : "#64748b";
+            ctx.fill();
+
+            const flagY = this.y + (1 - this.flagHeight) * 36;
+            ctx.beginPath();
+            ctx.moveTo(this.x + 8, flagY);
+            ctx.lineTo(this.x + 28, flagY + 10);
+            ctx.lineTo(this.x + 8, flagY + 20);
+            ctx.closePath();
+            ctx.fillStyle = this.activated ? "#10b981" : "#ef4444";
+            ctx.fill();
+            ctx.strokeStyle = "#ffffff";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.restore();
+        }
+    }
+
+    class Goal {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.width = 44;
+            this.height = 80;
+            this.completed = false;
+        }
+
+        draw(ctx, time) {
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const pulse = (Math.sin(time * 0.006) + 1) * 0.5;
+
+            ctx.fillStyle = "#cbd5e1";
+            ctx.fillRect(this.x, this.y + 10, 8, this.height - 10);
+            ctx.fillRect(this.x + this.width - 8, this.y + 10, 8, this.height - 10);
+            ctx.fillRect(this.x - 4, this.y + 4, this.width + 8, 10);
+
+            const grad = ctx.createLinearGradient(this.x, this.y, this.x, this.y + this.height);
+            grad.addColorStop(0, `rgba(52, 211, 153, ${0.4 + pulse * 0.4})`);
+            grad.addColorStop(1, `rgba(56, 189, 248, ${0.2 + pulse * 0.3})`);
+            ctx.fillStyle = grad;
+            ctx.fillRect(this.x + 8, this.y + 14, this.width - 16, this.height - 14);
+
+            ctx.font = "20px sans-serif";
+            ctx.textAlign = "center";
+            ctx.fillText("⭐", cx, this.y + 45 + Math.sin(time * 0.005) * 4);
+
+            ctx.restore();
+        }
+    }
+
+    class WalkerEnemy {
+        constructor(x, y, patrolMin, patrolMax) {
+            this.x = x;
+            this.y = y;
+            this.width = 36;
+            this.height = 32;
+            this.vx = 1.3;
+            this.patrolMin = patrolMin;
+            this.patrolMax = patrolMax;
+            this.alive = true;
+            this.walkAnim = 0;
+            this.type = "walker";
+        }
+
+        update(platforms) {
+            if (!this.alive) return;
+            this.walkAnim += 0.2;
+            this.x += this.vx;
+
+            if (this.x < this.patrolMin) {
+                this.x = this.patrolMin;
+                this.vx = Math.abs(this.vx);
+            } else if (this.x + this.width > this.patrolMax) {
+                this.x = this.patrolMax - this.width;
+                this.vx = -Math.abs(this.vx);
+            }
+
+            const frontCheckX = this.vx > 0 ? this.x + this.width + 2 : this.x - 2;
+            const checkY = this.y + this.height + 4;
+            const hasFloorAhead = platforms.some(p =>
+                frontCheckX >= p.x && frontCheckX <= p.x + p.w &&
+                checkY >= p.y && checkY <= p.y + p.h + 10
+            );
+
+            if (!hasFloorAhead) {
+                this.vx = -this.vx;
+            }
+        }
+
+        draw(ctx) {
+            if (!this.alive) {
+                ctx.save();
+                ctx.translate(this.x + this.width / 2, this.y + this.height);
+                ctx.scale(1.3, 0.2);
+                ctx.fillStyle = "#f43f5e";
+                ctx.beginPath();
+                ctx.arc(0, 0, 16, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                return;
+            }
+
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height / 2;
+            ctx.translate(cx, cy);
+            if (this.vx < 0) ctx.scale(-1, 1);
+
+            ctx.fillStyle = "#e11d48";
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 16, 12, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#9f1239";
+            ctx.beginPath();
+            ctx.arc(-2, -4, 4, 0, Math.PI * 2);
+            ctx.arc(5, -2, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.arc(8, -2, 4.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#0f172a";
+            ctx.beginPath();
+            ctx.arc(10, -2, 2.2, 0, Math.PI * 2);
+            ctx.fill();
+
+            const legWiggle = Math.sin(this.walkAnim) * 3;
+            ctx.fillStyle = "#881337";
+            ctx.fillRect(-10, 8 + legWiggle, 5, 5);
+            ctx.fillRect(5, 8 - legWiggle, 5, 5);
+
+            ctx.restore();
+        }
+    }
+
+    class JumperEnemy {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+            this.baseY = y;
+            this.width = 34;
+            this.height = 34;
+            this.vx = 0;
+            this.vy = 0;
+            this.jumpTimer = Math.random() * 60 + 60;
+            this.alive = true;
+            this.type = "jumper";
+            this.grounded = true;
+        }
+
+        update(platforms) {
+            if (!this.alive) return;
+
+            this.jumpTimer--;
+            if (this.jumpTimer <= 0 && this.grounded) {
+                this.vy = -10.2;
+                this.grounded = false;
+                this.jumpTimer = 110;
+                createDustPuff(this.x + this.width / 2, this.y + this.height, 4);
+            }
+
+            this.vy += PHYSICS.gravity * 0.9;
+            this.y += this.vy;
+
+            if (this.y >= this.baseY) {
+                this.y = this.baseY;
+                this.vy = 0;
+                if (!this.grounded) {
+                    createDustPuff(this.x + this.width / 2, this.y + this.height, 3);
+                }
+                this.grounded = true;
+            }
+        }
+
+        draw(ctx) {
+            if (!this.alive) {
+                ctx.save();
+                ctx.translate(this.x + this.width / 2, this.y + this.height);
+                ctx.scale(1.3, 0.2);
+                ctx.fillStyle = "#8b5cf6";
+                ctx.beginPath();
+                ctx.arc(0, 0, 16, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+                return;
+            }
+
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height / 2;
+            ctx.translate(cx, cy);
+
+            let scaleY = 1;
+            let scaleX = 1;
+            if (this.jumpTimer < 15 && this.grounded) {
+                scaleY = 0.75;
+                scaleX = 1.25;
+            } else if (!this.grounded) {
+                scaleY = 1.2;
+                scaleX = 0.85;
+            }
+            ctx.scale(scaleX, scaleY);
+
+            ctx.fillStyle = "#8b5cf6";
+            ctx.beginPath();
+            ctx.arc(0, 2, 14, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = "#c084fc";
+            ctx.beginPath();
+            ctx.moveTo(0, -12);
+            ctx.lineTo(-4, -18);
+            ctx.lineTo(4, -18);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.fillStyle = "#ffffff";
+            ctx.beginPath();
+            ctx.arc(-5, -2, 4, 0, Math.PI * 2);
+            ctx.arc(5, -2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#1e1b4b";
+            ctx.beginPath();
+            ctx.arc(-4, -2, 2, 0, Math.PI * 2);
+            ctx.arc(6, -2, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        }
+    }
+
+    class MovingPlatform {
+        constructor(x, y, w, h, distanceX, distanceY, speed = 1) {
+            this.startX = x;
+            this.startY = y;
+            this.x = x;
+            this.y = y;
+            this.w = w;
+            this.h = h;
+            this.distanceX = distanceX;
+            this.distanceY = distanceY;
+            this.speed = speed;
+            this.progress = 0;
+            this.vx = 0;
+            this.vy = 0;
+            this.type = "solid";
+        }
+
+        update() {
+            this.progress += 0.02 * this.speed;
+            const newX = this.startX + Math.sin(this.progress) * this.distanceX;
+            const newY = this.startY + Math.sin(this.progress) * this.distanceY;
+            this.vx = newX - this.x;
+            this.vy = newY - this.y;
+            this.x = newX;
+            this.y = newY;
+        }
+
+        draw(ctx) {
+            ctx.save();
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillRect(this.x + 2, this.y, this.w - 4, 4);
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(this.x, this.y + this.h - 4, this.w, 4);
+            ctx.restore();
+        }
+    }
+
+    /* ==========================================================================
+       8. PLAYER CLASS & RESPONSIVE PHYSICS
+       ========================================================================== */
+    class Player {
+        constructor() {
+            this.resetToStart(100, 300);
+            this.lives = 3;
+            this.invulnerableTimer = 0;
+            this.facing = 1;
+            this.coyoteTimer = 0;
+            this.jumpBufferTimer = 0;
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.runCycle = 0;
+            this.animTime = 0;
+        }
+
+        resetToStart(x, y) {
+            this.x = x;
+            this.y = y;
+            this.width = PLAYER_CONFIG.width;
+            this.height = PLAYER_CONFIG.height;
+            this.vx = 0;
+            this.vy = 0;
+            this.facing = 1;
+            this.isGrounded = false;
+            this.isDead = false;
+            this.scaleX = 1;
+            this.scaleY = 1;
+            this.runCycle = 0;
+        }
+
+        update(platforms, movingPlatforms, level) {
+            if (this.isDead) return;
+
+            this.animTime += 0.2;
+
+            // 1. Horizontal Input & Friction
+            if (input.left) {
+                this.vx -= PHYSICS.acceleration;
+                this.facing = -1;
+            } else if (input.right) {
+                this.vx += PHYSICS.acceleration;
+                this.facing = 1;
+            } else {
+                this.vx *= this.isGrounded ? PHYSICS.friction : PHYSICS.airFriction;
+                if (Math.abs(this.vx) < 0.1) this.vx = 0;
+            }
+
+            this.vx = Math.max(-PHYSICS.maxSpeed, Math.min(PHYSICS.maxSpeed, this.vx));
+
+            // 2. Jump Buffering & Coyote Time
+            if (this.isGrounded) {
+                this.coyoteTimer = PHYSICS.coyoteTimeFrames;
+            } else {
+                if (this.coyoteTimer > 0) this.coyoteTimer--;
+            }
+
+            if (input.jumpPressed) {
+                this.jumpBufferTimer = PHYSICS.jumpBufferFrames;
+                input.jumpPressed = false;
+            } else if (this.jumpBufferTimer > 0) {
+                this.jumpBufferTimer--;
+            }
+
+            if (this.jumpBufferTimer > 0 && this.coyoteTimer > 0) {
+                this.vy = PHYSICS.jumpForce;
+                this.isGrounded = false;
+                this.coyoteTimer = 0;
+                this.jumpBufferTimer = 0;
+                this.scaleX = 0.86;
+                this.scaleY = 1.24;
+                sound.playJump();
+                createDustPuff(this.x + this.width / 2, this.y + this.height, 6);
+            }
+
+            if (input.jumpReleased) {
+                if (this.vy < -3) {
+                    this.vy *= PHYSICS.jumpCutMultiplier;
+                }
+                input.jumpReleased = false;
+            }
+
+            // 3. Gravity
+            this.vy += PHYSICS.gravity;
+            if (this.vy > 14) this.vy = 14;
+
+            // 4. Two-Axis AABB Platform Collision (using pre-cached platform array)
+            const allPlatforms = (level && level.allPlatforms) || platforms;
+            // --- Horizontal Axis ---
+            this.x += this.vx;
+            for (const p of allPlatforms) {
+                if (p.type === "one-way") continue;
+                if (this.checkOverlap(this.x, this.y, this.width, this.height, p.x, p.y, p.w, p.h)) {
+                    if (this.vx > 0) {
+                        this.x = p.x - this.width;
+                        this.vx = 0;
+                    } else if (this.vx < 0) {
+                        this.x = p.x + p.w;
+                        this.vx = 0;
+                    }
+                }
+            }
+
+            if (this.x < 0) {
+                this.x = 0;
+                this.vx = 0;
+            } else if (this.x + this.width > level.width) {
+                this.x = level.width - this.width;
+                this.vx = 0;
+            }
+
+            // --- Vertical Axis ---
+            const prevY = this.y;
+            this.y += this.vy;
+            let groundedThisFrame = false;
+            let riddenMovingPlatform = null;
+
+            for (const p of allPlatforms) {
+                if (p.type === "one-way") {
+                    if (this.vy >= 0 && prevY + this.height <= p.y + 6) {
+                        if (this.checkOverlap(this.x, this.y, this.width, this.height, p.x, p.y, p.w, p.h)) {
+                            this.y = p.y - this.height;
+                            this.vy = 0;
+                            groundedThisFrame = true;
+                        }
+                    }
+                    continue;
+                }
+
+                if (this.checkOverlap(this.x, this.y, this.width, this.height, p.x, p.y, p.w, p.h)) {
+                    if (this.vy > 0) {
+                        this.y = p.y - this.height;
+                        this.vy = 0;
+                        groundedThisFrame = true;
+                        if (p instanceof MovingPlatform) {
+                            riddenMovingPlatform = p;
+                        }
+                    } else if (this.vy < 0) {
+                        this.y = p.y + p.h;
+                        this.vy = 0;
+                    }
+                }
+            }
+
+            // Moving Platform Synchronous Riding
+            if (riddenMovingPlatform) {
+                this.x += riddenMovingPlatform.vx;
+                this.y += riddenMovingPlatform.vy;
+            }
+
+            // Landing effect
+            if (!this.isGrounded && groundedThisFrame) {
+                this.scaleX = 1.22;
+                this.scaleY = 0.82;
+                createDustPuff(this.x + this.width / 2, this.y + this.height, 5);
+            }
+            this.isGrounded = groundedThisFrame;
+
+            // 5. Procedural Organic Animation Lerp
+            this.scaleX += (1 - this.scaleX) * 0.15;
+            this.scaleY += (1 - this.scaleY) * 0.15;
+
+            if (this.isGrounded && Math.abs(this.vx) > 0.5) {
+                this.runCycle += Math.max(0.12, Math.abs(this.vx) * 0.035);
+                if (Math.abs(this.vx) > 2 && Math.random() < 0.25) {
+                    createDustPuff(this.x + this.width / 2, this.y + this.height, 1);
+                }
+            } else {
+                this.runCycle = 0;
+            }
+
+            // 6. Invulnerability Timer
+            if (this.invulnerableTimer > 0) {
+                this.invulnerableTimer--;
+            }
+
+            // 7. Pit Fall Check
+            if (this.y > level.deathY && !this.isDead) {
+                this.die();
+            }
+        }
+
+        checkOverlap(x1, y1, w1, h1, x2, y2, w2, h2) {
+            return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
+        }
+
+        takeDamage() {
+            if (this.invulnerableTimer > 0 || this.isDead) return;
+            this.lives--;
+            updateHudLives();
+            sound.playHurt();
+            camera.triggerShake(18, 9);
+            createStompBurst(this.x + this.width / 2, this.y + this.height / 2);
+
+            if (this.lives <= 0) {
+                this.die(true);
+            } else {
+                this.invulnerableTimer = 60;
+                this.vy = -8.5;
+                this.vx = -this.facing * 4.5;
+            }
+        }
+
+        die(fromDamage = false) {
+            if (this.isDead) return;
+            this.isDead = true;
+            sound.playHurt();
+            camera.triggerShake(22, 12);
+            createStompBurst(this.x + this.width / 2, this.y + this.height / 2);
+
+            if (!fromDamage) {
+                this.lives--;
+                updateHudLives();
+            }
+
+            setTimeout(() => {
+                if (this.lives <= 0) {
+                    handleGameOver();
+                } else {
+                    respawnAtCheckpoint();
+                }
+            }, 650);
+        }
+
+        draw(ctx) {
+            ctx.save();
+
+            if (this.invulnerableTimer > 0 && Math.floor(this.invulnerableTimer / 4) % 2 === 0) {
+                ctx.globalAlpha = 0.4;
+            }
+
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height;
+
+            ctx.translate(cx, cy);
+            ctx.scale(this.facing * this.scaleX, this.scaleY);
+
+            const isRunning = this.isGrounded && Math.abs(this.vx) > 0.5;
+            const bob = isRunning ? Math.sin(this.runCycle * Math.PI) * 2 : 0;
+
+            if (isPlayerImageLoaded && !playerImageLoadError) {
+                let spriteImg = (playerImages.idle && playerImages.idle.complete && playerImages.idle.naturalWidth > 0) ? playerImages.idle : playerImage;
+                if (!this.isGrounded) {
+                    const jumpImg = (this.vy < 0 ? playerImages.jump : playerImages.fall) || playerImages.run;
+                    if (jumpImg && jumpImg.complete && jumpImg.naturalWidth > 0) {
+                        spriteImg = jumpImg;
+                    }
+                } else if (isRunning) {
+                    if (playerImages.runFrames && playerImages.runFrames.length > 0) {
+                        const frameIdx = Math.floor(this.runCycle) % playerImages.runFrames.length;
+                        const activeFrame = playerImages.runFrames[frameIdx];
+                        if (activeFrame && activeFrame.complete && activeFrame.naturalWidth > 0) {
+                            spriteImg = activeFrame;
+                        } else if (playerImages.run && playerImages.run.complete && playerImages.run.naturalWidth > 0) {
+                            spriteImg = playerImages.run;
+                        }
+                    } else if (playerImages.run && playerImages.run.complete && playerImages.run.naturalWidth > 0) {
+                        spriteImg = playerImages.run;
+                    }
+                }
+
+                let srcX = 0, srcY = 0;
+                let srcW = spriteImg.naturalWidth || spriteImg.width || 489;
+                let srcH = spriteImg.naturalHeight || spriteImg.height || 734;
+
+                const hasAnimFrames = PLAYER_CONFIG.animations && (
+                    (PLAYER_CONFIG.animations.idle && PLAYER_CONFIG.animations.idle.length > 1) ||
+                    (PLAYER_CONFIG.animations.run && PLAYER_CONFIG.animations.run.length > 1)
+                );
+                const isSpriteSheet = PLAYER_CONFIG.isSpriteSheet === true || Boolean(hasAnimFrames);
+
+                if (isSpriteSheet && PLAYER_CONFIG.frameWidth > 0 && PLAYER_CONFIG.frameHeight > 0) {
+                    let animList = PLAYER_CONFIG.animations.idle;
+                    if (!this.isGrounded) {
+                        animList = this.vy < 0 ? (PLAYER_CONFIG.animations.jump || []) : (PLAYER_CONFIG.animations.fall || []);
+                    } else if (Math.abs(this.vx) > 0.5) {
+                        animList = PLAYER_CONFIG.animations.run || [];
+                    }
+                    const frame = (animList && animList.length > 0)
+                        ? animList[Math.floor(this.animTime) % animList.length]
+                        : 0;
+
+                    const cols = Math.floor(srcW / PLAYER_CONFIG.frameWidth);
+                    srcX = (frame % cols) * PLAYER_CONFIG.frameWidth;
+                    srcY = Math.floor(frame / cols) * PLAYER_CONFIG.frameHeight;
+                    srcW = PLAYER_CONFIG.frameWidth;
+                    srcH = PLAYER_CONFIG.frameHeight;
+                }
+
+                // Preserve natural aspect ratio without stretching or distortion
+                const scale = PLAYER_CONFIG.scale || 1;
+                const targetH = this.height * scale;
+                const targetW = (srcW / srcH) * targetH;
+
+                ctx.drawImage(
+                    spriteImg,
+                    srcX, srcY, srcW, srcH,
+                    -targetW / 2,
+                    -targetH + bob,
+                    targetW,
+                    targetH
+                );
+            } else {
+                // Procedural placeholder box with deer antler hints
+                const w = this.width;
+                const h = this.height;
+                ctx.fillStyle = "#059669";
+                ctx.beginPath();
+                ctx.roundRect(-w / 2, -h + bob, w, h, 8);
+                ctx.fill();
+                ctx.lineWidth = 2;
+                ctx.strokeStyle = "#34d399";
+                ctx.stroke();
+
+                ctx.fillStyle = "#d97706";
+                ctx.fillRect(-10, -h - 6 + bob, 4, 8);
+                ctx.fillRect(6, -h - 6 + bob, 4, 8);
+
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("RUSA", 0, -h / 2 + bob);
+            }
+
+            ctx.restore();
+        }
+    }
+
+    const player = new Player();
+
+    /* ==========================================================================
+       9. LEVEL SYSTEM (3 Playable Levels with Distinct Themes)
+       ========================================================================== */
+    const LEVELS = [
+        {
+            name: "Padang Rumput Hijau",
+            worldBadge: "WORLD 1-1",
+            theme: "grassland",
+            width: 2800,
+            height: 540,
+            deathY: 570,
+            playerStart: { x: 80, y: 350 },
+            skyGradient: ["#38bdf8", "#bae6fd"],
+            mountainColor: "#065f46",
+            hillColor: "#047857",
+            checkpoint: { x: 1320, y: 376 },
+            goal: { x: 2650, y: 360 },
+            platforms: [
+                { x: 0, y: 440, w: 750, h: 100, type: "solid", color: "#15803d" },
+                { x: 820, y: 440, w: 600, h: 100, type: "solid", color: "#15803d" },
+                { x: 1500, y: 440, w: 700, h: 100, type: "solid", color: "#15803d" },
+                { x: 2280, y: 440, w: 520, h: 100, type: "solid", color: "#15803d" },
+                { x: 240, y: 350, w: 120, h: 24, type: "solid", color: "#166534" },
+                { x: 420, y: 280, w: 140, h: 24, type: "solid", color: "#166534" },
+                { x: 620, y: 360, w: 90, h: 24, type: "solid", color: "#166534" },
+                { x: 740, y: 390, w: 90, h: 16, type: "one-way", color: "#b45309" },
+                { x: 960, y: 340, w: 110, h: 24, type: "solid", color: "#166534" },
+                { x: 1140, y: 270, w: 130, h: 24, type: "solid", color: "#166534" },
+                { x: 1420, y: 380, w: 80, h: 16, type: "one-way", color: "#b45309" },
+                { x: 1700, y: 340, w: 120, h: 24, type: "solid", color: "#166534" },
+                { x: 1900, y: 260, w: 140, h: 24, type: "solid", color: "#166534" },
+                { x: 2100, y: 340, w: 120, h: 24, type: "solid", color: "#166534" },
+                { x: 2210, y: 390, w: 80, h: 16, type: "one-way", color: "#b45309" },
+            ],
+            movingPlatforms: [],
+            enemies: [
+                new WalkerEnemy(350, 408, 200, 680),
+                new WalkerEnemy(980, 408, 850, 1380),
+                new WalkerEnemy(1600, 408, 1520, 2150),
+                new JumperEnemy(1180, 236)
+            ],
+            collectibles: [
+                new Collectible(280, 310),
+                new Collectible(460, 240),
+                new Collectible(490, 240),
+                new Collectible(770, 350),
+                new Collectible(1000, 300),
+                new Collectible(1180, 230),
+                new Collectible(1740, 300),
+                new Collectible(1950, 220),
+                new Collectible(1980, 220),
+                new Collectible(2140, 300),
+                new Collectible(2400, 400),
+                new Collectible(2460, 400),
+            ]
+        },
+        {
+            name: "Ngarai Senja",
+            worldBadge: "WORLD 2-1",
+            theme: "canyon",
+            width: 3200,
+            height: 540,
+            deathY: 570,
+            playerStart: { x: 80, y: 350 },
+            skyGradient: ["#f97316", "#fed7aa"],
+            mountainColor: "#7c2d12",
+            hillColor: "#9a3412",
+            checkpoint: { x: 1540, y: 376 },
+            goal: { x: 3050, y: 360 },
+            platforms: [
+                { x: 0, y: 440, w: 600, h: 100, type: "solid", color: "#c2410c" },
+                { x: 720, y: 440, w: 450, h: 100, type: "solid", color: "#c2410c" },
+                { x: 1300, y: 440, w: 500, h: 100, type: "solid", color: "#c2410c" },
+                { x: 1950, y: 440, w: 400, h: 100, type: "solid", color: "#c2410c" },
+                { x: 2500, y: 440, w: 700, h: 100, type: "solid", color: "#c2410c" },
+                { x: 200, y: 340, w: 100, h: 24, type: "solid", color: "#9a3412" },
+                { x: 380, y: 260, w: 120, h: 24, type: "solid", color: "#9a3412" },
+                { x: 620, y: 380, w: 80, h: 16, type: "one-way", color: "#d97706" },
+                { x: 840, y: 330, w: 90, h: 24, type: "solid", color: "#9a3412" },
+                { x: 1020, y: 250, w: 110, h: 24, type: "solid", color: "#9a3412" },
+                { x: 1200, y: 370, w: 80, h: 16, type: "one-way", color: "#d97706" },
+                { x: 1400, y: 320, w: 130, h: 24, type: "solid", color: "#9a3412" },
+                { x: 1620, y: 240, w: 140, h: 24, type: "solid", color: "#9a3412" },
+                { x: 1840, y: 340, w: 90, h: 16, type: "one-way", color: "#d97706" },
+                { x: 2100, y: 310, w: 110, h: 24, type: "solid", color: "#9a3412" },
+                { x: 2280, y: 230, w: 120, h: 24, type: "solid", color: "#9a3412" },
+                { x: 2420, y: 370, w: 80, h: 16, type: "one-way", color: "#d97706" },
+                { x: 2750, y: 330, w: 140, h: 24, type: "solid", color: "#9a3412" }
+            ],
+            movingPlatforms: [
+                new MovingPlatform(600, 320, 80, 18, 0, 60, 1.2),
+                new MovingPlatform(1830, 260, 80, 18, 60, 0, 1.4)
+            ],
+            enemies: [
+                new WalkerEnemy(250, 408, 100, 580),
+                new JumperEnemy(420, 226),
+                new WalkerEnemy(800, 408, 730, 1150),
+                new JumperEnemy(1050, 216),
+                new WalkerEnemy(1380, 408, 1310, 1780),
+                new JumperEnemy(1660, 206),
+                new WalkerEnemy(2600, 408, 2520, 3000)
+            ],
+            collectibles: [
+                new Collectible(240, 300),
+                new Collectible(420, 220),
+                new Collectible(450, 220),
+                new Collectible(640, 270),
+                new Collectible(870, 290),
+                new Collectible(1060, 210),
+                new Collectible(1450, 280),
+                new Collectible(1670, 200),
+                new Collectible(1700, 200),
+                new Collectible(2140, 270),
+                new Collectible(2320, 190),
+                new Collectible(2800, 290),
+                new Collectible(2840, 290)
+            ]
+        },
+        {
+            name: "Puncak Bintang Malam",
+            worldBadge: "WORLD 3-1",
+            theme: "twilight",
+            width: 3600,
+            height: 540,
+            deathY: 570,
+            playerStart: { x: 80, y: 350 },
+            skyGradient: ["#090d16", "#1e1b4b"],
+            mountainColor: "#1e1e38",
+            hillColor: "#2e1065",
+            checkpoint: { x: 1720, y: 376 },
+            goal: { x: 3450, y: 360 },
+            platforms: [
+                { x: 0, y: 440, w: 550, h: 100, type: "solid", color: "#312e81" },
+                { x: 680, y: 440, w: 400, h: 100, type: "solid", color: "#312e81" },
+                { x: 1200, y: 440, w: 350, h: 100, type: "solid", color: "#312e81" },
+                { x: 1680, y: 440, w: 500, h: 100, type: "solid", color: "#312e81" },
+                { x: 2300, y: 440, w: 450, h: 100, type: "solid", color: "#312e81" },
+                { x: 2900, y: 440, w: 700, h: 100, type: "solid", color: "#312e81" },
+                { x: 220, y: 330, w: 100, h: 24, type: "solid", color: "#4338ca" },
+                { x: 400, y: 240, w: 120, h: 24, type: "solid", color: "#4338ca" },
+                { x: 740, y: 350, w: 90, h: 20, type: "solid", color: "#4338ca" },
+                { x: 920, y: 260, w: 100, h: 20, type: "solid", color: "#4338ca" },
+                { x: 1260, y: 340, w: 110, h: 24, type: "solid", color: "#4338ca" },
+                { x: 1440, y: 230, w: 120, h: 24, type: "solid", color: "#4338ca" },
+                { x: 1800, y: 320, w: 100, h: 24, type: "solid", color: "#4338ca" },
+                { x: 2020, y: 220, w: 120, h: 24, type: "solid", color: "#4338ca" },
+                { x: 2380, y: 340, w: 90, h: 24, type: "solid", color: "#4338ca" },
+                { x: 2560, y: 240, w: 100, h: 24, type: "solid", color: "#4338ca" },
+                { x: 2780, y: 330, w: 90, h: 20, type: "one-way", color: "#a855f7" },
+                { x: 3150, y: 330, w: 160, h: 24, type: "solid", color: "#4338ca" }
+            ],
+            movingPlatforms: [
+                new MovingPlatform(570, 360, 80, 18, 0, 70, 1.4),
+                new MovingPlatform(1080, 300, 80, 18, 50, 0, 1.5),
+                new MovingPlatform(1580, 270, 80, 18, 0, 60, 1.3),
+                new MovingPlatform(2180, 310, 80, 18, 60, 0, 1.6)
+            ],
+            enemies: [
+                new WalkerEnemy(200, 408, 80, 500),
+                new JumperEnemy(440, 206),
+                new WalkerEnemy(720, 408, 690, 1050),
+                new JumperEnemy(950, 226),
+                new WalkerEnemy(1720, 408, 1690, 2150),
+                new JumperEnemy(2060, 186),
+                new WalkerEnemy(2340, 408, 2310, 2720),
+                new JumperEnemy(2590, 206),
+                new WalkerEnemy(2980, 408, 2920, 3400)
+            ],
+            collectibles: [
+                new Collectible(250, 290),
+                new Collectible(440, 200),
+                new Collectible(470, 200),
+                new Collectible(770, 310),
+                new Collectible(950, 220),
+                new Collectible(1300, 300),
+                new Collectible(1480, 190),
+                new Collectible(1840, 280),
+                new Collectible(2060, 180),
+                new Collectible(2090, 180),
+                new Collectible(2420, 300),
+                new Collectible(2600, 200),
+                new Collectible(3200, 290),
+                new Collectible(3250, 290)
+            ]
+        }
+    ];
+
+    let currentLevelIndex = 0;
+    let currentLevel = null;
+    let levelTime = 0;
+    let levelScore = 0;
+    let totalScore = 0;
+    let totalCoins = 0;
+    let activeCheckpoint = null;
+
+    function loadLevel(index) {
+        currentLevelIndex = index;
+        const template = LEVELS[index];
+
+        currentLevel = {
+            ...template,
+            platforms: template.platforms.map(p => ({ ...p })),
+            movingPlatforms: template.movingPlatforms.map(mp => new MovingPlatform(mp.startX, mp.startY, mp.w, mp.h, mp.distanceX, mp.distanceY, mp.speed)),
+            enemies: template.enemies.map(e => e.type === "walker"
+                ? new WalkerEnemy(e.x, e.y, e.patrolMin, e.patrolMax)
+                : new JumperEnemy(e.x, e.baseY)),
+            collectibles: template.collectibles.map(c => new Collectible(c.x, c.baseY, c.type)),
+            checkpoint: new Checkpoint(template.checkpoint.x, template.checkpoint.y),
+            goal: new Goal(template.goal.x, template.goal.y)
+        };
+        currentLevel.allPlatforms = [...currentLevel.platforms, ...currentLevel.movingPlatforms];
+
+        camera.levelWidth = currentLevel.width;
+        camera.levelHeight = currentLevel.height;
+        activeCheckpoint = null;
+
+        player.resetToStart(currentLevel.playerStart.x, currentLevel.playerStart.y);
+        camera.x = 0;
+        camera.y = 0;
+        camera.currentLookahead = 40;
+
+        levelTime = 0;
+        lastDisplayedSec = -1;
+        updateHudWorld();
+    }
+
+    function respawnAtCheckpoint() {
+        if (activeCheckpoint) {
+            player.resetToStart(activeCheckpoint.x, activeCheckpoint.y - 10);
+        } else {
+            player.resetToStart(currentLevel.playerStart.x, currentLevel.playerStart.y);
+        }
+        player.invulnerableTimer = 60;
+    }
+
+    /* ==========================================================================
+       10. STORAGE & PERSISTENCE (localStorage)
+       ========================================================================== */
+    function getHighestUnlockedLevel() {
+        return parseInt(localStorage.getItem("rusa_game_unlocked_level") || "1", 10);
+    }
+
+    function saveHighestUnlockedLevel(lvl) {
+        const current = getHighestUnlockedLevel();
+        if (lvl > current) {
+            localStorage.setItem("rusa_game_unlocked_level", lvl);
+        }
+    }
+
+    function getSavedHighScore() {
+        return parseInt(localStorage.getItem("rusa_game_high_score") || "0", 10);
+    }
+
+    function saveHighScore(score) {
+        const current = getSavedHighScore();
+        if (score > current) {
+            localStorage.setItem("rusa_game_high_score", score);
+        }
+    }
+
+    function getSavedCoins() {
+        return parseInt(localStorage.getItem("rusa_game_total_coins") || "0", 10);
+    }
+
+    function saveTotalCoins(coins) {
+        localStorage.setItem("rusa_game_total_coins", coins);
+    }
+
+    function resetAllProgress() {
+        localStorage.removeItem("rusa_game_unlocked_level");
+        localStorage.removeItem("rusa_game_high_score");
+        localStorage.removeItem("rusa_game_total_coins");
+        totalScore = 0;
+        totalCoins = 0;
+        updateMenuStats();
+        renderLevelSelectButtons();
+    }
+
+    /* ==========================================================================
+       11. UI & MODALS
+       ========================================================================== */
+    const hud = document.getElementById("hud");
+    const hudLives = document.getElementById("hudLives");
+    const hudWorld = document.getElementById("hudWorld");
+    const hudScore = document.getElementById("hudScore");
+    const hudCoins = document.getElementById("hudCoins");
+    const hudTime = document.getElementById("hudTime");
+    const audioIcon = document.getElementById("audioIcon");
+
+    const menuModal = document.getElementById("menuModal");
+    const howToPlayModal = document.getElementById("howToPlayModal");
+    const levelSelectModal = document.getElementById("levelSelectModal");
+    const pauseModal = document.getElementById("pauseModal");
+    const levelCompleteModal = document.getElementById("levelCompleteModal");
+    const gameOverModal = document.getElementById("gameOverModal");
+    const winModal = document.getElementById("winModal");
+
+    function updateHudLives() {
+        hudLives.textContent = `× ${player.lives}`;
+    }
+
+    function updateHudScore() {
+        const fullScore = totalScore + levelScore;
+        hudScore.textContent = String(fullScore).padStart(6, "0");
+        hudCoins.textContent = String(totalCoins).padStart(2, "0");
+    }
+
+    function updateHudWorld() {
+        hudWorld.textContent = currentLevel.worldBadge;
+    }
+
+    function updateMenuStats() {
+        document.getElementById("menuHighScore").textContent = getSavedHighScore().toLocaleString();
+        document.getElementById("menuTotalCoins").textContent = getSavedCoins().toLocaleString();
+    }
+
+    function showStartMenu() {
+        currentState = GAME_STATE.MENU;
+        menuModal.classList.remove("hidden");
+        hud.classList.add("opacity-0");
+        pauseModal.classList.add("hidden");
+        levelCompleteModal.classList.add("hidden");
+        gameOverModal.classList.add("hidden");
+        winModal.classList.add("hidden");
+        checkMobileControlsVisibility();
+        updateMenuStats();
+    }
+
+    function startGame(levelIndex = 0) {
+        sound.initContext();
+        player.lives = 3;
+        levelScore = 0;
+        totalScore = 0;
+        totalCoins = getSavedCoins();
+        loadLevel(levelIndex);
+        updateHudLives();
+        updateHudScore();
+
+        menuModal.classList.add("hidden");
+        levelSelectModal.classList.add("hidden");
+        hud.classList.remove("opacity-0");
+        currentState = GAME_STATE.PLAYING;
+        checkMobileControlsVisibility();
+    }
+
+    function togglePause() {
+        if (currentState === GAME_STATE.PLAYING) {
+            currentState = GAME_STATE.PAUSED;
+            pauseModal.classList.remove("hidden");
+            checkMobileControlsVisibility();
+        } else if (currentState === GAME_STATE.PAUSED) {
+            currentState = GAME_STATE.PLAYING;
+            pauseModal.classList.add("hidden");
+            checkMobileControlsVisibility();
+        }
+    }
+
+    function handleLevelComplete() {
+        currentState = GAME_STATE.LEVEL_COMPLETE;
+        sound.playLevelComplete();
+        createConfetti(camera.x + camera.width / 2, camera.y + camera.height / 3, 50);
+        checkMobileControlsVisibility();
+
+        totalScore += levelScore;
+        saveHighScore(totalScore);
+        saveTotalCoins(totalCoins);
+
+        const nextLvl = currentLevelIndex + 2;
+        saveHighestUnlockedLevel(nextLvl);
+
+        document.getElementById("completeLevelTitle").textContent = `${currentLevel.worldBadge} - ${currentLevel.name} Berhasil Ditaklukkan!`;
+        document.getElementById("completeScore").textContent = levelScore;
+        document.getElementById("completeCoins").textContent = totalCoins;
+        document.getElementById("completeTime").textContent = `${Math.floor(levelTime)}s`;
+
+        if (currentLevelIndex >= LEVELS.length - 1) {
+            setTimeout(() => {
+                showWinScreen();
+            }, 1200);
+        } else {
+            levelCompleteModal.classList.remove("hidden");
+        }
+    }
+
+    function showWinScreen() {
+        currentState = GAME_STATE.WIN;
+        levelCompleteModal.classList.add("hidden");
+        winModal.classList.remove("hidden");
+        document.getElementById("winTotalScore").textContent = totalScore.toLocaleString();
+        document.getElementById("winTotalCoins").textContent = totalCoins.toLocaleString();
+        createConfetti(camera.x + camera.width / 2, camera.y + camera.height / 3, 80);
+        checkMobileControlsVisibility();
+    }
+
+    function handleGameOver() {
+        currentState = GAME_STATE.GAME_OVER;
+        sound.playGameOver();
+        gameOverModal.classList.remove("hidden");
+        document.getElementById("gameOverScore").textContent = (totalScore + levelScore).toLocaleString();
+        saveHighScore(totalScore + levelScore);
+        checkMobileControlsVisibility();
+    }
+
+    function renderLevelSelectButtons() {
+        const container = document.getElementById("levelButtonsContainer");
+        container.innerHTML = "";
+        const unlocked = getHighestUnlockedLevel();
+
+        LEVELS.forEach((lvl, idx) => {
+            const isUnlocked = idx + 1 <= unlocked;
+            const btn = document.createElement("button");
+            btn.className = `w-full p-3 rounded-2xl flex items-center justify-between border transition-all ${
+                isUnlocked
+                    ? "bg-white/10 hover:bg-emerald-500/20 border-white/20 active:scale-[0.98]"
+                    : "bg-white/5 opacity-40 border-white/5 cursor-not-allowed"
+            }`;
+            btn.innerHTML = `
+                <div class="text-left">
+                    <span class="text-[10px] text-emerald-400 font-bold block">${lvl.worldBadge}</span>
+                    <span class="font-game font-semibold text-white text-sm">${lvl.name}</span>
+                </div>
+                <span class="text-lg">${isUnlocked ? "▶" : "🔒"}</span>
+            `;
+            if (isUnlocked) {
+                btn.addEventListener("click", () => {
+                    startGame(idx);
+                });
+            }
+            container.appendChild(btn);
+        });
+    }
+
+    function setupUIListeners() {
+        document.getElementById("btnPlayGame").addEventListener("click", () => startGame(0));
+        document.getElementById("btnHowToPlay").addEventListener("click", () => howToPlayModal.classList.remove("hidden"));
+        document.getElementById("btnCloseHowTo").addEventListener("click", () => howToPlayModal.classList.add("hidden"));
+
+        document.getElementById("btnLevelSelect").addEventListener("click", () => {
+            renderLevelSelectButtons();
+            levelSelectModal.classList.remove("hidden");
+        });
+        document.getElementById("btnCloseLevelSelect").addEventListener("click", () => levelSelectModal.classList.add("hidden"));
+        document.getElementById("btnResetProgress").addEventListener("click", () => {
+            if (confirm("Reset semua skor dan level yang terbuka?")) {
+                resetAllProgress();
+            }
+        });
+
+        document.getElementById("btnPauseToggle").addEventListener("click", togglePause);
+        document.getElementById("btnResume").addEventListener("click", togglePause);
+        document.getElementById("btnRestartLevel").addEventListener("click", () => {
+            pauseModal.classList.add("hidden");
+            player.lives = 3;
+            levelScore = 0;
+            loadLevel(currentLevelIndex);
+            currentState = GAME_STATE.PLAYING;
+            checkMobileControlsVisibility();
+        });
+        document.getElementById("btnPauseMainMenu").addEventListener("click", showStartMenu);
+
+        document.getElementById("btnNextLevel").addEventListener("click", () => {
+            levelCompleteModal.classList.add("hidden");
+            levelScore = 0;
+            loadLevel(currentLevelIndex + 1);
+            currentState = GAME_STATE.PLAYING;
+            checkMobileControlsVisibility();
+        });
+        document.getElementById("btnCompleteMenu").addEventListener("click", showStartMenu);
+
+        document.getElementById("btnTryAgain").addEventListener("click", () => {
+            gameOverModal.classList.add("hidden");
+            startGame(currentLevelIndex);
+        });
+        document.getElementById("btnGameOverMenu").addEventListener("click", showStartMenu);
+
+        document.getElementById("btnPlayAgain").addEventListener("click", () => {
+            winModal.classList.add("hidden");
+            startGame(0);
+        });
+        document.getElementById("btnWinMainMenu").addEventListener("click", showStartMenu);
+
+        document.getElementById("btnAudioToggle").addEventListener("click", () => {
+            const isMuted = sound.toggleMute();
+            audioIcon.textContent = isMuted ? "🔇" : "🔊";
+        });
+        audioIcon.textContent = sound.muted ? "🔇" : "🔊";
+    }
+
+    /* ==========================================================================
+       12. PARALLAX BACKGROUND & WORLD RENDERER
+       ========================================================================== */
+    function drawParallaxBackground(ctx, level, cam) {
+        const w = camera.width;
+        const h = camera.height;
+
+        // Layer 1: Sky Gradient (Cached per level/height)
+        if (!level._skyGrad || level._skyGradH !== h) {
+            const grad = ctx.createLinearGradient(0, 0, 0, h);
+            grad.addColorStop(0, level.skyGradient[0]);
+            grad.addColorStop(1, level.skyGradient[1]);
+            level._skyGrad = grad;
+            level._skyGradH = h;
+        }
+        ctx.fillStyle = level._skyGrad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Layer 1.5: Stars / Sun / Moon
+        if (level.theme === "twilight") {
+            ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+            for (let i = 0; i < 40; i++) {
+                const sx = ((i * 97 + 13) % w);
+                const sy = ((i * 47 + 7) % (h * 0.6));
+                ctx.fillRect(sx, sy, 2, 2);
+            }
+            ctx.beginPath();
+            ctx.arc(w * 0.8, 80, 24, 0, Math.PI * 2);
+            ctx.fillStyle = "#fef08a";
+            ctx.fill();
+        } else if (level.theme === "canyon") {
+            ctx.beginPath();
+            ctx.arc(w * 0.75, 120, 36, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(254, 215, 170, 0.8)";
+            ctx.fill();
+        } else {
+            ctx.beginPath();
+            ctx.arc(w * 0.85, 75, 30, 0, Math.PI * 2);
+            ctx.fillStyle = "#fef08a";
+            ctx.fill();
+        }
+
+        // Layer 2: Clouds (Parallax Speed 0.1x)
+        ctx.save();
+        ctx.fillStyle = level.theme === "twilight" ? "rgba(255, 255, 255, 0.08)" : "rgba(255, 255, 255, 0.35)";
+        const cloudOffset = (cam.x * 0.1) % w;
+        for (let i = -1; i < 3; i++) {
+            const cx = i * 400 - cloudOffset;
+            drawCloud(ctx, cx + 50, 70, 60);
+            drawCloud(ctx, cx + 240, 110, 45);
+        }
+        ctx.restore();
+
+        // Layer 3: Distant Mountain Range (Parallax Speed 0.25x)
+        ctx.save();
+        ctx.fillStyle = level.mountainColor;
+        const mountainOffset = (cam.x * 0.25) % 500;
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        for (let x = -500; x < w + 500; x += 250) {
+            const mx = x - mountainOffset;
+            ctx.lineTo(mx, h - 180);
+            ctx.lineTo(mx + 125, h - 310);
+            ctx.lineTo(mx + 250, h - 180);
+        }
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+
+        // Layer 4: Midground Hills (Parallax Speed 0.5x)
+        ctx.save();
+        ctx.fillStyle = level.hillColor;
+        const hillOffset = (cam.x * 0.5) % 400;
+        ctx.beginPath();
+        ctx.moveTo(0, h);
+        for (let x = -400; x < w + 400; x += 200) {
+            const hx = x - hillOffset;
+            ctx.quadraticCurveTo(hx + 100, h - 220, hx + 200, h - 120);
+        }
+        ctx.lineTo(w, h);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function drawCloud(ctx, x, y, size) {
+        ctx.beginPath();
+        ctx.arc(x, y, size * 0.4, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.35, y - size * 0.2, size * 0.35, 0, Math.PI * 2);
+        ctx.arc(x + size * 0.7, y, size * 0.38, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    function drawPlatforms(ctx, platforms) {
+        const camLeft = camera.x - 60;
+        const camRight = camera.x + camera.width + 60;
+        for (const p of platforms) {
+            if (p.x + p.w < camLeft || p.x > camRight) continue;
+
+            if (p.type === "one-way") {
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, p.w, p.h);
+                ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+                ctx.fillRect(p.x, p.y, p.w, 3);
+            } else {
+                ctx.fillStyle = p.color;
+                ctx.fillRect(p.x, p.y, p.w, p.h);
+                ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
+                ctx.fillRect(p.x, p.y, p.w, 4);
+                ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
+                ctx.fillRect(p.x, p.y + p.h - 5, p.w, 5);
+            }
+        }
+    }
+
+    /* ==========================================================================
+       13. ENGINE CANVAS SETUP
+       ========================================================================== */
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d", { alpha: false });
+
+    const VIRTUAL_WIDTH = 960;
+    const VIRTUAL_HEIGHT = 540;
+    let canvasScale = 1;
+
+    function resizeCanvas() {
+        // Cap DPR at 2 to avoid extreme fill-rate lag on 3x/4K/Retina screens
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+
+        let targetWidth = windowWidth;
+        let targetHeight = windowWidth * (9 / 16);
+
+        if (targetHeight > windowHeight) {
+            targetHeight = windowHeight;
+            targetWidth = windowHeight * (16 / 9);
+        }
+
+        canvas.style.width = `${Math.floor(targetWidth)}px`;
+        canvas.style.height = `${Math.floor(targetHeight)}px`;
+
+        canvas.width = Math.floor(VIRTUAL_WIDTH * dpr);
+        canvas.height = Math.floor(VIRTUAL_HEIGHT * dpr);
+
+        canvasScale = dpr;
+        camera.width = VIRTUAL_WIDTH;
+        camera.height = VIRTUAL_HEIGHT;
+
+        ctx.imageSmoothingEnabled = true;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+
+    /* ==========================================================================
+       14. GAME LOOP & UPDATE/RENDER (Fixed-Timestep 60Hz + Smooth Pixel Blitting)
+       ========================================================================== */
+    const FIXED_STEP = 1000 / 60; // 16.6667 ms (canonical fixed physics tick)
+    let accumulator = 0;
+    let lastTime = 0;
+    let fps = 60;
+    let frameCount = 0;
+    let lastFpsUpdate = 0;
+    let lastDisplayedSec = -1;
+
+    function updateGame(deltaTime, currentTime) {
+        if (currentState !== GAME_STATE.PLAYING) return;
+
+        levelTime += deltaTime / 1000;
+        const sec = Math.floor(levelTime);
+        if (sec !== lastDisplayedSec) {
+            lastDisplayedSec = sec;
+            hudTime.textContent = String(sec).padStart(3, "0");
+        }
+
+        // 1. Moving Platforms
+        const mps = currentLevel.movingPlatforms;
+        for (let i = 0; i < mps.length; i++) {
+            mps[i].update();
+        }
+
+        // 2. Player Update (Uses pre-cached allPlatforms)
+        player.update(currentLevel.platforms, currentLevel.movingPlatforms, currentLevel);
+
+        // 3. Enemies Update & Stomp / Hurt Collisions
+        const enemies = currentLevel.enemies;
+        const allPlatforms = currentLevel.allPlatforms || currentLevel.platforms;
+        for (let i = 0; i < enemies.length; i++) {
+            const enemy = enemies[i];
+            if (!enemy.alive) continue;
+            enemy.update(allPlatforms);
+
+            if (player.checkOverlap(player.x, player.y, player.width, player.height, enemy.x, enemy.y, enemy.width, enemy.height)) {
+                // Stomp logic: player moving down and feet above enemy center
+                if (player.vy > 0 && (player.y + player.height) <= (enemy.y + enemy.height * 0.5 + 10)) {
+                    enemy.alive = false;
+                    player.vy = -9.2;
+                    sound.playStomp();
+                    createStompBurst(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2);
+                    levelScore += 200;
+                    spawnFloatingText(enemy.x + enemy.width / 2, enemy.y, "+200", "#fbbf24");
+                    updateHudScore();
+                } else {
+                    player.takeDamage();
+                }
+            }
+        }
+
+        // 4. Collectibles
+        const collectibles = currentLevel.collectibles;
+        for (let i = 0; i < collectibles.length; i++) {
+            const coin = collectibles[i];
+            if (coin.collected) continue;
+            coin.update(currentTime);
+
+            if (player.checkOverlap(player.x, player.y, player.width, player.height, coin.x, coin.y, coin.width, coin.height)) {
+                coin.collected = true;
+                totalCoins += 1;
+                levelScore += 100;
+                sound.playCoin();
+                createSparkleBurst(coin.x + coin.width / 2, coin.y + coin.height / 2, "#fde047", 12);
+                spawnFloatingText(coin.x + coin.width / 2, coin.y, "+100", "#fde047");
+                updateHudScore();
+            }
+        }
+
+        // 5. Checkpoint
+        currentLevel.checkpoint.update();
+        if (!currentLevel.checkpoint.activated) {
+            const cp = currentLevel.checkpoint;
+            if (player.checkOverlap(player.x, player.y, player.width, player.height, cp.x, cp.y, cp.width, cp.height)) {
+                cp.activate();
+                activeCheckpoint = { x: cp.x + 10, y: cp.y + cp.height };
+            }
+        }
+
+        // 6. Goal
+        const goal = currentLevel.goal;
+        if (!goal.completed && player.checkOverlap(player.x, player.y, player.width, player.height, goal.x, goal.y, goal.width, goal.height)) {
+            goal.completed = true;
+            handleLevelComplete();
+        }
+
+        // 7. Particles & Texts (Only update active ones)
+        for (let i = 0; i < particles.length; i++) {
+            if (particles[i].active) particles[i].update();
+        }
+        for (let i = 0; i < floatingTexts.length; i++) {
+            if (floatingTexts[i].active) floatingTexts[i].update();
+        }
+
+        // 8. Camera
+        camera.update(player);
+    }
+
+    function renderGame(currentTime) {
+        ctx.save();
+        ctx.scale(canvasScale, canvasScale);
+
+        if (currentLevel) {
+            drawParallaxBackground(ctx, currentLevel, camera);
+
+            const shake = camera.getShakeOffset();
+            ctx.save();
+            // Integer translation eliminates sub-pixel edge blur & micro-stuttering
+            ctx.translate(Math.round(-camera.x + shake.x), Math.round(-camera.y + shake.y));
+
+            currentLevel.checkpoint.draw(ctx);
+            currentLevel.goal.draw(ctx, currentTime);
+
+            const mps = currentLevel.movingPlatforms;
+            for (let i = 0; i < mps.length; i++) mps[i].draw(ctx);
+            drawPlatforms(ctx, currentLevel.platforms);
+
+            const collectibles = currentLevel.collectibles;
+            for (let i = 0; i < collectibles.length; i++) collectibles[i].draw(ctx, currentTime);
+
+            const enemies = currentLevel.enemies;
+            for (let i = 0; i < enemies.length; i++) enemies[i].draw(ctx);
+
+            player.draw(ctx);
+
+            for (let i = 0; i < particles.length; i++) {
+                if (particles[i].active) particles[i].draw(ctx);
+            }
+            for (let i = 0; i < floatingTexts.length; i++) {
+                if (floatingTexts[i].active) floatingTexts[i].draw(ctx);
+            }
+
+            if (debugEnabled) {
+                renderDebugView(ctx);
+            }
+
+            ctx.restore();
+        }
+
+        if (debugEnabled) {
+            renderDebugHUD(ctx);
+        }
+
+        ctx.restore();
+    }
+
+    function renderDebugView(ctx) {
+        // Player Hitbox (Green)
+        ctx.strokeStyle = "rgba(74, 222, 128, 0.9)";
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(player.x, player.y, player.width, player.height);
+
+        // Velocity line
+        ctx.beginPath();
+        ctx.moveTo(player.x + player.width / 2, player.y + player.height / 2);
+        ctx.lineTo(player.x + player.width / 2 + player.vx * 6, player.y + player.height / 2 + player.vy * 6);
+        ctx.strokeStyle = "#38bdf8";
+        ctx.stroke();
+
+        // Platforms (Cyan / Amber)
+        for (const p of currentLevel.platforms) {
+            ctx.strokeStyle = p.type === "one-way" ? "rgba(251, 191, 36, 0.7)" : "rgba(56, 189, 248, 0.7)";
+            ctx.lineWidth = 1;
+            ctx.strokeRect(p.x, p.y, p.w, p.h);
+        }
+        for (const mp of currentLevel.movingPlatforms) {
+            ctx.strokeStyle = "rgba(168, 85, 247, 0.8)";
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(mp.x, mp.y, mp.w, mp.h);
+        }
+
+        // Enemies (Red)
+        for (const e of currentLevel.enemies) {
+            ctx.strokeStyle = "rgba(244, 63, 94, 0.85)";
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(e.x, e.y, e.width, e.height);
+        }
+    }
+
+    function renderDebugHUD(ctx) {
+        ctx.save();
+        ctx.fillStyle = "rgba(15, 23, 42, 0.88)";
+        ctx.fillRect(10, 60, 220, 130);
+        ctx.strokeStyle = "#34d399";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(10, 60, 220, 130);
+
+        ctx.fillStyle = "#34d399";
+        ctx.font = "bold 11px monospace";
+        ctx.fillText(`FPS: ${fps}`, 20, 80);
+        ctx.fillText(`LEVEL: ${currentLevel ? currentLevel.worldBadge : '-'}`, 20, 96);
+        ctx.fillText(`STATE: ${currentState}`, 20, 112);
+        ctx.fillText(`PLAYER: X:${Math.round(player.x)} Y:${Math.round(player.y)}`, 20, 128);
+        ctx.fillText(`VEL: X:${player.vx.toFixed(2)} Y:${player.vy.toFixed(2)}`, 20, 144);
+        ctx.fillText(`CAMERA: ${Math.round(camera.x)}, ${Math.round(camera.y)}`, 20, 160);
+        ctx.fillText(`GROUNDED: ${player.isGrounded} | LIVES: ${player.lives}`, 20, 176);
+        ctx.restore();
+    }
+
+    function gameLoop(timestamp) {
+        if (!lastTime) lastTime = timestamp;
+        let delta = timestamp - lastTime;
+        lastTime = timestamp;
+
+        // Cap delta to 100ms to prevent spiral of death on background tab
+        if (delta > 100) delta = 100;
+
+        frameCount++;
+        if (timestamp - lastFpsUpdate >= 1000) {
+            fps = frameCount;
+            frameCount = 0;
+            lastFpsUpdate = timestamp;
+        }
+
+        accumulator += delta;
+
+        // Fixed timestep 60Hz updates ensure consistent, snappy physics regardless of display refresh rate
+        while (accumulator >= FIXED_STEP) {
+            updateGame(FIXED_STEP, timestamp);
+            accumulator -= FIXED_STEP;
+        }
+
+        renderGame(timestamp);
+
+        requestAnimationFrame(gameLoop);
+    }
+
+    /* ==========================================================================
+       15. INITIALIZATION
+       ========================================================================== */
+    function init() {
+        initAssetLoader();
+        resizeCanvas();
+        setupInputListeners();
+        setupUIListeners();
+        loadLevel(0);
+        showStartMenu();
+        requestAnimationFrame(gameLoop);
+    }
+
+    window.addEventListener("DOMContentLoaded", init);
+    </script>
+</body>
+</html>
