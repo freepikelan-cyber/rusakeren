@@ -234,8 +234,8 @@
                 "Melayani Dengan Ikhlas Tanpa Batas"
             </p>
 
-            <!-- Active Map Selector Tabs (4 Pokja Aktif) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 mt-1 mb-3">
+            <!-- Active Map Selector Tabs (5 Pokja Aktif) -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 sm:gap-2 mt-1 mb-3">
                 <button id="tabSelectTKRS" class="py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow">
                     <span>🏛️</span> MAP 1: TKRS
                 </button>
@@ -247,6 +247,9 @@
                 </button>
                 <button id="tabSelectMFK" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
                     <span>🧯</span> MAP 4: MFK
+                </button>
+                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all col-span-2 sm:col-span-1">
+                    <span>💊</span> MAP 5: PROGNAS
                 </button>
             </div>
 
@@ -454,12 +457,12 @@
                     <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
                 </div>
 
-                <!-- 15. PROGNAS -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 15</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">PROGNAS</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Program Nasional (TB, Stunting, HIV)</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 15. PROGNAS (ACTIVE) -->
+                <div id="selectPokjaPROGNAS" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider">MAP 5 / DUNIA 15</div>
+                    <div class="text-xs md:text-sm font-bold text-white">PROGNAS</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Program Pengendalian Resistensi Antimikroba (PPRA)</div>
+                    <span id="badgePROGNAS" class="inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 16. KPS-MED -->
@@ -524,7 +527,7 @@
     <div id="howToModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/85 backdrop-blur-md z-40 p-4 hidden">
         <div class="glass-panel max-w-lg w-full p-6 rounded-3xl border-sky-400/30 text-left">
             <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                <span>📖</span> BUKU SAKU AKREDITASI • MAP 1 (TKRS), MAP 2 (PMKP), MAP 3 (SKP) & MAP 4 (MFK)
+                <span>📖</span> BUKU SAKU AKREDITASI • MAP 1 (TKRS), MAP 2 (PMKP), MAP 3 (SKP), MAP 4 (MFK) & MAP 5 (PROGNAS)
             </h3>
             <div class="text-xs text-slate-300 space-y-2.5 max-h-[55vh] overflow-y-auto pr-1">
                 <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/30">
@@ -535,6 +538,33 @@
                 <div class="p-3 rounded-xl bg-rose-950/40 border border-rose-500/30">
                     <span class="font-bold text-rose-300">🏰 Tantangan Benteng Takeshi (Remedial):</span>
                     <p class="mt-0.5">Bila salah menjawab kuis di terminal pos, Kapten RUSA ERIK akan terperosok ke arena remedial Benteng Takeshi! Lewati <strong>Batu Loncat Goyang</strong> di atas Kolam Lumpur, terobos <strong>Pintu Kertas</strong> yang tepat (atau dobrak Pintu Kayu 3x), dan injak <strong>Super Trampolin Emas</strong> untuk melontar kembali ke koridor RS!</p>
+                </div>
+
+                <!-- POKJA PROGNAS SECTION -->
+                <div class="p-3 rounded-xl bg-purple-950/50 border border-purple-500/40">
+                    <span class="font-bold text-purple-300">💊 MAP 5: POKJA PROGNAS (Program Pengendalian Resistensi Antimikroba - PPRA):</span>
+                    <p class="mt-1 leading-relaxed">
+                        • <strong>Definisi PPRA:</strong> Program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak dan rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan.<br>
+                        • <strong>4 Tujuan Utama PPRA:</strong><br>
+                        &nbsp;&nbsp;1) Mengoptimalkan penggunaan antibiotik secara rasional.<br>
+                        &nbsp;&nbsp;2) Menurunkan kejadian resistensi antimikroba.<br>
+                        &nbsp;&nbsp;3) Meningkatkan keselamatan pasien.<br>
+                        &nbsp;&nbsp;4) Menurunkan angka infeksi dan biaya pelayanan kesehatan.<br>
+                        • <strong>6 Prinsip Penggunaan Antibiotik Rasional (6 Tepat):</strong><br>
+                        &nbsp;&nbsp;1. Tepat Indikasi, 2. Tepat Pasien, 3. Tepat Obat, 4. Tepat Dosis, 5. Tepat Rute Pemberian, 6. Tepat Waktu dan Lama Pemberian.<br>
+                        • <strong>Indikator Keberhasilan PPRA:</strong><br>
+                        &nbsp;&nbsp;1) Kepatuhan penggunaan antibiotik sesuai pedoman (PPAB).<br>
+                        &nbsp;&nbsp;2) Evaluasi penggunaan antibiotik (kuantitatif DDD & kualitatif Gyssens).<br>
+                        &nbsp;&nbsp;3) Pola resistensi kuman (Antibiogram berkala mikrobiologi klinik).<br>
+                        &nbsp;&nbsp;4) Audit penggunaan antibiotik.<br>
+                        • <strong>6 Strategi Utama PPRA:</strong><br>
+                        &nbsp;&nbsp;1) Pedoman penggunaan antibiotik.<br>
+                        &nbsp;&nbsp;2) Audit penggunaan antibiotik.<br>
+                        &nbsp;&nbsp;3) Restriksi antibiotik tertentu (pengelompokan lini/reserve dengan ASO & otorisasi Komite PPRA).<br>
+                        &nbsp;&nbsp;4) Surveilans resistensi kuman.<br>
+                        &nbsp;&nbsp;5) Edukasi tenaga kesehatan.<br>
+                        &nbsp;&nbsp;6) Monitoring dan evaluasi berkelanjutan.
+                    </p>
                 </div>
 
                 <!-- POKJA MFK SECTION -->
@@ -1213,6 +1243,90 @@
             ],
             correct: 0,
             explanation: "Sempurna! Standar Pokja MFK meliputi keselamatan fisik, proteksi kebakaran (APAR/Hydrant), utilitas darurat, penanggulangan bencana (Disaster Plan), dan mitigasi tumpahan B3 (Spill Kit APD) saat KODE ORANYE aktif!"
+        }
+    ];
+
+    /* ==========================================================================
+       1E. BANK SOAL & DATA POKJA PROGNAS (Program Pengendalian Resistensi Antimikroba / PPRA)
+       ========================================================================== */
+    const PROGNAS_QUIZ_BANK = [
+        {
+            id: "ppra_definisi",
+            posName: "Pos 1: Definisi Program PPRA Rumah Sakit",
+            question: "Apa yang dimaksud dengan Program Pengendalian Resistensi Antimikroba (PPRA) di rumah sakit?",
+            options: [
+                "Program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak dan rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan.",
+                "Program promosi penjualan obat antibiotik baru dengan diskon farmasi untuk meningkatkan pendapatan rumah sakit.",
+                "Program penghentian total seluruh penggunaan antibiotik bagi semua pasien rawat inap tanpa terkecuali.",
+                "Program pembersihan ruangan operasi hanya menggunakan desinfektan lantai tanpa uji laboratorium kultur."
+            ],
+            correct: 0,
+            explanation: "Tepat sekali! Sesuai standar Kemenkes, PPRA adalah program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak dan rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan."
+        },
+        {
+            id: "ppra_tujuan",
+            posName: "Pos 2: Empat Tujuan Utama PPRA",
+            question: "Apa sajakah 4 tujuan utama diselenggarakannya program PPRA di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "1) Mengoptimalkan penggunaan antibiotik secara rasional; 2) Menurunkan kejadian resistensi antimikroba; 3) Meningkatkan keselamatan pasien; 4) Menurunkan angka infeksi dan biaya pelayanan kesehatan.",
+                "1) Menghabiskan stok antibiotik kedaluwarsa; 2) Menambah kuota impor obat; 3) Mengurangi jumlah perawat; 4) Meniadakan pemeriksaan kultur kuman.",
+                "1) Menaikkan tarif rawat inap; 2) Mempercepat pemulangan pasien tanpa obat; 3) Mengganti semua obat oral dengan suntikan; 4) Menghapus resep dokter.",
+                "1) Membeli alat laboratorium termahal; 2) Membatasi kunjungan keluarga; 3) Mengurangi tes alergi obat; 4) Menghapus formularium obat."
+            ],
+            correct: 0,
+            explanation: "Sangat Benar! 4 Tujuan utama PPRA: 1) Mengoptimalkan penggunaan antibiotik rasional, 2) Menurunkan resistensi antimikroba, 3) Meningkatkan keselamatan pasien, dan 4) Menurunkan angka infeksi serta biaya pelayanan kesehatan!"
+        },
+        {
+            id: "ppra_prinsip_rasional",
+            posName: "Pos 3: Enam Prinsip Penggunaan Antibiotik Rasional (6 Tepat)",
+            question: "Sebutkan 6 prinsip penggunaan antibiotik secara rasional menurut kaidah PPRA!",
+            options: [
+                "Tepat Indikasi, Tepat Pasien, Tepat Obat, Tepat Dosis, Tepat Rute Pemberian, serta Tepat Waktu dan Lama Pemberian.",
+                "Tepat Merk Obat, Tepat Kemasan, Tepat Harga Murah, Tepat Pabrik, Tepat Kurir, dan Tepat Lokasi Apotek.",
+                "Tepat Selera Pasien, Tepat Warna Kapsul, Tepat Tanggal Gajian, Tepat Promosi Sponsor, Tepat Ruangan, dan Tepat Waktu Pulang.",
+                "Tepat Pembayaran Tunai, Tepat Asuransi, Tepat Antrean Poli, Tepat Parkir Mobil, Tepat Jam Dokter, dan Tepat Resep."
+            ],
+            correct: 0,
+            explanation: "Luar biasa! 6 Prinsip Penggunaan Antibiotik Rasional: 1. Tepat Indikasi, 2. Tepat Pasien, 3. Tepat Obat, 4. Tepat Dosis, 5. Tepat Rute Pemberian, dan 6. Tepat Waktu & Lama Pemberian!"
+        },
+        {
+            id: "ppra_indikator_keberhasilan",
+            posName: "Pos 4: Indikator Keberhasilan PPRA",
+            question: "Apa sajakah 4 indikator utama keberhasilan pelaksanaan program PPRA di rumah sakit?",
+            options: [
+                "Kepatuhan penggunaan antibiotik sesuai pedoman, evaluasi penggunaan antibiotik (kuantitatif DDD & kualitatif Gyssens), pola resistensi kuman (antibiogram), dan audit penggunaan antibiotik.",
+                "Jumlah penjualan obat antibiotik terbanyak, keuntungan laba apotek, banyaknya resep luar, dan ketiadaan komplain harga.",
+                "Penurunan jumlah pasien yang berobat ke IGD, pengurangan dokter spesialis, penghapusan lembar resep, dan stok gudang habis.",
+                "Hanya dihitung dari jumlah poster edukasi yang ditempel di dinding lorong tanpa audit rekam medis."
+            ],
+            correct: 0,
+            explanation: "Sempurna! 4 Indikator PPRA meliputi: 1) Kepatuhan peresepan sesuai pedoman PPAB, 2) Evaluasi kuantitatif (Defined Daily Dose/DDD) & kualitatif (Gyssens), 3) Pemetaan pola resistensi kuman berkala (antibiogram), dan 4) Audit berkala penggunaan antibiotik!"
+        },
+        {
+            id: "ppra_strategi_utama",
+            posName: "Pos 5: Strategi Utama Tim PPRA",
+            question: "Apa sajakah 6 strategi utama PPRA dalam mengendalikan resistensi kuman di lingkungan rumah sakit?",
+            options: [
+                "Pedoman penggunaan antibiotik, audit penggunaan antibiotik, restriksi antibiotik tertentu, surveilans resistensi, edukasi tenaga kesehatan, serta monitoring dan evaluasi.",
+                "Memberikan antibiotik spektrum luas langsung ke semua pasien tanpa indikasi dan melarang dokter konsultasi farmasi.",
+                "Menutup laboratorium mikrobiologi dan menyerahkan pemilihan obat sepenuhnya pada kemauan pasien.",
+                "Menghilangkan kewajiban cuci tangan dan melarang audit kepatuhan klinis oleh Komite Farmasi."
+            ],
+            correct: 0,
+            explanation: "Hebat! 6 Strategi Utama PPRA: 1. Pedoman Penggunaan Antibiotik (PPAB), 2. Audit penggunaan antibiotik, 3. Restriksi antibiotik tertentu (lini restriksi), 4. Surveilans resistensi kuman, 5. Edukasi nakes (dokter, apoteker, perawat), dan 6. Monitoring & evaluasi berkelanjutan!"
+        },
+        {
+            id: "ppra_restriksi_lini",
+            posName: "Pos 6: Restriksi Antibiotik & Otorisasi Reserve",
+            question: "Dalam kebijakan restriksi antibiotik Tim PPRA, bagaimana tata laksana penggunaan antibiotik kelompok Reserve / Lini 3?",
+            options: [
+                "Antibiotik kelompok Reserve dicadangkan untuk infeksi bakteri multiresisten (MDRO), memerlukan formulir persetujuan khusus/otorisasi Tim PPRA (atau Dokter Spesialis Konsultan), serta diberlakukan Automatic Stop Order (ASO).",
+                "Antibiotik Reserve boleh diresepkan bebas tanpa resep dan dibeli bebas oleh keluarga pasien di kasir.",
+                "Antibiotik Reserve diberikan sebagai terapi pencegahan flu biasa bagi seluruh staf administrasi.",
+                "Semua dokter muda bebas memberikan antibiotik Reserve lini 3 tanpa indikasi hasil kultur laboratorium mikrobiologi."
+            ],
+            correct: 0,
+            explanation: "Sangat Tepat! Restriksi Antibiotik: Golongan Reserve (lini 3) hanya untuk infeksi kuman resisten (MDRO) yang terbukti via kultur, wajib mendapatkan otorisasi/persetujuan Tim PPRA, dan dipantau ketat dengan Automatic Stop Order (ASO) demi mencegah 'superbug'!"
         }
     ];
 
@@ -1984,6 +2098,57 @@
                 ctx.fillRect(-11, -3, 22, 4); // brim helm
                 ctx.fillStyle = "#ca8a04";
                 ctx.fillRect(-9, 1, 18, 2);
+            } else if (this.type === "antibiotic_capsule") {
+                // Kapsul Antibiotik PPRA (Dua Warna: Ungu & Cyan dengan Kilau)
+                // Badan kapsul kiri (ungu PPRA)
+                ctx.fillStyle = "#9333ea";
+                ctx.beginPath();
+                ctx.arc(-4, 0, 6, Math.PI * 0.5, Math.PI * 1.5);
+                ctx.fillRect(-4, -6, 5, 12);
+                ctx.fill();
+                // Badan kapsul kanan (cyan)
+                ctx.fillStyle = "#38bdf8";
+                ctx.beginPath();
+                ctx.arc(4, 0, 6, Math.PI * 1.5, Math.PI * 0.5);
+                ctx.fillRect(0, -6, 5, 12);
+                ctx.fill();
+                // Garis sambungan tengah putih
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-1, -6.5, 2, 13);
+                // Highlight kilau
+                ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+                ctx.fillRect(-5, -4, 10, 2);
+                // Label PPRA mikro
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 6px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("PPRA", 0, 14);
+            } else if (this.type === "petri_dish") {
+                // Cawan Petri Kultur Kuman & Uji Sensitivitas (Antibiogram PPRA)
+                ctx.fillStyle = "rgba(241, 245, 249, 0.85)";
+                ctx.beginPath();
+                ctx.arc(0, 0, 12, 0, Math.PI * 2);
+                ctx.fill();
+                // Media agar kuning bening
+                ctx.fillStyle = "#fde047";
+                ctx.beginPath();
+                ctx.arc(0, 0, 9.5, 0, Math.PI * 2);
+                ctx.fill();
+                // Zona hambat antibiotik bening
+                ctx.fillStyle = "#ffffff";
+                ctx.beginPath();
+                ctx.arc(0, 0, 6, 0, Math.PI * 2);
+                ctx.fill();
+                // Cakram kertas antibiotik ungu di tengah
+                ctx.fillStyle = "#a855f7";
+                ctx.beginPath();
+                ctx.arc(0, 0, 2.5, 0, Math.PI * 2);
+                ctx.fill();
+                // Koloni bakteri mikro di pinggir agar
+                ctx.fillStyle = "#15803d";
+                ctx.fillRect(4, -5, 2, 2);
+                ctx.fillRect(-6, 3, 2, 2);
+                ctx.fillRect(5, 4, 2, 2);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -2356,6 +2521,71 @@
             new CollectibleDoc(5750, 390, "apar")
         ],
         finishX: 6400
+    };
+
+    /* ==========================================================================
+       7E. DEFINISI DUNIA POKJA PROGNAS (LEVEL 5 / MAP 5 - PPRA)
+       ========================================================================== */
+    const PROGNAS_LEVEL = {
+        id: "PROGNAS",
+        shortName: "POKJA PROGNAS",
+        name: "Pokja PROGNAS • Program Pengendalian Resistensi Antimikroba (PPRA)",
+        accentFloor: "#9333ea",
+        accentBorder: "#c084fc",
+        width: 5400,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Definisi & Regulasi PPRA (x: 0 - 780)
+            { x: 0, y: 440, w: 780, h: 100, type: "solid" },
+            // Koridor 2: 4 Tujuan Utama PPRA (x: 920 - 1500)
+            { x: 920, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 3: 6 Prinsip Penggunaan Antibiotik Rasional (x: 1640 - 2280)
+            { x: 1640, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 4: Indikator Keberhasilan PPRA (x: 2360 - 2980)
+            { x: 2360, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 2560, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Strategi Utama Tim PPRA (x: 3100 - 3740)
+            { x: 3100, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 6: Restriksi Antibiotik Lini 3 & Reserve (x: 3860 - 4500)
+            { x: 3860, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 4060, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Exit Conference Surveyor PROGNAS (x: 4800 - 5400)
+            { x: 4800, y: 440, w: 600, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(800, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2990, 400, 95, 20, 0, -70, 1.2),
+            new MovingPlatform(3750, 400, 95, 20, 70, 0, 1.3),
+            new MovingPlatform(4520, 410, 100, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, PROGNAS_QUIZ_BANK[0]),  // Pos 1: Definisi PPRA
+            new QuizTerminal(1150, 270, PROGNAS_QUIZ_BANK[1]), // Pos 2: 4 Tujuan PPRA
+            new QuizTerminal(1950, 380, PROGNAS_QUIZ_BANK[2]), // Pos 3: 6 Prinsip Rasional (6 Tepat)
+            new QuizTerminal(2720, 270, PROGNAS_QUIZ_BANK[3]), // Pos 4: Indikator Keberhasilan PPRA
+            new QuizTerminal(3420, 380, PROGNAS_QUIZ_BANK[4]), // Pos 5: Strategi Utama PPRA
+            new QuizTerminal(4220, 270, PROGNAS_QUIZ_BANK[5])  // Pos 6: Restriksi Antibiotik & Reserve
+        ],
+        collectibles: [
+            new CollectibleDoc(220, 390, "antibiotic_capsule"),
+            new CollectibleDoc(400, 370, "petri_dish"),
+            new CollectibleDoc(650, 390, "badge_tni"),
+            new CollectibleDoc(1020, 250, "antibiotic_capsule"),
+            new CollectibleDoc(1350, 250, "star_mutu"),
+            new CollectibleDoc(1800, 390, "petri_dish"),
+            new CollectibleDoc(2100, 390, "antibiotic_capsule"),
+            new CollectibleDoc(2650, 250, "petri_dish"),
+            new CollectibleDoc(2850, 250, "star_mutu"),
+            new CollectibleDoc(3250, 390, "antibiotic_capsule"),
+            new CollectibleDoc(3580, 390, "petri_dish"),
+            new CollectibleDoc(4120, 250, "antibiotic_capsule"),
+            new CollectibleDoc(4380, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "petri_dish")
+        ],
+        finishX: 5000
     };
 
     let currentLevel = TKRS_LEVEL;
@@ -2924,7 +3154,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "MFK") {
+        if (currentLevel.id === "PROGNAS") {
+            // Suasana Laboratorium Mikrobiologi & Farmasi Aeromedis
+            skyGrad.addColorStop(0, "#1e1b4b");
+            skyGrad.addColorStop(0.5, "#4c1d95");
+            skyGrad.addColorStop(1, "#c084fc");
+        } else if (currentLevel.id === "MFK") {
             // Suasana Kesiapsiagaan Fasilitas / Sore Darurat
             skyGrad.addColorStop(0, "#450a0a");
             skyGrad.addColorStop(0.5, "#7c2d12");
@@ -2946,7 +3181,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)";
+        ctx.fillStyle = currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)");
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -2959,7 +3194,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"));
+        ctx.fillStyle = currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -2981,15 +3216,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"));
+            ctx.fillStyle = currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"));
+            ctx.fillStyle = currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"));
+        ctx.fillStyle = currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -2997,7 +3232,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "MFK") {
+            if (currentLevel.id === "PROGNAS") {
+                ctx.fillStyle = "rgba(147, 51, 234, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("💊 PPRA: BIJAK ANTIBIOTIK • TEKAN RESISTENSI", kx + 160, 296);
+                ctx.fillStyle = "rgba(46, 16, 101, 0.55)";
+            } else if (currentLevel.id === "MFK") {
                 ctx.fillStyle = "rgba(234, 88, 12, 0.8)";
                 ctx.fillRect(kx + 40, 280, 240, 24);
                 ctx.fillStyle = "#ffffff";
@@ -3077,7 +3320,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "PMKP" ? "#059669" : "#0284c7";
+        ctx.fillStyle = currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -3278,9 +3521,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "MFK") {
+        if (currentLevel.id === "PROGNAS") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
             btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-200 to-indigo-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja PROGNAS, Program Pengendalian Resistensi Antimikroba (PPRA), 6 Prinsip Penggunaan Antibiotik Rasional, restriksi antibiotik, dan surveilans mikrobiologi paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola PPRA, penggunaan antibiotik bijak, dan evaluasi Gyssens/DDD berjalan baik dengan penguatan koordinasi surveilans kuman.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan kepatuhan peresepan PPAB dan pengawasan restriksi antibiotik Reserve lini 3 di seluruh ruangan.";
+            }
+        } else if (currentLevel.id === "MFK") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 5: POKJA PROGNAS ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -3429,7 +3690,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "MFK") {
+        if (pokjaId === "PROGNAS") {
+            currentLevel = PROGNAS_LEVEL;
+        } else if (pokjaId === "MFK") {
             currentLevel = MFK_LEVEL;
         } else if (pokjaId === "SKP") {
             currentLevel = SKP_LEVEL;
@@ -3449,6 +3712,7 @@
         const tabPMKP = document.getElementById("tabSelectPMKP");
         const tabSKP = document.getElementById("tabSelectSKP");
         const tabMFK = document.getElementById("tabSelectMFK");
+        const tabPROGNAS = document.getElementById("tabSelectPROGNAS");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -3457,16 +3721,19 @@
         const cardPMKP = document.getElementById("selectPokjaPMKP");
         const cardSKP = document.getElementById("selectPokjaSKP");
         const cardMFK = document.getElementById("selectPokjaMFK");
+        const cardPROGNAS = document.getElementById("selectPokjaPROGNAS");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
         const badgeMFK = document.getElementById("badgeMFK");
+        const badgePROGNAS = document.getElementById("badgePROGNAS");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
         if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
         if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
         if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
+        if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all col-span-2 sm:col-span-1";
 
         // Reset all cards
         if (cardTKRS) {
@@ -3485,8 +3752,29 @@
             cardMFK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-orange-950/40 transition-all";
             if (badgeMFK) { badgeMFK.innerText = "SIAP DITELUSURI"; badgeMFK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 text-[9px] font-semibold"; }
         }
+        if (cardPROGNAS) {
+            cardPROGNAS.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all";
+            if (badgePROGNAS) { badgePROGNAS.innerText = "SIAP DITELUSURI"; badgePROGNAS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "MFK") {
+        if (currentLevel.id === "PROGNAS") {
+            if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow col-span-2 sm:col-span-1";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA PROGNAS • MAP 5 (AKTIF)";
+                menuSubtitle.className = "text-xs text-purple-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PROGNAS (<strong>Program Pengendalian Resistensi Antimikroba / PPRA</strong>, <strong>4 Tujuan</strong>, <strong>6 Tepat Antibiotik</strong>, <strong>Indikator</strong>, & <strong>Restriksi Reserve</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 5: POKJA PROGNAS";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-base md:text-lg shadow-lg shadow-purple-500/30 transition-all active:scale-98";
+            }
+            if (cardPROGNAS) {
+                cardPROGNAS.className = "p-3 rounded-xl bg-purple-500/20 border border-purple-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-purple-500/30 transition-all";
+                if (badgePROGNAS) { badgePROGNAS.innerText = "TELUSUR AKTIF"; badgePROGNAS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "MFK") {
             if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-orange-400/80 bg-orange-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA MFK • MAP 4 (AKTIF)";
@@ -3562,6 +3850,7 @@
     document.getElementById("tabSelectPMKP").onclick = () => setPokja("PMKP");
     document.getElementById("tabSelectSKP").onclick = () => setPokja("SKP");
     document.getElementById("tabSelectMFK").onclick = () => setPokja("MFK");
+    document.getElementById("tabSelectPROGNAS").onclick = () => setPokja("PROGNAS");
     document.getElementById("selectPokjaTKRS").onclick = () => {
         setPokja("TKRS");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
@@ -3578,6 +3867,10 @@
         setPokja("MFK");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
     };
+    document.getElementById("selectPokjaPROGNAS").onclick = () => {
+        setPokja("PROGNAS");
+        document.getElementById("pokjaSelectModal").classList.add("hidden");
+    };
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -3585,6 +3878,8 @@
             setPokja("SKP");
         } else if (currentLevel.id === "SKP") {
             setPokja("MFK");
+        } else if (currentLevel.id === "MFK") {
+            setPokja("PROGNAS");
         } else {
             setPokja("TKRS");
         }

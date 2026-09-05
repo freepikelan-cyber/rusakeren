@@ -816,5 +816,98 @@ Untuk penanganan kebakaran skala sedang hingga besar, personel rumah sakit wajib
 | **Pos 8** | Manajemen Fasilitas & Spill Kit B3 | Menjamin keselamatan sarana, proteksi kebakaran, utilitas RS; saat KODE ORANYE aktif gunakan APD lengkap Spill Kit B3 & isolasi area. |
 
 ---
+
+## 💊 BAGIAN 15: IMPLEMENTASI KHUSUS: GAMIFIKASI AKREDITASI MAP 5 (POKJA PROGNAS - PPRA)
+
+Program Nasional (PROGNAS) dalam Standar Akreditasi Rumah Sakit Kemenkes RI (STARKES) mencakup program prioritas nasional, salah satu pilar utamanya adalah **Program Pengendalian Resistensi Antimikroba (PPRA)** di RSAU dr. Esnawan Antariksa.
+
+---
+
+### 🧬 1. Definisi & Konsep Dasar PPRA
+**Program Pengendalian Resistensi Antimikroba (PPRA)** adalah program terpadu rumah sakit untuk mengendalikan penggunaan antibiotik secara **bijak dan rasional** guna menekan laju resistensi kuman (*antimicrobial resistance* / AMR), meningkatkan keselamatan pasien (*patient safety*), serta menjamin mutu pelayanan kesehatan secara berkesinambungan.
+
+> **Urgensi Klinis**: Penggunaan antibiotik yang tidak tepat dapat memicu munculnya bakteri kebal obat (*superbugs* / MDRO - *Multi Drug Resistant Organisms*), meningkatkan lama rawat inap (*length of stay*), morbiditas, mortalitas, serta beban biaya kesehatan pasien dan negara.
+
+---
+
+### 🎯 2. Empat (4) Tujuan Utama Diselenggarakannya PPRA
+1. **Mengoptimalkan penggunaan antibiotik secara rasional**: Menjamin pasien yang membutuhkan antibiotik menerima obat yang tepat sesuai indikasi klinis dan mikrobiologis.
+2. **Menurunkan kejadian resistensi antimikroba**: Menghambat seleksi dan penyebaran galur kuman yang resisten terhadap antibiotik lini utama maupun lini cadangan.
+3. **Meningkatkan keselamatan pasien (*Patient Safety*)**: Meminimalkan risiko efek toksisitas obat, reaksi alergi obat, dan infeksi sekunder (seperti *Clostridioides difficile*).
+4. **Menurunkan angka infeksi dan biaya pelayanan kesehatan**: Menurunkan angka infeksi terkait pelayanan kesehatan (HAIs) serta mengefisiensikan anggaran pengeluaran farmasi rumah sakit.
+
+---
+
+### 💊 3. Enam (6) Prinsip Penggunaan Antibiotik Rasional (6 Tepat)
+
+Penggunaan antibiotik bijak dan rasional wajib mematuhi kaidah **6 Tepat**:
+
+```mermaid
+flowchart TD
+    A["6 PRINSIP PENGGUNAAN ANTIBIOTIK RASIONAL (PPRA)"] --> B["1. TEPAT INDIKASI\nHanya untuk infeksi bakteri, bukan virus/influenza biasa"]
+    A --> C["2. TEPAT PASIEN\nMempertimbangkan usia, riwayat alergi, fungsi ginjal/hati, kehamilan"]
+    A --> D["3. TEPAT OBAT\nDipilih spektrum tersempit yang efektif berdasarkan antibiogram"]
+    A --> E["4. TEPAT DOSIS\nSesuai farmakokinetik & farmakodinamik (PK/PD)"]
+    A --> F["5. TEPAT RUTE PEMBERIAN\nOral vs Intravena (program 'IV to Oral Switch')"]
+    A --> G["6. TEPAT WAKTU & LAMA PEMBERIAN\nDurasi tepat untuk mencegah resistensi tanpa paparan berlebih"]
+```
+
+---
+
+### 📊 4. Empat (4) Indikator Keberhasilan PPRA
+Keberhasilan Komite/Tim PPRA diukur melalui 4 indikator standar:
+1. **Kepatuhan Penggunaan Antibiotik Sesuai Pedoman**: Persentase peresepan yang taat pada Pedoman Pelayanan Antibiotik (PPAB) dan Formularium RS.
+2. **Evaluasi Penggunaan Antibiotik**:
+   - **Kuantitatif**: Menghitung kuantitas konsumsi antibiotik menggunakan satuan standar internasional *Defined Daily Dose* (DDD) per 100 hari rawat pasien.
+   - **Kualitatif**: Menilai ketepatan penggunaan antibiotik menggunakan alur kriteria **Gyssens** (Kategori 0 sampai VI).
+3. **Pola Resistensi Kuman (Antibiogram)**: Pemetaan profil kepekaan bakteri berkala yang diterbitkan laboratorium mikrobiologi klinik setiap tahun sebagai dasar empiris peresepan antibiotik.
+4. **Audit Penggunaan Antibiotik**: Pemeriksaan berkala terhadap rekam medis dan lembar peresepan antibiotik oleh Tim PPRA secara berkesinambungan.
+
+---
+
+### 🛡️ 5. Enam (6) Strategi Utama Tim PPRA & Alur Restriksi Antibiotik
+Untuk mencapai target mutu dan keselamatan pasien, Tim PPRA menjalankan 6 strategi pokok:
+
+```mermaid
+flowchart LR
+    S1["1. Pedoman PPAB & Formularium"] --> S2["2. Restriksi & Otorisasi Reserve"]
+    S2 --> S3["3. Surveilans Antibiogram"]
+    S3 --> S4["4. Audit Kuantitatif & Gyssens"]
+    S4 --> S5["5. Edukasi Nakes (Dokter, Apoteker, Perawat)"]
+    S5 --> S6["6. Monitoring & Evaluasi Berkala"]
+```
+
+#### Alur Restriksi Antibiotik (Pengelompokan Access, Watch, Reserve):
+- **Kelompok Non-Restriksi (Access / Lini 1)**: Antibiotik lini pertama untuk infeksi umum, dapat diresepkan oleh seluruh dokter spesialis/umum sesuai panduan.
+- **Kelompok Restriksi Terbatas (Watch / Lini 2)**: Antibiotik spektrum lebih luas, digunakan untuk indikasi spesifik dengan batas waktu evaluasi 72 jam.
+- **Kelompok Restriksi Sangat Ketat (Reserve / Lini 3)**:
+  - Dicadangkan khusus untuk infeksi bakteri multiresisten (*MDRO* / *ESBL* / *MRSA* / *Carbapenemase*).
+  - Wajib menyertakan hasil pemeriksaan kultur & resistensi laboratorium mikrobiologi.
+  - Wajib mendapatkan **formulir otorisasi persetujuan tertulis dari Komite/Tim PPRA** atau Dokter Spesialis Konsultan Mikrobiologi / Penyakit Dalam.
+  - Diberlakukan **Automatic Stop Order (ASO)** maksimal 7 hari untuk mencegah resistensi lebih lanjut.
+
+---
+
+### 🎮 6. Pemetaan 6 Pos Terminal Kuis Map 5 (Pokja PROGNAS - PPRA) di Game
+
+| Pos | Kategori Materi | Butir Resmi Regulasi PPRA RSAU dr. Esnawan Antariksa |
+|---|---|---|
+| **Pos 1** | Definisi Program PPRA | Program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak & rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan. |
+| **Pos 2** | 4 Tujuan Utama PPRA | 1) Mengoptimalkan antibiotik rasional; 2) Menurunkan kejadian resistensi kuman; 3) Meningkatkan keselamatan pasien; 4) Menurunkan infeksi dan biaya kesehatan. |
+| **Pos 3** | 6 Prinsip Rasional (6 Tepat) | Tepat Indikasi, Tepat Pasien, Tepat Obat, Tepat Dosis, Tepat Rute Pemberian, serta Tepat Waktu & Lama Pemberian. |
+| **Pos 4** | Indikator Keberhasilan PPRA | Kepatuhan pedoman PPAB, evaluasi kuantitatif DDD & kualitatif Gyssens, pola resistensi kuman (antibiogram), dan audit penggunaan antibiotik. |
+| **Pos 5** | 6 Strategi Utama Tim PPRA | Pedoman penggunaan antibiotik, audit antibiotik, restriksi antibiotik tertentu, surveilans resistensi, edukasi nakes, serta monitoring dan evaluasi. |
+| **Pos 6** | Restriksi Lini 3 (Reserve) | Antibiotik Reserve dicadangkan untuk bakteri multiresisten (MDRO), memerlukan formulir otorisasi Tim PPRA, dan dipantau dengan Automatic Stop Order (ASO). |
+
+---
+
+### 🧪 7. Kolektibel Khusus Map 5 (PROGNAS)
+1. **`antibiotic_capsule` (Kapsul Antibiotik PPRA)**:
+   - Kapsul farmasi dua warna (*two-tone capsule*) bernuansa ungu PPRA (`#9333ea`) dan cyan klinis (`#38bdf8`) dengan kilau highlight dan teks mikroskopis `PPRA`.
+2. **`petri_dish` (Cawan Petri Kultur Mikrobiologi)**:
+   - Cawan petri kaca laboratorium dengan media kuning agar nutrien, cakram kertas antibiotik ungu di tengah, dan cincin lingkaran bening zona hambat (*zone of inhibition*) yang menunjukkan efektivitas bakterisidal.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
+
 
