@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/akreditasi/index.html" },
+    { "source": "/akreditasi", "destination": "/akreditasi/index.html" }
+  ]
+}
