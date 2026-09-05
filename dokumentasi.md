@@ -908,6 +908,219 @@ flowchart LR
    - Cawan petri kaca laboratorium dengan media kuning agar nutrien, cakram kertas antibiotik ungu di tengah, dan cincin lingkaran bening zona hambat (*zone of inhibition*) yang menunjukkan efektivitas bakterisidal.
 
 ---
+
+## 🩺 BAGIAN 16: IMPLEMENTASI KHUSUS: GAMIFIKASI AKREDITASI MAP 6 (POKJA PAP - PELAYANAN DAN ASUHAN PASIEN TERPADU)
+
+Pokja **PAP (Pelayanan dan Asuhan Pasien)** merupakan pilar inti standar akreditasi rumah sakit yang menjamin setiap pasien menerima pelayanan yang seragam, berpusat pada pasien (*Patient-Centered Care*), terdokumentasi terintegrasi dalam CPPT SOAP, serta terlindungi saat mengalami kegawatdaruratan, kondisi kritis, atau menghadapi akhir hayat.
+
+---
+
+### 🏛️ 1. Prinsip Pelayanan Asuhan Pasien Seragam
+Pelayanan asuhan pasien seragam di seluruh unit RS bermakna:
+> **Pemberian perawatan dengan kualitas yang sama dan berstandar tinggi kepada setiap pasien yang memiliki masalah kesehatan dan kebutuhan medis yang sama, tanpa membedakan status sosial, ekonomi, agama, ras, maupun kemampuan membayar.**
+
+Hal ini diwujudkan melalui:
+- Standar kompetensi staf klinis yang seragam di seluruh ruang rawat.
+- Penerapan Panduan Praktik Klinis (PPK) dan *Integrated Clinical Pathway* (ICP) yang konsisten.
+- Akses terhadap pemeriksaan diagnostik dan obat yang setara sesuai indikasi klinis.
+
+---
+
+### 🔄 2. Tujuh (7) Alur Koordinasi Asuhan Berpusat pada Pasien (PCC)
+
+```mermaid
+flowchart TD
+    A["1. Asesmen Awal Pasien\nSeluruh PPA (Dokter, Perawat, Farmasi, Gizi, Fisioterapi) <= 24 Jam"] --> B["2. Visite Bersama & Ronde Bangsal\nDiskusi interdisiplin PPA di samping pasien"]
+    B --> C["3. Penetapan Rencana Asuhan Terpadu\nDPJP menyatukan rekomendasi PPA menjadi satu rencana holistik"]
+    C --> D["4. Pencatatan di CPPT Real-Time\nMetode SOAP terpadu, paraf DPJP, min. 1x per shift"]
+    D --> E["5. Fasilitasi MPP (Case Manager)\nOptimalisasi kendali mutu, biaya, & kelancaran kasus risti"]
+    E --> F["6. Edukasi & Persetujuan Keluarga\nKomunikasi empati rencana medis & informed consent"]
+    F --> G["7. Evaluasi Berkala & Discharge Planning\nPenyesuaian asuhan dinamis hingga rencana pemulangan"]
+```
+
+---
+
+### 📝 3. Tata Kelola CPPT (Catatan Perkembangan Pasien Terintegrasi) & Metode SOAP
+
+#### A. 8 Profesional Pemberi Asuhan (PPA) Penulis CPPT:
+1. **Dokter**: DPJP Utama, DPJP Tambahan, Dokter Ruangan, Dokter Umum, Dokter Spesialis.
+2. **Perawat & Bidan**: Asuhan keperawatan dan kebidanan harian.
+3. **Apoteker / Farmasi Klinik**: Rekonsiliasi obat, MESO, pemantauan efek samping & interaksi obat.
+4. **Ahli Gizi (Dietisien)**: Asuhan gizi klinis, penghitungan kalori, dan rekomendasi dietetik.
+5. **Fisioterapis / Okupasi / Terapi Wicara**: Rencana dan evaluasi rehabilitasi medik.
+6. **Psikolog Klinis**: Dukungan psikologis dan evaluasi emosional.
+7. **Pekerja Sosial**: Asesmen kondisi sosial, penelantaran, atau advokasi jaminan sosial.
+8. **Tenaga Kesehatan Lain**: Yang memberikan asuhan klinis langsung kepada pasien.
+
+#### B. 3 Prinsip Pokok Penulisan CPPT:
+1. **Terintegrasi**: Seluruh disiplin ilmu mencatat pada lembar formulir yang sama agar tercipta kesinambungan informasi asuhan antar PPA.
+2. **Verifikasi DPJP**: Setiap catatan perkembangan yang ditulis oleh PPA lain wajib diverifikasi dan diberi paraf/tanda tangan oleh DPJP dalam waktu maksimal **1 x 24 jam**.
+3. **Waktu Pengisian**: CPPT wajib diisi minimal **satu kali setiap shift** atau per 24 jam oleh setiap PPA yang bertugas.
+4. **Instruksi Verbal (TBAK)**: Instruksi verbal/telepon wajib menggunakan metode **TBAK (Tulis, Baca Kembali, Konfirmasi)** dan ditandatangani dokter maksimal **1 x 24 Jam**.
+
+---
+
+### ⚠️ 4. Kategori Pasien & Pelayanan Risiko Tinggi (Risti)
+
+| Kategori | Rincian Pasien / Pelayanan Risiko Tinggi |
+|---|---|
+| **Pasien Risiko Tinggi** | • Pasien Gawat Darurat (Emergensi)<br>• Pasien Koma / Penurunan Kesadaran<br>• Pasien dengan Alat Bantuan Hidup (Ventilator, Inotropik)<br>• Pasien Risiko Tinggi Komorbid: Jantung, Hipertensi, Stroke, Diabetes<br>• Pasien dengan Risiko Bunuh Diri<br>• Populasi Rentan: Geriatri, Pediatri/Neonatus, Korban Kekerasan/Terlantar, Gangguan Jiwa |
+| **Pelayanan Risiko Tinggi** | • Pelayanan Pasien Penyakit Menular & Potensi KLB<br>• Pelayanan Pasien Immuno-suppressed<br>• Pelayanan Dialisis / Hemodialisa<br>• Pelayanan Pasien yang di-Restrain<br>• Pelayanan Pasien Kemoterapi<br>• Pelayanan Pasien Paliatif & Bebas Nyeri<br>• Pelayanan Radioterapi, Terapi Hiperbarik, Radiologi Intervensi |
+| **Komplikasi Pasca Layanan** | Dekubitus (Luka Tekan), *Ventilator Associated Pneumonia* (VAP), Infeksi Aliran Darah Primer (IADP/Flebitis), Infeksi Selang Sentral (CLABSI), Pasien Jatuh. |
+
+---
+
+### 🛏️ 5. Pencegahan Dekubitus (Skala Norton & Braden) dan VAP
+
+#### Skala Norton Penilaian Risiko Luka Tekan (Skor 5 - 20):
+- **5 Parameter Penilaian (Skor 1 - 4)**:
+  1. *Kondisi Fisik*: 4 (Baik), 3 (Sedang), 2 (Buruk), 1 (Sangat Buruk)
+  2. *Kondisi Mental*: 4 (Sadar/Waspada), 3 (Apatis), 2 (Bingung), 1 (Pingsan/Linglung)
+  3. *Aktivitas*: 4 (Dapat Jalan Sendiri), 3 (Jalan Bantuan), 2 (Kursi Roda), 1 (Bed-bound)
+  4. *Mobilitas*: 4 (Bebas Bergerak), 3 (Sedikit Terbatas), 2 (Sangat Terbatas), 1 (Tidak Bergerak)
+  5. *Inkontinensia*: 4 (Tidak Pernah), 3 (Kadang-kadang), 2 (Biasanya Urine), 1 (Urine & Alvi)
+- **Interpretasi**:
+  - **Skor > 16**: Risiko Rendah
+  - **Skor 14 - 15**: Risiko Sedang
+  - **Skor < 13**: Risiko Tinggi (Wajib mobilisasi miring kanan-miring kiri / mikiki tiap 2 jam & kasur dekubitus)
+
+#### 6 Faktor Penyebab & Bundle Pencegahan VAP (*Ventilator Associated Pneumonia*):
+1. **Durasi Ventilasi**: Batasi dan lakukan *spontaneous breathing trial* (SBT) seawal mungkin.
+2. **Aspirasi Sekret**: Penumpukan lendir di subglotik di atas balon ETT; gunakan *subglottic suctioning*.
+3. **Oral Hygiene Rendah**: Lakukan perawatan mulut berkala dengan antiseptik *chlorhexidine* 0.2%.
+4. **Posisi Pasien**: Pertahankan posisi elevasi kepala tempat tidur **30 - 45 derajat** untuk mencegah aspirasi refluks gaster.
+5. **Sedasi & Paralitik**: Lakukan penghentian sedasi harian (*sedation vacation*) untuk mengevaluasi refleks batuk.
+6. **Kondisi Komorbid**: Pengawasan ketat pada pasien usia lanjut atau malnutrisi.
+
+---
+
+### 🚨 6. Deteksi Dini Perburukan: EWS Dewasa & PEWS Anak
+
+```mermaid
+flowchart TD
+    subgraph EWS["EWS (Early Warning Score) - Dewasa"]
+        E1["Skor 0 - 4: Risiko Rendah\nMonitoring minimal tiap 4-12 jam"]
+        E2["Skor 5 - 6: Risiko Sedang\nEskalasi perawat jaga & lapor DPJP/Dokter Jaga"]
+        E3["Skor >= 7: Risiko Tinggi / Gawat\nAktifkan Tim Medis Reaksi Cepat / Transfer ICU"]
+    end
+    subgraph PEWS["PEWS (Pediatric Early Warning Score) - Anak"]
+        P1["Kardiovaskular (HR, Warna Kulit, CRT)"]
+        P2["Respirasi (RR, Retraksi, Oksigen)"]
+        P3["Neurologis / Perilaku (Sadar, Rewel, Letargis)"]
+        P4["Skor 0-2 (Rendah) | Skor 3-4 (Sedang) | Skor >=5 (Darurat Reaksi Cepat)"]
+    end
+```
+
+---
+
+### 📞 7. Sistem Penanganan Henti Jantung: CODE BLUE RSAU dr. Esnawan Antariksa
+
+- **Nomor Darurat**: **Ext 3030** / Nomor Piketan RS.
+- **Komposisi Tim Code Blue**:
+  1. **Ketua Tim Code Blue**: Dokter Jaga yang sedang bertugas.
+     - *Shift Pagi Kerja*: Dokter ruangan terdekat lokasi kejadian.
+     - *Shift Sore, Malam, & Libur*: Dokter ruangan bertugas sesuai jadwal piket.
+  2. **4 Orang Perawat Terlatih**:
+     - Petugas 1: Airway & Breathing (manajemen jalan napas & ventilasi).
+     - Petugas 2: Sirkulasi (kompresi dada berkualitas tinggi / CPR).
+     - Petugas 3: Defibrilator & Monitoring (pasang AED/defibrilator & rekam EKG).
+     - Petugas 4: Dokumentasi & Pencatat Waktu Obat resusitasi.
+  3. **1 Petugas Farmasi Logistik**:
+     - Petugas dari Depo Farmasi Merak atau Garuda terdekat membawa **Tas Emergency Code Blue Berwarna Merah** ke lokasi henti jantung.
+
+---
+
+### 🩸 8. Pelayanan dan Keselamatan Transfusi Darah
+1. **Informed Consent**: Penjelasan risiko & manfaat serta penandatanganan formulir persetujuan.
+2. **Permintaan & Pengambilan Sampel**: Label identitas tabung di samping tempat tidur pasien.
+3. **Uji Kecocokan (*Crossmatching*)**: Uji kompatibilitas & skrining IMLTD (HIV, Hep B/C, Sifilis, Malaria).
+4. **Penyimpanan**: Disimpan di Bank Darah / Laboratorium dengan suhu terkontrol (2-6°C).
+5. **Identifikasi Ganda (Double Check)**: Verifikasi 2 identitas pasien, nomor rekam medis, golongan darah/rhesus, nomor seri kantong darah, jenis produk, dan tanggal kedaluwarsa.
+6. **Monitoring 15-30 Menit Pertama**: Wajib diobservasi ketat oleh perawat saat awal tetesan untuk mendeteksi reaksi transfusi cepat.
+7. **Pencatatan TTV**: Tanda vital dicatat sebelum transfusi, 15 menit awal, pertengahan, dan selesai transfusi.
+
+---
+
+### 🥗 9. Pelayanan Gizi & Jadwal Makan Pasien
+- Skrining awal malnutrisi dilakukan oleh perawat dalam 24 jam pertama; bila berisiko dikonsulkan ke dietisien.
+- Pasien dilarang mengonsumsi makanan dari luar RS tanpa izin dokter/dietisien demi kepatuhan diet klinis.
+- **Jadwal Distribusi Makanan Pasien di RSAU**:
+  - **Makan Pagi**: 06.00 – 07.00 WIB
+  - **Snack Pagi**: 09.00 – 10.00 WIB
+  - **Makan Siang**: 12.00 – 13.00 WIB
+  - **Snack Sore**: 15.00 – 16.00 WIB
+  - **Makan Sore**: 17.00 – 18.00 WIB
+
+---
+
+### 😣 10. Manajemen Pengkajian Nyeri PQRST & Comfort Scale
+
+#### A. Metode Pengkajian PQRST:
+- **P (*Provocation / Paliatif*)**: Pencetus yang memperberat atau meringankan nyeri.
+- **Q (*Quality*)**: Kualitas sensasi nyeri (tajam, tumpul, berdenyut, terbakar, tertusuk).
+- **R (*Region / Radiation*)**: Lokasi anatomis nyeri dan penjalaran ke area lain.
+- **S (*Severity*)**: Derajat keparahan menggunakan instrumen skala nyeri terstandar.
+- **T (*Timing*)**: Onset waktu, durasi, dan pola timbulnya nyeri (konstan atau hilang timbul).
+
+#### B. Instrumen Skala Nyeri:
+1. **NRS (Numeric Rating Scale 0-10)**: Pasien dewasa sadar & kooperatif (0 = tidak nyeri, 1-3 ringan, 4-6 sedang, 7-10 berat).
+2. **Wong-Baker FACES**: Anak-anak (usia >= 3 tahun), lansia, atau pasien kendala bahasa.
+3. **VAS (Visual Analog Scale)**: Penggaris garis 10 cm visual.
+4. **BPS / CPOT**: Pasien kritis tidak sadar terintubasi di ICU (ekspresi wajah, gerakan, sinkronisasi ventilator).
+5. **Comfort Scale (Skor 8 - 40)**:
+   - 8 Parameter (Kewaspadaan, Ketenangan, Distres Napas, Menangis, Gerakan Fisik, Tonus Otot, Raut Wajah, Tensi/Nadi).
+   - **8 - 16**: Sedasi Berlebih (Sangat tenang/dalam)
+   - **17 - 26**: Kondisi Nyaman & Sedasi Optimal
+   - **27 - 40**: Tidak Nyaman, Distres Nyeri Memerlukan Intervensi Lanjutan.
+
+#### C. Waktu Wajib Monitoring Skala Nyeri:
+- **60 Menit (1 Jam)** pasca pemberian analgesik pereda nyeri.
+- **Setiap 8 Jam** secara berkala bersamaan dengan pemeriksaan tanda vital rutin.
+- **Setiap 15 Menit** pada satu jam pertama pasca operasi bedah.
+- Kondisional sebelum dan sesudah aktivitas fisioterapi/mobilisasi atau jika pasien mengeluhkan nyeri bertambah.
+
+---
+
+### 🕊️ 11. Tim Bimbingan Rohani (Binroh) 4 Agama RSAU dr. Esnawan Antariksa
+
+Pelayanan Binroh memastikan hak spiritual pasien terpenuhi sesuai keyakinan masing-masing:
+1. **Agama Protestan**: **Drg. Janti Hiantje R** (Pembina Tingkat I IV/b - NIP 196908061999032003)
+2. **Agama Hindu**: **I.G.A. Ayu Wiratih, S.Farm., Apt** (Pembina IV/a - NIP 197807192007122001)
+3. **Agama Katolik**: **Gretta Yuliana, A.Mf** (Pengatur Tingkat I II/d - NIP 197607222008122001)
+4. **Agama Islam**: **Supriyadi, S.Pd.I.** (PPPK - NIP 197609142022511019)
+
+---
+
+### ⌛ 12. Pelayanan Pasien Tahap Terminal & Asesmen Menjelang Ajal
+- **Definisi Pasien Terminal**: Pasien menderita penyakit progresif yang tidak dapat disembuhkan dan secara medis diperkirakan berujung pada kematian dalam jangka waktu **enam (6) bulan atau kurang**. Perawatan difokuskan pada kenyamanan (perawatan paliatif holistik).
+- **Contoh Kondisi**: Kanker stadium metastasis lanjut, gagal jantung stadium akhir, PPOK berat, gagal ginjal kronik stadium 5, penyakit neurologis progresif (ALS, demensia akhir), infeksi kronik terminal.
+- **3 Waktu Pelaksanaan Asesmen Pasien Terminal**:
+  1. **Asesmen Awal**: Segera saat terdiagnosis kondisi terminal oleh DPJP (fokus fisik, psikososial, kultural, dan spiritual).
+  2. **Asesmen Lanjutan / Berkala**: Pemantauan harian respons manajemen nyeri dan kenyamanan simtomatik.
+  3. **Asesmen Menjelang Kematian (*End-of-Life*)**: Dilakukan saat timbul tanda klinis menjelang ajal (penurunan kesadaran dalam, hilangnya tonus otot/rahang jatuh, pola napas *Cheyne-Stokes*, ekstremitas dingin/sianosis perifer, dan hilangnya refleks menelan).
+
+---
+
+### 🎮 13. Pemetaan 8 Pos Terminal Kuis Map 6 (Pokja PAP) di Game
+
+| Pos | Kategori Materi | Butir Resmi Regulasi PAP RSAU dr. Esnawan Antariksa |
+|---|---|---|
+| **Pos 1** | Pelayanan Pasien Seragam | Asuhan standar tinggi berkualitas sama tanpa diskriminasi status sosial, ekonomi, agama, ras, dan kemampuan membayar. |
+| **Pos 2** | Alur Koordinasi Asuhan & DPJP | 7 Tahap asuhan terpusat pasien (asesmen awal, visite ronde bangsal, rencana terpadu, CPPT SOAP, MPP, edukasi, discharge planning) & evaluasi harian DPJP. |
+| **Pos 3** | Penulisan CPPT & Metode SOAP | 8 PPA penulis, verifikasi paraf DPJP maksimal 1x24 jam, pengisian minimal 1x per shift, dan verifikasi verbal TBAK 1x24 jam. |
+| **Pos 4** | Pasien & Pelayanan Risiko Tinggi | Kriteria risti emergensi/koma/ventilator/bunuh diri/menular/dialisis/kemoterapi, ICP/PPK, restrain fisik/kimiawi, dan skrining gizi perawat. |
+| **Pos 5** | Komplikasi Dekubitus & VAP | Skala Braden & Skala Norton (skor 5-20: <13 risti, 14-15 sedang, >16 rendah); 6 faktor bundle VAP (head-up 30-45°, oral hygiene chlorhexidine). |
+| **Pos 6** | Deteksi EWS/PEWS & Code Blue | EWS dewasa (0-4, 5-6, >=7 darurat/ICU); PEWS anak; Code Blue Ext 3030 (ketua dokter jaga, 4 perawat, 1 farmasi tas emergency merah Merak/Garuda). |
+| **Pos 7** | Keselamatan Transfusi & Gizi | Transfusi darah (crossmatching, lab bank darah, 2 identitas, pantau 15-30 mnt pertama); jadwal makan 5 sesi (06-07, 09-10, 12-13, 15-16, 17-18) & larangan makanan luar. |
+| **Pos 8** | Manajemen Nyeri, Binroh, & Terminal | PQRST, NRS/FACES/VAS/BPS/Comfort Scale (8-40), monitoring 60 mnt pasca analgesik & tiap 8 jam; Tim Binroh 4 Agama (drg. Janti, Ayu Wiratih, Gretta, Supriyadi); Pasien Terminal prognosis <=6 bln & 3 asesmen ajal. |
+
+---
+
+### 🩸 14. Kolektibel Khusus Map 6 (PAP)
+1. **`blood_bag` (Kantong Darah Transfusi Berlabel)**:
+   - Kantong transfusi darah steril medis dengan gantungan infus, tabung selang, cairan darah merah gelap, label putih klinis bertuliskan `DARAH`, serta indikator golongan darah.
+2. **`stetho_clipboard` (Clipboard Rekam Medis CPPT SOAP & Stetoskop)**:
+   - Papan rekam medis rumah sakit (*clipboard*) berwarna putih bersih dengan klip stainless steel, lembar catatan perkembangan medis bergaris dengan header `CPPT`, serta stetoskop dokter melingkar di sekeliling papan.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
-
-
