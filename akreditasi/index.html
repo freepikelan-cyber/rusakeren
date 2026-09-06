@@ -1507,6 +1507,7 @@
         TAKESHI_CHALLENGE: "takeshi_challenge",
         PAUSED: "paused",
         ASSESSMENT: "assessment",
+        SIMULATION: "simulation",
         GAME_OVER: "game_over"
     };
 
@@ -3681,23 +3682,15 @@
             feedbackTitle.innerHTML = "<span>✅ JAWABAN TEPAT!</span> Sesuai Dokumen Resmi RSAU dr. Esnawan Antariksa";
             feedbackText.innerHTML = q.explanation;
             if (currentLevel.id === "MFK" && (q.id.includes("apar") || q.id.includes("hydrant"))) {
+                const targetSim = q.id.includes("apar") ? "APAR" : "HYDRANT";
                 feedbackText.innerHTML += `
                     <div class="mt-2.5 pt-2 border-t border-emerald-500/30 flex flex-wrap items-center justify-between gap-2">
                         <span class="text-[11px] text-amber-300 font-semibold">🧯 Ingin mempraktikkan langsung?</span>
-                        <button id="btnQuizOpenSim" class="px-2.5 py-1 rounded-lg bg-orange-500/30 hover:bg-orange-500/50 border border-orange-400 text-[11px] font-bold text-white transition-all">
-                            Uji di Simulator ${q.id.includes("apar") ? "APAR (PASS)" : "Hydrant"} ➔
+                        <button id="btnQuizOpenSim" onclick="document.getElementById('quizModal').classList.add('hidden'); aparHydrantSimulator.open('${targetSim}');" class="px-2.5 py-1 rounded-lg bg-orange-500/30 hover:bg-orange-500/50 border border-orange-400 text-[11px] font-bold text-white transition-all">
+                            Uji di Simulator ${targetSim === "APAR" ? "APAR (PASS)" : "Hydrant"} ➔
                         </button>
                     </div>
                 `;
-                setTimeout(() => {
-                    const b = document.getElementById("btnQuizOpenSim");
-                    if (b) {
-                        b.onclick = () => {
-                            document.getElementById("quizModal").classList.add("hidden");
-                            aparHydrantSimulator.open(q.id.includes("apar") ? "APAR" : "HYDRANT");
-                        };
-                    }
-                }, 20);
             }
 
             btnAction.innerText = "LANJUTKAN TELUSUR ➔";
@@ -4298,6 +4291,7 @@
             this.currentTab = "APAR"; // "APAR" | "HYDRANT"
             this.isOpen = false;
             this.rafId = null;
+            this.previousState = GAME_STATE.PLAYING;
 
             // APAR State (Metode PASS: Pull, Aim, Squeeze, Sweep)
             this.apar = {
@@ -4433,6 +4427,8 @@
 
         open(tab = "APAR") {
             sound.initContext();
+            this.previousState = currentState;
+            currentState = GAME_STATE.SIMULATION;
             this.isOpen = true;
             this.modal.classList.remove("hidden");
             this.switchTab(tab);
@@ -4445,6 +4441,37 @@
             if (this.rafId) {
                 cancelAnimationFrame(this.rafId);
                 this.rafId = null;
+            }
+
+            // Pastikan quizModal tertutup jika sebelumnya dibuka dari dalam kuis
+            const quizModal = document.getElementById("quizModal");
+            if (quizModal) quizModal.classList.add("hidden");
+
+            // Reset seluruh tombol input agar pemain tidak stuck / bergerak otomatis
+            input.left = false;
+            input.right = false;
+            input.jumpPressed = false;
+            input.jumpHeld = false;
+            input.jumpReleased = false;
+
+            // Reset akumulator loop untuk mencegah lonjakan fisika pasca simulasi
+            lastTime = performance.now();
+            accumulator = 0;
+
+            // Kembalikan ke state aktif bermain agar Kapten Erik langsung bisa berjalan lagi
+            if (this.previousState === GAME_STATE.PLAYING || this.previousState === GAME_STATE.QUIZ) {
+                currentState = GAME_STATE.PLAYING;
+            } else if (this.previousState === GAME_STATE.MENU) {
+                currentState = GAME_STATE.MENU;
+                document.getElementById("menuModal").classList.remove("hidden");
+            } else {
+                currentState = GAME_STATE.PLAYING;
+            }
+
+            // Kembalikan fokus browser ke window agar tombol keyboard langsung aktif
+            window.focus();
+            if (document.activeElement && typeof document.activeElement.blur === "function") {
+                document.activeElement.blur();
             }
         }
 
