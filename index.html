@@ -234,25 +234,31 @@
                 "Melayani Dengan Ikhlas Tanpa Batas"
             </p>
 
-            <!-- Active Map Selector Tabs (6 Pokja Aktif) -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-1.5 sm:gap-2 mt-1 mb-3">
-                <button id="tabSelectTKRS" class="py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow">
+            <!-- Active Map Selector Tabs (8 Pokja Aktif) -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-1.5 sm:gap-2 mt-1 mb-3">
+                <button id="tabSelectTKRS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow">
                     MAP 1: TKRS
                 </button>
-                <button id="tabSelectPMKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                <button id="tabSelectPMKP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
                     MAP 2: PMKP
                 </button>
-                <button id="tabSelectSKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                <button id="tabSelectSKP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
                     MAP 3: SKP
                 </button>
-                <button id="tabSelectMFK" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                <button id="tabSelectMFK" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
                     MAP 4: MFK
                 </button>
-                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
                     MAP 5: PROGNAS
                 </button>
-                <button id="tabSelectPAP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                <button id="tabSelectPAP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
                     MAP 6: PAP
+                </button>
+                <button id="tabSelectPPI" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 7: PPI
+                </button>
+                <button id="tabSelectKPS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 8: KPS
                 </button>
             </div>
 
@@ -388,12 +394,12 @@
                     <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
                 </div>
 
-                <!-- 6. PPI -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 6</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">PPI</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Pencegahan & Pengendalian Infeksi</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 6. PPI (ACTIVE) -->
+                <div id="selectPokjaPPI" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-teal-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-teal-400 uppercase tracking-wider">MAP 7 / DUNIA 6</div>
+                    <div class="text-xs md:text-sm font-bold text-white">PPI</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Pencegahan & Pengendalian Infeksi (5 Momen, Etika Batuk, Cuci Tangan, APD & Limbah)</div>
+                    <span id="badgePPI" class="inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 7. PPK -->
@@ -452,12 +458,12 @@
                     <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
                 </div>
 
-                <!-- 14. KPS -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 14</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">KPS</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Kualifikasi & Pendidikan Staf</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 14. KPS (ACTIVE) -->
+                <div id="selectPokjaKPS" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-sky-400 uppercase tracking-wider">MAP 8 / DUNIA 14</div>
+                    <div class="text-xs md:text-sm font-bold text-white">KPS</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Kualifikasi & Pendidikan Staf (Uraian Jabatan, Kredensial, Rekredensial, SPK & RKK)</div>
+                    <span id="badgeKPS" class="inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 15. PROGNAS (ACTIVE) -->
@@ -798,6 +804,207 @@
             <div class="flex-shrink-0 px-4 sm:px-6 py-2.5 border-t border-slate-800 bg-slate-900/90 text-center">
                 <button id="btnCloseSimulasiFooter" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
                     TUTUP SIMULATOR & KEMBALI TELUSUR POKJA MFK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         LABORATORIUM SIMULASI PPI: CUCI TANGAN WHO, ETIKA BATUK & APD (DONNING/DOFFING)
+         ========================================================================== -->
+    <div id="ppiSimulasiModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/90 backdrop-blur-md z-50 p-2 sm:p-4 overflow-y-auto hidden">
+        <div class="glass-panel max-w-3xl w-full max-h-[94vh] rounded-2xl sm:rounded-3xl border-teal-500/40 shadow-2xl flex flex-col overflow-hidden relative my-auto">
+            <!-- Header Modal -->
+            <div class="flex-shrink-0 flex items-center justify-between border-b border-teal-500/20 px-4 sm:px-6 py-3 bg-slate-900/80">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl animate-pulse">🧼</span>
+                    <div>
+                        <div class="text-[10px] sm:text-[11px] text-teal-400 font-mono tracking-wide uppercase">LAB SIMULASI PPI • RSAU dr. ESNAWAN ANTARIKSA</div>
+                        <h2 class="text-sm sm:text-base md:text-lg font-bold text-white leading-tight">Simulasi Cuci Tangan WHO, Etika Batuk & APD</h2>
+                    </div>
+                </div>
+                <button id="btnClosePpiSimulasi" class="text-slate-400 hover:text-white text-xl p-1">✕</button>
+            </div>
+
+            <!-- Tab Switcher: 3 TABS -->
+            <div class="flex border-b border-slate-800 bg-slate-950/60 px-4 pt-2 gap-2 overflow-x-auto">
+                <button id="tabPpiSimCuciTangan" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-teal-400 text-white bg-teal-500/10 flex items-center gap-1.5 transition-all flex-shrink-0">
+                    <span>🧼</span> 6 LANGKAH CUCI TANGAN WHO
+                </button>
+                <button id="tabPpiSimEtikaBatuk" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0">
+                    <span>🤧</span> ETIKA BATUK & BERSIN
+                </button>
+                <button id="tabPpiSimApd" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0">
+                    <span>🥼</span> PEMASANGAN & PELEPASAN APD
+                </button>
+            </div>
+
+            <!-- Modal Body Scrollable -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4 custom-scrollbar text-left">
+                <!-- VIEW 1: 6 LANGKAH CUCI TANGAN WHO -->
+                <div id="ppiSimCuciTanganView" class="space-y-3">
+                    <!-- Mode Switch: Handwash vs Handrub -->
+                    <div class="flex gap-2">
+                        <button id="btnPpiModeHandwash" class="flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow">
+                            💧 HANDWASH (Air Mengalir: 40-60 dtk • 6 Hitungan)
+                        </button>
+                        <button id="btnPpiModeHandrub" class="flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
+                            🧴 HANDRUB (Gel Alkohol: 20-40 dtk • 4 Hitungan)
+                        </button>
+                    </div>
+
+                    <!-- Canvas Animasi Cuci Tangan -->
+                    <div class="rounded-2xl border border-teal-500/30 overflow-hidden bg-slate-950 relative shadow-inner flex flex-col items-center">
+                        <canvas id="ppiCuciTanganCanvas" width="680" height="240" class="w-full max-w-full block bg-gradient-to-b from-slate-950 via-teal-950/30 to-stone-950"></canvas>
+                        <div class="absolute top-2 left-3 right-3 flex items-center justify-between pointer-events-none">
+                            <span id="ppiStepBadge" class="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                                LANGKAH 1 / 6: TELAPAK TANGAN
+                            </span>
+                            <span id="ppiTimerText" class="text-xs font-bold text-teal-300 bg-slate-900/80 px-2 py-0.5 rounded">
+                                Hitungan: 1/6 • Durasi: 45s
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 6 Step Buttons -->
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
+                        <button id="btnPpiStep1" class="py-2 px-1.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all shadow">
+                            <span>1. Telapak</span>
+                            <span class="text-[9px] text-teal-200 font-normal">Ratakan busa</span>
+                        </button>
+                        <button id="btnPpiStep2" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>2. Punggung</span>
+                            <span class="text-[9px] text-slate-400 font-normal">Sela luar</span>
+                        </button>
+                        <button id="btnPpiStep3" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>3. Sela Jari</span>
+                            <span class="text-[9px] text-slate-400 font-normal">Bertaut dalam</span>
+                        </button>
+                        <button id="btnPpiStep4" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>4. Kunci Jari</span>
+                            <span class="text-[9px] text-slate-400 font-normal">Buku-buku</span>
+                        </button>
+                        <button id="btnPpiStep5" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>5. Ibu Jari</span>
+                            <span class="text-[9px] text-slate-400 font-normal">Genggam putar</span>
+                        </button>
+                        <button id="btnPpiStep6" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>6. Ujung Kuku</span>
+                            <span class="text-[9px] text-slate-400 font-normal">Kuncup putar</span>
+                        </button>
+                    </div>
+
+                    <!-- Step Instruction & 5 Momen Card -->
+                    <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-teal-500/20 text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
+                        <div id="ppiStepInstruction" class="font-medium text-teal-200">
+                            💡 <strong>Langkah 1:</strong> Ratakan sabun/gel dengan menggosokkan kedua telapak tangan secara memutar.
+                        </div>
+                        <div class="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300">
+                            <div>
+                                <span class="text-amber-300 font-bold">5 Momen WHO:</span> 1. Sblm kontak pasien • 2. Sblm tindakan aseptik • 3. Stlh terkena cairan tubuh • 4. Stlh kontak pasien • 5. Stlh lingkungan RS
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button id="btnPpiCuciAuto" class="px-3 py-1 rounded-lg bg-teal-500/20 hover:bg-teal-500/30 border border-teal-400 text-teal-300 font-bold text-xs">
+                                    ▶ Putar Otomatis
+                                </button>
+                                <button id="btnPpiCuciNext" class="px-3 py-1 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs">
+                                    Langkah Berikutnya ➔
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: ETIKA BATUK & BERSIN -->
+                <div id="ppiSimEtikaBatukView" class="space-y-3 hidden">
+                    <!-- Canvas Etika Batuk -->
+                    <div class="rounded-2xl border border-sky-500/30 overflow-hidden bg-slate-950 relative shadow-inner flex flex-col items-center">
+                        <canvas id="ppiEtikaBatukCanvas" width="680" height="230" class="w-full max-w-full block bg-gradient-to-b from-slate-950 via-slate-900 to-sky-950/40"></canvas>
+                        <div class="absolute top-2 left-3 right-3 flex items-center justify-between pointer-events-none">
+                            <span id="ppiBatukStepBadge" class="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                LANGKAH 1 / 4: TUTUP DENGAN TISU / LENGAN DALAM
+                            </span>
+                            <span class="text-xs font-bold text-slate-300 bg-slate-900/80 px-2 py-0.5 rounded">
+                                Hindari Telapak Tangan!
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 4 Steps Navigation -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button id="btnPpiBatukStep1" class="py-2.5 px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-xs flex flex-col items-center gap-0.5 transition-all shadow">
+                            <span>1. Tutup Mulut/Hidung</span>
+                            <span class="text-[10px] text-sky-200 font-normal">Tisu atau Lengan Dalam</span>
+                        </button>
+                        <button id="btnPpiBatukStep2" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-sky-400 font-bold text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>2. Buang Tisu</span>
+                            <span class="text-[10px] text-slate-400 font-normal">Tempat Sampah Medis</span>
+                        </button>
+                        <button id="btnPpiBatukStep3" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-sky-400 font-bold text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>3. Cuci Tangan</span>
+                            <span class="text-[10px] text-slate-400 font-normal">Sabun / Handrub Gel</span>
+                        </button>
+                        <button id="btnPpiBatukStep4" class="py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-sky-400 font-bold text-xs flex flex-col items-center gap-0.5 transition-all">
+                            <span>4. Gunakan Masker</span>
+                            <span class="text-[10px] text-slate-400 font-normal">Menutup Hidung - Dagu</span>
+                        </button>
+                    </div>
+
+                    <!-- Instruction Card -->
+                    <div id="ppiBatukInstruction" class="p-3.5 rounded-2xl bg-slate-900/70 border border-sky-500/20 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        💡 <strong>Langkah 1:</strong> Tutup hidung dan mulut dengan menggunakan tisu / sapu tangan atau lengan baju bagian dalam saat batuk/bersin. Jangan gunakan telapak tangan agar kuman tidak berpindah ke gagang pintu atau saat bersalaman!
+                    </div>
+                </div>
+
+                <!-- VIEW 3: PEMASANGAN & PELEPASAN APD (DONNING & DOFFING) -->
+                <div id="ppiSimApdView" class="space-y-3 hidden">
+                    <!-- Mode Switch: Donning vs Doffing -->
+                    <div class="flex gap-2">
+                        <button id="btnPpiApdModeDonning" class="flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow">
+                            📥 URUTAN PEMASANGAN APD (DONNING)
+                        </button>
+                        <button id="btnPpiApdModeDoffing" class="flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all">
+                            📤 PELEPASAN APD AMAN (DOFFING)
+                        </button>
+                    </div>
+
+                    <!-- Canvas APD Donning/Doffing -->
+                    <div class="rounded-2xl border border-teal-500/30 overflow-hidden bg-slate-950 relative shadow-inner flex flex-col items-center">
+                        <canvas id="ppiApdCanvas" width="680" height="240" class="w-full max-w-full block bg-gradient-to-b from-slate-950 via-teal-950/20 to-slate-900"></canvas>
+                        <div class="absolute top-2 left-3 right-3 flex items-center justify-between pointer-events-none">
+                            <span id="ppiApdStepBadge" class="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                                DONNING 1 / 5: BAJU KERJA (SCRUB) & CUCI TANGAN
+                            </span>
+                            <span id="ppiApdItemBadge" class="text-xs font-bold text-emerald-300 bg-slate-900/80 px-2 py-0.5 rounded">
+                                Status: Bersih & Siap
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Step Nav Buttons -->
+                    <div class="flex items-center justify-between gap-2">
+                        <button id="btnPpiApdPrev" class="py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs flex items-center gap-1">
+                            ◀ Langkah Sebelumnya
+                        </button>
+                        <div id="ppiApdStepCounter" class="text-xs font-bold text-teal-300">
+                            Langkah 1 dari 5
+                        </div>
+                        <button id="btnPpiApdNext" class="py-2 px-4 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs flex items-center gap-1">
+                            Langkah Selanjutnya ▶
+                        </button>
+                    </div>
+
+                    <!-- Instruction Card -->
+                    <div id="ppiApdInstruction" class="p-3.5 rounded-2xl bg-slate-900/70 border border-teal-500/20 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="flex-shrink-0 px-4 sm:px-6 py-2.5 border-t border-slate-800 bg-slate-900/90 text-center">
+                <button id="btnClosePpiSimulasiFooter" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">
+                    TUTUP SIMULATOR & KEMBALI TELUSUR POKJA PPI
                 </button>
             </div>
         </div>
@@ -1462,6 +1669,226 @@
             ],
             correct: 0,
             explanation: "Luar biasa! Manajemen nyeri terstruktur (PQRST, NRS, Wong-Baker, CPOT, Comfort Scale) dengan evaluasi 60 mnt pasca obat. Perawatan terminal berfokus pada martabat dan paliatif, didukung pelayanan pastoral Bimbingan Rohani (Binroh) lintas agama resmi RSAU dr. Esnawan Antariksa!"
+        }
+    ];
+
+    /* ==========================================================================
+       1G. BANK SOAL & DATA POKJA PPI (PENCEGAHAN & PENGENDALIAN INFEKSI - MAP 7)
+       ========================================================================== */
+    const PPI_QUIZ_BANK = [
+        {
+            id: "ppi_program_komite",
+            posName: "Pos 1: Program PPI & Tim/Panitia PPI RS",
+            question: "Apa yang dimaksud dengan Program Pencegahan dan Pengendalian Infeksi (PPI) di rumah sakit dan bagaimana pelaksanaannya di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Program untuk mengidentifikasikan, mengendalikan, melindungi, dan menurunkan risiko infeksi yang dibuat dan ditularkan di antara pasien, staf, tenaga profesional kesehatan, tenaga kontrak, tenaga sukarela, pengunjung, dan lingkungan RS; Rumah Sakit membentuk Tim/Panitia PPI untuk menjalankan program PPI RS secara menyeluruh dan berkesinambungan.",
+                "Program pengadaan obat antibiotik komersial untuk dijual bebas kepada keluarga pasien rawat jalan.",
+                "Program pembersihan taman dan halaman luar rumah sakit sebulan sekali oleh dinas kebersihan kota.",
+                "Program sterilisasi khusus yang hanya berlaku bagi ruang kantor staf personalia."
+            ],
+            correct: 0,
+            explanation: "Tepat sekali! Program PPI RS bertujuan mengidentifikasikan, mengendalikan, melindungi, dan menurunkan risiko transmisi infeksi bagi seluruh populasi RS (pasien, nakes, staf, kontrak, sukarela, pengunjung, lingkungan) yang dipimpin oleh Tim/Panitia PPI RS!"
+        },
+        {
+            id: "ppi_5_momen_handhygiene",
+            posName: "Pos 2: Lima (5) Momen Kebersihan Tangan WHO",
+            question: "Kapan sajakah 5 Momen Praktik Kebersihan Tangan (Hand Hygiene) wajib dilakukan sesuai pedoman WHO?",
+            options: [
+                "1) Sebelum kontak dengan pasien, 2) Sebelum tindakan aseptik, 3) Setelah terkena cairan tubuh pasien, 4) Setelah kontak dengan pasien, 5) Setelah meninggalkan lingkungan Rumah Sakit.",
+                "1) Hanya saat diawasi supervisor, 2) Saat jam istirahat makan, 3) Sebelum apel pagi, 4) Saat masuk lobi utama, 5) Saat mencuci piring di kantin.",
+                "1) Setelah menyentuh stetoskop saja, 2) Sebelum membaca rekam medis, 3) Setelah minum obat, 4) Sebelum tidur, 5) Saat pulang kerja.",
+                "1) Tiap 10 menit sekali tanpa memandang ada kontak dengan pasien atau tidak."
+            ],
+            correct: 0,
+            explanation: "Sangat Benar! 5 Momen Kebersihan Tangan WHO adalah standar emas proteksi: 1. Sebelum kontak pasien, 2. Sebelum tindakan aseptik, 3. Setelah terkena cairan tubuh, 4. Setelah kontak pasien, dan 5. Setelah meninggalkan lingkungan rumah sakit!"
+        },
+        {
+            id: "ppi_etika_batuk",
+            posName: "Pos 3: Pedoman Etika Saat Batuk atau Bersin di RS",
+            question: "Bagaimanakah etika yang benar saat batuk atau bersin di lingkungan fasilitas pelayanan kesehatan?",
+            options: [
+                "1) Tutup hidung atau mulut dengan menggunakan tisu/sapu tangan atau lengan dalam baju anda, 2) Segera buang tisu yang sudah dipakai ke dalam tempat sampah, 3) Cuci tangan dengan air bersih dan sabun atau pencuci berbasis alkohol, 4) Gunakan Masker.",
+                "Tutup mulut dengan kedua telapak tangan lalu segera bersalaman dengan pasien lain agar kuman hilang.",
+                "Batuk menghadap ke arah orang lain tanpa menutup hidung dan mulut.",
+                "Buang tisu bekas batuk ke bawah kolong tempat tidur bangsal rawat inap."
+            ],
+            correct: 0,
+            explanation: "Luar biasa! Etika batuk/bersin: Tutup hidung/mulut menggunakan tisu atau lengan baju bagian dalam (bukan telapak tangan!), segera buang tisu ke tempat sampah tertutup, cuci tangan dengan air mengalir & sabun atau handrub alkohol, lalu kenakan masker medis!"
+        },
+        {
+            id: "ppi_handwash_vs_handrub",
+            posName: "Pos 4: Dua (2) Cara Cuci Tangan: Handwash vs Handrub",
+            question: "Apa perbedaan mendasar antara metode HANDWASH dan HANDRUB terkait media pembersih dan durasi waktunya?",
+            options: [
+                "HANDWASH: dengan air mengalir dan sabun waktunya 40–60 detik (6 hitungan); HANDRUB: dengan gel berbasis alkohol waktunya 20–40 detik (4 hitungan).",
+                "Handwash hanya butuh waktu 5 detik menggunakan air kobokan, Handrub butuh waktu 2 jam menggunakan cairan pemutih.",
+                "Handwash dilakukan saat tangan tampak bersih, Handrub hanya untuk mencuci kaki sebelum tidur.",
+                "Kedua metode sama-sama membutuhkan waktu 15 menit menggunakan alkohol pekat 96%."
+            ],
+            correct: 0,
+            explanation: "Sempurna! HANDWASH dilakukan dengan air mengalir & sabun bila tangan tampak kotor selama 40–60 detik (6 hitungan per langkah). HANDRUB menggunakan gel berbasis alkohol bila tangan tampak bersih selama 20–40 detik (4 hitungan per langkah)!"
+        },
+        {
+            id: "ppi_6_langkah_who",
+            posName: "Pos 5: Enam (6) Langkah Cuci Tangan yang Benar Sesuai WHO",
+            question: "Sebutkan urutan 6 langkah cuci tangan yang benar sesuai pedoman WHO (akronim Tepung Selaci Puput)!",
+            options: [
+                "1) Telapak Tangan, 2) Punggung Tangan, 3) Sela-sela jari tangan, 4) Empat Jari saling mengunci, 5) Sekeliling ibu jari putar-putar, 6) Ujung jari putar-putar di telapak tangan.",
+                "1) Kuku jari, 2) Pergelangan tangan, 3) Siku tangan, 4) Ibu jari, 5) Telapak kaki, 6) Wajah.",
+                "1) Punggung tangan saja lalu dibilas air panas tanpa menyentuh sela-sela jari.",
+                "1) Gosok sabun ke pakaian kerja lalu usap telapak tangan bolak-balik."
+            ],
+            correct: 0,
+            explanation: "Hebat! 6 Langkah Cuci Tangan WHO: Te-Pung-Sela-Ci-Pu-Put: 1. Telapak tangan, 2. Punggung tangan bergantian, 3. Sela-sela jari, 4. Mengunci empat jari, 5. Putar sekeliling ibu jari bergantian, 6. Putar ujung jari pada telapak tangan bergantian!"
+        },
+        {
+            id: "ppi_limbah_padat_medis",
+            posName: "Pos 6: Pengelolaan 4 Jenis Limbah Padat Medis RS",
+            question: "Bagaimana pemilahan dan pewadahan 4 jenis limbah padat medis di rumah sakit beserta wadah kantung plastiknya?",
+            options: [
+                "1) Limbah Infeksius (terkontaminasi cairan tubuh): kantung KUNING (infus set, kateter/kantung urine, masker, sarung tangan, jaringan tubuh); 2) Limbah Non-Infeksius: kantung HITAM (plastik pembungkus spuit, kertas); 3) Limbah Benda Tajam: safety box KUNING tahan tusuk (jarum suntik, pisau bedah); 4) Limbah Daur Ulang: kantung PUTIH (plabot, botol infus/vial tak terkontaminasi).",
+                "Semua jenis limbah rumah sakit dicampur menjadi satu di dalam kantung plastik warna merah tanpa pemilahan.",
+                "Jarum suntik dan pisau bedah dibuang ke dalam kantung plastik tipis warna hitam bersama sisa makanan kantin.",
+                "Limbah infeksius dibuang ke kantung putih dan limbah daur ulang dibakar di halaman rumah sakit."
+            ],
+            correct: 0,
+            explanation: "Sangat Tepat! Pemilahan limbah padat: KUNING = Infeksius; HITAM = Non-Infeksius / Domestik; SAFETY BOX KUNING = Benda Tajam menusuk; PUTIH = Daur Ulang non-kontaminasi cairan tubuh!"
+        },
+        {
+            id: "ppi_limbah_cair_apd",
+            posName: "Pos 7: Tata Kelola Limbah Cair Medis & Prinsip APD",
+            question: "Bagaimanakah pengelolaan limbah cair medis rumah sakit dan apa saja prinsip pemilihan Alat Pelindung Diri (APD)?",
+            options: [
+                "Limbah cair medis dari seluruh kegiatan RS dialirkan melalui saluran kedap air tertutup menuju IPAL (Instalasi Pengolahan Air Limbah) dengan pengujian baku mutu berkala; APD (sarung tangan, masker bedah/N95, gaun/apron, goggle/face shield) dipilih sesuai jenis transmisi dan dilepas dengan urutan benar untuk mencegah kontaminasi diri.",
+                "Limbah cair medis boleh dialirkan langsung ke selokan perumahan umum tanpa pengolahan IPAL.",
+                "Petugas dilarang menggunakan sarung tangan dan masker saat menangani pasien menular di ruang isolasi.",
+                "Penggunaan APD hanya diperbolehkan jika staf sedang berfoto untuk keperluan media sosial."
+            ],
+            correct: 0,
+            explanation: "Benar Sekali! Limbah cair wajib diolah di IPAL hingga memenuhi parameter baku mutu lingkungan hidup. APD wajib dipakai sesuai derajat transmisi infeksi dan dilepas dengan tata cara doffing aman!"
+        },
+        {
+            id: "ppi_simulasi_lab",
+            posName: "Pos 8: Laboratorium Praktik Simulasi Terpadu PPI",
+            question: "Mengapa simulasi praktik cuci tangan 6 langkah, etika batuk, dan donning-doffing APD menjadi indikator krusial dalam akreditasi Pokja PPI?",
+            options: [
+                "Karena kepatuhan teknik fisik yang benar secara konsisten adalah benteng utama memutus mata rantai penularan Healthcare-Associated Infections (HAIs) bagi pasien, tenaga medis, staf, maupun pengunjung RSAU dr. Esnawan Antariksa.",
+                "Hanya untuk memenuhi syarat formalitas sesi wawancara telusur surveyor di atas kertas.",
+                "Agar staf rumah sakit menghabiskan persediaan sabun dan handrub antiseptik sebelum akhir tahun anggaran.",
+                "Simulasi cuci tangan dan APD hanya ditujukan bagi mahasiswa magang yang baru pertama kali masuk RS."
+            ],
+            correct: 0,
+            explanation: "Luar biasa! Simulasi praktik fisik menjamin kompetensi nyata seluruh civitas rumah sakit dalam kebersihan tangan, etika pernapasan, dan pemakaian APD demi keselamatan pasien (Patient Safety) paripurna!"
+        }
+    ];
+
+    /* ==========================================================================
+       1H. BANK SOAL & DATA POKJA KPS (KUALIFIKASI & PENDIDIKAN STAF - MAP 8)
+       ========================================================================== */
+    const KPS_QUIZ_BANK = [
+        {
+            id: "kps_uraian_jabatan",
+            posName: "Pos 1: Uraian Jabatan Staf & Lokasi Penyimpanan Dokumen",
+            question: "Apakah yang dimaksud dengan Uraian Jabatan staf dan di manakah dokumen resminya disimpan di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Uraian jabatan adalah penjelasan tentang dasar penugasan jabatan yang bersifat personal tergantung pada jabatan yang dimiliki; Disimpan oleh bagian personalia / urusan personel (Urpers), unit kerja tempat bertugas, dan salinannya harus dimiliki oleh staf yang bersangkutan.",
+                "Uraian jabatan adalah daftar gaji rahasia yang hanya boleh dilihat oleh bendahara pengeluaran rumah sakit.",
+                "Uraian jabatan disimpan di pos penjagaan satpam gerbang depan dan tidak boleh dibaca oleh staf yang bersangkutan.",
+                "Uraian jabatan hanya dibuat untuk direktur rumah sakit, sedangkan perawat dan dokter tidak memilikinya."
+            ],
+            correct: 0,
+            explanation: "Tepat sekali! Uraian jabatan adalah dasar penugasan personal staf. Dokumen resminya disimpan di Urpers (personalia), unit kerja tempat bertugas, dan salinan resminya wajib dipegang oleh staf yang bersangkutan!"
+        },
+        {
+            id: "kps_medical_staff_bylaws_audit",
+            posName: "Pos 2: Medical Staff Bylaws & Audit Medis Profesional",
+            question: "Apa yang dimaksud dengan Peraturan Internal Staf Medis (Medical Staff Bylaws) dan Audit Medis di rumah sakit?",
+            options: [
+                "Medical Staff Bylaws: aturan yang mengatur tata kelola klinis (clinical governance) untuk menjaga profesionalisme staf medis di RS; Audit Medis: upaya evaluasi secara profesional terhadap mutu pelayanan medis yang diberikan kepada pasien dengan menggunakan rekam medisnya yang dilaksanakan oleh profesi medis.",
+                "Medical Staff Bylaws adalah buku tarif kamar rawat inap, Audit medis adalah pemeriksaan keuangan oleh kantor pajak.",
+                "Medical Staff Bylaws mengatur tata cara renovasi gedung rawat inap rumah sakit.",
+                "Audit Medis adalah pemecatan dokter secara sepihak tanpa menelaah rekam medis pasien."
+            ],
+            correct: 0,
+            explanation: "Sangat Benar! Medical Staff Bylaws adalah landasan tata kelola klinis (clinical governance) profesi dokter, sedangkan Audit Medis mengevaluasi mutu pelayanan berbasis rekam medis secara kolegial oleh profesi medis!"
+        },
+        {
+            id: "kps_kewenangan_penugasan_klinis",
+            posName: "Pos 3: Kewenangan Klinis (Clinical Privilege) & Penugasan Klinis",
+            question: "Apa perbedaan antara Kewenangan Klinis (Clinical Privilege) dan Penugasan Klinis (Clinical Appointment)?",
+            options: [
+                "Kewenangan Klinis (Clinical Privilege): hak khusus seorang staf medis untuk melakukan sekelompok pelayanan medis tertentu dalam RS untuk suatu periode tertentu berdasarkan penugasan klinis; Penugasan Klinis (Clinical Appointment): penugasan Kepala/Direktur Rumah Sakit kepada staf medis untuk melakukan pelayanan medis berdasarkan daftar kewenangan klinis yang ditetapkan baginya.",
+                "Kewenangan klinis diberikan oleh pasien saat mendaftar, penugasan klinis ditentukan oleh perawat ruangan.",
+                "Clinical privilege hanya berlaku untuk perawat magang, clinical appointment untuk dokter umum saja.",
+                "Kewenangan klinis dan penugasan klinis adalah surat izin mengemudi ambulans rumah sakit."
+            ],
+            correct: 0,
+            explanation: "Luar biasa! Kewenangan Klinis (Clinical Privilege) adalah rincian lingkup pelayanan medis yang boleh dilakukan, yang disahkan melalui Surat Penugasan Klinis (SPK / Clinical Appointment) oleh Kepala Rumah Sakit!"
+        },
+        {
+            id: "kps_kredensial_rekredensial_mitra",
+            posName: "Pos 4: Kredensial, Rekredensial Tiap 3 Tahun & Mitra Bestari",
+            question: "Apa pengertian Kredensial, Rekredensial, dan peran Mitra Bestari (Peer Group) di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Kredensial: proses evaluasi staf medis untuk kelayakan kewenangan klinis; Rekredensial: proses reevaluasi kelayakan kewenangan klinis yang telah dimiliki, dilaksanakan setiap 3 tahun atau bila ada penambahan/pengurangan kewenangan; Mitra Bestari (Peer Group): sekelompok staf medis bereputasi dan kompetensi baik untuk menelaah hal terkait profesi medis.",
+                "Kredensial dilakukan setiap hari senin pagi sebelum pelayanan poli rawat jalan dibuka.",
+                "Mitra Bestari adalah perhimpunan keluarga pasien yang mengawasi harga obat di apotek.",
+                "Rekredensial hanya dilaksanakan jika staf medis mengundurkan diri dari rumah sakit."
+            ],
+            correct: 0,
+            explanation: "Sempurna! Kredensial menentukan kelayakan awal, Rekredensial mengevaluasi berkala setiap 3 tahun (atau bila kompetensi berubah), dan Mitra Bestari (Peer Group) menelaah secara objektif dan profesional!"
+        },
+        {
+            id: "kps_alur_kredensial_whitepaper",
+            posName: "Pos 5: Tahapan Kredensial Staf Medis & Buku Putih (White Paper)",
+            question: "Bagaimanakah tahapan awal pemberian kewenangan klinis staf medis oleh Rumah Sakit?",
+            options: [
+                "a) Staf medis mengajukan permohonan ke Kepala RS dengan formulir rincian kewenangan klinis, b) Berkas lengkap disampaikan Kepala RS ke Komite Medik, c) Pengkajian formulir, d) Subkomite Kredensial membentuk panel ad-hoc melibatkan Mitra Bestari berdasarkan Buku Putih (White Paper) dengan mempertimbangkan reputasi, kompetensi, dan bebas konflik kepentingan.",
+                "Staf medis langsung bertugas di ruang bedah tanpa permohonan tertulis maupun kajian komite medik.",
+                "Kepala RS langsung memberikan kewenangan klinis tanpa melibatkan komite medik dan mitra bestari.",
+                "Buku Putih (White Paper) digunakan untuk mencatat presensi kehadiran harian perawat."
+            ],
+            correct: 0,
+            explanation: "Hebat! Alur kredensial resmi: Permohonan staf ke Kepala RS -> Komite Medik -> Subkomite Kredensial bersama Mitra Bestari menelaah berkas berpedoman pada Buku Putih (White Paper) demi mutu dan keselamatan!"
+        },
+        {
+            id: "kps_delineation_privilege_rekomendasi",
+            posName: "Pos 6: Delineation of Clinical Privilege & 6 Rekomendasi Rekredensial",
+            question: "Bagaimanakah penyusunan Rincian Kewenangan Klinis diperoleh dan apa saja 6 bentuk rekomendasi hasil rekredensial?",
+            options: [
+                "Diperoleh dari masukan kelompok staf medis, telaah pemohon, kaji periodik, dan rekomendasi komite medik; Rekomendasi Rekredensial: 1) Dilanjutkan, 2) Ditambah, 3) Dikurangi, 4) Dibekukan untuk waktu tertentu, 5) Diubah/dimodifikasi, 6) Diakhiri.",
+                "Rekomendasi rekredensial hanya satu yaitu pemotongan pangkat militer staf medis.",
+                "Rincian kewenangan klinis diperoleh dengan cara undian acak saat rapat komite medik.",
+                "Rekomendasi rekredensial berupa pemberian libur cuti 6 bulan tanpa evaluasi rekam medis."
+            ],
+            correct: 0,
+            explanation: "Sangat Tepat! Delineation of Clinical Privilege dikaji berjenjang. Hasil rekredensial memberikan 6 rekomendasi: Dilanjutkan, Ditambah, Dikurangi, Dibekukan sementara, Dimodifikasi, atau Diakhiri!"
+        },
+        {
+            id: "kps_masa_spk_proctoring",
+            posName: "Pos 7: Masa Berlaku SPK, Proses Rekredensial & Pendampingan (Proctoring)",
+            question: "Berapa lama masa berlaku Surat Penugasan Klinis (SPK) dan bagaimana pemulihan kewenangan klinis melalui pendampingan (proctoring)?",
+            options: [
+                "SPK berlaku untuk periode tertentu (misal 2 tahun); Rekredensial lebih sederhana karena RS sudah memiliki rekam jejak performa staf; Staf medis yang ingin memulihkan kewenangan klinis yang dikurangi atau menambah baru mengajukan ke Komite Medik melalui pembinaan profesi mekanisme pendampingan (proctoring).",
+                "SPK berlaku seumur hidup tanpa perlu diperbarui sampai masa pensiun tiba.",
+                "Proctoring adalah tindakan pengasingan staf medis di ruangan arsip tanpa boleh melayani pasien.",
+                "Masa berlaku SPK habis setiap minggu dan dokter harus ujian kompetensi ulang dari awal."
+            ],
+            correct: 0,
+            explanation: "Benar Sekali! SPK berlaku periodik (misal 2 tahun). Rekredensial memanfaatkan data performa historis, dan pemulihan/penambahan kewenangan klinis dibina melalui mekanisme pendampingan (proctoring) oleh sejawat ahli!"
+        },
+        {
+            id: "kps_pencabutan_pemulihan_kewenangan",
+            posName: "Pos 8: Evaluasi Kinerja Profesi, Pencabutan & Pemulihan Kewenangan",
+            question: "Atas dasar pertimbangan apa kewenangan klinis dapat dicabut oleh Kepala RS dan bagaimana mekanisme pemberiannya kembali?",
+            options: [
+                "Pencabutan didasarkan pada kinerja profesi di lapangan (gangguan kesehatan fisik/mental, kecelakaan medis diduga inkompetensi, atau tindakan disiplin komite medik); Kewenangan dapat diberikan kembali bila staf medis telah pulih kompetensinya setelah melalui pembinaan subkomite mutu profesi dan rekomendasi komite medik kepada Kepala RS.",
+                "Pencabutan kewenangan klinis dilakukan jika dokter menolak mengenakan seragam dinas hari jumat.",
+                "Kewenangan klinis yang dicabut tidak dapat dipulihkan kembali untuk selamanya tanpa alasan apapun.",
+                "Kepala RS dapat mencabut kewenangan klinis staf tanpa perlu rekomendasi komite medik maupun pembinaan."
+            ],
+            correct: 0,
+            explanation: "Luar biasa! Pencabutan melindungi keselamatan pasien bila ada kendala kesehatan fisik/mental, insiden inkompetensi, atau disiplin. Pemulihan kewenangan dilakukan setelah kompetensi terbukti pulih lewat pembinaan mutu profesi dan rekomendasi resmi Komite Medik ke Kepala RS!"
         }
     ];
 
@@ -2325,6 +2752,90 @@
                 ctx.fillRect(-6, 0, 12, 1.5);
                 ctx.fillRect(-6, 3, 10, 1.5);
                 ctx.fillRect(-6, 6, 12, 1.5);
+            } else if (this.type === "handrub_dispenser") {
+                // Botol Handrub Antiseptik PPI Berbasis Alkohol
+                ctx.fillStyle = "#0f766e"; // badan botol toska
+                ctx.fillRect(-7, -8, 14, 20);
+                // Leher & pompa dispenser putih
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-3, -13, 6, 5);
+                ctx.fillRect(-6, -15, 10, 3); // tuas tekan pompa
+                // Cairan gel alkohol transparan berkilau
+                ctx.fillStyle = "#5eead4";
+                ctx.fillRect(-5, -5, 10, 14);
+                // Label GEL PPI putih
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-5, -1, 10, 6);
+                ctx.fillStyle = "#042f2e";
+                ctx.font = "bold 4.5px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("RUB", 0, 3.5);
+                // Tetesan gel berkilau
+                ctx.fillStyle = "#99f6e4";
+                ctx.beginPath();
+                ctx.arc(6, -10, 2, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (this.type === "safety_box_biohazard") {
+                // Kotak Kuning Benda Tajam Tahan Tusuk (Safety Box)
+                ctx.fillStyle = "#eab308"; // box kuning tebal
+                ctx.fillRect(-10, -11, 20, 22);
+                ctx.fillStyle = "#ca8a04"; // tutup box
+                ctx.fillRect(-11, -14, 22, 4);
+                // Lubang jarum hitam
+                ctx.fillStyle = "#1e293b";
+                ctx.fillRect(-4, -13, 8, 2);
+                // Simbol Biohazard hitam di badan kotak
+                ctx.fillStyle = "#0f172a";
+                ctx.beginPath();
+                ctx.arc(0, -1, 4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = "#eab308";
+                ctx.beginPath();
+                ctx.arc(0, -1, 2, 0, Math.PI * 2);
+                ctx.fill();
+                // Label BIOHAZARD
+                ctx.fillStyle = "#dc2626";
+                ctx.font = "bold 5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("BIO", 0, 7);
+            } else if (this.type === "kredensial_badge") {
+                // ID Badge Komite Medik / Kredensial Staf KPS
+                ctx.fillStyle = "#1e293b"; // kartu navy
+                ctx.fillRect(-9, -13, 18, 26);
+                // Tali lanyard biru atas
+                ctx.fillStyle = "#3b82f6";
+                ctx.fillRect(-2, -17, 4, 5);
+                // Foto profil staf
+                ctx.fillStyle = "#38bdf8";
+                ctx.fillRect(-6, -10, 12, 10);
+                // Pita emas verifikasi kredensial
+                ctx.fillStyle = "#f59e0b";
+                ctx.fillRect(-7, 2, 14, 3);
+                // Teks MEDIK
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 5px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("KPS", 0, 10);
+            } else if (this.type === "spk_rkk_doc") {
+                // Map Berkas Surat Penugasan Klinis (SPK & RKK)
+                ctx.fillStyle = "#1e3a8a"; // map biru tua resmi
+                ctx.fillRect(-11, -13, 22, 26);
+                // Lembar putih sertifikat
+                ctx.fillStyle = "#f8fafc";
+                ctx.fillRect(-8, -10, 16, 20);
+                // Segel pita emas kehormatan
+                ctx.fillStyle = "#f59e0b";
+                ctx.beginPath();
+                ctx.arc(4, 5, 4, 0, Math.PI * 2);
+                ctx.fill();
+                // Teks SPK merah/emas
+                ctx.fillStyle = "#b91c1c";
+                ctx.font = "bold 6px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("SPK", -1, -2);
+                ctx.fillStyle = "#0284c7";
+                ctx.fillRect(-6, 2, 6, 1.5);
+                ctx.fillRect(-6, 5, 5, 1.5);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -2835,6 +3346,158 @@
             new CollectibleDoc(5100, 390, "stetho_clipboard"),
             new CollectibleDoc(5550, 390, "blood_bag"),
             new CollectibleDoc(5880, 390, "stetho_clipboard"),
+            new CollectibleDoc(6120, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
+    /* ==========================================================================
+       7G. DEFINISI DUNIA POKJA PPI (LEVEL 7 / MAP 7 - PENCEGAHAN & PENGENDALIAN INFEKSI)
+       ========================================================================== */
+    const PPI_LEVEL = {
+        id: "PPI",
+        shortName: "POKJA PPI",
+        name: "Pokja PPI • Pencegahan & Pengendalian Infeksi (5 Momen, Etika Batuk, Cuci Tangan, APD & Limbah)",
+        accentFloor: "#0d9488",
+        accentBorder: "#2dd4bf",
+        width: 6800,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Program PPI & Tim PPI RS (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: 5 Momen Kebersihan Tangan WHO (x: 940 - 1520)
+            { x: 940, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 3: Etika Batuk & Bersin di RS (x: 1660 - 2280)
+            { x: 1660, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 4: Handwash vs Handrub (Skybridge PPI) (x: 2360 - 2980)
+            { x: 2360, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 2560, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: 6 Langkah Cuci Tangan WHO (x: 3100 - 3740)
+            { x: 3100, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 6: Pengelolaan Limbah Padat Medis 4 Jenis (x: 3860 - 4500)
+            { x: 3860, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 4060, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Limbah Cair IPAL & Pemakaian APD (x: 4620 - 5280)
+            { x: 4620, y: 440, w: 660, h: 100, type: "solid" },
+            // Koridor 8: Laboratorium Simulasi Terpadu PPI (x: 5400 - 6050)
+            { x: 5400, y: 440, w: 650, h: 100, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor PPI (x: 6200 - 6800)
+            { x: 6200, y: 440, w: 600, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1540, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2990, 400, 95, 20, 0, -70, 1.2),
+            new MovingPlatform(3750, 400, 95, 20, 70, 0, 1.3),
+            new MovingPlatform(4510, 410, 95, 20, 0, -60, 1.2),
+            new MovingPlatform(5300, 410, 85, 20, 60, 0, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, PPI_QUIZ_BANK[0]),  // Pos 1: Program PPI & Tim PPI
+            new QuizTerminal(1150, 270, PPI_QUIZ_BANK[1]), // Pos 2: 5 Momen Kebersihan Tangan
+            new QuizTerminal(1950, 380, PPI_QUIZ_BANK[2]), // Pos 3: Etika Batuk & Bersin
+            new QuizTerminal(2720, 270, PPI_QUIZ_BANK[3]), // Pos 4: Handwash vs Handrub
+            new QuizTerminal(3420, 380, PPI_QUIZ_BANK[4]), // Pos 5: 6 Langkah Cuci Tangan WHO
+            new QuizTerminal(4220, 270, PPI_QUIZ_BANK[5]), // Pos 6: Limbah Padat Medis 4 Jenis
+            new QuizTerminal(4950, 380, PPI_QUIZ_BANK[6]), // Pos 7: Limbah Cair IPAL & APD
+            new QuizTerminal(5720, 380, PPI_QUIZ_BANK[7])  // Pos 8: Laboratorium Simulasi PPI
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "handrub_dispenser"),
+            new CollectibleDoc(420, 370, "safety_box_biohazard"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "handrub_dispenser"),
+            new CollectibleDoc(1380, 250, "star_mutu"),
+            new CollectibleDoc(1800, 390, "safety_box_biohazard"),
+            new CollectibleDoc(2120, 390, "handrub_dispenser"),
+            new CollectibleDoc(2650, 250, "safety_box_biohazard"),
+            new CollectibleDoc(2850, 250, "star_mutu"),
+            new CollectibleDoc(3250, 390, "handrub_dispenser"),
+            new CollectibleDoc(3580, 390, "safety_box_biohazard"),
+            new CollectibleDoc(4120, 250, "handrub_dispenser"),
+            new CollectibleDoc(4380, 250, "star_mutu"),
+            new CollectibleDoc(4780, 390, "safety_box_biohazard"),
+            new CollectibleDoc(5100, 390, "handrub_dispenser"),
+            new CollectibleDoc(5550, 390, "safety_box_biohazard"),
+            new CollectibleDoc(5880, 390, "handrub_dispenser"),
+            new CollectibleDoc(6120, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
+    /* ==========================================================================
+       7H. DEFINISI DUNIA POKJA KPS (LEVEL 8 / MAP 8 - KUALIFIKASI & PENDIDIKAN STAF)
+       ========================================================================== */
+    const KPS_LEVEL = {
+        id: "KPS",
+        shortName: "POKJA KPS",
+        name: "Pokja KPS • Kualifikasi & Pendidikan Staf (Uraian Jabatan, Kredensial, Rekredensial, SPK & RKK)",
+        accentFloor: "#1e3a8a",
+        accentBorder: "#60a5fa",
+        width: 6800,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Uraian Jabatan Staf & Lokasi Penyimpanan (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Medical Staff Bylaws & Audit Medis (x: 940 - 1520)
+            { x: 940, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 3: Kewenangan Klinis & Penugasan Klinis (x: 1660 - 2280)
+            { x: 1660, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 4: Kredensial, Rekredensial & Mitra Bestari (x: 2360 - 2980)
+            { x: 2360, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 2560, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Tahapan Kredensial & Buku Putih (White Paper) (x: 3100 - 3740)
+            { x: 3100, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 6: Delineation of Privilege & 6 Rekomendasi (x: 3860 - 4500)
+            { x: 3860, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 4060, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Masa Berlaku SPK & Proctoring (x: 4620 - 5280)
+            { x: 4620, y: 440, w: 660, h: 100, type: "solid" },
+            // Koridor 8: Kinerja Profesi, Pencabutan & Pemulihan (x: 5400 - 6050)
+            { x: 5400, y: 440, w: 650, h: 100, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor KPS (x: 6200 - 6800)
+            { x: 6200, y: 440, w: 600, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1540, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2990, 400, 95, 20, 0, -70, 1.2),
+            new MovingPlatform(3750, 400, 95, 20, 70, 0, 1.3),
+            new MovingPlatform(4510, 410, 95, 20, 0, -60, 1.2),
+            new MovingPlatform(5300, 410, 85, 20, 60, 0, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, KPS_QUIZ_BANK[0]),  // Pos 1: Uraian Jabatan & Lokasi Dokumen
+            new QuizTerminal(1150, 270, KPS_QUIZ_BANK[1]), // Pos 2: Medical Staff Bylaws & Audit Medis
+            new QuizTerminal(1950, 380, KPS_QUIZ_BANK[2]), // Pos 3: Kewenangan & Penugasan Klinis
+            new QuizTerminal(2720, 270, KPS_QUIZ_BANK[3]), // Pos 4: Kredensial, Rekredensial & Mitra Bestari
+            new QuizTerminal(3420, 380, KPS_QUIZ_BANK[4]), // Pos 5: Tahapan Kredensial & White Paper
+            new QuizTerminal(4220, 270, KPS_QUIZ_BANK[5]), // Pos 6: Delineation of Privilege & Rekomendasi
+            new QuizTerminal(4950, 380, KPS_QUIZ_BANK[6]), // Pos 7: Masa Berlaku SPK & Proctoring
+            new QuizTerminal(5720, 380, KPS_QUIZ_BANK[7])  // Pos 8: Pencabutan & Pemulihan Kewenangan
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "kredensial_badge"),
+            new CollectibleDoc(420, 370, "spk_rkk_doc"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "kredensial_badge"),
+            new CollectibleDoc(1380, 250, "star_mutu"),
+            new CollectibleDoc(1800, 390, "spk_rkk_doc"),
+            new CollectibleDoc(2120, 390, "kredensial_badge"),
+            new CollectibleDoc(2650, 250, "spk_rkk_doc"),
+            new CollectibleDoc(2850, 250, "star_mutu"),
+            new CollectibleDoc(3250, 390, "kredensial_badge"),
+            new CollectibleDoc(3580, 390, "spk_rkk_doc"),
+            new CollectibleDoc(4120, 250, "kredensial_badge"),
+            new CollectibleDoc(4380, 250, "star_mutu"),
+            new CollectibleDoc(4780, 390, "spk_rkk_doc"),
+            new CollectibleDoc(5100, 390, "kredensial_badge"),
+            new CollectibleDoc(5550, 390, "spk_rkk_doc"),
+            new CollectibleDoc(5880, 390, "kredensial_badge"),
             new CollectibleDoc(6120, 390, "star_mutu")
         ],
         finishX: 6300
@@ -3406,7 +4069,17 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "PAP") {
+        if (currentLevel.id === "KPS") {
+            // Suasana Birokrasi & Tata Kelola Medis Profesional
+            skyGrad.addColorStop(0, "#0f172a");
+            skyGrad.addColorStop(0.5, "#1e3a8a");
+            skyGrad.addColorStop(1, "#93c5fd");
+        } else if (currentLevel.id === "PPI") {
+            // Suasana Klinis Antiseptik Bersih & Higienis
+            skyGrad.addColorStop(0, "#042f2e");
+            skyGrad.addColorStop(0.5, "#115e59");
+            skyGrad.addColorStop(1, "#5eead4");
+        } else if (currentLevel.id === "PAP") {
             // Suasana Ruang Perawatan & Asuhan Terpadu RSAU
             skyGrad.addColorStop(0, "#4c0519");
             skyGrad.addColorStop(0.5, "#881337");
@@ -3438,7 +4111,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"));
+        ctx.fillStyle = currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -3451,7 +4124,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))));
+        ctx.fillStyle = currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -3473,15 +4146,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))));
+            ctx.fillStyle = currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))));
+            ctx.fillStyle = currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))));
+        ctx.fillStyle = currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -3489,7 +4162,23 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "PAP") {
+            if (currentLevel.id === "KPS") {
+                ctx.fillStyle = "rgba(30, 58, 138, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🎓 KPS: KREDENSIAL STAF • SPK & RKK • CLINICAL APPOINTMENT", kx + 160, 296);
+                ctx.fillStyle = "rgba(15, 23, 42, 0.6)";
+            } else if (currentLevel.id === "PPI") {
+                ctx.fillStyle = "rgba(13, 148, 136, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🧼 PPI: 5 MOMEN • 6 LANGKAH WHO • ETIKA BATUK • APD", kx + 160, 296);
+                ctx.fillStyle = "rgba(4, 47, 46, 0.6)";
+            } else if (currentLevel.id === "PAP") {
                 ctx.fillStyle = "rgba(225, 29, 72, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -3691,6 +4380,17 @@
                         </button>
                     </div>
                 `;
+            } else if (currentLevel.id === "PPI") {
+                const simTarget = (q.id.includes("batuk")) ? "BATUK" : (q.id.includes("apd") ? "APD" : "CUCI_TANGAN");
+                const simLabel = (simTarget === "BATUK") ? "Etika Batuk" : (simTarget === "APD" ? "Donning/Doffing APD" : "6 Langkah Cuci Tangan");
+                feedbackText.innerHTML += `
+                    <div class="mt-2.5 pt-2 border-t border-emerald-500/30 flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-[11px] text-teal-300 font-semibold">🧼 Uji keterampilan fisik di Lab Simulasi PPI:</span>
+                        <button id="btnQuizOpenPpiSim" onclick="document.getElementById('quizModal').classList.add('hidden'); ppiSimulator.open('${simTarget}');" class="px-2.5 py-1 rounded-lg bg-teal-500/30 hover:bg-teal-500/50 border border-teal-400 text-[11px] font-bold text-white transition-all">
+                            Buka Simulasi ${simLabel} ➔
+                        </button>
+                    </div>
+                `;
             }
 
             btnAction.innerText = "LANJUTKAN TELUSUR ➔";
@@ -3778,9 +4478,45 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "PAP") {
+        if (currentLevel.id === "KPS") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
             btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-indigo-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja KPS (Kualifikasi dan Pendidikan Staf), kejelasan uraian jabatan personal staf di Urpers & unit kerja, Medical Staff Bylaws, evaluasi Kredensial staf medis bersama Mitra Bestari bersumber Buku Putih (White Paper), verifikasi Rekredensial 3 tahun, penerbitan SPK & RKK oleh Kepala Rumah Sakit, mekanisme pembinaan proctoring, serta audit medis profesional paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola kredensial, SPK/RKK 2 tahunan, dan uraian jabatan personal berjalan tertib dengan catatan peningkatan dokumentasi audit medis.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu percepatan pembaruan SPK staf medis yang habis masa berlakunya dan kepatuhan arsip uraian jabatan di unit kerja.";
+            }
+        } else if (currentLevel.id === "PPI") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 8: POKJA KPS ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-500 hover:from-sky-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja PPI (Pencegahan dan Pengendalian Infeksi), kepatuhan 5 Momen Kebersihan Tangan WHO, disiplin Etika Batuk menutup dengan lengan dalam baju, penguasaan teknik 6 Langkah Cuci Tangan WHO metode Handwash (40-60 detik) & Handrub (20-40 detik), pemilahan 4 jenis limbah padat medis (Kuning infeksius, Hitam non-infeksius, Safety Box kuning benda tajam, Putih daur ulang), pengelolaan limbah cair IPAL, serta kepatuhan pemakaian APD terstandar!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Budaya kebersihan tangan 5 momen dan etika batuk berjalan prima dengan penguatan monitoring kepatuhan pembuangan limbah benda tajam di safety box.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Tingkatkan drill kebersihan tangan 6 langkah metode Tepung Selaci Puput dan ketersediaan handrub di seluruh titik rawat inap.";
+            }
+        } else if (currentLevel.id === "PAP") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 7: POKJA PPI ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -3965,7 +4701,11 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "PAP") {
+        if (pokjaId === "KPS") {
+            currentLevel = KPS_LEVEL;
+        } else if (pokjaId === "PPI") {
+            currentLevel = PPI_LEVEL;
+        } else if (pokjaId === "PAP") {
             currentLevel = PAP_LEVEL;
         } else if (pokjaId === "PROGNAS") {
             currentLevel = PROGNAS_LEVEL;
@@ -3991,6 +4731,8 @@
         const tabMFK = document.getElementById("tabSelectMFK");
         const tabPROGNAS = document.getElementById("tabSelectPROGNAS");
         const tabPAP = document.getElementById("tabSelectPAP");
+        const tabPPI = document.getElementById("tabSelectPPI");
+        const tabKPS = document.getElementById("tabSelectKPS");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -4001,20 +4743,26 @@
         const cardMFK = document.getElementById("selectPokjaMFK");
         const cardPROGNAS = document.getElementById("selectPokjaPROGNAS");
         const cardPAP = document.getElementById("selectPokjaPAP");
+        const cardPPI = document.getElementById("selectPokjaPPI");
+        const cardKPS = document.getElementById("selectPokjaKPS");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
         const badgeMFK = document.getElementById("badgeMFK");
         const badgePROGNAS = document.getElementById("badgePROGNAS");
         const badgePAP = document.getElementById("badgePAP");
+        const badgePPI = document.getElementById("badgePPI");
+        const badgeKPS = document.getElementById("badgeKPS");
 
         // Reset all tabs
-        if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
-        if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
-        if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
-        if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
-        if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
-        if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPPI) tabPPI.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabKPS) tabKPS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -4041,9 +4789,51 @@
             cardPAP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-rose-950/40 transition-all";
             if (badgePAP) { badgePAP.innerText = "SIAP DITELUSURI"; badgePAP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 text-[9px] font-semibold"; }
         }
+        if (cardPPI) {
+            cardPPI.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-teal-950/40 transition-all";
+            if (badgePPI) { badgePPI.innerText = "SIAP DITELUSURI"; badgePPI.className = "inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold"; }
+        }
+        if (cardKPS) {
+            cardKPS.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all";
+            if (badgeKPS) { badgeKPS.innerText = "SIAP DITELUSURI"; badgeKPS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "PAP") {
-            if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-rose-400/80 bg-rose-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+        if (currentLevel.id === "KPS") {
+            if (tabKPS) tabKPS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA KPS • MAP 8 (AKTIF)";
+                menuSubtitle.className = "text-xs text-sky-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja KPS (<strong>Uraian Jabatan</strong> di Urpers, <strong>Medical Staff Bylaws</strong>, <strong>Audit Medis</strong>, <strong>Kredensial & Rekredensial 3 Thn</strong>, <strong>Buku Putih & Mitra Bestari</strong>, <strong>SPK & RKK</strong>, serta <strong>Proctoring</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 8: POKJA KPS";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-indigo-500 hover:from-sky-500 hover:to-indigo-400 text-white font-bold text-base md:text-lg shadow-lg shadow-sky-500/30 transition-all active:scale-98";
+            }
+            if (cardKPS) {
+                cardKPS.className = "p-3 rounded-xl bg-sky-500/20 border border-sky-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-sky-500/30 transition-all";
+                if (badgeKPS) { badgeKPS.innerText = "TELUSUR AKTIF"; badgeKPS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "PPI") {
+            if (tabPPI) tabPPI.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA PPI • MAP 7 (AKTIF)";
+                menuSubtitle.className = "text-xs text-teal-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PPI (<strong>Program PPI RS</strong>, <strong>5 Momen Kebersihan Tangan</strong>, <strong>Etika Batuk</strong>, <strong>Handwash 40-60s vs Handrub 20-40s</strong>, <strong>6 Langkah WHO</strong>, <strong>Pengelolaan 4 Jenis Limbah Medis</strong>, & <strong>Simulasi Pasang APD</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 7: POKJA PPI";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-teal-500 to-emerald-400 hover:from-teal-400 hover:to-emerald-300 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-teal-500/30 transition-all active:scale-98";
+            }
+            if (cardPPI) {
+                cardPPI.className = "p-3 rounded-xl bg-teal-500/20 border border-teal-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-teal-500/30 transition-all";
+                if (badgePPI) { badgePPI.innerText = "TELUSUR AKTIF"; badgePPI.className = "inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "PAP") {
+            if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-rose-400/80 bg-rose-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PAP • MAP 6 (AKTIF)";
                 menuSubtitle.className = "text-xs text-rose-400 font-bold uppercase tracking-wider";
@@ -4060,7 +4850,7 @@
                 if (badgePAP) { badgePAP.innerText = "TELUSUR AKTIF"; badgePAP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "PROGNAS") {
-            if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PROGNAS • MAP 5 (AKTIF)";
                 menuSubtitle.className = "text-xs text-purple-400 font-bold uppercase tracking-wider";
@@ -4077,7 +4867,7 @@
                 if (badgePROGNAS) { badgePROGNAS.innerText = "TELUSUR AKTIF"; badgePROGNAS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "MFK") {
-            if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-orange-400/80 bg-orange-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-orange-400/80 bg-orange-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA MFK • MAP 4 (AKTIF)";
                 menuSubtitle.className = "text-xs text-orange-400 font-bold uppercase tracking-wider";
@@ -4094,7 +4884,7 @@
                 if (badgeMFK) { badgeMFK.innerText = "TELUSUR AKTIF"; badgeMFK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "SKP") {
-            if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-indigo-400/80 bg-indigo-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-indigo-400/80 bg-indigo-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA SKP • MAP 3 (AKTIF)";
                 menuSubtitle.className = "text-xs text-indigo-400 font-bold uppercase tracking-wider";
@@ -4111,7 +4901,7 @@
                 if (badgeSKP) { badgeSKP.innerText = "TELUSUR AKTIF"; badgeSKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "PMKP") {
-            if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PMKP • MAP 2 (AKTIF)";
                 menuSubtitle.className = "text-xs text-emerald-400 font-bold uppercase tracking-wider";
@@ -4128,7 +4918,7 @@
                 if (badgePMKP) { badgePMKP.innerText = "TELUSUR AKTIF"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
             }
         } else {
-            if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA TKRS • MAP 1 (AKTIF)";
                 menuSubtitle.className = "text-xs text-sky-400 font-bold uppercase tracking-wider";
@@ -4154,6 +4944,8 @@
     document.getElementById("tabSelectMFK").onclick = () => setPokja("MFK");
     document.getElementById("tabSelectPROGNAS").onclick = () => setPokja("PROGNAS");
     document.getElementById("tabSelectPAP").onclick = () => setPokja("PAP");
+    document.getElementById("tabSelectPPI").onclick = () => setPokja("PPI");
+    document.getElementById("tabSelectKPS").onclick = () => setPokja("KPS");
     document.getElementById("selectPokjaTKRS").onclick = () => {
         setPokja("TKRS");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
@@ -4178,6 +4970,14 @@
         setPokja("PAP");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
     };
+    document.getElementById("selectPokjaPPI").onclick = () => {
+        setPokja("PPI");
+        document.getElementById("pokjaSelectModal").classList.add("hidden");
+    };
+    document.getElementById("selectPokjaKPS").onclick = () => {
+        setPokja("KPS");
+        document.getElementById("pokjaSelectModal").classList.add("hidden");
+    };
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -4189,6 +4989,10 @@
             setPokja("PROGNAS");
         } else if (currentLevel.id === "PROGNAS") {
             setPokja("PAP");
+        } else if (currentLevel.id === "PAP") {
+            setPokja("PPI");
+        } else if (currentLevel.id === "PPI") {
+            setPokja("KPS");
         } else {
             setPokja("TKRS");
         }
@@ -5496,7 +6300,912 @@
         }
     }
 
+    /* ==========================================================================
+       SIMULATOR PENCEGAHAN & PENGENDALIAN INFEKSI (PPI):
+       1. CUCI TANGAN 6 LANGKAH WHO (HANDWASH 40-60s & HANDRUB 20-40s)
+       2. ETIKA BATUK & BERSIN (4 LANGKAH EDUKATIF)
+       3. PEMASANGAN & PELEPASAN APD (DONNING & DOFFING AMAN)
+       ========================================================================== */
+    class PpiSimulator {
+        constructor() {
+            this.modal = document.getElementById("ppiSimulasiModal");
+            this.cuciCanvas = document.getElementById("ppiCuciTanganCanvas");
+            this.cuciCtx = this.cuciCanvas ? this.cuciCanvas.getContext("2d") : null;
+            this.batukCanvas = document.getElementById("ppiEtikaBatukCanvas");
+            this.batukCtx = this.batukCanvas ? this.batukCanvas.getContext("2d") : null;
+            this.apdCanvas = document.getElementById("ppiApdCanvas");
+            this.apdCtx = this.apdCanvas ? this.apdCanvas.getContext("2d") : null;
+
+            this.currentTab = "CUCI_TANGAN"; // "CUCI_TANGAN" | "BATUK" | "APD"
+            this.isOpen = false;
+            this.rafId = null;
+            this.previousState = GAME_STATE.PLAYING;
+
+            // State Cuci Tangan (6 Langkah WHO)
+            this.cuci = {
+                mode: "handwash", // "handwash" (40-60s, 6 hitungan) | "handrub" (20-40s, 4 hitungan)
+                step: 1, // 1 to 6
+                count: 1, // 1 to 6 or 1 to 4
+                timerSeconds: 45,
+                isPlaying: true,
+                animPhase: 0,
+                foamParticles: [],
+                lastTickTime: 0
+            };
+
+            this.cuciStepData = [
+                {
+                    title: "Langkah 1 / 6: Gosok Kedua Telapak Tangan",
+                    desc: "Ratakan sabun dengan air mengalir (atau gel berbasis alkohol) dengan menggosokkan kedua telapak tangan secara lembut berputar.",
+                    poseName: "Telapak Tangan"
+                },
+                {
+                    title: "Langkah 2 / 6: Gosok Punggung & Sela-sela Jari Luar",
+                    desc: "Gosok punggung dan sela-sela jari tangan kiri dengan telapak tangan kanan, dan lakukan sebaliknya secara bergantian.",
+                    poseName: "Punggung Tangan"
+                },
+                {
+                    title: "Langkah 3 / 6: Gosok Telapak & Sela-sela Jari Dalam",
+                    desc: "Rapatkan kedua telapak tangan dengan jari-jari bertaut (interlaced) dan gosok sela-sela jari tangan bagian dalam secara merata.",
+                    poseName: "Sela-sela Jari"
+                },
+                {
+                    title: "Langkah 4 / 6: Empat Jari Saling Mengunci",
+                    desc: "Jari-jari sisi dalam dari kedua tangan saling mengunci (interlocked) dan gosok punggung jari-jari pada telapak tangan di hadapannya.",
+                    poseName: "Empat Jari Mengunci"
+                },
+                {
+                    title: "Langkah 5 / 6: Sekeliling Ibu Jari Putar-putar",
+                    desc: "Genggam ibu jari kiri dengan tangan kanan lalu gosok memutar, lakukan sebaliknya secara bergantian untuk membersihkan area peripangkal ibu jari.",
+                    poseName: "Putar Ibu Jari"
+                },
+                {
+                    title: "Langkah 6 / 6: Ujung Kuku & Jari Putar di Telapak",
+                    desc: "Kuncupkan ujung-ujung jari tangan kanan, lalu putar-putar menggosok telapak tangan kiri ke depan dan ke belakang, lalu lakukan sebaliknya.",
+                    poseName: "Putar Ujung Jari"
+                }
+            ];
+
+            // State Etika Batuk (4 Langkah)
+            this.batuk = {
+                step: 1, // 1 to 4
+                animPhase: 0
+            };
+
+            this.batukStepData = [
+                {
+                    title: "Langkah 1 / 4: Tutup Hidung & Mulut dengan Tisu atau Lengan Dalam Baju",
+                    desc: "Saat batuk atau bersin, segera tutup hidung dan mulut dengan tisu/sapu tangan atau lengan bagian dalam atas baju anda. JANGAN gunakan telapak tangan agar kuman tidak menempel pada gagang pintu atau saat bersalaman!"
+                },
+                {
+                    title: "Langkah 2 / 4: Segera Buang Tisu Bekas ke Tempat Sampah Medis Tertutup",
+                    desc: "Segera buang tisu yang telah digunakan ke dalam tempat sampah medis tertutup (atau kantung plastik kuning bila terkontaminasi cairan tubuh) agar virus/bakteri tidak menyebar ke udara dan lingkungan."
+                },
+                {
+                    title: "Langkah 3 / 4: Cuci Tangan dengan Sabun/Air atau Handrub Berbasis Alkohol",
+                    desc: "Bersihkan kedua tangan dengan air mengalir dan sabun selama 40–60 detik atau handrub alkohol selama 20–40 detik untuk membasmi sisa droplet mikroba yang menempel."
+                },
+                {
+                    title: "Langkah 4 / 4: Gunakan Masker Medis dengan Benar",
+                    desc: "Kenakan masker medis yang menutupi hidung, mulut, hingga dagu. Tekan strip kawat hidung agar pas rapat dan ganti masker secara berkala bila lembab/kotor."
+                }
+            ];
+
+            // State APD (Donning & Doffing)
+            this.apd = {
+                mode: "donning", // "donning" | "doffing"
+                step: 1, // 1 to 5 (donning) or 1 to 6 (doffing)
+                animPhase: 0
+            };
+
+            this.donningStepData = [
+                {
+                    title: "Donning 1 / 5: Kenakan Baju Kerja (Scrub) & Lakukan Kebersihan Tangan",
+                    item: "Baju Kerja / Scrub Bedah",
+                    status: "Tangan Bersih & Siap",
+                    desc: "Lakukan kebersihan tangan dengan handwash atau handrub alkohol sebelum menyentuh perlengkapan APD steril."
+                },
+                {
+                    title: "Donning 2 / 5: Kenakan Gaun Pelindung (Gown / Apron)",
+                    item: "Gaun Pelindung (Gown Isolasi)",
+                    status: "Tubuh Terlindungi",
+                    desc: "Kenakan gaun pelindung menutupi badan dari leher hingga lutut, lengan hingga pergelangan. Ikat erat tali leher dan pinggang di belakang."
+                },
+                {
+                    title: "Donning 3 / 5: Pasang Masker Bedah / Masker N95",
+                    item: "Masker Bedah / N95 Respirator",
+                    status: "Saluran Napas Rapat",
+                    desc: "Pasang masker menutupi hidung dan mulut hingga dagu. Sesuaikan klip logam fleksibel pada batang hidung dan pastikan tidak ada kebocoran (fit check)."
+                },
+                {
+                    title: "Donning 4 / 5: Pasang Pelindung Mata (Goggles) / Face Shield",
+                    item: "Kacamata Goggle / Pelindung Wajah",
+                    status: "Mukosa Mata Terlindungi",
+                    desc: "Kenakan kacamata goggle atau pelindung wajah (face shield) di atas mata dan masker. Sesuaikan tali pengikat agar nyaman dan tidak menghalangi pandangan."
+                },
+                {
+                    title: "Donning 5 / 5: Kenakan Sarung Tangan Steril / Medis (Gloves)",
+                    item: "Sarung Tangan Medis (Nitrile/Latex)",
+                    status: "APD Lengkap Paripurna!",
+                    desc: "Tarik sarung tangan hingga menutupi manset pergelangan gaun pelindung. Pastikan tidak ada celah kulit terbuka. Siap melayani pasien risti!"
+                }
+            ];
+
+            this.doffingStepData = [
+                {
+                    title: "Doffing 1 / 6: Lepas Sarung Tangan (Bagian Paling Terkontaminasi)",
+                    item: "Sarung Tangan Kotor",
+                    status: "Kantung Plastik Kuning",
+                    desc: "Pegang bagian luar sarung tangan dengan tangan bersarung tangan lainnya, kupas ke arah luar. Buang langsung ke tempat sampah infeksius kantung kuning!"
+                },
+                {
+                    title: "Doffing 2 / 6: Lakukan Kebersihan Tangan Antara (Hand Hygiene)",
+                    item: "Handrub Alkohol",
+                    status: "Dekontaminasi Tangan",
+                    desc: "Gunakan handrub berbasis alkohol selama 20 detik sebelum menyentuh tali pengikat gaun untuk mencegah kontaminasi silang."
+                },
+                {
+                    title: "Doffing 3 / 6: Lepas Gaun Pelindung (Gown)",
+                    item: "Gaun Pelindung Kotor",
+                    status: "Gulung Menjauhi Tubuh",
+                    desc: "Buka ikatan tali. Tarik gaun dari leher dan bahu, balik bagian dalam ke luar. Gulung gaun menjauhi tubuh dan buang ke kantung kuning (atau bin laundry infeksius)."
+                },
+                {
+                    title: "Doffing 4 / 6: Lepas Pelindung Mata (Goggles / Face Shield)",
+                    item: "Goggle / Face Shield",
+                    status: "Pegang Dari Tali Belakang",
+                    desc: "Pegang tali pengikat dari belakang kepala tanpa menyentuh bagian depan goggle yang berisiko terkontaminasi percikan droplet. Letakkan di wadah dekontaminasi."
+                },
+                {
+                    title: "Doffing 5 / 6: Lepas Masker Medis / N95",
+                    item: "Masker Bedah / N95",
+                    status: "Lepas Tali Belakang",
+                    desc: "Pegang tali pengait belakang atau telinga tanpa menyentuh permukaan depan masker. Buang masker langsung ke kantung kuning infeksius."
+                },
+                {
+                    title: "Doffing 6 / 6: Cuci Tangan Bersih Paripurna (Handwash)",
+                    item: "Air Mengalir & Sabun",
+                    status: "Dekontaminasi Total 100%",
+                    desc: "Cuci tangan dengan air mengalir dan sabun selama 40–60 detik sesuai 6 langkah WHO. Pelepasan APD selesai dengan aman tanpa kontaminasi silang!"
+                }
+            ];
+        }
+
+        init() {
+            // Tab Switchers
+            const tabCuci = document.getElementById("tabPpiSimCuciTangan");
+            const tabBatuk = document.getElementById("tabPpiSimEtikaBatuk");
+            const tabApd = document.getElementById("tabPpiSimApd");
+
+            if (tabCuci) tabCuci.onclick = () => this.switchTab("CUCI_TANGAN");
+            if (tabBatuk) tabBatuk.onclick = () => this.switchTab("BATUK");
+            if (tabApd) tabApd.onclick = () => this.switchTab("APD");
+
+            // Close buttons
+            const btnClose = document.getElementById("btnClosePpiSimulasi");
+            const btnCloseFooter = document.getElementById("btnClosePpiSimulasiFooter");
+            if (btnClose) btnClose.onclick = () => this.close();
+            if (btnCloseFooter) btnCloseFooter.onclick = () => this.close();
+
+            // Cuci Tangan Mode & Step Buttons
+            const btnHandwash = document.getElementById("btnPpiModeHandwash");
+            const btnHandrub = document.getElementById("btnPpiModeHandrub");
+            if (btnHandwash) btnHandwash.onclick = () => this.setCuciMode("handwash");
+            if (btnHandrub) btnHandrub.onclick = () => this.setCuciMode("handrub");
+
+            for (let i = 1; i <= 6; i++) {
+                const btnStep = document.getElementById(`btnPpiStep${i}`);
+                if (btnStep) btnStep.onclick = () => this.setCuciStep(i);
+            }
+
+            const btnCuciAuto = document.getElementById("btnPpiCuciAuto");
+            const btnCuciNext = document.getElementById("btnPpiCuciNext");
+            if (btnCuciAuto) {
+                btnCuciAuto.onclick = () => {
+                    this.cuci.isPlaying = !this.cuci.isPlaying;
+                    btnCuciAuto.innerText = this.cuci.isPlaying ? "⏸️ Jeda Otomatis" : "▶ Putar Otomatis";
+                };
+            }
+            if (btnCuciNext) {
+                btnCuciNext.onclick = () => {
+                    const nextS = (this.cuci.step % 6) + 1;
+                    this.setCuciStep(nextS);
+                };
+            }
+
+            // Etika Batuk Step Buttons
+            for (let i = 1; i <= 4; i++) {
+                const btnB = document.getElementById(`btnPpiBatukStep${i}`);
+                if (btnB) btnB.onclick = () => this.setBatukStep(i);
+            }
+
+            // APD Mode & Step Buttons
+            const btnDonning = document.getElementById("btnPpiApdModeDonning");
+            const btnDoffing = document.getElementById("btnPpiApdModeDoffing");
+            const btnApdPrev = document.getElementById("btnPpiApdPrev");
+            const btnApdNext = document.getElementById("btnPpiApdNext");
+
+            if (btnDonning) btnDonning.onclick = () => this.setApdMode("donning");
+            if (btnDoffing) btnDoffing.onclick = () => this.setApdMode("doffing");
+            if (btnApdPrev) btnApdPrev.onclick = () => this.changeApdStep(-1);
+            if (btnApdNext) btnApdNext.onclick = () => this.changeApdStep(1);
+
+            this.updateCuciUI();
+            this.updateBatukUI();
+            this.updateApdUI();
+        }
+
+        open(targetTab = "CUCI_TANGAN") {
+            this.previousState = currentState;
+            currentState = GAME_STATE.SIMULATION;
+            this.isOpen = true;
+
+            if (this.modal) this.modal.classList.remove("hidden");
+            this.switchTab(targetTab);
+
+            // Spawn initial foam
+            this.cuci.foamParticles = [];
+            for (let i = 0; i < 28; i++) {
+                this.cuci.foamParticles.push({
+                    x: 280 + Math.random() * 120,
+                    y: 80 + Math.random() * 80,
+                    r: 3 + Math.random() * 8,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5,
+                    alpha: 0.6 + Math.random() * 0.4
+                });
+            }
+
+            this.loop();
+        }
+
+        close() {
+            if (!this.isOpen) return;
+            this.isOpen = false;
+            if (this.modal) this.modal.classList.add("hidden");
+            if (this.rafId) cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+
+            // Restorasi Game State & Pembersihan Input
+            currentState = GAME_STATE.PLAYING;
+            input.left = false;
+            input.right = false;
+            input.jumpPressed = false;
+            input.jumpReleased = false;
+            input.jumpHeld = false;
+            lastTime = performance.now();
+            window.focus();
+        }
+
+        switchTab(tabName) {
+            const normalized = String(tabName || "CUCI_TANGAN").toUpperCase().trim();
+            this.currentTab = (normalized === "BATUK" || normalized === "ETIKA_BATUK") ? "BATUK" : (normalized === "APD" ? "APD" : "CUCI_TANGAN");
+            const tabCuci = document.getElementById("tabPpiSimCuciTangan");
+            const tabBatuk = document.getElementById("tabPpiSimEtikaBatuk");
+            const tabApd = document.getElementById("tabPpiSimApd");
+            const viewCuci = document.getElementById("ppiSimCuciTanganView");
+            const viewBatuk = document.getElementById("ppiSimEtikaBatukView");
+            const viewApd = document.getElementById("ppiSimApdView");
+
+            const activeTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-teal-400 text-white bg-teal-500/10 flex items-center gap-1.5 transition-all flex-shrink-0";
+            const inactiveTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0";
+
+            if (tabCuci) tabCuci.className = (this.currentTab === "CUCI_TANGAN") ? activeTabClass : inactiveTabClass;
+            if (tabBatuk) tabBatuk.className = (this.currentTab === "BATUK") ? activeTabClass : inactiveTabClass;
+            if (tabApd) tabApd.className = (this.currentTab === "APD") ? activeTabClass : inactiveTabClass;
+
+            if (viewCuci) viewCuci.classList.toggle("hidden", this.currentTab !== "CUCI_TANGAN");
+            if (viewBatuk) viewBatuk.classList.toggle("hidden", this.currentTab !== "BATUK");
+            if (viewApd) viewApd.classList.toggle("hidden", this.currentTab !== "APD");
+        }
+
+        setCuciMode(mode) {
+            this.cuci.mode = mode;
+            this.cuci.count = 1;
+            this.cuci.timerSeconds = (mode === "handwash") ? 45 : 25;
+            this.updateCuciUI();
+        }
+
+        setCuciStep(step) {
+            this.cuci.step = Math.max(1, Math.min(6, step));
+            this.cuci.count = 1;
+            this.updateCuciUI();
+        }
+
+        updateCuciUI() {
+            const btnHandwash = document.getElementById("btnPpiModeHandwash");
+            const btnHandrub = document.getElementById("btnPpiModeHandrub");
+            if (btnHandwash && btnHandrub) {
+                if (this.cuci.mode === "handwash") {
+                    btnHandwash.className = "flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow";
+                    btnHandrub.className = "flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all";
+                } else {
+                    btnHandwash.className = "flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all";
+                    btnHandrub.className = "flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow";
+                }
+            }
+
+            for (let i = 1; i <= 6; i++) {
+                const btn = document.getElementById(`btnPpiStep${i}`);
+                if (btn) {
+                    if (this.cuci.step === i) {
+                        btn.className = "py-2 px-1.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all shadow";
+                    } else {
+                        btn.className = "py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all";
+                    }
+                }
+            }
+
+            const stepInfo = this.cuciStepData[this.cuci.step - 1];
+            const badge = document.getElementById("ppiStepBadge");
+            const timer = document.getElementById("ppiTimerText");
+            const instruct = document.getElementById("ppiStepInstruction");
+
+            const maxHitungan = (this.cuci.mode === "handwash") ? 6 : 4;
+            if (badge) badge.innerText = `LANGKAH ${this.cuci.step} / 6: ${stepInfo.poseName.toUpperCase()}`;
+            if (timer) timer.innerText = `Hitungan: ${this.cuci.count}/${maxHitungan} • Timer: ${this.cuci.timerSeconds}s (${this.cuci.mode.toUpperCase()})`;
+            if (instruct) instruct.innerHTML = `💡 <strong>${stepInfo.title}:</strong> ${stepInfo.desc}`;
+        }
+
+        setBatukStep(step) {
+            this.batuk.step = Math.max(1, Math.min(4, step));
+            this.updateBatukUI();
+        }
+
+        updateBatukUI() {
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`btnPpiBatukStep${i}`);
+                if (btn) {
+                    if (this.batuk.step === i) {
+                        btn.className = "py-2.5 px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-xs flex flex-col items-center gap-0.5 transition-all shadow";
+                    } else {
+                        btn.className = "py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-sky-400 font-bold text-xs flex flex-col items-center gap-0.5 transition-all";
+                    }
+                }
+            }
+
+            const info = this.batukStepData[this.batuk.step - 1];
+            const badge = document.getElementById("ppiBatukStepBadge");
+            const instruct = document.getElementById("ppiBatukInstruction");
+            if (badge) badge.innerText = info.title.toUpperCase();
+            if (instruct) instruct.innerHTML = `💡 <strong>${info.title}:</strong> ${info.desc}`;
+        }
+
+        setApdMode(mode) {
+            this.apd.mode = mode;
+            this.apd.step = 1;
+            this.updateApdUI();
+        }
+
+        changeApdStep(delta) {
+            const maxS = (this.apd.mode === "donning") ? 5 : 6;
+            this.apd.step = Math.max(1, Math.min(maxS, this.apd.step + delta));
+            this.updateApdUI();
+        }
+
+        updateApdUI() {
+            const btnDonning = document.getElementById("btnPpiApdModeDonning");
+            const btnDoffing = document.getElementById("btnPpiApdModeDoffing");
+            if (btnDonning && btnDoffing) {
+                if (this.apd.mode === "donning") {
+                    btnDonning.className = "flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow";
+                    btnDoffing.className = "flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all";
+                } else {
+                    btnDonning.className = "flex-1 py-2 px-3 rounded-xl bg-slate-900/60 border border-slate-700 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all";
+                    btnDoffing.className = "flex-1 py-2 px-3 rounded-xl bg-teal-500/20 border border-teal-400/80 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-all shadow";
+                }
+            }
+
+            const dataList = (this.apd.mode === "donning") ? this.donningStepData : this.doffingStepData;
+            const maxS = dataList.length;
+            const current = dataList[this.apd.step - 1];
+
+            const stepBadge = document.getElementById("ppiApdStepBadge");
+            const itemBadge = document.getElementById("ppiApdItemBadge");
+            const counter = document.getElementById("ppiApdStepCounter");
+            const instruct = document.getElementById("ppiApdInstruction");
+
+            if (stepBadge) stepBadge.innerText = current.title.toUpperCase();
+            if (itemBadge) itemBadge.innerText = current.status;
+            if (counter) counter.innerText = `Langkah ${this.apd.step} dari ${maxS}`;
+            if (instruct) instruct.innerHTML = `💡 <strong>${current.item}:</strong> ${current.desc}`;
+        }
+
+        loop() {
+            if (!this.isOpen) return;
+
+            const now = performance.now();
+            this.cuci.animPhase += 0.05;
+            this.batuk.animPhase += 0.04;
+            this.apd.animPhase += 0.04;
+
+            // Auto timer & counter for cuci tangan
+            if (this.cuci.isPlaying && now - this.cuci.lastTickTime > 800) {
+                this.cuci.lastTickTime = now;
+                const maxH = (this.cuci.mode === "handwash") ? 6 : 4;
+                this.cuci.count++;
+                if (this.cuci.count > maxH) {
+                    this.cuci.count = 1;
+                    this.cuci.step = (this.cuci.step % 6) + 1;
+                }
+                if (this.cuci.timerSeconds > 0) this.cuci.timerSeconds--;
+                else this.cuci.timerSeconds = (this.cuci.mode === "handwash") ? 50 : 30;
+                this.updateCuciUI();
+            }
+
+            if (this.currentTab === "CUCI_TANGAN" && this.cuciCtx) {
+                this.renderCuciTangan();
+            } else if (this.currentTab === "BATUK" && this.batukCtx) {
+                this.renderEtikaBatuk();
+            } else if (this.currentTab === "APD" && this.apdCtx) {
+                this.renderApd();
+            }
+
+            this.rafId = requestAnimationFrame(() => this.loop());
+        }
+
+        renderCuciTangan() {
+            const ctx = this.cuciCtx;
+            const w = this.cuciCanvas.width;
+            const h = this.cuciCanvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Background Lab Sink / Antiseptic Washroom
+            const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+            bgGrad.addColorStop(0, "#042f2e");
+            bgGrad.addColorStop(0.5, "#0f766e");
+            bgGrad.addColorStop(1, "#022c22");
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // Water faucet / dispenser in the top center
+            ctx.fillStyle = "#94a3b8";
+            ctx.fillRect(w / 2 - 12, 10, 24, 30);
+            ctx.fillStyle = "#cbd5e1";
+            ctx.fillRect(w / 2 - 8, 36, 16, 14);
+
+            // Flowing water if handwash, or gel drop if handrub
+            if (this.cuci.mode === "handwash") {
+                ctx.fillStyle = "rgba(186, 230, 253, 0.55)";
+                ctx.fillRect(w / 2 - 4, 48, 8, 80 + Math.sin(this.cuci.animPhase * 8) * 8);
+            } else {
+                ctx.fillStyle = "rgba(94, 234, 212, 0.75)";
+                ctx.beginPath();
+                ctx.arc(w / 2, 54 + (this.cuci.animPhase * 12 % 40), 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Draw Hands based on step
+            ctx.save();
+            const cx = w / 2;
+            const cy = 145;
+            const osc = Math.sin(this.cuci.animPhase * 6) * 16;
+
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "#ca8a04";
+
+            if (this.cuci.step === 1) {
+                // Step 1: Telapak tangan berhadapan saling menggesek horizontal
+                ctx.fillStyle = "#fde047";
+                // Tangan kiri
+                ctx.beginPath();
+                ctx.roundRect(cx - 70 + osc, cy - 35, 55, 70, 16);
+                ctx.fill();
+                ctx.stroke();
+                // Tangan kanan
+                ctx.beginPath();
+                ctx.roundRect(cx + 15 - osc, cy - 35, 55, 70, 16);
+                ctx.fill();
+                ctx.stroke();
+                // Garis jari
+                ctx.strokeStyle = "#a16207";
+                ctx.lineWidth = 2;
+                for (let i = -1; i <= 2; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(cx - 50 + osc + i * 10, cy - 30);
+                    ctx.lineTo(cx - 50 + osc + i * 10, cy - 50);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(cx + 35 - osc + i * 10, cy - 30);
+                    ctx.lineTo(cx + 35 - osc + i * 10, cy - 50);
+                    ctx.stroke();
+                }
+            } else if (this.cuci.step === 2) {
+                // Step 2: Punggung tangan & sela luar
+                ctx.fillStyle = "#fde047";
+                // Tangan bawah
+                ctx.beginPath();
+                ctx.roundRect(cx - 50, cy - 30, 100, 60, 16);
+                ctx.fill();
+                ctx.stroke();
+                // Tangan atas menggosok serong
+                ctx.fillStyle = "#fef08a";
+                ctx.beginPath();
+                ctx.roundRect(cx - 60 + osc, cy - 45, 90, 50, 16);
+                ctx.fill();
+                ctx.stroke();
+            } else if (this.cuci.step === 3) {
+                // Step 3: Sela jari bertaut dalam
+                ctx.fillStyle = "#fde047";
+                ctx.beginPath();
+                ctx.roundRect(cx - 65, cy - 35 + osc * 0.4, 60, 75, 14);
+                ctx.fill();
+                ctx.stroke();
+                ctx.fillStyle = "#fef08a";
+                ctx.beginPath();
+                ctx.roundRect(cx + 5, cy - 35 - osc * 0.4, 60, 75, 14);
+                ctx.fill();
+                ctx.stroke();
+                // Jari-jari bersilangan
+                ctx.fillStyle = "#ca8a04";
+                for (let i = 0; i < 4; i++) {
+                    ctx.fillRect(cx - 20, cy - 25 + i * 14 + osc * 0.2, 40, 6);
+                }
+            } else if (this.cuci.step === 4) {
+                // Step 4: Mengunci empat jari
+                ctx.fillStyle = "#fde047";
+                ctx.beginPath();
+                ctx.roundRect(cx - 55 + osc * 0.5, cy - 30, 55, 60, 12);
+                ctx.fill();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.roundRect(cx, cy - 30 - osc * 0.5, 55, 60, 12);
+                ctx.fill();
+                ctx.stroke();
+                // Kaitan buku jari
+                ctx.fillStyle = "#eab308";
+                ctx.fillRect(cx - 15, cy - 20, 30, 40);
+            } else if (this.cuci.step === 5) {
+                // Step 5: Ibu jari digenggam dan diputar
+                ctx.fillStyle = "#fde047";
+                // Ibu jari tegak
+                ctx.beginPath();
+                ctx.roundRect(cx - 40, cy - 50, 24, 60, 12);
+                ctx.fill();
+                ctx.stroke();
+                // Tangan menggenggam memutar
+                ctx.fillStyle = "#fef08a";
+                ctx.beginPath();
+                ctx.arc(cx - 28 + Math.cos(this.cuci.animPhase * 6) * 15, cy - 20 + Math.sin(this.cuci.animPhase * 6) * 10, 32, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            } else {
+                // Step 6: Ujung kuku kuncup diputar di telapak
+                ctx.fillStyle = "#fde047";
+                // Telapak terbuka datar
+                ctx.beginPath();
+                ctx.roundRect(cx - 70, cy - 20, 80, 50, 14);
+                ctx.fill();
+                ctx.stroke();
+                // Ujung jari kuncup berputar di atasnya
+                ctx.fillStyle = "#fef08a";
+                const qx = cx - 30 + Math.cos(this.cuci.animPhase * 8) * 18;
+                const qy = cy + 5 + Math.sin(this.cuci.animPhase * 8) * 12;
+                ctx.beginPath();
+                ctx.arc(qx, qy - 25, 20, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                // Titik kuncup kuku
+                ctx.fillStyle = "#a16207";
+                for (let k = -2; k <= 2; k++) {
+                    ctx.fillRect(qx + k * 4 - 2, qy - 12, 4, 8);
+                }
+            }
+
+            // Busa sabun & partikel antiseptik mengambang
+            ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+            this.cuci.foamParticles.forEach((p, idx) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < cx - 120 || p.x > cx + 120) p.vx *= -1;
+                if (p.y < cy - 60 || p.y > cy + 60) p.vy *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Kilau bintang mikro
+                if (idx % 4 === 0) {
+                    ctx.fillStyle = "#5eead4";
+                    ctx.fillText("✨", p.x - 4, p.y - 4);
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+                }
+            });
+
+            ctx.restore();
+        }
+
+        renderEtikaBatuk() {
+            const ctx = this.batukCtx;
+            const w = this.batukCanvas.width;
+            const h = this.batukCanvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Room Background
+            const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+            bgGrad.addColorStop(0, "#082f49");
+            bgGrad.addColorStop(0.6, "#0369a1");
+            bgGrad.addColorStop(1, "#075985");
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // Ground hospital floor
+            ctx.fillStyle = "#0c4a6e";
+            ctx.fillRect(0, 185, w, h - 185);
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, 185);
+            ctx.lineTo(w, 185);
+            ctx.stroke();
+
+            const cx = w / 2;
+            const cy = 110;
+
+            // Draw Kapten RUSA ERIK
+            // Badan Kapten Erik (Seragam TNI AU / Jas Medis)
+            ctx.fillStyle = "#1e3a8a"; // seragam dinas biru AU
+            ctx.fillRect(cx - 24, cy - 20, 48, 70);
+            ctx.fillStyle = "#f8fafc"; // kerah putih
+            ctx.beginPath();
+            ctx.moveTo(cx - 15, cy - 20);
+            ctx.lineTo(cx, cy - 5);
+            ctx.lineTo(cx + 15, cy - 20);
+            ctx.fill();
+
+            // Kepala Rusa
+            ctx.fillStyle = "#b45309"; // bulu rusa cokelat
+            ctx.beginPath();
+            ctx.arc(cx, cy - 42, 22, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Moncong Rusa
+            ctx.fillStyle = "#fef3c7";
+            ctx.beginPath();
+            ctx.ellipse(cx, cy - 36, 14, 10, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "#1f2937";
+            ctx.beginPath();
+            ctx.arc(cx, cy - 40, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Tanduk Rusa Keren
+            ctx.strokeStyle = "#78350f";
+            ctx.lineWidth = 3.5;
+            ctx.beginPath();
+            ctx.moveTo(cx - 12, cy - 60);
+            ctx.lineTo(cx - 22, cy - 82);
+            ctx.lineTo(cx - 30, cy - 88);
+            ctx.moveTo(cx - 18, cy - 74);
+            ctx.lineTo(cx - 12, cy - 84);
+
+            ctx.moveTo(cx + 12, cy - 60);
+            ctx.lineTo(cx + 22, cy - 82);
+            ctx.lineTo(cx + 30, cy - 88);
+            ctx.moveTo(cx + 18, cy - 74);
+            ctx.lineTo(cx + 12, cy - 84);
+            ctx.stroke();
+
+            // Mata Rusa
+            ctx.fillStyle = "#1e293b";
+            ctx.beginPath();
+            ctx.arc(cx - 8, cy - 46, 3, 0, Math.PI * 2);
+            ctx.arc(cx + 8, cy - 46, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Action based on batuk.step
+            if (this.batuk.step === 1) {
+                // Step 1: Tutup hidung/mulut dengan lengan dalam baju
+                ctx.fillStyle = "#1e3a8a";
+                ctx.beginPath();
+                ctx.roundRect(cx - 38, cy - 42, 42, 16, 8);
+                ctx.fill();
+                // Tisu putih
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(cx - 16, cy - 45, 20, 18);
+
+                // Perisai droplet hijau/cyan
+                ctx.fillStyle = "rgba(94, 234, 212, 0.35)";
+                ctx.beginPath();
+                ctx.arc(cx - 25, cy - 35, 30, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#5eead4";
+                ctx.stroke();
+                ctx.fillStyle = "#5eead4";
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText("🛡️ DROPLET TERLINDUNGI", cx + 45, cy - 35);
+            } else if (this.batuk.step === 2) {
+                // Step 2: Buang tisu ke tempat sampah medis kuning
+                const binX = cx + 90;
+                const binY = 135;
+                // Tempat sampah medis kuning
+                ctx.fillStyle = "#eab308";
+                ctx.fillRect(binX - 20, binY - 30, 40, 50);
+                ctx.fillStyle = "#ca8a04";
+                ctx.fillRect(binX - 24, binY - 36, 48, 7);
+                // Simbol biohazard
+                ctx.fillStyle = "#000000";
+                ctx.font = "bold 7px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("MEDIS", binX, binY);
+
+                // Tisu putih melayang masuk ke tempat sampah
+                const tissueY = binY - 45 + Math.sin(this.batuk.animPhase * 5) * 8;
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(binX - 10, tissueY, 16, 16);
+                ctx.strokeStyle = "#38bdf8";
+                ctx.strokeRect(binX - 10, tissueY, 16, 16);
+            } else if (this.batuk.step === 3) {
+                // Step 3: Cuci tangan dengan air mengalir & sabun
+                ctx.fillStyle = "#5eead4";
+                ctx.font = "24px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🧼 💧 ✨", cx, cy + 10);
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillStyle = "#fef08a";
+                ctx.fillText("Cuci Tangan Sabun / Handrub Gel", cx, cy + 30);
+            } else {
+                // Step 4: Masker bedah terpasang rapi di wajah
+                ctx.fillStyle = "#0d9488"; // masker hijau toska
+                ctx.beginPath();
+                ctx.roundRect(cx - 16, cy - 44, 32, 22, 6);
+                ctx.fill();
+                ctx.strokeStyle = "#ffffff";
+                ctx.lineWidth = 1.5;
+                // Tali masker
+                ctx.beginPath();
+                ctx.moveTo(cx - 16, cy - 40);
+                ctx.lineTo(cx - 24, cy - 44);
+                ctx.moveTo(cx + 16, cy - 40);
+                ctx.lineTo(cx + 24, cy - 44);
+                ctx.stroke();
+
+                ctx.fillStyle = "#34d399";
+                ctx.font = "bold 13px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("👍 MASKER TERPASANG SEMPURNA!", cx, cy + 35);
+            }
+        }
+
+        renderApd() {
+            const ctx = this.apdCtx;
+            const w = this.apdCanvas.width;
+            const h = this.apdCanvas.height;
+
+            ctx.clearRect(0, 0, w, h);
+
+            // Anteroom Clean Atmosphere
+            const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+            bgGrad.addColorStop(0, "#022c22");
+            bgGrad.addColorStop(0.6, "#065f46");
+            bgGrad.addColorStop(1, "#064e3b");
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, w, h);
+
+            // Ground floor
+            ctx.fillStyle = "#042f2e";
+            ctx.fillRect(0, 190, w, h - 190);
+            ctx.strokeStyle = "#2dd4bf";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(0, 190);
+            ctx.lineTo(w, 190);
+            ctx.stroke();
+
+            const cx = w / 2;
+            const cy = 115;
+
+            // Base Kapten RUSA ERIK
+            // Scrub bedah (Baju kerja dasar)
+            ctx.fillStyle = "#15803d"; // scrub hijau RS
+            ctx.fillRect(cx - 25, cy - 20, 50, 75);
+
+            // Kepala Rusa
+            ctx.fillStyle = "#b45309";
+            ctx.beginPath();
+            ctx.arc(cx, cy - 44, 22, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Tanduk Rusa
+            ctx.strokeStyle = "#78350f";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(cx - 10, cy - 62);
+            ctx.lineTo(cx - 20, cy - 82);
+            ctx.lineTo(cx - 28, cy - 88);
+            ctx.moveTo(cx + 10, cy - 62);
+            ctx.lineTo(cx + 20, cy - 82);
+            ctx.lineTo(cx + 28, cy - 88);
+            ctx.stroke();
+
+            // Mata Rusa
+            ctx.fillStyle = "#0f172a";
+            ctx.beginPath();
+            ctx.arc(cx - 8, cy - 48, 3, 0, Math.PI * 2);
+            ctx.arc(cx + 8, cy - 48, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Progressive APD layers
+            const isDon = (this.apd.mode === "donning");
+            const s = this.apd.step;
+
+            // 1. Gaun Pelindung (Gown)
+            const hasGown = isDon ? (s >= 2) : (s < 3);
+            if (hasGown) {
+                ctx.fillStyle = "#facc15"; // Gaun isolasi kuning terang
+                ctx.fillRect(cx - 28, cy - 22, 56, 78);
+                // Tali ikatan pinggang
+                ctx.strokeStyle = "#ca8a04";
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(cx - 28, cy + 20);
+                ctx.lineTo(cx + 28, cy + 20);
+                ctx.stroke();
+            }
+
+            // 2. Masker Bedah / N95
+            const hasMask = isDon ? (s >= 3) : (s < 5);
+            if (hasMask) {
+                ctx.fillStyle = "#0d9488"; // masker toska bedah
+                ctx.beginPath();
+                ctx.roundRect(cx - 15, cy - 46, 30, 20, 5);
+                ctx.fill();
+            }
+
+            // 3. Goggles / Face Shield
+            const hasGoggles = isDon ? (s >= 4) : (s < 4);
+            if (hasGoggles) {
+                ctx.fillStyle = "rgba(186, 230, 253, 0.55)"; // lensa goggle transparan
+                ctx.beginPath();
+                ctx.roundRect(cx - 20, cy - 54, 40, 15, 6);
+                ctx.fill();
+                ctx.strokeStyle = "#38bdf8";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // 4. Sarung Tangan Medis (Gloves)
+            const hasGloves = isDon ? (s >= 5) : (s < 1);
+            if (hasGloves) {
+                ctx.fillStyle = "#a855f7"; // sarung tangan nitril ungu
+                ctx.beginPath();
+                ctx.roundRect(cx - 38, cy + 30, 16, 25, 6);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.roundRect(cx + 22, cy + 30, 16, 25, 6);
+                ctx.fill();
+            }
+
+            // Checklist HUD samping
+            ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
+            ctx.roundRect(cx + 90, cy - 70, 190, 130, 12);
+            ctx.fill();
+            ctx.strokeStyle = "#14b8a6";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.fillStyle = "#5eead4";
+            ctx.font = "bold 11px sans-serif";
+            ctx.textAlign = "left";
+            ctx.fillText(isDon ? "CHECKLIST PEMASANGAN:" : "CHECKLIST PELEPASAN:", cx + 102, cy - 48);
+
+            ctx.font = "10px sans-serif";
+            const items = isDon
+                ? ["1. Baju Scrub & Hand Hygiene", "2. Gaun Pelindung (Gown)", "3. Masker Bedah / N95", "4. Pelindung Mata (Goggles)", "5. Sarung Tangan Medis"]
+                : ["1. Sarung Tangan Kotor", "2. Hand Hygiene Antara", "3. Gaun Pelindung (Gown)", "4. Goggles / Face Shield", "5. Masker dari Belakang", "6. Cuci Tangan Akhir"];
+
+            items.forEach((txt, i) => {
+                const active = isDon ? (s > i) : (s > i);
+                ctx.fillStyle = active ? "#34d399" : "#94a3b8";
+                ctx.fillText(`${active ? "✅" : "⏳"} ${txt}`, cx + 102, cy - 28 + i * 16);
+            });
+        }
+    }
+
     const aparHydrantSimulator = new AparHydrantSimulator();
+    const ppiSimulator = new PpiSimulator();
 
     // Init
     function init() {
@@ -5505,7 +7214,16 @@
         resizeCanvas();
         setPokja("TKRS");
         aparHydrantSimulator.init();
+        ppiSimulator.init();
         updateHud();
+        // Expose to window for external integration / testing
+        window.player = player;
+        window.getCurrentLevel = () => currentLevel;
+        window.setPokja = setPokja;
+        window.ppiSimulator = ppiSimulator;
+        window.aparHydrantSimulator = aparHydrantSimulator;
+        window.openQuizModal = openQuizModal;
+        window.triggerAssessmentSummary = triggerAssessmentSummary;
         requestAnimationFrame(gameLoop);
     }
 

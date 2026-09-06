@@ -14,6 +14,14 @@
 8. [Blueprint Konversi ke Game Akreditasi Rumah Sakit (STARKES / KARS)](#8-blueprint-konversi-ke-game-akreditasi-rumah-sakit-starkes--kars)
 9. [Panduan Langkah-demi-Langkah Menambah Fitur & Konten Baru](#9-panduan-langkah-demi-langkah-menambah-fitur--konten-baru)
 10. [Daftar Berkas & Panduan Menjalankan](#10-daftar-berkas--panduan-menjalankan)
+11. [Gamifikasi Akreditasi Map 1 (Pokja TKRS)](#-bagian-11-implementasi-khusus-gamifikasi-akreditasi-map-1-pokja-tkrs)
+12. [Gamifikasi Akreditasi Map 2 (Pokja PMKP)](#-bagian-12-implementasi-khusus-gamifikasi-akreditasi-map-2-pokja-pmkp)
+13. [Gamifikasi Akreditasi Map 3 (Pokja SKP)](#-bagian-13-implementasi-khusus-gamifikasi-akreditasi-map-3-pokja-skp)
+14. [Gamifikasi Akreditasi Map 4 (Pokja MFK & Simulasi Proteksi Bencana)](#-bagian-14-implementasi-khusus-gamifikasi-akreditasi-map-4-pokja-mfk)
+15. [Gamifikasi Akreditasi Map 5 (Pokja PROGNAS - PPRA)](#-bagian-15-implementasi-khusus-gamifikasi-akreditasi-map-5-pokja-prognas---ppra)
+16. [Gamifikasi Akreditasi Map 6 (Pokja PAP - Asuhan Pasien Terpadu)](#-bagian-16-implementasi-khusus-gamifikasi-akreditasi-map-6-pokja-pap---pelayanan-dan-asuhan-pasien-terpadu)
+17. [Gamifikasi Akreditasi Map 7 (Pokja PPI - Simulasi Cuci Tangan, Etika Batuk, APD & Limbah)](#-bagian-17-implementasi-khusus-gamifikasi-akreditasi-map-7-pokja-ppi---pencegahan-dan-pengendalian-infeksi)
+18. [Gamifikasi Akreditasi Map 8 (Pokja KPS - Uraian Jabatan, Kredensial, Rekredensial, SPK & RKK)](#-bagian-18-implementasi-khusus-gamifikasi-akreditasi-map-8-pokja-kps---kualifikasi-dan-pendidikan-staf)
 
 ---
 
@@ -1121,6 +1129,197 @@ Pelayanan Binroh memastikan hak spiritual pasien terpenuhi sesuai keyakinan masi
    - Kantong transfusi darah steril medis dengan gantungan infus, tabung selang, cairan darah merah gelap, label putih klinis bertuliskan `DARAH`, serta indikator golongan darah.
 2. **`stetho_clipboard` (Clipboard Rekam Medis CPPT SOAP & Stetoskop)**:
    - Papan rekam medis rumah sakit (*clipboard*) berwarna putih bersih dengan klip stainless steel, lembar catatan perkembangan medis bergaris dengan header `CPPT`, serta stetoskop dokter melingkar di sekeliling papan.
+
+---
+
+## 🧼 BAGIAN 17: IMPLEMENTASI KHUSUS: GAMIFIKASI AKREDITASI MAP 7 (POKJA PPI - PENCEGAHAN DAN PENGENDALIAN INFEKSI)
+
+Pokja **PPI (Pencegahan dan Pengendalian Infeksi)** merupakan instrumen vital dalam akreditasi rumah sakit (STARKES) yang bertujuan memutus mata rantai transmisi infeksi terkait pelayanan kesehatan (*Healthcare-Associated Infections* / HAIs). RSAU dr. Esnawan Antariksa membentuk **Tim/Panitia PPI** untuk merancang, mengawasi, dan mengevaluasi seluruh program pengendalian infeksi di seluruh area rumah sakit.
+
+---
+
+### 🛡️ 1. Definisi & Ruang Lingkup Program PPI RS
+Rumah Sakit melaksanakan Program Pencegahan dan Pengendalian Infeksi (PPI) yaitu:
+> **Mengidentifikasikan, mengendalikan, melindungi, dan menurunkan risiko infeksi yang dibuat dan ditularkan di antara pasien, staf, tenaga profesional kesehatan, tenaga kontrak, tenaga sukarela, pengunjung, dan lingkungan rumah sakit.**
+
+Rumah sakit membentuk **Tim / Panitia PPI** yang dipimpin oleh Infection Prevention and Control Doctor (IPCD) dan Infection Prevention and Control Nurse (IPCN) purnawaktu untuk menjalankan pengawasan mikrobiologis, surveilans HAIs (Plebitis, ISK, IDO, VAP), dan audit kepatuhan fasilitas.
+
+---
+
+### ✋ 2. Lima (5) Momen Praktik Kebersihan Tangan (WHO 5 Moments for Hand Hygiene)
+
+Kebersihan tangan (*hand hygiene*) adalah prosedur paling efektif dalam menekan transmisi mikroorganisme patogen. Wajib dilakukan pada **5 Momen Krusial**:
+
+```mermaid
+flowchart TD
+    M1["1. SEBELUM Kontak dengan Pasien\nMelindungi pasien dari kuman yang terbawa pada tangan petugas"] --> M2["2. SEBELUM Melakukan Tindakan Aseptik\nMelindungi pasien dari patogen yang dapat masuk ke tubuh (infus, kateter, luka)"]
+    M2 --> M3["3. SETELAH Terkena Paparan Cairan Tubuh Pasien\nMelindungi petugas & lingkungan dari kontaminasi cairan biologis"]
+    M3 --> M4["4. SETELAH Kontak dengan Pasien\nMelindungi petugas & lingkungan dari mikroorganisme pasien"]
+    M4 --> M5["5. SETELAH Meninggalkan Lingkungan Rumah Sakit / Sekitar Pasien\nMelindungi area luar dan populasi umum dari kuman fasilitas kesehatan"]
+```
+
+---
+
+### 🤧 3. Pedoman Etika Saat Batuk atau Bersin di Lingkungan RS
+
+Untuk mencegah penularan infeksi melalui percikan droplet pernapasan (*airborne & droplet transmission*), setiap individu di RSAU dr. Esnawan Antariksa wajib mematuhi **4 Langkah Etika Batuk/Bersin**:
+1. **Tutup Hidung atau Mulut**: Gunakan tisu/sapu tangan atau lengan dalam baju anda (bukan menggunakan telapak tangan!).
+2. **Segera Buang Tisu**: Masukkan tisu bekas ke dalam tempat sampah infeksius/tertutup medis.
+3. **Cuci Tangan**: Bersihkan tangan dengan air mengalir dan sabun atau cairan antiseptik berbahan dasar alkohol.
+4. **Gunakan Masker**: Kenakan masker bedah dengan posisi kawat hidung menempel rapat.
+
+---
+
+### ⏱️ 4. Dua (2) Cara Cuci Tangan: Handwash vs Handrub
+
+| Parameter | HANDWASH (Air Mengalir & Sabun) | HANDRUB (Gel Berbasis Alkohol) |
+|---|---|---|
+| **Media Pembersih** | Air bersih mengalir + Sabun cair antiseptik | Larutan / Gel berbasis alkohol (*alcohol-based handrub*) |
+| **Durasi Waktu** | **40 – 60 Detik** (6 hitungan per langkah) | **20 – 40 Detik** (4 hitungan per langkah) |
+| **Indikasi Utama** | Wajib bila tangan **tampak kotor secara visual**, terkena cairan tubuh, atau merawat pasien terduga spora *C. difficile*. | Dilakukan rutin bila tangan **tidak tampak kotor**, lebih cepat dan praktis di samping tempat tidur pasien. |
+
+---
+
+### 🖐️ 5. Enam (6) Langkah Cuci Tangan WHO ("Tepung Selaci Puput")
+
+Enam urutan teknik cuci tangan sesuai standar Organisasi Kesehatan Dunia (WHO):
+1. **Te (Telapak Tangan)**: Gosokkan kedua telapak tangan secara memutar berlawanan arah.
+2. **Pung (Punggung Tangan)**: Gosok punggung tangan kiri dengan telapak tangan kanan dengan jari saling menyilang, lakukan bergantian.
+3. **Sela (Sela-sela Jari)**: Gosok kedua telapak tangan dengan jari-jari tangan saling menyusup dan menyilang.
+4. **Ci (Kunci Empat Jari)**: Jari-jari dalam dari kedua tangan saling mengunci berhadapan.
+5. **Pu (Putar Ibu Jari)**: Gosok ibu jari kiri secara berputar dalam genggaman tangan kanan, lakukan bergantian.
+6. **Put (Putar Ujung Jari)**: Gosok memutar ujung jari-jari dan kuku tangan kanan pada telapak tangan kiri, lakukan bergantian.
+
+---
+
+### 🗑️ 6. Pengelolaan Limbah Rumah Sakit: Padat Medis & Cair Medis
+
+Pengelolaan limbah medis di RSAU dr. Esnawan Antariksa dipisahkan menjadi limbah padat medis (4 kategori warna) dan limbah cair medis:
+
+```mermaid
+flowchart LR
+    L["LIMBAH MEDIS RS"] --> LP["Limbah Padat Medis"]
+    L --> LC["Limbah Cair Medis\nSaluran Kedap Air -> IPAL RS -> Uji Baku Mutu Berkala"]
+    LP --> K["1. INFEKSIUS\nKantung Plastik KUNING\nInfus set, kateter, masker, kasa, sarung tangan, jaringan tubuh"]
+    LP --> H["2. NON-INFEKSIUS / DOMESTIK\nKantung Plastik HITAM\nPembungkus spuit, kertas, kardus, sisa makanan kantin"]
+    LP --> BT["3. BENDA TAJAM\nSafety Box Tahan Tusuk KUNING\nJarum suntik, ampul, bisturi, pisau bedah"]
+    LP --> P["4. DAUR ULANG\nKantung Plastik PUTIH\nPlabot infus, botol kaca obat/vial bebas kontaminasi"]
+```
+
+---
+
+### 🧪 7. Laboratorium Simulasi Interaktif PPI (`PpiSimulator`)
+Di dalam game, pemain dapat mengakses modal simulasi interaktif PPI dengan 3 modul simulasi visual:
+1. **Simulasi Cuci Tangan 6 Langkah**: Menampilkan animasi visual kanvas dua tangan yang melakukan 6 gerakan WHO lengkap dengan busa sabun (*foam particle system*), timer hitungan (4 hitungan Handrub / 6 hitungan Handwash), tombol Otomatis dan Manual.
+2. **Simulasi Etika Batuk & Bersin**: Menampilkan 4 tahapan animasi Kapten Erik mendemonstrasikan penutupan droplet dengan lengan dalam baju, pembuangan tisu ke tempat sampah biohazard, kebersihan tangan, dan pemasangan masker.
+3. **Simulasi APD Donning & Doffing**: Menampilkan prosedur pemasangan dan pelepasan Alat Pelindung Diri (baju kerja/scrub, gaun isolasi, masker N95, pelindung mata/goggle, dan sarung tangan steril).
+
+---
+
+### 🎮 8. Pemetaan 8 Pos Terminal Kuis Map 7 (Pokja PPI) di Game
+
+| Pos | Kategori Materi | Butir Regulasi PPI RSAU dr. Esnawan Antariksa |
+|---|---|---|
+| **Pos 1** | Program & Tim PPI | Tujuan program PPI melindungi pasien, nakes, staf, sukarela, dan pengunjung serta struktur Tim/Panitia PPI RS. |
+| **Pos 2** | 5 Momen Kebersihan Tangan | 1) Sebelum kontak pasien, 2) Sebelum tindakan aseptik, 3) Setelah terkena cairan tubuh, 4) Setelah kontak pasien, 5) Setelah meninggalkan lingkungan RS. |
+| **Pos 3** | Etika Batuk & Bersin | Tutup tisu/lengan dalam, buang tisu ke tempat sampah tertutup, cuci tangan sabun/alkohol, pakai masker medis. |
+| **Pos 4** | Handwash vs Handrub | Handwash air mengalir 40-60 detik (6 hitungan); Handrub gel alkohol 20-40 detik (4 hitungan). |
+| **Pos 5** | 6 Langkah Cuci Tangan WHO | Tepung Selaci Puput: Telapak, Punggung, Sela jari, Mengunci, Putar ibu jari, Putar kuncup jari. |
+| **Pos 6** | Limbah Padat Medis (4 Kategori) | Kuning (Infeksius), Hitam (Non-infeksius/domestik), Safety Box Kuning (Benda tajam menusuk), Putih (Daur ulang non-kontaminasi). |
+| **Pos 7** | Limbah Cair IPAL & APD | Aliran limbah cair menuju IPAL terstandar baku mutu; prinsip pemilihan dan pemakaian APD sesuai rute transmisi. |
+| **Pos 8** | Lab Simulasi Praktik PPI | Pentingnya kompetensi fisik nyata civitas hospitalia memutus rantai transmisi HAIs melalui simulasi rutin. |
+
+---
+
+### 🧴 9. Kolektibel Khusus Map 7 (PPI)
+1. **`handrub_dispenser`**: Botol dispenser antiseptik berbasis alkohol warna toska/teal khas PPI dengan label `HANDRUB` dan efek partikel tetesan steril.
+2. **`safety_box_biohazard`**: Wadah kotak kardus kuning tebal tahan tusukan (*puncture-proof box*) berlogo lambang bahaya biologis (*biohazard symbol*) dan lubang pembuangan jarum suntik.
+
+---
+
+## 👨‍💼 BAGIAN 18: IMPLEMENTASI KHUSUS: GAMIFIKASI AKREDITASI MAP 8 (POKJA KPS - KUALIFIKASI DAN PENDIDIKAN STAF)
+
+Pokja **KPS (Kualifikasi dan Pendidikan Staf)** mengatur standar rekruitmen, evaluasi kompetensi, tata kelola klinis (*clinical governance*), dan kewenangan staf medis serta tenaga kesehatan lainnya di RSAU dr. Esnawan Antariksa.
+
+---
+
+### 📑 1. Uraian Jabatan Staf & Lokasi Penyimpanan Dokumen
+- **Definisi**: Uraian jabatan (*job description*) adalah dokumen yang menjelaskan dasar penugasan jabatan, tugas pokok, wewenang, dan tanggung jawab kerja.
+- **Sifat Dokumen**: Bersifat **personal** tergantung pada jenjang jabatan, kualifikasi, dan penempatan staf.
+- **Tiga (3) Tempat Penyimpanan Dokumen Resmi di RSAU**:
+  1. Bagian Personalia / Urusan Personel (**Urpers**).
+  2. **Unit Kerja** tempat staf bertugas (ruangan/instalasi).
+  3. **Salinan Resmi** wajib dipegang dan dimiliki oleh staf yang bersangkutan.
+
+---
+
+### ⚖️ 2. Tujuh (7) Hal Pokok Tata Kelola Staf Medis yang Wajib Diketahui
+
+Setiap personel RSAU dr. Esnawan Antariksa wajib memahami 7 konsep fundamental tata laksana staf medis:
+
+1. **Peraturan Internal Staf Medis (*Medical Staff Bylaws*)**:
+   - Aturan internal rumah sakit yang mengatur tata kelola klinis (*clinical governance*) untuk menjaga etika, mutu, dan profesionalisme staf medis.
+2. **Kewenangan Klinis (*Clinical Privilege*)**:
+   - Hak khusus seorang staf medis untuk melakukan sekelompok pelayanan medis tertentu dalam lingkungan rumah sakit untuk suatu periode tertentu berdasarkan penugasan klinis.
+3. **Penugasan Klinis (*Clinical Appointment*)**:
+   - Surat penugasan resmi dari Kepala / Direktur Rumah Sakit kepada staf medis untuk melakukan pelayanan medis berdasarkan rincian kewenangan klinis yang ditetapkan baginya.
+4. **Kredensial**:
+   - Proses evaluasi dan verifikasi terhadap ijazah, kompetensi, dan sertifikasi staf medis untuk menentukan kelayakan pemberian kewenangan klinis awal (*clinical privilege*).
+5. **Rekredensial**:
+   - Proses reevaluasi berkala terhadap staf medis yang telah memiliki kewenangan klinis untuk menentukan kelayakan perpanjangan atau penyesuaian kewenangan klinis tersebut. **Dilaksanakan setiap 3 tahun sekali** atau sewaktu-waktu bila ada penambahan/pengurangan kompetensi.
+6. **Audit Medis**:
+   - Upaya evaluasi mutu pelayanan medis secara profesional dan kolegial terhadap kasus yang telah ditangani, menggunakan telaah rekam medis oleh profesi medis.
+7. **Mitra Bestari (*Peer Group*)**:
+   - Sekelompok staf medis sejawat dengan reputasi dan kompetensi profesi teruji untuk menelaah secara objektif segala hal yang terkait dengan etika dan kompetensi profesi medis.
+
+---
+
+### 🔄 3. Alur Komprehensif Proses Kredensial & Rekredensial (Tahapan a – k)
+
+```mermaid
+flowchart TD
+    A["a) Pengajuan Permohonan\nStaf medis mengisi Formulir Rincian Kewenangan Klinis ke Kepala RS"] --> B["b) Disposisi Berkas Lengkap\nKepala RS meneruskan berkas ke Komite Medik"]
+    B --> C["c) Pengkajian Formulir\nKomite Medik & Subkomite Kredensial mengkaji kelengkapan dokumen"]
+    C --> D["d) Pembentukan Panel Ad-Hoc\nSubkomite membentuk panel melibatkan Mitra Bestari berdasar Buku Putih (White Paper)"]
+    D --> E["e) Seleksi Panelis\nMempertimbangkan reputasi, kompetensi, & bebas konflik kepentingan"]
+    E --> F["f) Penetapan Derajat Kompetensi\nMenentukan lingkup praktik mandiri atau di bawah supervisi"]
+    F --> G["g) Delineation of Clinical Privilege\nPenyusunan rincian kewenangan klinis melalui telaah periodik & masukan KSM"]
+    G --> H["h) Rekredensial Berkala\nEvaluasi saat SPK habis menghasilkan 6 rekomendasi"]
+```
+
+#### Enam (6) Bentuk Rekomendasi Hasil Rekredensial:
+1. **Dilanjutkan**: Kewenangan klinis diperpanjang penuh tanpa perubahan.
+2. **Ditambah**: Kewenangan klinis bertambah setelah lulus pelatihan tersertifikasi / subspesialisasi.
+3. **Dikurangi**: Sebagian kewenangan dikurangi akibat kendala kompetensi atau jarang dikerjakan.
+4. **Dibekukan**: Dinonaktifkan sementara untuk evaluasi investigatif.
+5. **Diubah / Dimodifikasi**: Penyesuaian lingkup pelayanan klinis tertentu.
+6. **Diakhiri**: Penarikan permanen penugasan klinis.
+
+#### Ketentuan Penting Terkait Masa Berlaku & Pemulihan Kewenangan (i, j, k):
+- **Pemulihan Kewenangan via Proctoring (i)**: Staf medis yang kewenangannya dikurangi atau ingin menambah kompetensi baru dapat mengajukan pemulihan melalui pembinaan profesi dengan mekanisme **pendampingan (*proctoring*)** oleh dokter supervisor senior.
+- **Masa Berlaku SPK (j)**: Surat Penugasan Klinis (SPK) berlaku untuk **periode tertentu (misal 2 tahun)**. Di akhir masa berlaku, dilakukan rekredensial yang prosesnya lebih sederhana karena data performa historis staf telah tercatat di RS.
+- **Pencabutan & Pemulihan Kembali (k)**: Kepala RS dapat mencabut kewenangan klinis apabila terjadi gangguan kesehatan fisik/mental, kecelakaan medis akibat inkompetensi, atau tindakan disiplin profesi. Pemberian kembali kewenangan klinis dilakukan atas rekomendasi Komite Medik setelah kompetensi staf dinyatakan pulih melalui pembinaan Subkomite Mutu Profesi.
+
+---
+
+### 🎮 4. Pemetaan 8 Pos Terminal Kuis Map 8 (Pokja KPS) di Game
+
+| Pos | Kategori Materi | Butir Regulasi KPS RSAU dr. Esnawan Antariksa |
+|---|---|---|
+| **Pos 1** | Uraian Jabatan Staf | Uraian jabatan bersifat personal dan wajib tersimpan di Urpers, unit kerja, serta dipegang staf bersangkutan. |
+| **Pos 2** | Medical Staff Bylaws & Audit Medis | Medical Staff Bylaws mengatur *clinical governance*; Audit Medis mengevaluasi mutu pelayanan via rekam medis. |
+| **Pos 3** | Clinical Privilege & Appointment | Kewenangan klinis (hak tindakan) diterbitkan melalui Surat Penugasan Klinis (SPK) resmi Kepala RS. |
+| **Pos 4** | Kredensial, Rekredensial & Mitra Bestari | Kredensial awal, Rekredensial tiap 3 tahun, dan peran independen Mitra Bestari (*Peer Group*). |
+| **Pos 5** | Alur Kredensial & Buku Putih | Permohonan staf -> Komite Medik -> Panel Mitra Bestari berpedoman pada Buku Putih (*White Paper*). |
+| **Pos 6** | Delineation & 6 Rekomendasi | Rincian kewenangan (*delineation*) & 6 opsi rekredensial (lanjut, tambah, kurang, beku, ubah, akhiri). |
+| **Pos 7** | Masa Berlaku SPK & Proctoring | Masa berlaku SPK (misal 2 tahun) dan pemulihan kewenangan klinis via pembinaan pendampingan (*proctoring*). |
+| **Pos 8** | Pencabutan & Pemulihan Kewenangan | Syarat pencabutan (gangguan fisik/mental, inkompetensi, disiplin) & alur pemulihan via Komite Medik & Mutu Profesi. |
+
+---
+
+### 🎖️ 5. Kolektibel Khusus Map 8 (KPS)
+1. **`kredensial_badge`**: Lencana ID Card kredensial staf medis berbentuk perisai emas kehormatan militer TNI AU dengan bordir pita biru, bintang perwira medis, dan teks `KPS`.
+2. **`spk_rkk_doc`**: Gulungan berkas resmi Surat Penugasan Klinis (SPK) dan Rincian Kewenangan Klinis (RKK) lengkap dengan cap dinas stempel merah RSAU dr. Esnawan Antariksa dan pita pengikat emas.
 
 ---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
