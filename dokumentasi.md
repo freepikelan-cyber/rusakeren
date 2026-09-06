@@ -1533,13 +1533,156 @@ Seluruh bank soal berikut telah ditambahkan ke basis data permainan untuk modul 
 
 ---
 
-### ✅ 4. Verifikasi Mutu & Hasil Pengujian CDP
-- **Pengujian Headless Chrome CDP (`scratch/test_mrmik_level.mjs`)**:
-  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaMRMIK`.
-  - Berhasil mengaktifkan `currentLevel = MRMIK_LEVEL`, mengubah judul tombol menjadi `▶ MULAI TELUSUR MAP 9: POKJA MRMIK`, dan menampilkan kartu aktif di modal menu.
-  - Menjalankan gameplay MRMIK dengan render kanvas tanpa error runtime.
-  - Membuka Pos 1 Kuis STARKES MRMIK, menjawab opsi B (4 komponen identitas PPA), dan menerima umpan balik positif beserta penjelasan lengkap.
-  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur rekam medis elektronik terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
+## 23. Implementasi MAP 10 / DUNIA 7: POKJA PPK (Pendidikan dalam Pelayanan Kesehatan)
+
+Berdasarkan instrumen resmi survei akreditasi STARKES dan regulasi UU RI No. 20 Tahun 2013 tentang Pendidikan Kedokteran, modul **MAP 10 / DUNIA 7 (POKJA PPK)** telah diaktifkan secara penuh sebagai map platformer playable dengan bank soal terverifikasi, aset grafis bernuansa akademik universitas kedokteran, dan sistem evaluasi kelulusan komprehensif.
+
+### 🎓 1. Inti Regulasi & Standar Pokja PPK
+Modul PPK mengintegrasikan pilar penting rumah sakit pendidikan:
+1. **Pengertian Rumah Sakit Pendidikan**:
+   - Berdasarkan **UU RI No. 20 Tahun 2013 Pasal 1 Butir 15**, Rumah Sakit Pendidikan adalah rumah sakit yang mempunyai fungsi sebagai tempat pendidikan, penelitian, dan pelayanan kesehatan secara terpadu dalam bidang pendidikan kedokteran dan/atau kedokteran gigi, pendidikan berkelanjutan, dan pendidikan kesehatan lainnya secara multiprofesi.
+2. **Klasifikasi Rumah Sakit Pendidikan & Status RSAU dr. Esnawan Antariksa**:
+   - Tiga klasifikasi RS Pendidikan: **RS Pendidikan Utama**, **RS Pendidikan Satelit**, dan **RS Pendidikan Afiliasi**.
+   - Status RSAU dr. Esnawan Antariksa:
+     - **Rumah Sakit Pendidikan Utama** bagi Fakultas Kedokteran Universitas Gunadarma.
+     - **Rumah Sakit Pendidikan Satelit** bagi Fakultas Kedokteran Universitas Kristen Krida Wacana (FK UKRIDA).
+3. **Komite Koordinasi Pendidikan (Komkordik)**:
+   - Komkordik dibentuk bersama antara Direktur RS Pendidikan dan Dekan Fakultas Kedokteran.
+   - Bertugas mengoordinasikan seluruh kebijakan, tata tertib, jadwal rotasi klinik (*clinical rotation*), kapasitas rasio dosen pendidik klinis terhadap mahasiswa, dan penjaminan mutu pendidikan klinik di rumah sakit.
+4. **Batasan Kewenangan Klinis Peserta Didik**:
+   - Setiap peserta didik dokter (dokter muda/koas) maupun residen/nakes lainnya wajib memenuhi **2 (dua) syarat administratif dan kompetensi** sebelum memberikan pelayanan:
+     1. Memperoleh **Surat Penugasan Klinis (SPK)** yang diterbitkan resmi oleh Direktur Rumah Sakit.
+     2. Memiliki **Rincian Kewenangan Klinis (RKK)** yang telah diverifikasi oleh Komite Medik / Komkordik sesuai level kompetensinya.
+   - Peserta didik dilarang keras melakukan intervensi medis di luar RKK atau tanpa tingkatan supervisi yang sah dari Dokter Pendidik Klinis (DPJP/Konsulen).
+5. **4 Tingkat Supervisi Klinis**:
+   - **Supervisi Tinggi**: DPJP hadir langsung mendampingi di samping peserta didik (*direct physical bedside supervision*) dari awal sampai akhir tindakan.
+   - **Supervisi Moderat Tinggi**: DPJP berada di lingkungan rumah sakit/instalasi yang sama dan siap dipanggil tiba dalam hitungan menit (*immediate physical availability*).
+   - **Supervisi Moderat**: DPJP melakukan telaah berkala terhadap rencana dan hasil asuhan (*periodic review & sign-off*), peserta didik melakukan konsultasi aktif.
+   - **Supervisi Rendah**: Peserta didik bertindak mandiri dengan telaah retrospektif berkala (*retrospective logbook audit*).
+6. **4 Level Kompetensi Supervisi Peserta Didik**:
+   - **Level 1**: Kemampuan asesmen dan pembuatan keputusan belum sahih; seluruh tindakan wajib disupervisi ketat secara langsung (Supervisi Tinggi).
+   - **Level 2**: Kemampuan asesmen dianggap sahih, namun kemampuan pembuatan keputusan belum matang; tindakan invasif/operatif minor hanya dengan pendampingan langsung.
+   - **Level 3**: Kemampuan asesmen sahih dan pembuatan keputusan sudah cukup sahih; tindakan medis rutin mandiri namun tetap wajib melapor DPJP secara berkala.
+   - **Level 4**: Kemampuan asesmen dan pembuatan keputusan sudah matang dan sahih; berwenang mandiri dalam koridor RKK dan pelaporan administratif logbook teratur.
+
+---
+
+### 🎮 2. Desain Level MAP 10 (`PPK_LEVEL`)
+- **Visual & Atmosfer Kampus Kedokteran / RS Pendidikan**:
+  - Lantai platform ubin marmer biru tua dengan lis aksen biru safir (`accentFloor: #1e3a8a`, `accentBorder: #3b82f6`).
+  - Langit gradien akademis malam bertabur bintang fajar (`#0b1329` -> `#1e3a8a` -> `#60a5fa`).
+  - Siluet gedung fakultas kedokteran dengan lambang palang biru es bercahaya.
+  - Banner dinding koridor: `🎓 PPK: RS PENDIDIKAN UTAMA FK GUNADARMA & SATELIT FK UNKRIDA • KOMKORDIK`.
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 5800 px x 540 px.
+  - 7 Platform koridor utama (Sekretariat Komkordik, Ruang Kuliah Klinis, Bangsal Pembelajaran, Laboratorium Keterampilan Klinik/OSCE, Unit Rawat Inap Supervisi, Ruang Diskusi Jaga, dan Exit Conference).
+  - 5 Platform bergerak melayang vertikal dan horizontal.
+- **Kolektibel Khusus**:
+  - `buku_logbook`: Buku biru laut berlogo topi toga wisuda emas dan pita pembatas merah (*clinical training logbook*).
+  - `spk_didik`: Sertifikat penugasan klinis bertanda tangan Direktur RS dan dekan FK dengan stempel segel medali emas (*Surat Penugasan Klinis Peserta Didik*).
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`PPK_QUIZ_BANK`)**:
+  - Terdiri dari 6 QuizTerminal interaktif berstandar STARKES dengan opsi jawaban berbobot edukatif seimbang.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_ppk_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaPPK`.
+  - Berhasil mengaktifkan `currentLevel = PPK_LEVEL`, mengubah judul tombol menjadi `▶ MULAI TELUSUR MAP 10: POKJA PPK`, dan menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay PPK dengan render kanvas tanpa error runtime.
+  - Membuka Pos 1 Kuis STARKES PPK, menjawab opsi A (UU RI No. 20/2013 Pasal 1 butir 15 tentang RS Pendidikan), dan menerima umpan balik positif beserta penjelasan lengkap.
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur pendidikan kedokteran terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
+
+---
+
+## 24. Implementasi MAP 11 / DUNIA 9: POKJA HPK (Hak Pasien & Keluarga)
+
+Berdasarkan instrumen resmi survei akreditasi STARKES dan regulasi UU RI No. 44 Tahun 2009 tentang Rumah Sakit serta Permenkes No. 290/Menkes/Per/III/2008, modul **MAP 11 / DUNIA 9 (POKJA HPK)** telah diaktifkan secara penuh sebagai map platformer playable dengan bank soal terverifikasi, aset grafis bertema hak asasi dan perlindungan pasien, dan sistem evaluasi kelulusan komprehensif.
+
+### 🤝 1. Inti Regulasi & Standar Pokja HPK
+Modul HPK mengintegrasikan 11 instrumen telusur hak pasien dan keluarga:
+1. **17 Hak Pasien Sesuai UU RI No. 44 Tahun 2009**:
+   - Memperoleh informasi tata tertib dan peraturan RS.
+   - Memperoleh informasi hak dan kewajiban pasien.
+   - Layanan manusiawi, adil, jujur, dan tanpa diskriminasi.
+   - Layanan kesehatan bermutu sesuai standar profesi dan standar prosedur operasional.
+   - Layanan efektif dan efisien bebas kerugian fisik dan materi.
+   - Mengajukan pengaduan atas kualitas pelayanan.
+   - Memilih dokter dan kelas perawatan sesuai regulasi RS.
+   - Meminta konsultasi dokter lain ber-SIP (*second opinion*).
+   - Mendapat privasi dan kerahasiaan penyakit serta data medis.
+   - Menyetujui atau menolak tindakan medis (*Informed Consent / Refusal*).
+   - Didampingi keluarga dalam keadaan kritis.
+   - Menjalankan ibadah sesuai agama selama tidak mengganggu pasien lain.
+   - Memperoleh keamanan dan keselamatan selama dirawat.
+   - Mengajukan usul, saran, dan perbaikan perilaku RS.
+   - Menolak bimbingan rohani yang tidak sesuai keyakinan.
+   - Menggugat/menuntut RS bila layanan tidak sesuai standar (perdata/pidana).
+   - Mengeluhkan pelayanan melalui media cetak/elektronik sesuai perundang-undangan.
+2. **Pemberian Informasi dan Edukasi**: Dilakukan sesuai kebutuhan klinis oleh PPA yang kompeten, terdokumentasi dalam Formulir Edukasi Terintegrasi (SPO Pemberian Informasi & Edukasi).
+3. **Persetujuan Tindakan Kedokteran (*Informed Consent*)**:
+   - Mengacu Permenkes No. 290/Menkes/Per/III/2008 dan SPO Informed Consent.
+   - Wajib diperoleh sebelum tindakan pembedahan (operasi), anestesi/sedasi, penggunaan darah/produk darah, serta prosedur diagnostik/pengobatan berisiko tinggi.
+   - Diberikan oleh Dokter Penanggung Jawab Pelayanan (DPJP) dalam bahasa yang dipahami pasien dan keluarga.
+4. **Materi Informasi Informed Consent vs Persetujuan Umum (*General Consent*)**:
+   - **Informed Consent**: Memuat diagnosis kerja (WD), diagnosis banding (DD), tindakan kedokteran, indikasi tindakan, tata cara, tujuan, risiko, komplikasi, prognosis, serta alternatif dan risikonya.
+   - **General Consent**: Dibuat saat pertama kali berobat/admisi rawat inap untuk persetujuan tindakan medis umum rutin (pemberian obat, infus, radiologi, EKG, pelepasan kateter, dan pengambilan sampel darah/urin).
+5. **Hierarki Hak Pemberi Persetujuan Tindakan Medis**:
+   - **Pasien Mandiri**: Berusia $\ge 21$ tahun atau telah menikah.
+   - **Pasien $< 21$ Tahun & Belum Menikah**: 1) Ayah/Ibu kandung, 2) Saudara-saudara kandung. Bila berhalangan: Ayah/Ibu angkat, saudara kandung, atau induk semang.
+   - **Pasien Dewasa Gangguan Mental / Curatelle**: Wali atau Kurator yang sah.
+   - **Pasien Dewasa Telah Menikah**: 1) Suami/Istri, 2) Ayah/Ibu kandung, 3) Anak kandung, 4) Saudara kandung.
+6. **Pelayanan Bimbingan Kerohanian (Binroh)**:
+   - Terdiri dari bimbingan rohani rutin dan atas permintaan pasien/keluarga melalui Formulir Permintaan Pelayanan Kerohanian (SPO Pelayanan Kerohanian).
+   - RSAU dr. Esnawan Antariksa memfasilitasi Tim Binroh resmi untuk 4 agama: Islam, Protestan, Katolik, dan Hindu.
+7. **Pemenuhan Privasi Pasien**: Pemasangan tirai penyekat di sekeliling tempat tidur saat pemeriksaan fisik, konsultasi, dan pelaksanaan tindakan medis (SPO Pemenuhan Kebutuhan Privasi Pasien).
+8. **Perlindungan Terhadap Kekerasan Fisik**:
+   - Mencegah pelecehan seksual, pemukulan, penelantaran, dan pemaksaan fisik oleh pengunjung, penunggu, maupun staf (SPO Perlindungan Fisik dan Kekerasan).
+   - Penerapan sistem identifikasi ketat faskes: gelang identitas pasien rawat inap, kartu visitor bagi pengunjung/pembesuk, dan nametag resmi karyawan.
+9. **Perlindungan Harta & Barang Berharga Pasien Rentan**:
+   - Kategori pasien yang barang miliknya wajib dilindungi: pasien penurunan kesadaran, gangguan mental, trauma berat, pasien tanpa keluarga/pengantar, pasien operasi, atau gangguan komunikasi (afasia).
+   - Barang yang diamankan dalam *safe deposit*: uang tunai, logam mulia, surat/dokumen berharga, dan alat komunikasi (HP) (SPO Perlindungan Barang Milik Pasien).
+10. **Penolakan Tindakan Resusitasi Jantung Paru (*Do Not Resuscitate* / DNR)**:
+    - Rumah sakit menghormati hak pasien/keluarga menolak tindakan RJP (SPO Penolakan Resusitasi/DNR).
+    - Keputusan wajib dicatat lengkap di rekam medis dan Formulir DNR resmi.
+    - Alasan penolakan dan seluruh pihak yang terlibat dicatat serta dikomunikasikan kepada seluruh tim asuhan pasien.
+11. **Pelayanan Kebutuhan Unik Tahap Terminal**:
+    - Manajemen gejala primer/sekunder dan manajemen nyeri (*pain management*).
+    - Respons empatik terhadap kondisi psikologis, sosial, dan emosional pasien serta keluarga.
+    - Menghormati nilai agama, budaya, dan spiritual yang dianut.
+    - Mengikutsertakan pasien dan keluarga secara aktif dalam setiap keputusan perawatan.
+
+---
+
+### 🎮 2. Desain Level MAP 11 (`HPK_LEVEL`)
+- **Visual & Atmosfer Humanis Bernuansa Ungu/Lavender**:
+  - Lantai platform ubin marmer ungu tua dengan lis aksen ungu menyala (`accentFloor: #581c87`, `accentBorder: #a855f7`).
+  - Langit gradien senja humanis bertabur bintang kehangatan (`#2e1065` -> `#581c87` -> `#c084fc`).
+  - Siluet gedung faskes dengan lambang palang ungu lavender bercahaya (`#d8b4fe`).
+  - Banner dinding koridor: `🤝 HPK: 17 HAK PASIEN UU 44/2009 • INFORMED & GENERAL CONSENT • DNR • PRIVASI TIRAI`.
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Loket Admisi General Consent, Poliklinik Konsultasi & Tirai Privasi, Ruang Informed Consent DPJP, Ruang Perlindungan Pasien Rentan, Ruang Bimbingan Kerohanian, Bangsal Pencegahan Kekerasan Fisik, Ruang Paliatif Formulir DNR, dan Exit Conference Surveyor).
+  - 7 Platform bergerak vertikal dan horizontal.
+- **Kolektibel Khusus**:
+  - `general_consent`: Lembar putih berlis ungu dengan header pita bertuliskan *"HAK PASIEN"*, lencana medali persetujuan emas, dan stempel verifikasi hijau.
+  - `lembar_dnr`: Formulir Do Not Resuscitate lavender putih dengan stempel kotak merah bertuliskan *"DNR"* tebal dan garis paraf DPJP/wali.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`HPK_QUIZ_BANK`)**:
+  - Terdiri dari 8 QuizTerminal interaktif berstandar STARKES dengan opsi jawaban berbobot edukatif seimbang.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_hpk_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaHPK`.
+  - Berhasil mengaktifkan `currentLevel = HPK_LEVEL`, mengubah judul tombol menjadi `▶ MULAI TELUSUR MAP 11: POKJA HPK`, dan menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay HPK dengan render kanvas tanpa error runtime.
+  - Membuka Pos 1 Kuis STARKES HPK, menjawab opsi B (17 Hak Pasien UU 44/2009), dan menerima umpan balik positif beserta penjelasan lengkap.
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur hak pasien & keluarga terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
 
 ---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
+
+

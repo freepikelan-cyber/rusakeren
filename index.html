@@ -423,12 +423,12 @@
                     <span id="badgePPI" class="inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 7. PPK -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 7</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">PPK</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Pendidikan dalam Pelayanan Kesehatan</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 7. PPK (ACTIVE) -->
+                <div id="selectPokjaPPK" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-blue-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-blue-400 uppercase tracking-wider">MAP 10 / DUNIA 7</div>
+                    <div class="text-xs md:text-sm font-bold text-white">PPK</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Pendidikan dalam Pelayanan Kesehatan (RS Pendidikan Utama FK Gunadarma & Satelit FK Unkrida, Komkordik, Supervisi)</div>
+                    <span id="badgePPK" class="inline-block mt-2 px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 8. AKP -->
@@ -439,12 +439,12 @@
                     <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
                 </div>
 
-                <!-- 9. HPK -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 9</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">HPK</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Hak Pasien & Keluarga</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 9. HPK (ACTIVE) -->
+                <div id="selectPokjaHPK" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider">MAP 11 / DUNIA 9</div>
+                    <div class="text-xs md:text-sm font-bold text-white">HPK</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Hak Pasien & Keluarga (17 Hak Pasien UU 44/2009, General/Informed Consent, DNR, Privasi Tirai)</div>
+                    <span id="badgeHPK" class="inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 10. PP -->
@@ -2406,78 +2406,104 @@
             posName: "Pos 1: Hak Pasien Rumah Sakit (UU 44/2009)",
             question: "Manakah yang merupakan salah satu hak pasien di rumah sakit sesuai UU RI No. 44 Tahun 2009?",
             options: [
-                "Pasien berhak menentukan besaran tagihan rumah sakit secara sepihak tanpa rujukan tarif.",
-                "Pasien berhak memperoleh layanan kesehatan bermutu, manusiawi, adil, jujur, dan tanpa diskriminasi.",
-                "Pasien berhak membawa pulang seluruh peralatan medis kamar operasi ke rumah pribadi.",
-                "Pasien berhak menolak segala bentuk aturan jam besuk kunjungan dan membawa rombongan bebas."
+                "Pasien berhak menentukan besaran tagihan rawat inap secara sepihak tanpa mengacu pada tarif resmi faskes.",
+                "Pasien berhak memperoleh layanan yang manusiawi, adil, jujur, tanpa diskriminasi, serta bermutu sesuai standar profesi.",
+                "Pasien berhak membawa pulang seluruh instrumen medis kamar bedah untuk disimpan di kediaman pribadi.",
+                "Pasien berhak mengabaikan seluruh tata tertib rumah sakit dan membawa rombongan penunggu tanpa batas."
             ],
             correct: 1,
-            explanation: "Sesuai UU 44/2009, pasien berhak memperoleh layanan yang manusiawi, adil, jujur, tanpa diskriminasi, serta bermutu sesuai standar profesi dan keselamatan."
+            explanation: "Sesuai UU 44/2009, pasien berhak memperoleh layanan yang manusiawi, adil, jujur, tanpa diskriminasi, serta bermutu sesuai standar profesi dan prosedur operasional."
         },
         {
             id: "hpk_informed_consent",
-            posName: "Pos 2: Prosedur Persetujuan Tindakan Kedokteran (Informed Consent)",
-            question: "Kapan Informed Consent wajib diperoleh dari pasien atau keluarga?",
+            posName: "Pos 2: Persetujuan Tindakan Kedokteran (Informed Consent)",
+            question: "Kapan Informed Consent wajib diperoleh dari pasien atau keluarga sesuai Permenkes No. 290/2008?",
             options: [
-                "Hanya setelah tindakan operasi selesai dilakukan di ruang pemulihan.",
-                "Sebelum tindakan operasi, anestesi, sedasi, produk darah, dan tindakan berisiko tinggi dilakukan.",
-                "Hanya bila pasien dirawat di ruang VIP dan meminta penjelasan tambahan.",
-                "Cukup dengan persetujuan lisan perawat saat pasien mendaftar di loket depan."
+                "Hanya setelah tindakan pembedahan selesai dilakukan dan pasien sadar penuh di ruang pemulihan.",
+                "Sebelum tindakan operasi, anestesi/sedasi, penggunaan darah/produk darah, serta tindakan medis berisiko tinggi.",
+                "Cukup secara lisan saat petugas administrasi pendaftaran mencatat kartu identitas di loket depan.",
+                "Hanya jika keluarga pasien mengajukan permintaan tertulis bermaterai kepada direktur rumah sakit."
             ],
             correct: 1,
-            explanation: "Informed consent wajib diperoleh sebelum operasi, anestesi, penggunaan darah/produk darah, serta tindakan dan pengobatan lain yang berisiko tinggi."
+            explanation: "Informed consent wajib diperoleh sebelum tindakan pembedahan, anestesi/sedasi, transfusi darah/produk darah, serta prosedur diagnostik maupun pengobatan yang berisiko tinggi."
+        },
+        {
+            id: "hpk_komponen_consent",
+            posName: "Pos 3: Komponen Informed Consent & General Consent",
+            question: "Apa perbedaan pokok materi antara Informed Consent dan Persetujuan Umum (General Consent)?",
+            options: [
+                "Informed Consent memuat diagnosis kerja/banding, indikasi, risiko, & komplikasi; General Consent memuat persetujuan tindakan medis umum saat admisi.",
+                "Informed Consent hanya untuk pasien rawat jalan, sedangkan General Consent khusus ditujukan untuk rujukan luar negeri.",
+                "Informed Consent ditandatangani oleh petugas satpam, sedangkan General Consent diotorisasi oleh kasir keuangan.",
+                "Informed Consent tidak memiliki konsekuensi hukum, sedangkan General Consent bersifat rahasia mutlak tanpa salinan."
+            ],
+            correct: 0,
+            explanation: "Informed consent memuat WD, DD, tata cara, indikasi, tujuan, risiko, komplikasi, dan prognosis tindakan. General consent dibuat saat pertama kali berobat/masuk rawat inap untuk tindakan medis umum seperti infus, obat, radiologi, dan tes lab."
         },
         {
             id: "hpk_hirarki_persetujuan",
-            posName: "Pos 3: Kriteria Pemberi Persetujuan Tindakan Medis",
-            question: "Siapakah yang berhak memberikan persetujuan tindakan medis bagi pasien yang belum berusia 21 tahun dan belum menikah?",
+            posName: "Pos 4: Kriteria & Hierarki Pemberi Persetujuan Tindakan",
+            question: "Siapakah yang berhak menandatangani persetujuan medis bagi pasien di bawah umur 21 tahun dan belum menikah?",
             options: [
-                "Pasien sendiri secara mandiri tanpa memerlukan izin keluarga.",
-                "Ayah/Ibu kandung atau saudara kandung bila orang tua berhalangan.",
-                "Kepala lingkungan RT/RW tempat tinggal pasien.",
-                "Pihak asuransi kesehatan yang menanggung biaya perawatan."
+                "Pasien sendiri secara mandiri tanpa memerlukan izin ataupun kehadiran wali keluarga kandung.",
+                "Petugas administrasi instalasi gawat darurat yang sedang berdinas di ruang pendaftaran.",
+                "Ayah/Ibu kandung, atau saudara kandung bila orang tua berhalangan sesuai urutan hierarki hukum.",
+                "Pihak perusahaan asuransi atau penjamin biaya perawatan kesehatan pasien bersangkutan."
             ],
-            correct: 1,
-            explanation: "Bagi pasien di bawah 21 tahun dan belum menikah, hak persetujuan/penolakan diberikan oleh ayah/ibu kandung, atau saudara kandung sesuai urutan hak perundang-undangan."
+            correct: 2,
+            explanation: "Bagi pasien di bawah 21 tahun dan belum menikah, hak persetujuan/penolakan diberikan oleh ayah/ibu kandung, atau saudara kandung (bila tanpa orang tua: ayah/ibu angkat, saudara kandung, atau induk semang)."
+        },
+        {
+            id: "hpk_pelayanan_kerohanian",
+            posName: "Pos 5: Prosedur Pelayanan Bimbingan Kerohanian",
+            question: "Bagaimana alur pemberian pelayanan bimbingan kerohanian (Binroh) bagi pasien di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Petugas rohani langsung masuk ke kamar pasien kapan saja tanpa meminta izin pasien dan perawat jaga.",
+                "Rumah sakit meniadakan sama sekali bimbingan rohani karena seluruh pasien dianggap mandiri secara spiritual.",
+                "Keluarga pasien wajib mencari dan membayar pemuka agama dari luar rumah sakit secara mandiri tanpa koordinasi.",
+                "Pelayanan rutin dan atas permintaan; pasien mengisi formulir permintaan rohani lalu perawat menghubungi Tim Binroh sesuai agama yang dianut."
+            ],
+            correct: 3,
+            explanation: "Pelayanan kerohanian terdiri dari bimbingan rutin dan atas permintaan. Pasien mengisi formulir permintaan bimbingan rohani, lalu perawat menghubungi Tim Binroh resmi RSAU (Islam, Protestan, Katolik, atau Hindu)."
         },
         {
             id: "hpk_privasi_dan_kekerasan",
-            posName: "Pos 4: Perlindungan Privasi Pasien & Pencegahan Kekerasan",
-            question: "Bagaimana rumah sakit melindungi privasi dan keamanan pasien dari potensi kekerasan fisik?",
+            posName: "Pos 6: Perlindungan Privasi Pasien & Pencegahan Kekerasan Fisik",
+            question: "Bagaimana rumah sakit melindungi privasi pasien serta mencegah insiden kekerasan fisik di lingkungan faskes?",
             options: [
-                "Membatasi konsultasi antar pasien dengan tirai penyekat serta mewajibkan pemakaian tanda pengenal (gelang/nametag/visitor).",
-                "Menutup seluruh jendela poliklinik dengan papan triplek permanen tanpa ventilasi.",
-                "Melarang seluruh keluarga pasien memasuki lingkungan rumah sakit selama 24 jam.",
-                "Memasang kamera pengawas di dalam toilet pasien ruang rawat inap."
+                "Membatasi konsultasi/pemeriksaan dengan tirai penyekat serta mewajibkan identitas gelang pasien, kartu visitor, dan nametag staf.",
+                "Menutup seluruh kaca poliklinik dengan papan triplek kayu permanen serta mematikan seluruh lampu koridor.",
+                "Melarang seluruh keluarga inti membesuk pasien di rumah sakit selama masa perawatan rawat inap berlangsung.",
+                "Memasang kamera pengawas tersembunyi di dalam kamar mandi dan bilik ganti pakaian pasien ruang rawat."
             ],
             correct: 0,
-            explanation: "Privasi dijaga dengan pembatas tirai saat pemeriksaan/tatalaksana, dan proteksi kekerasan ditegakkan lewat gelang identitas pasien, kartu visitor, dan nametag karyawan."
+            explanation: "Privasi dilindungi dengan tirai penyekat saat pemeriksaan dan konsultasi. Kekerasan fisik dicegah melalui kontrol akses: gelang identitas pasien, kartu visitor pengunjung, dan nametag karyawan."
         },
         {
             id: "hpk_barang_milik_pasien",
-            posName: "Pos 5: Perlindungan Barang Milik Pasien",
-            question: "Kategori pasien manakah yang barang berharganya wajib dilindungi oleh rumah sakit?",
+            posName: "Pos 7: Perlindungan Harta & Barang Berharga Pasien Rentan",
+            question: "Kategori pasien manakah yang barang berharganya wajib mendapatkan perlindungan khusus oleh rumah sakit?",
             options: [
-                "Seluruh pengunjung kantin rumah sakit saat jam makan siang.",
-                "Pasien dengan kesadaran menurun, gangguan mental, cedera berat, operasi, atau tanpa pendamping.",
-                "Staf medis yang sedang menjalankan tugas jaga dinas malam.",
-                "Pengemudi ambulans yang sedang beristirahat di pangkalan."
+                "Pengemudi ojek daring yang sedang menunggu pesanan makanan di area parkir luar faskes.",
+                "Pasien kesadaran menurun, gangguan mental, cedera berat, pasien tanpa keluarga, pasien operasi, atau gangguan komunikasi.",
+                "Seluruh rekanan kontraktor proyek yang sedang melakukan renovasi fisik gedung perkantoran.",
+                "Staf keuangan rumah sakit yang sedang membawa berkas arsip laporan pajak tahunan."
             ],
             correct: 1,
-            explanation: "Perlindungan barang berharga (uang, logam mulia, dokumen penting) difokuskan bagi pasien kesadaran menurun, cedera berat, pasien operasi, atau tanpa keluarga pendamping."
+            explanation: "Perlindungan barang milik pasien (uang, logam mulia, dokumen berharga, HP) diatur dalam SPO Perlindungan Barang Milik Pasien untuk pasien penurunan kesadaran, gangguan jiwa, trauma berat, operasi, tanpa pendamping, atau afasia/gangguan komunikasi."
         },
         {
             id: "hpk_penolakan_resusitasi_dnr",
-            posName: "Pos 6: Penolakan Resusitasi & Formulir Do Not Resuscitate (DNR)",
-            question: "Apa langkah rumah sakit apabila pasien atau keluarga memutuskan menolak tindakan resusitasi (DNR)?",
+            posName: "Pos 8: Penolakan Resusitasi (DNR) & Kebutuhan Tahap Terminal",
+            question: "Bagaimana rumah sakit mengelola keputusan Do Not Resuscitate (DNR) dan kebutuhan unik pasien tahap terminal?",
             options: [
-                "Mengabaikan keputusan keluarga dan tetap melakukan RJP paksa tanpa penjelasan.",
-                "Menghormati keputusan, mengisi lengkap Formulir DNR, mencatat di rekam medis, dan mengomunikasikannya ke tim rawat.",
-                "Meminta pasien segera keluar dari rumah sakit saat itu juga.",
-                "Melaporkan keputusan penolakan ke pihak kepolisian sebagai tindak pidana."
+                "Mengabaikan penolakan keluarga dan memaksakan resusitasi jantung paru tanpa memperhatikan hak pasien.",
+                "Menghentikan seluruh perawatan medis dasar dan langsung meminta keluarga membawa pulang pasien saat itu juga.",
+                "Menghormati keputusan, mencatat formulir DNR di rekam medis, mengomunikasikan ke tim asuhan, serta memberi manajemen nyeri & dukungan holistik.",
+                "Melaporkan keputusan penolakan resusitasi ke dinas ketenagakerjaan sebagai pelanggaran kontrak kerja."
             ],
-            correct: 1,
-            explanation: "Rumah sakit menghormati hak pasien; keputusan DNR wajib dicatat lengkap di rekam medis dan formulir Do Not Resuscitate (DNR) serta dikomunikasikan ke seluruh tim asuhan."
+            correct: 2,
+            explanation: "RS menghormati hak pasien; keputusan DNR dicatat lengkap di formulir DNR & rekam medis serta dikomunikasikan ke seluruh tim asuhan. Pada tahap terminal, RS memenuhi manajemen gejala/nyeri, respons psikologis/spiritual, dan pelibatan keluarga."
         }
     ];
 
@@ -3677,6 +3703,94 @@
                 ctx.font = "bold 5px monospace";
                 ctx.textAlign = "center";
                 ctx.fillText("SIMRS", 0, 14);
+            } else if (this.type === "buku_logbook") {
+                // Buku Logbook Peserta Didik / Komkordik (Buku Biru Navy + Topi Toga Emas)
+                ctx.fillStyle = "#1e3a8a"; // sampul buku navy
+                ctx.fillRect(-11, -14, 22, 28);
+                ctx.fillStyle = "#3b82f6"; // tulang buku
+                ctx.fillRect(-11, -14, 5, 28);
+                // Lambang topi toga / lencana pendidikan emas
+                ctx.fillStyle = "#f59e0b";
+                ctx.beginPath();
+                ctx.moveTo(3, -5);
+                ctx.lineTo(9, -2);
+                ctx.lineTo(3, 1);
+                ctx.lineTo(-3, -2);
+                ctx.closePath();
+                ctx.fill();
+                // Tali pita pembatas buku merah
+                ctx.fillStyle = "#ef4444";
+                ctx.fillRect(1, 4, 3, 10);
+                // Tulisan LOG
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 5px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("LOG", 3, 2);
+            } else if (this.type === "spk_didik") {
+                // Sertifikat Kewenangan Klinis Peserta Didik (Pita Biru Emas)
+                ctx.fillStyle = "#ffffff"; // lembar sertifikat putih
+                ctx.fillRect(-10, -13, 20, 26);
+                ctx.strokeStyle = "#1e3a8a"; // lis ganda navy
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-9, -12, 18, 24);
+                // Teks sertifikat
+                ctx.fillStyle = "#1e3a8a";
+                ctx.font = "bold 4.5px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("KOMKORDIK", 0, -5);
+                ctx.fillStyle = "#64748b";
+                ctx.fillRect(-6, -1, 12, 1.5);
+                ctx.fillRect(-6, 2, 9, 1.5);
+            } else if (this.type === "lembar_dnr") {
+                // Formulir Do Not Resuscitate (DNR) - Kertas lavender putih dengan stempel merah tebal DNR
+                ctx.fillStyle = "#f5f3ff"; // lavender sheet
+                ctx.fillRect(-10, -13, 20, 26);
+                ctx.strokeStyle = "#7c3aed"; // border ungu rekam medis
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-9, -12, 18, 24);
+                // Garis header rekam medis
+                ctx.fillStyle = "#94a3b8";
+                ctx.fillRect(-6, -9, 12, 1.5);
+                ctx.fillRect(-6, -6, 8, 1.5);
+                // Kotak stempel merah tebal DNR
+                ctx.strokeStyle = "#ef4444";
+                ctx.lineWidth = 1.2;
+                ctx.strokeRect(-7, -2, 14, 8);
+                ctx.fillStyle = "#dc2626";
+                ctx.font = "bold 6px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("DNR", 0, 4);
+                // Garis paraf DPJP & wali
+                ctx.fillStyle = "#6366f1";
+                ctx.fillRect(-5, 8, 10, 1.2);
+            } else if (this.type === "general_consent") {
+                // Lembar Hak Pasien UU 44/2009 & General Consent (Header pita ungu + lencana emas)
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-10, -13, 20, 26);
+                ctx.strokeStyle = "#a855f7"; // lis ungu cerah
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-9, -12, 18, 24);
+                // Header pita ungu
+                ctx.fillStyle = "#9333ea";
+                ctx.fillRect(-8, -11, 16, 5);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 3.5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("HAK PASIEN", 0, -7.5);
+                // Lambang medali persetujuan pasien emas
+                ctx.fillStyle = "#f59e0b";
+                ctx.beginPath();
+                ctx.arc(0, -1, 3, 0, Math.PI * 2);
+                ctx.fill();
+                // Garis-garis klausul hak & persetujuan
+                ctx.fillStyle = "#cbd5e1";
+                ctx.fillRect(-6, 4, 12, 1.5);
+                ctx.fillRect(-6, 7, 8, 1.5);
+                // Cap stempel hijau verifikasi
+                ctx.fillStyle = "#10b981";
+                ctx.beginPath();
+                ctx.arc(4, 7, 2, 0, Math.PI * 2);
+                ctx.fill();
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -4421,6 +4535,154 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 10: POKJA PPK (PENDIDIKAN DALAM PELAYANAN KESEHATAN)
+       Auditorium Komkordik, Ruang Pembelajaran Klinik FK Gunadarma & FK Unkrida
+       ========================================================================== */
+    const PPK_LEVEL = {
+        id: "PPK",
+        shortName: "POKJA PPK",
+        name: "Pokja PPK • Pendidikan dalam Pelayanan Kesehatan (RS Pendidikan Utama FK Gunadarma & Satelit FK Unkrida, Komkordik, Supervisi Klinis)",
+        accentFloor: "#1e3a8a",
+        accentBorder: "#3b82f6",
+        width: 5800,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Ruang Sekretariat Komkordik & UU No. 20/2013 (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Ruang Kuliah & Penetapan RS Pendidikan Utama/Satelit (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Ruang Rapat Fungsional Komkordik (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Batasan Kewenangan Klinis Peserta Didik (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Bangsal Pendidikan & 4 Tingkat Supervisi DPJP (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Ruang Evaluasi Logbook & 4 Level Kompetensi (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Exit Conference Surveyor PPK (x: 4580 - 5500)
+            { x: 4580, y: 440, w: 920, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, PPK_QUIZ_BANK[0]),  // Pos 1: Pengertian RS Pendidikan (UU 20/2013)
+            new QuizTerminal(1140, 270, PPK_QUIZ_BANK[1]), // Pos 2: Jenis RS Pendidikan (Utama FK Gunadarma & Satelit FK Unkrida)
+            new QuizTerminal(1920, 380, PPK_QUIZ_BANK[2]), // Pos 3: Komite Koordinasi Pendidikan (Komkordik)
+            new QuizTerminal(2700, 270, PPK_QUIZ_BANK[3]), // Pos 4: Batasan Kewenangan Klinis Peserta Didik
+            new QuizTerminal(3400, 380, PPK_QUIZ_BANK[4]), // Pos 5: 4 Tingkat Supervisi (Rendah, Moderat, Moderat Tinggi, Tinggi)
+            new QuizTerminal(4180, 270, PPK_QUIZ_BANK[5])  // Pos 6: 4 Level Kompetensi Supervisi Klinis
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "buku_logbook"),
+            new CollectibleDoc(440, 370, "spk_didik"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "buku_logbook"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "spk_didik"),
+            new CollectibleDoc(2100, 390, "buku_logbook"),
+            new CollectibleDoc(2640, 250, "spk_didik"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "buku_logbook"),
+            new CollectibleDoc(3550, 390, "spk_didik"),
+            new CollectibleDoc(4080, 250, "buku_logbook"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "spk_didik"),
+            new CollectibleDoc(4950, 390, "buku_logbook"),
+            new CollectibleDoc(5120, 390, "star_mutu")
+        ],
+        finishX: 5200
+    };
+
+    /* ==========================================================================
+       MAP 11: POKJA HPK (HAK PASIEN & KELUARGA)
+       Ruang Admisi General Consent, Poliklinik Privasi Tirai, Ruang Bimbingan Rohani,
+       Ruang Informed Consent DPJP, Bangsal Perlindungan Pasien Rentan, Ruang Paliatif DNR
+       ========================================================================== */
+    const HPK_LEVEL = {
+        id: "HPK",
+        shortName: "POKJA HPK",
+        name: "Pokja HPK • Hak Pasien & Keluarga (17 Hak Pasien UU 44/2009, General & Informed Consent, DNR, Privasi Tirai)",
+        accentFloor: "#581c87",
+        accentBorder: "#a855f7",
+        width: 6600,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Loket Admisi & Hak Pasien UU 44/2009 (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Ruang Edukasi & Prosedur Informed Consent Permenkes 290/2008 (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Meja Verifikasi Komponen Informed & General Consent (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Ruang Konsultasi & Hierarki Pemberi Persetujuan (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Ruang Bimbingan Kerohanian (Binroh 4 Agama) (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Poliklinik Tirai Privasi & Proteksi Kekerasan Fisik (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Safe Deposit & Perlindungan Pasien Rentan (x: 4580 - 5200)
+            { x: 4580, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 8: Ruang Perawatan Paliatif & Formulir DNR (x: 5320 - 5800)
+            { x: 5320, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 5500, y: 330, w: 300, h: 24, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor HPK (x: 5920 - 6600)
+            { x: 5920, y: 440, w: 680, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2),
+            new MovingPlatform(5220, 410, 85, 20, 70, 0, 1.3),
+            new MovingPlatform(5820, 400, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, HPK_QUIZ_BANK[0]),  // Pos 1: Hak Pasien UU 44/2009
+            new QuizTerminal(1140, 270, HPK_QUIZ_BANK[1]), // Pos 2: Informed Consent Permenkes 290/2008
+            new QuizTerminal(1920, 380, HPK_QUIZ_BANK[2]), // Pos 3: Komponen Informed & General Consent
+            new QuizTerminal(2700, 270, HPK_QUIZ_BANK[3]), // Pos 4: Hierarki Pemberi Persetujuan
+            new QuizTerminal(3400, 380, HPK_QUIZ_BANK[4]), // Pos 5: Pelayanan Bimbingan Kerohanian
+            new QuizTerminal(4180, 270, HPK_QUIZ_BANK[5]), // Pos 6: Privasi Tirai & Pencegahan Kekerasan
+            new QuizTerminal(4900, 380, HPK_QUIZ_BANK[6]), // Pos 7: Perlindungan Harta Pasien Rentan
+            new QuizTerminal(5650, 270, HPK_QUIZ_BANK[7])  // Pos 8: Penolakan Resusitasi (DNR) & Tahap Terminal
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "general_consent"),
+            new CollectibleDoc(440, 370, "lembar_dnr"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "general_consent"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "lembar_dnr"),
+            new CollectibleDoc(2100, 390, "general_consent"),
+            new CollectibleDoc(2640, 250, "lembar_dnr"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "general_consent"),
+            new CollectibleDoc(3550, 390, "lembar_dnr"),
+            new CollectibleDoc(4080, 250, "general_consent"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "lembar_dnr"),
+            new CollectibleDoc(5050, 390, "general_consent"),
+            new CollectibleDoc(5580, 250, "lembar_dnr"),
+            new CollectibleDoc(6050, 390, "general_consent"),
+            new CollectibleDoc(6250, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
 
@@ -4987,7 +5249,17 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "MRMIK") {
+        if (currentLevel.id === "HPK") {
+            // Suasana Hak Pasien & Keluarga (Ungu/Lavender Hangat & Humanis)
+            skyGrad.addColorStop(0, "#2e1065");
+            skyGrad.addColorStop(0.5, "#581c87");
+            skyGrad.addColorStop(1, "#c084fc");
+        } else if (currentLevel.id === "PPK") {
+            // Suasana Auditorium Akademik Kedokteran & Ruang Komkordik
+            skyGrad.addColorStop(0, "#0b1329");
+            skyGrad.addColorStop(0.5, "#1e3a8a");
+            skyGrad.addColorStop(1, "#60a5fa");
+        } else if (currentLevel.id === "MRMIK") {
             // Suasana Laboratorium Server SIMRS & Rekam Medis Elektronik Terpadu
             skyGrad.addColorStop(0, "#022c22");
             skyGrad.addColorStop(0.5, "#065f46");
@@ -5034,7 +5306,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))));
+        ctx.fillStyle = currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -5047,7 +5319,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))));
+        ctx.fillStyle = currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -5069,15 +5341,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))));
+            ctx.fillStyle = currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))));
+            ctx.fillStyle = currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))));
+        ctx.fillStyle = currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -5085,7 +5357,23 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "MRMIK") {
+            if (currentLevel.id === "HPK") {
+                ctx.fillStyle = "rgba(88, 28, 135, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🤝 HPK: 17 HAK PASIEN UU 44/2009 • INFORMED & GENERAL CONSENT • DNR • PRIVASI TIRAI", kx + 160, 296);
+                ctx.fillStyle = "rgba(46, 16, 101, 0.65)";
+            } else if (currentLevel.id === "PPK") {
+                ctx.fillStyle = "rgba(30, 58, 138, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🎓 PPK: RS PENDIDIKAN UTAMA FK GUNADARMA & SATELIT FK UNKRIDA • KOMKORDIK", kx + 160, 296);
+                ctx.fillStyle = "rgba(15, 23, 42, 0.65)";
+            } else if (currentLevel.id === "MRMIK") {
                 ctx.fillStyle = "rgba(5, 150, 105, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -5205,7 +5493,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))));
+        ctx.fillStyle = currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -5409,9 +5697,45 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "MRMIK") {
+        if (currentLevel.id === "HPK") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja HPK (Hak Pasien dan Keluarga), penegakan 17 Hak Pasien UU RI No. 44/2009, pelaksanaan General Consent saat admisi, Informed Consent tindakan medis DPJP Permenkes No. 290/2008, hierarki hak persetujuan keluarga, pelayanan bimbingan kerohanian terpadu 4 agama, privasi tirai pemeriksaan, pencegahan kekerasan fisik (gelang identitas & kartu visitor), perlindungan barang berharga pasien rentan, tata kelola formulir penolakan resusitasi (Do Not Resuscitate / DNR) lengkap di rekam medis, serta asuhan holistik bermartabat pada pasien tahap terminal!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola hak pasien, informed consent, dan privasi tirai berjalan prima dengan penguatan pencatatan formulir DNR dan sosialisasi alur bimbingan kerohanian.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan kelengkapan penjelasan informed consent oleh DPJP, ketertiban kartu visitor di luar jam besuk, dan SPO safe deposit barang pasien tidak sadar.";
+            }
+        } else if (currentLevel.id === "PPK") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 11: POKJA HPK ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-indigo-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja PPK (Pendidikan dalam Pelayanan Kesehatan), peran paripurna sebagai RS Pendidikan Utama FK Universitas Gunadarma dan RS Pendidikan Satelit FK Unkrida, tata kelola Komite Koordinasi Pendidikan (Komkordik), kepatuhan batasan kewenangan peserta didik di bawah supervisi klinis, penerapan 4 Tingkat Supervisi (Rendah, Moderat, Moderat Tinggi, dan Tinggi), pencatatan rekam medis terverifikasi DPJP, serta penguasaan Level Kompetensi 1 hingga 4 secara profesional!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola Komkordik dan supervisi klinis peserta didik berjalan tertib dengan penguatan monitoring berkala verifikasi DPJP di berkas rekam medis.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan sosialisasi 4 tingkat supervisi kepada seluruh dokter pendidik klinis dan kepatuhan pengisian logbook peserta didik.";
+            }
+        } else if (currentLevel.id === "MRMIK") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 10: POKJA PPK ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -5689,7 +6013,11 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "MRMIK") {
+        if (pokjaId === "HPK") {
+            currentLevel = HPK_LEVEL;
+        } else if (pokjaId === "PPK") {
+            currentLevel = PPK_LEVEL;
+        } else if (pokjaId === "MRMIK") {
             currentLevel = MRMIK_LEVEL;
         } else if (pokjaId === "KPS") {
             currentLevel = KPS_LEVEL;
@@ -5724,6 +6052,8 @@
         const tabPPI = document.getElementById("tabSelectPPI");
         const tabKPS = document.getElementById("tabSelectKPS");
         const tabMRMIK = document.getElementById("tabSelectMRMIK");
+        const tabPPK = document.getElementById("tabSelectPPK");
+        const tabHPK = document.getElementById("tabSelectHPK");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -5742,6 +6072,8 @@
         const cardPPI = document.getElementById("selectPokjaPPI");
         const cardKPS = document.getElementById("selectPokjaKPS");
         const cardMRMIK = document.getElementById("selectPokjaMRMIK");
+        const cardPPK = document.getElementById("selectPokjaPPK");
+        const cardHPK = document.getElementById("selectPokjaHPK");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -5751,6 +6083,8 @@
         const badgePPI = document.getElementById("badgePPI");
         const badgeKPS = document.getElementById("badgeKPS");
         const badgeMRMIK = document.getElementById("badgeMRMIK");
+        const badgePPK = document.getElementById("badgePPK");
+        const badgeHPK = document.getElementById("badgeHPK");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -5762,6 +6096,8 @@
         if (tabPPI) tabPPI.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabKPS) tabKPS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabMRMIK) tabMRMIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPPK) tabPPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-blue-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -5800,8 +6136,50 @@
             cardMRMIK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-emerald-950/40 transition-all";
             if (badgeMRMIK) { badgeMRMIK.innerText = "SIAP DITELUSURI"; badgeMRMIK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold"; }
         }
+        if (cardPPK) {
+            cardPPK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-blue-950/40 transition-all";
+            if (badgePPK) { badgePPK.innerText = "SIAP DITELUSURI"; badgePPK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[9px] font-semibold"; }
+        }
+        if (cardHPK) {
+            cardHPK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all";
+            if (badgeHPK) { badgeHPK.innerText = "SIAP DITELUSURI"; badgeHPK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "MRMIK") {
+        if (currentLevel.id === "HPK") {
+            if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA HPK • MAP 11 (AKTIF)";
+                menuSubtitle.className = "text-xs text-purple-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja HPK (<strong>17 Hak Pasien UU 44/2009</strong>, <strong>General & Informed Consent Permenkes 290/2008</strong>, <strong>Hierarki Pemberi Persetujuan</strong>, <strong>Privasi Tirai</strong>, <strong>Bimbingan Kerohanian</strong>, <strong>Pencegahan Kekerasan</strong>, <strong>Perlindungan Harta Pasien Rentan</strong>, & <strong>Formulir DNR Tahap Terminal</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 11: POKJA HPK";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-base md:text-lg shadow-lg shadow-purple-500/30 transition-all active:scale-98";
+            }
+            if (cardHPK) {
+                cardHPK.className = "p-3 rounded-xl bg-purple-500/20 border border-purple-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-purple-500/30 transition-all";
+                if (badgeHPK) { badgeHPK.innerText = "TELUSUR AKTIF"; badgeHPK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "PPK") {
+            if (tabPPK) tabPPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-blue-400/80 bg-blue-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA PPK • MAP 10 (AKTIF)";
+                menuSubtitle.className = "text-xs text-blue-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PPK (<strong>RS Pendidikan Utama FK Gunadarma</strong> & <strong>Satelit FK Unkrida</strong>, <strong>Komkordik</strong>, <strong>Batasan Kewenangan Peserta Didik</strong>, <strong>4 Tingkat Supervisi</strong>, & <strong>Level Kompetensi 1-4</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 10: POKJA PPK";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-500 hover:to-indigo-400 text-white font-bold text-base md:text-lg shadow-lg shadow-blue-500/30 transition-all active:scale-98";
+            }
+            if (cardPPK) {
+                cardPPK.className = "p-3 rounded-xl bg-blue-500/20 border border-blue-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-blue-500/30 transition-all";
+                if (badgePPK) { badgePPK.innerText = "TELUSUR AKTIF"; badgePPK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "MRMIK") {
             if (tabMRMIK) tabMRMIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA MRMIK • MAP 9 (AKTIF)";
@@ -5971,6 +6349,7 @@
     bindTab("tabSelectPPI", "PPI");
     bindTab("tabSelectKPS", "KPS");
     bindTab("tabSelectMRMIK", "MRMIK");
+    bindTab("tabSelectPPK", "PPK");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -6017,6 +6396,20 @@
             document.getElementById("pokjaSelectModal").classList.add("hidden");
         };
     }
+    const selectPPK = document.getElementById("selectPokjaPPK");
+    if (selectPPK) {
+        selectPPK.onclick = () => {
+            setPokja("PPK");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
+    const selectHPK = document.getElementById("selectPokjaHPK");
+    if (selectHPK) {
+        selectHPK.onclick = () => {
+            setPokja("HPK");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -6034,6 +6427,10 @@
             setPokja("KPS");
         } else if (currentLevel.id === "KPS") {
             setPokja("MRMIK");
+        } else if (currentLevel.id === "MRMIK") {
+            setPokja("PPK");
+        } else if (currentLevel.id === "PPK") {
+            setPokja("HPK");
         } else {
             setPokja("TKRS");
         }
