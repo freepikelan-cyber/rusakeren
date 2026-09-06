@@ -447,12 +447,12 @@
                     <span id="badgeHPK" class="inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 10. PP -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 10</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">PP</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Pelayanan & Asuhan Pasien</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 10. PP (ACTIVE) -->
+                <div id="selectPokjaPP" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-teal-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-teal-400 uppercase tracking-wider">MAP 12 / DUNIA 10</div>
+                    <div class="text-xs md:text-sm font-bold text-white">PP</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Pelayanan Pasien (Pengkajian 24 Jam, Skrining Gizi MST/Strong Kids, Skala Nyeri, Flebotomi, Nilai Kritis Lab ≤ 30 Mnt)</div>
+                    <span id="badgePP" class="inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 11. PAP (ACTIVE) -->
@@ -2510,81 +2510,107 @@
     const PP_QUIZ_BANK = [
         {
             id: "pp_waktu_pengkajian_awal",
-            posName: "Pos 1: Batas Waktu Penyelesaian Pengkajian Awal",
-            question: "Kapan pengkajian awal medis dan keperawatan pasien rawat inap harus diselesaikan?",
+            posName: "Pos 1: Batas Waktu Pengkajian Awal Pasien",
+            question: "Kapan pengkajian awal medis dan keperawatan pasien rawat inap harus diselesaikan secara lengkap?",
             options: [
-                "Dalam waktu 24 jam pertama sejak pasien masuk sebagai pasien rawat inap.",
-                "Boleh diselesaikan saat pasien sudah dinyatakan sembuh dan akan pulang.",
-                "Paling lambat 7 hari kerja setelah konfirmasi hasil laboratorium rujukan.",
-                "Tidak ada batas waktu baku selama pasien masih mendapatkan infus cairan."
+                "Dalam waktu 24 jam pertama sejak pasien masuk rawat inap (segera untuk IGD, masa berlaku asesmen pra-ranap ≤ 30 hari).",
+                "Boleh diselesaikan saat pasien sudah dinyatakan sembuh dan bersiap menandatangani resume pulang.",
+                "Paling lambat 7 hari kerja setelah konfirmasi rujukan dan verifikasi berkas klaim asuransi kesehatan.",
+                "Tidak ada batas waktu tertentu selama tanda-tanda vital pasien masih berada dalam batas normal."
             ],
             correct: 0,
-            explanation: "Pengkajian awal medis dan keperawatan harus diselesaikan dalam waktu 24 jam pertama sejak pasien masuk rawat inap (untuk gawat darurat harus segera)."
+            explanation: "Pengkajian awal medis dan keperawatan wajib diselesaikan dalam waktu 24 jam pertama sejak pasien masuk rawat inap, segera untuk kasus gawat darurat, dan pengkajian sebelum ranap berlaku maksimal 30 hari."
         },
         {
             id: "pp_skrining_gizi_mst",
-            posName: "Pos 2: Skrining Status Gizi Pasien (MST & Strong Kids)",
-            question: "Perangkat skrining gizi apa yang digunakan untuk pasien dewasa dan anak di rumah sakit?",
+            posName: "Pos 2: Skrining Status Gizi (MST & Strong Kids)",
+            question: "Perangkat skrining gizi terstandar apa yang digunakan untuk pasien dewasa dan anak di rumah sakit?",
             options: [
-                "Skala Braden untuk dewasa dan Skala Humpty Dumpty untuk anak.",
-                "MST (Malnutrition Screening Tools) untuk dewasa dan Strong Kids untuk pasien anak.",
-                "Uji fungsi hati untuk dewasa dan tes Mantoux untuk anak.",
-                "Kuesioner kepuasan makanan kantin rumah sakit."
+                "Skala Braden untuk pasien dewasa dan Skala Humpty Dumpty untuk kelompok pasien anak.",
+                "MST (Malnutrition Screening Tools) untuk dewasa dan Strong Kids untuk anak dalam waktu ≤ 24 jam.",
+                "Uji toleransi glukosa oral untuk dewasa dan tes Mantoux tuberkulin untuk pasien anak.",
+                "Kuesioner selera makan kantin rumah sakit dan survei indeks massa tubuh berkala tahunan."
             ],
             correct: 1,
-            explanation: "Status gizi dinilai dengan MST (Malnutrition Screening Tools) untuk dewasa dan Strong Kids untuk anak, dilakukan oleh perawat dalam waktu <= 24 jam pertama."
+            explanation: "Status gizi pasien dinilai dengan instrumen skrining baku: MST (Malnutrition Screening Tools) untuk pasien dewasa dan Strong Kids untuk anak, dikerjakan oleh perawat dalam waktu ≤ 24 jam pertama masuk RS."
         },
         {
             id: "pp_skala_pengkajian_nyeri",
-            posName: "Pos 3: Skala Pengkajian Rasa Nyeri Pasien",
-            question: "Skala apakah yang digunakan untuk mengkaji derajat nyeri pada pasien bayi usia di bawah 1 tahun?",
+            posName: "Pos 3: Instrumen Asesmen Skala Nyeri Multi-Usia",
+            question: "Bagaimana penentuan instrumen pengkajian rasa nyeri berdasarkan kelompok usia pasien?",
             options: [
-                "Numeric Rating Scale (NRS).",
-                "Wong Baker Faces Rating Scale.",
-                "Neonatal Infants Pain Scale (NIPS).",
-                "Visual Analogue Scale (VAS)."
+                "Numeric Rating Scale untuk seluruh bayi baru lahir dan Wong-Baker Faces khusus pasien lanjut usia demensia.",
+                "Visual Analogue Scale untuk seluruh kelompok usia tanpa mempertimbangkan tingkat kesadaran dan usia kognitif.",
+                "NIPS (<1 tahun), FLACCS (1–3 tahun), Wong-Baker Faces (>3 tahun), dan Numeric Scale untuk dewasa kooperatif.",
+                "Penilaian nyeri ditiadakan bagi pasien anak-anak karena persepsi nyeri anak dianggap belum matang."
             ],
             correct: 2,
-            explanation: "NIPS (Neonatal Infants Pain Scale) digunakan untuk usia < 1 tahun, FLACCS untuk usia 1-3 tahun, Wong Baker Faces > 3 tahun, dan Numeric Scale untuk dewasa."
+            explanation: "Pengkajian derajat nyeri menggunakan: NIPS (Neonatal Infants Pain Scale) untuk <1 tahun, FLACCS untuk 1-3 tahun, Wong-Baker Faces Rating Scale untuk >3 tahun, dan Numeric Scale (NRS) untuk pasien dewasa."
+        },
+        {
+            id: "pp_wewenang_flebotomi",
+            posName: "Pos 4: Wewenang Pengambilan Sampel Darah (Flebotomi)",
+            question: "Siapakah tenaga kesehatan yang memiliki wewenang legal melakukan flebotomi sampel laboratorium di rumah sakit?",
+            options: [
+                "Hanya dokter spesialis bedah saat tindakan di dalam kamar operasi berlangsung.",
+                "Seluruh petugas administrasi pendaftaran laboratorium dan staf pengantar dokumen medis.",
+                "Petugas rekam medis dan teknisi pemeliharaan sarana prasarana elektromedis faskes.",
+                "Perawat dan Analis Kesehatan (Teknologi Laboratorium Medik / TLM) yang kompeten dan terlatih."
+            ],
+            correct: 3,
+            explanation: "Pengambilan spesimen darah untuk pemeriksaan laboratorium berwenang dilakukan oleh Perawat dan Analis Kesehatan (Tenaga Teknologi Laboratorium Medik) sesuai standar prosedur operasional flebotomi."
         },
         {
             id: "pp_alur_nilai_kritis_lab",
-            posName: "Pos 4: Waktu Pelaporan Nilai Kritis Laboratorium",
-            question: "Berapa batas waktu maksimal pelaporan hasil nilai kritis laboratorium kepada dokter penanggung jawab (DPJP)?",
+            posName: "Pos 5: Alur & Batas Waktu Pelaporan Nilai Kritis",
+            question: "Bagaimana alur dan batas waktu maksimal pelaporan hasil pemeriksaan laboratorium kategori Nilai Kritis?",
             options: [
-                "Maksimal dalam waktu <= 30 menit setelah hasil diverifikasi dokter patologi klinik.",
-                "Boleh dilaporkan keesokan harinya saat jam visite pagi dokter ruangan.",
-                "Dalam waktu 24 jam bersamaan dengan rekapitulasi keuangan pasien.",
-                "Tidak ada batas waktu khusus selama pasien tidak mengeluh pusing."
-            ],
-            correct: 0,
-            explanation: "Hasil pemeriksaan kategori nilai kritis wajib diulang pemeriksaannya, diverifikasi dokter patklin, dan dilaporkan ke perawat/DPJP dalam waktu <= 30 menit."
-        },
-        {
-            id: "pp_nilai_kritis_spesifik",
-            posName: "Pos 5: Rentang Nilai Kritis Pemeriksaan Laboratorium",
-            question: "Manakah hasil pemeriksaan glukosa darah dan elektrolit yang tergolong Nilai Kritis?",
-            options: [
-                "Glukosa 100 mg/dl dan Natrium 140 mmol/L.",
-                "Glukosa darah < 50 mg/dl atau > 500 mg/dl, dan Kalium <= 3 mmol/L.",
-                "Glukosa 120 mg/dl dan Kalium 4.5 mmol/L.",
-                "Hemoglobin 14 g/dl dan Trombosit 250.000/mm3."
+                "Hasil langsung dikirimkan melalui kurir cetak bersamaan dengan jadwal pengantaran arsip harian.",
+                "Petugas mengulang pemeriksaan, lapor dokter patklin, lalu lapor perawat/DPJP dalam waktu ≤ 30 menit.",
+                "Hasil dicatat di buku arsip laboratorium dan baru disampaikan kepada dokter saat visite keesokan pagi.",
+                "Petugas menunggu hasil pemeriksaan shift jaga berikutnya untuk memastikan tidak terjadi fluktuasi analitik."
             ],
             correct: 1,
-            explanation: "Nilai kritis kimia klinik mencakup Glukosa < 50 mg/dl atau > 500 mg/dl, Natrium <= 120 mmol/L, Kalium <= 3 mmol/L, dan Hemoglobin <= 5 g/dl atau >= 18 g/dl."
+            explanation: "Bila ditemukan nilai kritis, petugas wajib melakukan pengulangan pemeriksaan, lapor dokter spesialis patologi klinik, lalu segera melapor ke perawat ruangan dan DPJP dalam batas waktu baku ≤ 30 menit."
+        },
+        {
+            id: "pp_rentang_nilai_kritis",
+            posName: "Pos 6: Nilai Kritis Kimia Klinik & Elektrolit",
+            question: "Manakah rentang hasil pemeriksaan kimia klinik dan elektrolit yang masuk dalam kategori Nilai Kritis RSAU?",
+            options: [
+                "Glukosa darah < 50 mg/dl atau > 500 mg/dl; Natrium ≤ 120 mmol/L; Kalium ≤ 3.0 mmol/L; Klorida ≤ 80 mmol/L.",
+                "Glukosa darah 90–110 mg/dl; Natrium 135–145 mmol/L; Kalium 3.5–5.0 mmol/L; Klorida 95–105 mmol/L.",
+                "Glukosa darah 140 mg/dl setelah makan; Natrium 130 mmol/L; Kalium 4.0 mmol/L tanpa keluhan fisik.",
+                "Seluruh hasil laboratorium pasien yang dirawat di kelas VIP otomatis berstatus nilai kritis darurat."
+            ],
+            correct: 0,
+            explanation: "Nilai kritis kimia klinik meliputi Glukosa < 50 mg/dl atau > 500 mg/dl. Nilai kritis elektrolit meliputi Natrium (Na) ≤ 120 mmol/L, Kalium (K) ≤ 3.0 mmol/L, dan Klorida (Cl) ≤ 80 mmol/L."
         },
         {
             id: "pp_komponen_asesmen_awal",
-            posName: "Pos 6: Komponen Lengkap Pengkajian Pasien Baru",
-            question: "Apa saja komponen data yang dikaji saat penerimaan pasien baru rawat inap/jalan?",
+            posName: "Pos 7: Komponen Asesmen Awal Pasien Rawat Inap & Jalan",
+            question: "Apa saja komponen data yang wajib dikaji dalam formulir pengkajian awal pasien baru?",
             options: [
-                "Nomor polis kendaraan bermotor dan catatan rekening koran bank keluarga.",
-                "Riwayat kesehatan, keadaan fisik, skrining nutrisi, nyeri, risiko jatuh, dekubitus, dan psikososiospiritual.",
-                "Tingkat popularitas pasien di media sosial dan keikutsertaan partai politik.",
-                "Daftar menu makanan favorit dan riwayat belanja online tiga bulan terakhir."
+                "Hanya nomor kontak kerabat jauh dan rincian polis asuransi swasta yang menanggung pengobatan.",
+                "Catatan riwayat transaksi rekening bank keluarga dan tingkat popularitas pasien di platform sosial media.",
+                "Riwayat kesehatan, fisik, skrining nutrisi, nyeri, risiko jatuh, risiko dekubitus, dan psikososiospiritual.",
+                "Surat pernyataan bebas sengketa hukum keluarga dan kartu keanggotaan klub olahraga kebugaran."
             ],
-            correct: 1,
-            explanation: "Pengkajian awal mencakup riwayat kesehatan, fisik, skrining nutrisi, nyeri, risiko jatuh, risiko dekubitus, serta status psikologis, sosial, ekonomi, dan spiritual."
+            correct: 2,
+            explanation: "Pengkajian awal pasien baru meliputi riwayat kesehatan, pemeriksaan fisik, skrining risiko nutrisi, skrining nyeri, skrining risiko jatuh, skrining risiko dekubitus, serta data psikologis, sosial, ekonomi, dan spiritual."
+        },
+        {
+            id: "pp_tindak_lanjut_hematologi_hdt",
+            posName: "Pos 8: Nilai Kritis Hematologi & Morfologi Darah Tepi",
+            question: "Berapa nilai kritis hematologi dan apa tindakan wajib laboratorium bila nilai tersebut terpenuhi?",
+            options: [
+                "Hemoglobin 12 g/dl dan trombosit 200.000/mm3; tindakan wajib adalah memberikan vitamin penambah darah.",
+                "Hemoglobin 9 g/dl dan leukosit 8.000/mm3; tindakan wajib adalah meminta pasien segera pulang beristirahat.",
+                "Trombosit 150.000/mm3; tindakan wajib adalah menghentikan pengambilan darah selama tiga hari berturut-turut.",
+                "Hb ≤ 5.0 atau ≥ 18 g/dl, Trombosit ≤ 50.000 atau ≥ 1.000.000/mm3, PT ≥ 35\", APTT ≥ 60\"; wajib dibuat sediaan HDT/MDT."
+            ],
+            correct: 3,
+            explanation: "Nilai kritis hematologi: Hb ≤ 5.0 atau ≥ 18 g/dl, Trombosit ≤ 50.000 atau ≥ 1.000.000/mm3, PT ≥ 35 detik, APTT ≥ 60 detik. Bila terpenuhi, wajib dibuat sediaan Hapusan Darah Tepi (HDT/MDT) untuk dievaluasi dokter spesialis patologi klinik."
         }
     ];
 
@@ -3791,6 +3817,62 @@
                 ctx.beginPath();
                 ctx.arc(4, 7, 2, 0, Math.PI * 2);
                 ctx.fill();
+            } else if (this.type === "skala_nyeri_wongbaker") {
+                // Mistar Skala Nyeri Wong-Baker & Pengkajian Nyeri (Kartu Emas-Kuning + Ikon Ekspresi Wajah)
+                ctx.fillStyle = "#fef08a"; // kartu kuning cerah
+                ctx.fillRect(-12, -10, 24, 20);
+                ctx.strokeStyle = "#eab308"; // border emas
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-11, -9, 22, 18);
+                // Header Skala Nyeri
+                ctx.fillStyle = "#854d0e";
+                ctx.font = "bold 3.5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("SKALA NYERI", 0, -5.5);
+                // 3 Lingkaran Wajah Wong-Baker (Senang hijau, Sedang kuning, Menangis merah)
+                ctx.fillStyle = "#22c55e"; // Senang (0)
+                ctx.beginPath(); ctx.arc(-6, 0, 2.8, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#f59e0b"; // Sedang (4-6)
+                ctx.beginPath(); ctx.arc(0, 0, 2.8, 0, Math.PI * 2); ctx.fill();
+                ctx.fillStyle = "#ef4444"; // Sangat Nyeri (10)
+                ctx.beginPath(); ctx.arc(6, 0, 2.8, 0, Math.PI * 2); ctx.fill();
+                // Titik mata & senyum/sedih mini
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-7, -0.8, 0.8, 0.8); ctx.fillRect(-5.8, -0.8, 0.8, 0.8);
+                ctx.fillRect(-1, -0.8, 0.8, 0.8); ctx.fillRect(0.2, -0.8, 0.8, 0.8);
+                ctx.fillRect(5, -0.8, 0.8, 0.8); ctx.fillRect(6.2, -0.8, 0.8, 0.8);
+                // Indikator angka 0 - 10
+                ctx.fillStyle = "#713f12";
+                ctx.font = "bold 4px monospace";
+                ctx.fillText("0 • 5 • 10", 0, 6.5);
+            } else if (this.type === "tabung_nilai_kritis") {
+                // Tabung Reaksi Vakutainer Nilai Kritis Laboratorium (Tutup Biru Muda + Sampel Darah Merah + Label Kritis)
+                // Tutup karet atas
+                ctx.fillStyle = "#38bdf8";
+                ctx.fillRect(-4, -13, 8, 4);
+                // Tabung kaca transparan
+                ctx.fillStyle = "rgba(224, 242, 254, 0.85)";
+                ctx.fillRect(-4, -9, 8, 20);
+                ctx.strokeStyle = "#93c5fd";
+                ctx.lineWidth = 0.8;
+                ctx.strokeRect(-4, -9, 8, 20);
+                // Dasar tabung membulat
+                ctx.beginPath();
+                ctx.arc(0, 11, 4, 0, Math.PI);
+                ctx.fill();
+                // Sampel darah merah di dalam tabung
+                ctx.fillStyle = "#b91c1c";
+                ctx.fillRect(-3, -2, 6, 12);
+                ctx.beginPath();
+                ctx.arc(0, 10, 3, 0, Math.PI);
+                ctx.fill();
+                // Label peringatan darurat kuning dengan tanda seru
+                ctx.fillStyle = "#fef08a";
+                ctx.fillRect(-4, -7, 8, 4.5);
+                ctx.fillStyle = "#dc2626";
+                ctx.font = "bold 4px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("≤30m", 0, -3.5);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -4683,6 +4765,89 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 12: POKJA PP (PELAYANAN PASIEN)
+       Alur Telusur:
+       Triase IGD & Asesmen Awal 24 Jam, Skrining Gizi MST & Strong Kids,
+       Evaluasi Skala Nyeri NIPS/FLACCS/Wong-Baker/NRS, Laboratorium Flebotomi,
+       Pelaporan Nilai Kritis Lab ≤ 30 Menit, Rentang Kritis Kimia & Elektrolit,
+       Asesmen Awal Lengkap 7 Komponen, Unit Hematologi Nilai Kritis & HDT/MDT
+       ========================================================================== */
+    const PP_LEVEL = {
+        id: "PP",
+        shortName: "POKJA PP",
+        name: "Pokja PP • Pelayanan Pasien (Pengkajian 24 Jam, Skrining Gizi MST/Strong Kids, Skala Nyeri, Flebotomi, Nilai Kritis Lab ≤ 30 Mnt)",
+        accentFloor: "#0f766e",
+        accentBorder: "#14b8a6",
+        width: 6600,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Triase IGD & Admisi Pengkajian 24 Jam (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Poli Asesmen Medis & Keperawatan (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Ruang Skrining Gizi MST & Strong Kids (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Unit Evaluasi Skala Nyeri Klinis (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Laboratorium Flebotomi & Ruang Analis (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Pelaporan Nilai Kritis Lab ≤ 30 Menit (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Ruang Kimia Klinik & Elektrolit Kritis (x: 4580 - 5200)
+            { x: 4580, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 8: Unit Hematologi & Sediaan Hapusan Darah Tepi (x: 5320 - 5800)
+            { x: 5320, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 5500, y: 330, w: 300, h: 24, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor POKJA PP (x: 5920 - 6600)
+            { x: 5920, y: 440, w: 680, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2),
+            new MovingPlatform(5220, 410, 85, 20, 70, 0, 1.3),
+            new MovingPlatform(5820, 400, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, PP_QUIZ_BANK[0]),  // Pos 1: Pengkajian Awal 24 Jam
+            new QuizTerminal(1140, 270, PP_QUIZ_BANK[1]), // Pos 2: Skrining Gizi MST & Strong Kids
+            new QuizTerminal(1920, 380, PP_QUIZ_BANK[2]), // Pos 3: Skala Nyeri Klinis
+            new QuizTerminal(2700, 270, PP_QUIZ_BANK[3]), // Pos 4: Flebotomi Spesimen Laboratorium
+            new QuizTerminal(3400, 380, PP_QUIZ_BANK[4]), // Pos 5: Alur & Batas Waktu Pelaporan Nilai Kritis
+            new QuizTerminal(4180, 270, PP_QUIZ_BANK[5]), // Pos 6: Rentang Nilai Kritis Kimia Klinik & Elektrolit
+            new QuizTerminal(4900, 380, PP_QUIZ_BANK[6]), // Pos 7: Komponen Asesmen Awal Pasien
+            new QuizTerminal(5650, 270, PP_QUIZ_BANK[7])  // Pos 8: Nilai Kritis Hematologi & HDT/MDT
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(440, 370, "tabung_nilai_kritis"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "tabung_nilai_kritis"),
+            new CollectibleDoc(2100, 390, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(2640, 250, "tabung_nilai_kritis"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(3550, 390, "tabung_nilai_kritis"),
+            new CollectibleDoc(4080, 250, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "tabung_nilai_kritis"),
+            new CollectibleDoc(5050, 390, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(5580, 250, "tabung_nilai_kritis"),
+            new CollectibleDoc(6050, 390, "skala_nyeri_wongbaker"),
+            new CollectibleDoc(6250, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
 
@@ -5249,7 +5414,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "HPK") {
+        if (currentLevel.id === "PP") {
+            // Suasana Pelayanan Pasien (Klinis Teal & Zamrud Bersih)
+            skyGrad.addColorStop(0, "#042f2e");
+            skyGrad.addColorStop(0.5, "#0d9488");
+            skyGrad.addColorStop(1, "#5eead4");
+        } else if (currentLevel.id === "HPK") {
             // Suasana Hak Pasien & Keluarga (Ungu/Lavender Hangat & Humanis)
             skyGrad.addColorStop(0, "#2e1065");
             skyGrad.addColorStop(0.5, "#581c87");
@@ -5306,7 +5476,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))))));
+        ctx.fillStyle = currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))))))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -5319,7 +5489,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))));
+        ctx.fillStyle = currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -5341,15 +5511,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))))));
+            ctx.fillStyle = currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))));
+            ctx.fillStyle = currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))))));
+        ctx.fillStyle = currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -5357,7 +5527,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "HPK") {
+            if (currentLevel.id === "PP") {
+                ctx.fillStyle = "rgba(13, 148, 136, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🩺 PP: PENGKAJIAN 24 JAM • MST & STRONG KIDS • SKALA NYERI • NILAI KRITIS LAB ≤ 30 MNT", kx + 160, 296);
+                ctx.fillStyle = "rgba(4, 47, 46, 0.65)";
+            } else if (currentLevel.id === "HPK") {
                 ctx.fillStyle = "rgba(88, 28, 135, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -5493,7 +5671,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))))));
+        ctx.fillStyle = currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -5697,9 +5875,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "HPK") {
+        if (currentLevel.id === "PP") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja PP (Pelayanan Pasien), ketepatan pengkajian awal 24 jam rawat inap & pra-ranap ≤ 30 hari, skrining gizi terstandar MST (dewasa) dan Strong Kids (anak) ≤ 24 jam, pengukuran skala nyeri presisi (NIPS <1 th, FLACCS 1-3 th, Wong-Baker >3 th, NRS dewasa), kompetensi flebotomi perawat & analis kesehatan TLM, batas waktu baku pelaporan nilai kritis laboratorium ≤ 30 menit (pengulangan, lapor dokter patklin, dan DPJP), kepatuhan rentang nilai kritis kimia darah (Glukosa <50 / >500 mg/dl), elektrolit (Na ≤ 120, K ≤ 3.0, Cl ≤ 80 mmol/L), serta nilai kritis hematologi (Hb ≤ 5 atau ≥ 18 g/dl, Trombosit ≤ 50.000 atau ≥ 1.000.000/mm3, PT ≥ 35\", APTT ≥ 60\") dengan pembuatan sediaan Hapusan Darah Tepi (HDT/MDT) terpadu paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola asesmen awal 24 jam, skrining gizi MST/Strong Kids, dan skala nyeri berjalan prima dengan penguatan kecepatan pelaporan nilai kritis laboratorium di bawah 30 menit.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan kelengkapan 7 komponen pengkajian awal pasien baru, kepatuhan sediaan HDT untuk nilai kritis hematologi, dan re-asesmen nyeri berkala.";
+            }
+        } else if (currentLevel.id === "HPK") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 12: POKJA PP ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -6013,7 +6209,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "HPK") {
+        if (pokjaId === "PP") {
+            currentLevel = PP_LEVEL;
+        } else if (pokjaId === "HPK") {
             currentLevel = HPK_LEVEL;
         } else if (pokjaId === "PPK") {
             currentLevel = PPK_LEVEL;
@@ -6054,6 +6252,7 @@
         const tabMRMIK = document.getElementById("tabSelectMRMIK");
         const tabPPK = document.getElementById("tabSelectPPK");
         const tabHPK = document.getElementById("tabSelectHPK");
+        const tabPP = document.getElementById("tabSelectPP");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -6074,6 +6273,7 @@
         const cardMRMIK = document.getElementById("selectPokjaMRMIK");
         const cardPPK = document.getElementById("selectPokjaPPK");
         const cardHPK = document.getElementById("selectPokjaHPK");
+        const cardPP = document.getElementById("selectPokjaPP");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -6085,6 +6285,7 @@
         const badgeMRMIK = document.getElementById("badgeMRMIK");
         const badgePPK = document.getElementById("badgePPK");
         const badgeHPK = document.getElementById("badgeHPK");
+        const badgePP = document.getElementById("badgePP");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -6098,6 +6299,7 @@
         if (tabMRMIK) tabMRMIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabPPK) tabPPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-blue-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPP) tabPP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -6144,8 +6346,29 @@
             cardHPK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all";
             if (badgeHPK) { badgeHPK.innerText = "SIAP DITELUSURI"; badgeHPK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold"; }
         }
+        if (cardPP) {
+            cardPP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-teal-950/40 transition-all";
+            if (badgePP) { badgePP.innerText = "SIAP DITELUSURI"; badgePP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "HPK") {
+        if (currentLevel.id === "PP") {
+            if (tabPP) tabPP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA PP • MAP 12 (AKTIF)";
+                menuSubtitle.className = "text-xs text-teal-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PP (<strong>Pengkajian Awal 24 Jam Ranap</strong>, <strong>Skrining Gizi MST & Strong Kids</strong>, <strong>Skala Nyeri NIPS/FLACCS/Wong-Baker/NRS</strong>, <strong>Flebotomi TLM</strong>, <strong>Pelaporan Nilai Kritis Lab ≤ 30 Mnt</strong>, & <strong>Sediaan HDT/MDT Hematologi</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 12: POKJA PP";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-bold text-base md:text-lg shadow-lg shadow-teal-500/30 transition-all active:scale-98";
+            }
+            if (cardPP) {
+                cardPP.className = "p-3 rounded-xl bg-teal-500/20 border border-teal-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-teal-500/30 transition-all";
+                if (badgePP) { badgePP.innerText = "TELUSUR AKTIF"; badgePP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "HPK") {
             if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA HPK • MAP 11 (AKTIF)";
@@ -6350,6 +6573,8 @@
     bindTab("tabSelectKPS", "KPS");
     bindTab("tabSelectMRMIK", "MRMIK");
     bindTab("tabSelectPPK", "PPK");
+    bindTab("tabSelectHPK", "HPK");
+    bindTab("tabSelectPP", "PP");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -6410,6 +6635,13 @@
             document.getElementById("pokjaSelectModal").classList.add("hidden");
         };
     }
+    const selectPP = document.getElementById("selectPokjaPP");
+    if (selectPP) {
+        selectPP.onclick = () => {
+            setPokja("PP");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -6431,6 +6663,8 @@
             setPokja("PPK");
         } else if (currentLevel.id === "PPK") {
             setPokja("HPK");
+        } else if (currentLevel.id === "HPK") {
+            setPokja("PP");
         } else {
             setPokja("TKRS");
         }

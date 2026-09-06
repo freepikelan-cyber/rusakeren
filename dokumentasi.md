@@ -1683,6 +1683,75 @@ Modul HPK mengintegrasikan 11 instrumen telusur hak pasien dan keluarga:
   - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur hak pasien & keluarga terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
 
 ---
+
+## 25. Aktivasi Penuh MAP 12 / DUNIA 10: POKJA PP (Pelayanan Pasien) - Standar STARKES Kemenkes RI di RSAU dr. Esnawan Antariksa
+
+Berdasarkan instrumen resmi survei akreditasi STARKES Kemenkes RI dan panduan pelayanan klinis rumah sakit, modul **MAP 12 / DUNIA 10 (POKJA PP - Pelayanan Pasien)** telah diaktifkan secara penuh sebagai platformer edukatif dengan bank soal berstandar patologi klinik & asuhan keperawatan, aset kolektibel bertema penilaian klinis & spesimen kritis laboratorium, serta sistem evaluasi kelulusan komprehensif.
+
+### 🩺 1. Inti Regulasi & Standar Pokja PP
+Modul PP mengintegrasikan 8 instrumen telusur asuhan pasien dan laboratorium klinis:
+1. **Batas Waktu Pengkajian Awal Pasien**:
+   - Pengkajian awal medis dan keperawatan rawat inap wajib diselesaikan secara lengkap dalam **24 jam pertama** sejak pasien masuk rawat inap.
+   - Untuk pasien gawat darurat di IGD, pengkajian awal dilakukan **segera** saat kedatangan.
+   - Pengkajian medis yang dilakukan sebelum pasien masuk rawat inap (pra-ranap / poliklinik) memiliki masa berlaku maksimal **$\le 30$ hari**, dengan catatan wajib dilakukan verifikasi ulang kondisi terkini saat pasien masuk bangsal.
+2. **Skrining Risiko Gizi Rawat Inap**:
+   - Wajib diselesaikan dalam waktu **$\le 24$ jam** pertama rawat inap.
+   - Menggunakan instrumen tervalidasi: **Malnutrition Screening Tool (MST)** untuk pasien dewasa dan **Strong Kids** untuk pasien anak.
+   - Bila hasil skrining menunjukkan risiko malnutrisi sedang atau tinggi, pasien langsung dikonsultasikan kepada Ahli Gizi / Dietisien untuk asuhan nutrisi terpadu.
+3. **Instrumen Pengukuran Skala Nyeri Klinis**:
+   - Pemilihan skala nyeri disesuaikan dengan usia dan tingkat perkembangan pasien:
+     - **NIPS (Neonatal Infant Pain Scale)**: Bayi usia $< 1$ tahun.
+     - **FLACCS (Face, Legs, Activity, Cry, Consolability Scale)**: Balita usia $1 - 3$ tahun atau pasien tidak sadar/kritis.
+     - **Wong-Baker Faces Pain Rating Scale**: Anak usia $> 3$ tahun, lansia, atau pasien yang kesulitan mendeskripsikan angka.
+     - **NRS (Numeric Rating Scale, rentang 0–10)**: Pasien dewasa yang sadar penuh dan kooperatif.
+4. **Kompetensi Flebotomi Spesimen Laboratorium**:
+   - Petugas yang berwenang dan memiliki kompetensi resmi melakukan pengambilan darah (flebotomi vena/kapiler) untuk pemeriksaan laboratorium di RSAU adalah **Perawat yang telah bersertifikat pelatihan flebotomi** dan **Analis Kesehatan / Tenaga Ahli Teknologi Laboratorium Medis (TLM)**.
+5. **Alur & Batas Waktu Pelaporan Nilai Kritis Laboratorium**:
+   - Batas waktu baku pelaporan sejak hasil nilai kritis diverifikasi alat hingga diterima oleh DPJP/perawat ruangan adalah **$\le 30$ menit**.
+   - **Tahapan Prosedur**: 1) Melakukan pengulangan (*re-run*) atau re-cek spesimen untuk memastikan validitas analitik; 2) Melaporkan kepada Dokter Spesialis Patologi Klinik penanggung jawab laboratorium; 3) Menghubungi perawat ruangan rawat inap/IGD dan DPJP menggunakan teknik komunikasi efektif *TBaK* (Tulis, Baca, Konfirmasi).
+6. **Rentang Nilai Kritis Kimia Klinik & Elektrolit**:
+   - **Glukosa Darah**: $< 50\text{ mg/dl}$ (hipoglikemia berat) atau $> 500\text{ mg/dl}$ (krisis hiperglikemia).
+   - **Natrium (Na)**: $\le 120\text{ mmol/L}$ (hiponatremia berat).
+   - **Kalium (K)**: $\le 3.0\text{ mmol/L}$ (hipokalemia berat berisiko aritmia letal).
+   - **Klorida (Cl)**: $\le 80\text{ mmol/L}$.
+7. **Komponen Lengkap Asesmen Awal Pasien**:
+   - Formulir pengkajian awal mencakup 7 komponen inti: riwayat kesehatan dan penyakit terdahulu, pemeriksaan fisik lengkap (*head-to-toe*), skrining risiko nutrisi, skrining nyeri, skrining risiko jatuh, skrining risiko dekubitus (skala Braden/Norton), serta status psikologis, sosial, ekonomi, dan spiritual.
+8. **Nilai Kritis Hematologi & Sediaan Hapusan Darah Tepi (HDT/MDT)**:
+   - **Nilai Kritis Hematologi**: Hemoglobin (Hb) $\le 5.0\text{ g/dl}$ atau $\ge 18.0\text{ g/dl}$, Trombosit $\le 50.000/\text{mm}^3$ atau $\ge 1.000.000/\text{mm}^3$, Prothrombin Time (PT) $\ge 35\text{ detik}$, dan Activated Partial Thromboplastin Time (APTT) $\ge 60\text{ detik}$.
+   - **Tindakan Wajib**: Analis laboratorium wajib segera membuat sediaan **Hapusan Darah Tepi / Morfologi Darah Tepi (HDT/MDT)** yang diwarnai Giemsa/Wright untuk dievaluasi morfologi sel darahnya secara langsung oleh Dokter Spesialis Patologi Klinik.
+
+---
+
+### 🎮 2. Desain Level MAP 12 (`PP_LEVEL`)
+- **Visual & Atmosfer Klinis Teal & Zamrud**:
+  - Lantai platform ubin porselen hijau toska tua dengan lis aksen zamrud bercahaya (`accentFloor: #0f766e`, `accentBorder: #14b8a6`).
+  - Langit gradien hijau toska antiseptik bersih (`#042f2e` -> `#0d9488` -> `#5eead4`).
+  - Siluet gedung faskes dengan lambang palang toska cyan bercahaya (`#99f6e4`).
+  - Banner dinding koridor: `🩺 PP: PENGKAJIAN 24 JAM • MST & STRONG KIDS • SKALA NYERI • NILAI KRITIS LAB ≤ 30 MNT`.
+  - Gerbang finish surveyor berwarna hijau toska emerald (`#0d9488`).
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Triase IGD & Admisi Pengkajian 24 Jam, Poli Asesmen Medis & Keperawatan, Ruang Skrining Gizi MST & Strong Kids, Unit Evaluasi Skala Nyeri Klinis, Laboratorium Flebotomi & Ruang Analis, Pelaporan Nilai Kritis Lab $\le 30$ Menit, Ruang Kimia Klinik & Elektrolit Kritis, Unit Hematologi & HDT/MDT, dan Exit Conference Surveyor).
+  - 7 Platform bergerak vertikal dan horizontal.
+- **Kolektibel Khusus**:
+  - `skala_nyeri_wongbaker`: Kartu mistar kuning keemasan bergaris dengan 3 ekspresi wajah Wong-Baker (hijau cerah untuk wajah senang [0], oranye untuk nyeri sedang [5], dan merah untuk sangat nyeri [10]) beserta penanda angka skala `0 • 5 • 10`.
+  - `tabung_nilai_kritis`: Tabung vakutainer laboratorium kaca transparan dengan tutup karet biru muda, sampel darah merah di bagian dasar tabung, dan label peringatan darurat kuning bertuliskan teks merah tebal `≤30m`.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`PP_QUIZ_BANK`)**:
+  - Terdiri dari 8 QuizTerminal interaktif berstandar STARKES dengan opsi jawaban berbobot edukatif seimbang.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_pp_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaPP`.
+  - Berhasil mengaktifkan `currentLevel = PP_LEVEL`, mengubah teks tombol menjadi `▶ MULAI TELUSUR MAP 12: POKJA PP`, dan menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay PP dengan render kanvas tanpa error runtime.
+  - Membuka Pos 1 Kuis STARKES PP, menjawab opsi A (Batas waktu 24 jam pertama ranap & pra-ranap $\le 30$ hari), dan menerima umpan balik positif beserta penjelasan lengkap.
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur pelayanan pasien terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
+
 
 
