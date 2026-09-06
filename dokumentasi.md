@@ -22,6 +22,7 @@
 16. [Gamifikasi Akreditasi Map 6 (Pokja PAP - Asuhan Pasien Terpadu)](#-bagian-16-implementasi-khusus-gamifikasi-akreditasi-map-6-pokja-pap---pelayanan-dan-asuhan-pasien-terpadu)
 17. [Gamifikasi Akreditasi Map 7 (Pokja PPI - Simulasi Cuci Tangan, Etika Batuk, APD & Limbah)](#-bagian-17-implementasi-khusus-gamifikasi-akreditasi-map-7-pokja-ppi---pencegahan-dan-pengendalian-infeksi)
 18. [Gamifikasi Akreditasi Map 8 (Pokja KPS - Uraian Jabatan, Kredensial, Rekredensial, SPK & RKK)](#-bagian-18-implementasi-khusus-gamifikasi-akreditasi-map-8-pokja-kps---kualifikasi-dan-pendidikan-staf)
+19. [Arsitektur Halaman Utama: Mukadimah, Misi Kapten Erik, Kreator Herlani & Sistem Pilih Map](#-bagian-19-arsitektur-halaman-utama-mukadimah-misi-kapten-erik-kreator-herlani--sistem-pilih-map)
 
 ---
 
@@ -1320,6 +1321,52 @@ flowchart TD
 ### 🎖️ 5. Kolektibel Khusus Map 8 (KPS)
 1. **`kredensial_badge`**: Lencana ID Card kredensial staf medis berbentuk perisai emas kehormatan militer TNI AU dengan bordir pita biru, bintang perwira medis, dan teks `KPS`.
 2. **`spk_rkk_doc`**: Gulungan berkas resmi Surat Penugasan Klinis (SPK) dan Rincian Kewenangan Klinis (RKK) lengkap dengan cap dinas stempel merah RSAU dr. Esnawan Antariksa dan pita pengikat emas.
+
+---
+
+## 🏛️ BAGIAN 19: ARSITEKTUR HALAMAN UTAMA: MUKADIMAH, MISI KAPTEN ERIK, KREATOR HERLANI & SISTEM PILIH MAP
+
+Sesuai arahan pengembangan UI/UX agar pemain mendapatkan *onboarding* naratif yang imersif dan memahami tujuan pembelajaran sejak awal, halaman utama (`menuModal`) diperbarui dengan pendekatan **Mukadimah & Misi Naratif**, menghilangkan deretan tombol map yang padat di tampilan awal, serta menyematkan identitas kreator pengembang.
+
+---
+
+### 📜 1. Mukadimah & Filosofi Edukasi Gamifikasi
+Halaman pembuka kini berfungsi sebagai gerbang penyambutan formal dan edukatif:
+- **Identitas Fasyankes**: Menampilkan lencana resmi *RSAU dr. Esnawan Antariksa • Halim Perdanakusuma* beserta motto luhur *"Melayani Dengan Ikhlas Tanpa Batas"*.
+- **Penghargaan Ide Kreatif**: Menampilkan tanda penghormatan khusus kepada penggagas dan pengembang game:
+  > **💡 Ide Kreatif & Pengembang: Herlani**
+- **Deskripsi Konseptual**: Memperkenalkan game sebagai media digital interaktif untuk memahami dan menginternalisasi Standar Akreditasi Rumah Sakit Kementerian Kesehatan Republik Indonesia (**STARKES**).
+
+---
+
+### 🦌 2. Narasi Misi Utama Kapten Rusa Erik
+Pemain diperkenalkan langsung dengan protagonis utama:
+- **Nama Karakter**: **Kapten RUSA ERIK**
+- **Gelar Penugasan**: **Duta Mutu & Keselamatan Pasien** (*Patient Safety Ambassador*)
+- **Misi Strategis**:
+  1. Melakukan inspeksi telusur ke setiap instalasi dan unit kerja fasyankes.
+  2. Mengumpulkan berkas dokumen regulasi resmi (*Hospital Corporate Bylaws*, Panduan, SOP, SK, CPPT, RKK/SPK).
+  3. Menguji pemahaman staf di Pos Kuis Surveyor Akreditasi.
+  4. Mempraktikkan simulasi fisik proteksi darurat (APAR metode PASS, Hydrant Gedung/Halaman, Cuci Tangan 6 Langkah WHO, Etika Batuk, Donning/Doffing APD, dan Pengelolaan Limbah Medis).
+  5. Mengantarkan RSAU dr. Esnawan Antariksa meraih status akreditasi tertinggi: **PARIPURNA (BINTANG 5)**!
+- **Konsekuensi Tantangan**: Apabila terjadi keraguan atau kesalahan saat menjawab kuis regulasi, Kapten Erik harus menaklukkan rintangan di **Arena Benteng Takeshi** (menerobos pintu kertas atau menghantam pintu kayu dengan tanduk rusa) sebagai fase remedial sebelum dapat kembali ke koridor rumah sakit.
+
+---
+
+### 🗺️ 3. Transformasi Sistem Navigasi: Menu "Pilih Map"
+Untuk menjaga tampilan depan tetap bersih, fokus, dan tidak membuat pemain kewalahan (*cognitive overload*):
+1. **Pemberitahuan Map Aktif**: Halaman depan menampilkan kotak ringkas (*preview card*) yang menunjukkan map yang sedang siap ditelusuri (contoh: `MAP 1: POKJA TKRS (Tata Kelola Rumah Sakit & Corporate Bylaws)`).
+2. **Tombol "PILIH MAP"**: Menggantikan tombol lama (*"Daftar Pokja"*), tombol ini membuka modal komprehensif **PILIH MAP TELUSUR AKREDITASI** (`pokjaSelectModal`).
+3. **Modal Pemilihan 16 Pokja**: Menampilkan seluruh Pokja STARKES dengan 8 Map yang telah aktif secara penuh:
+   - **MAP 1**: TKRS (Tata Kelola Rumah Sakit & Corporate Bylaws)
+   - **MAP 2**: PMKP (Peningkatan Mutu & Keselamatan Pasien / SI IMUT)
+   - **MAP 3**: SKP (Sasaran Keselamatan Pasien & 7 Benar Obat)
+   - **MAP 4**: MFK (Fasilitas & Proteksi Kebakaran APAR/Hydrant)
+   - **MAP 5**: PROGNAS (Pengendalian Resistensi Antimikroba / PPRA)
+   - **MAP 6**: PAP (Pelayanan & Asuhan Pasien Terpadu CPPT SOAP)
+   - **MAP 7**: PPI (Pencegahan & Pengendalian Infeksi, Cuci Tangan, APD)
+   - **MAP 8**: KPS (Kualifikasi & Pendidikan Staf, Kredensial, SPK/RKK)
+4. **Respon Cepat Antar Muka**: Memilih salah satu map pada modal akan langsung memperbarui kartu status, deskripsi materi telusur, dan teks tombol utama di halaman depan menjadi `▶ MULAI TELUSUR MAP [X]: POKJA [NAMA]`.
 
 ---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*

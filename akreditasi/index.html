@@ -217,79 +217,96 @@
         </div>
     </div>
 
-    <!-- MODAL 1: START MENU -->
-    <div id="menuModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/85 backdrop-blur-md z-40 p-4">
-        <div class="glass-panel max-w-lg w-full p-6 md:p-8 rounded-3xl border-sky-500/30 text-center shadow-2xl relative overflow-hidden">
-            <!-- Medical Military Badge Decoration -->
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 text-xs font-semibold mb-3">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                RSAU dr. Esnawan Antariksa • Halim Perdanakusuma
+    <!-- MODAL 1: START MENU / MUKADIMAH AKREDITASI QUEST -->
+    <div id="menuModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/85 backdrop-blur-md z-40 p-3 sm:p-4 overflow-y-auto">
+        <div class="glass-panel max-w-xl w-full p-5 sm:p-7 md:p-8 rounded-3xl border-sky-500/30 text-center shadow-2xl relative overflow-hidden my-auto">
+            <!-- Medical Military Badge Decoration & Creator Credit -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-2.5">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 text-[11px] font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+                    RSAU dr. Esnawan Antariksa • Halim Perdanakusuma
+                </div>
+                <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-sky-500/20 to-teal-500/20 border border-amber-400/40 text-amber-300 text-[11px] font-semibold shadow">
+                    <span>💡</span> Ide Kreatif & Pengembang: <strong class="text-white font-bold ml-0.5">Herlani</strong>
+                </div>
             </div>
 
-            <!-- Title -->
-            <h1 class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-teal-200 to-amber-300 tracking-tight">
+            <!-- Title & Motto -->
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-teal-200 to-amber-300 tracking-tight">
                 AKREDITASI QUEST
             </h1>
-            <p class="text-xs md:text-sm text-slate-300 font-medium mt-1 mb-4 italic">
+            <p class="text-xs sm:text-sm text-slate-300 font-medium mt-0.5 mb-3 italic">
                 "Melayani Dengan Ikhlas Tanpa Batas"
             </p>
 
-            <!-- Active Map Selector Tabs (8 Pokja Aktif) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-1.5 sm:gap-2 mt-1 mb-3">
-                <button id="tabSelectTKRS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow">
-                    MAP 1: TKRS
-                </button>
-                <button id="tabSelectPMKP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 2: PMKP
-                </button>
-                <button id="tabSelectSKP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 3: SKP
-                </button>
-                <button id="tabSelectMFK" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 4: MFK
-                </button>
-                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 5: PROGNAS
-                </button>
-                <button id="tabSelectPAP" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 6: PAP
-                </button>
-                <button id="tabSelectPPI" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 7: PPI
-                </button>
-                <button id="tabSelectKPS" class="py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all">
-                    MAP 8: KPS
-                </button>
-            </div>
-
-            <!-- Deer Character Card -->
-            <div class="my-3 p-4 rounded-2xl bg-gradient-to-b from-sky-900/30 to-slate-900/60 border border-sky-400/20 flex items-center gap-4">
-                <img id="menuPlayerImg" src="assets/player_front.png" alt="Kapten RUSA ERIK" class="w-20 h-28 object-contain drop-shadow-lg">
-                <div class="text-left flex-1">
-                    <div class="text-xs text-sky-400 font-bold uppercase tracking-wider" id="menuWorldSubtitle">POKJA TKRS • MAP 1 (AKTIF)</div>
-                    <div class="text-base font-bold text-white flex items-center gap-2">
-                        Kapten RUSA ERIK
-                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">Duta Mutu</span>
+            <!-- Mukadimah, Pengenalan Game & Misi Kapten Rusa Erik -->
+            <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-b from-sky-950/50 via-slate-900/70 to-slate-950/80 border border-sky-400/25 text-left space-y-2.5 shadow-inner">
+                <!-- Character Profile Header -->
+                <div class="flex items-center gap-3 border-b border-sky-500/20 pb-2.5">
+                    <img id="menuPlayerImg" src="assets/player_front.png" alt="Kapten RUSA ERIK" class="w-16 h-22 sm:w-20 sm:h-28 object-contain drop-shadow-lg flex-shrink-0">
+                    <div class="flex-1 min-w-0">
+                        <div class="text-[10px] sm:text-xs text-sky-400 font-bold uppercase tracking-wider">
+                            PENGANTAR & MUKADIMAH
+                        </div>
+                        <div class="text-base sm:text-lg font-extrabold text-white flex items-center gap-2">
+                            Kapten RUSA ERIK
+                            <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">Duta Mutu</span>
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-slate-300 leading-snug mt-1">
+                            Media gamifikasi interaktif untuk mendalami dan menjiwai <strong>Standar Akreditasi Rumah Sakit Kemenkes RI (STARKES)</strong> di lingkungan RSAU dr. Esnawan Antariksa.
+                        </p>
                     </div>
-                    <p class="text-xs text-slate-300 mt-1" id="menuDescText">
-                        Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja TKRS (Visi, Misi, Falsafah, & <strong>Hospital Corporate Bylaws</strong>). Jika salah menjawab, taklukkan <strong>Tantangan Benteng Takeshi</strong> untuk kembali ke RS!
+                </div>
+
+                <!-- Misi Kapten Erik -->
+                <div class="space-y-1.5 text-xs text-slate-200 leading-relaxed">
+                    <div class="font-bold text-amber-300 flex items-center gap-1.5 text-xs sm:text-sm">
+                        <span>🎯</span> MISI UTAMA KAPTEN ERIK:
+                    </div>
+                    <p class="text-[11px] sm:text-xs text-slate-300 pl-2 border-l-2 border-amber-400/60">
+                        Sebagai <strong>Duta Mutu dan Keselamatan Pasien</strong>, Kapten Rusa Erik mengemban amanah menelusuri seluruh koridor dan unit fasyankes, mengumpulkan berkas regulasi resmi, membimbing staf menjawab kuis verifikasi surveyor di setiap Pos Telusur, serta menuntaskan simulasi tanggap darurat dan keselamatan klinis.
+                    </p>
+                    <p class="text-[11px] sm:text-xs text-slate-300 pl-2 border-l-2 border-sky-400/60">
+                        Buktikan kepatuhan standar mutu pelayanan untuk membawa RSAU meraih akreditasi predikat tertinggi: <strong>PARIPURNA (BINTANG 5)</strong>! Namun bila ada keraguan regulasi, Kapten Erik harus menaklukkan rintangan di <strong>Arena Benteng Takeshi</strong> sebelum melanjutkan telusur.
                     </p>
                 </div>
-            </div>
 
-            <!-- Main Buttons -->
-            <div class="space-y-2.5 mt-4">
-                <button id="btnPlayTKRS" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-sky-500/30 transition-all active:scale-98">
-                    ▶ MULAI TELUSUR MAP 1: POKJA TKRS
-                </button>
-                <div class="flex gap-2">
-                    <button id="btnOpenPokjaSelect" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold text-slate-200">
-                        🗺️ DAFTAR POKJA
-                    </button>
-                    <button id="btnOpenHowTo" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs md:text-sm font-semibold text-slate-200">
-                        📖 BUKU PANDUAN
+                <!-- Active Map Status Box (Pemberitahuan Map yang Terpilih Saat Ini) -->
+                <div class="mt-2 p-2.5 rounded-xl bg-slate-900/90 border border-teal-500/30 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="text-xl">🗺️</span>
+                        <div class="min-w-0">
+                            <div class="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">MAP SIAP DITELUSURI:</div>
+                            <div id="menuActiveMapName" class="text-xs sm:text-sm font-extrabold text-teal-300 truncate">
+                                MAP 1: POKJA TKRS (Tata Kelola Rumah Sakit)
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btnQuickPilihMap" class="py-1 px-2.5 rounded-lg bg-teal-500/20 hover:bg-teal-500/30 border border-teal-400/40 text-teal-200 hover:text-white text-[10px] sm:text-xs font-bold transition-all flex-shrink-0">
+                        Ganti Map ➔
                     </button>
                 </div>
+            </div>
+
+            <!-- Main Action Buttons -->
+            <div class="space-y-2.5 mt-4">
+                <button id="btnPlayTKRS" class="w-full py-3 sm:py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-sky-500/30 transition-all active:scale-98 flex items-center justify-center gap-2">
+                    <span>▶</span> MULAI TELUSUR MAP 1: POKJA TKRS
+                </button>
+                <div class="flex gap-2">
+                    <button id="btnOpenPokjaSelect" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-slate-100 hover:text-sky-300 flex items-center justify-center gap-1.5 border border-sky-400/40 bg-sky-500/10">
+                        <span>🗺️</span> PILIH MAP
+                    </button>
+                    <button id="btnOpenHowTo" class="glass-btn flex-1 py-2.5 px-4 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white flex items-center justify-center gap-1.5">
+                        <span>📖</span> BUKU PANDUAN
+                    </button>
+                </div>
+            </div>
+
+            <!-- Creator Credit Footer -->
+            <div class="text-[10px] sm:text-[11px] text-slate-400 mt-3 flex items-center justify-center gap-1">
+                <span>Inovasi Gamifikasi Digital Akreditasi RS • Karya</span>
+                <strong class="text-amber-300 font-semibold">Herlani</strong>
             </div>
         </div>
     </div>
@@ -346,8 +363,10 @@
         <div class="glass-panel max-w-2xl w-full p-6 md:p-8 rounded-3xl border-sky-400/30 text-center shadow-2xl">
             <div class="flex items-center justify-between border-b border-sky-500/20 pb-3 mb-4">
                 <div class="text-left">
-                    <h2 class="text-lg md:text-xl font-bold text-white">PEMETAAN 16 POKJA AKREDITASI</h2>
-                    <p class="text-xs text-slate-300">Standar Akreditasi Rumah Sakit Kemenkes RI (STARKES)</p>
+                    <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                        <span>🗺️</span> PILIH MAP TELUSUR AKREDITASI
+                    </h2>
+                    <p class="text-xs text-slate-300">Pilih Map Pokja Standar STARKES yang ingin Anda telusuri bersama Kapten RUSA ERIK</p>
                 </div>
                 <button id="btnClosePokjaSelect" class="text-slate-400 hover:text-white text-xl">✕</button>
             </div>
@@ -4736,6 +4755,11 @@
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
+        const menuActiveMap = document.getElementById("menuActiveMapName");
+        if (menuActiveMap) {
+            const cleanTitle = currentLevel.name.includes("•") ? currentLevel.name.split("•")[1].trim() : currentLevel.name;
+            menuActiveMap.innerText = `${currentLevel.shortName}: ${cleanTitle}`;
+        }
 
         const cardTKRS = document.getElementById("selectPokjaTKRS");
         const cardPMKP = document.getElementById("selectPokjaPMKP");
@@ -4938,14 +4962,25 @@
     }
 
     // UI Buttons Binding
-    document.getElementById("tabSelectTKRS").onclick = () => setPokja("TKRS");
-    document.getElementById("tabSelectPMKP").onclick = () => setPokja("PMKP");
-    document.getElementById("tabSelectSKP").onclick = () => setPokja("SKP");
-    document.getElementById("tabSelectMFK").onclick = () => setPokja("MFK");
-    document.getElementById("tabSelectPROGNAS").onclick = () => setPokja("PROGNAS");
-    document.getElementById("tabSelectPAP").onclick = () => setPokja("PAP");
-    document.getElementById("tabSelectPPI").onclick = () => setPokja("PPI");
-    document.getElementById("tabSelectKPS").onclick = () => setPokja("KPS");
+    const bindTab = (id, pokja) => {
+        const el = document.getElementById(id);
+        if (el) el.onclick = () => setPokja(pokja);
+    };
+    bindTab("tabSelectTKRS", "TKRS");
+    bindTab("tabSelectPMKP", "PMKP");
+    bindTab("tabSelectSKP", "SKP");
+    bindTab("tabSelectMFK", "MFK");
+    bindTab("tabSelectPROGNAS", "PROGNAS");
+    bindTab("tabSelectPAP", "PAP");
+    bindTab("tabSelectPPI", "PPI");
+    bindTab("tabSelectKPS", "KPS");
+
+    const btnQuickMap = document.getElementById("btnQuickPilihMap");
+    if (btnQuickMap) {
+        btnQuickMap.onclick = () => {
+            document.getElementById("pokjaSelectModal").classList.remove("hidden");
+        };
+    }
     document.getElementById("selectPokjaTKRS").onclick = () => {
         setPokja("TKRS");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
