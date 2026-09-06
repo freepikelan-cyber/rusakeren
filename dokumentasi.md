@@ -2070,45 +2070,14 @@ Pengujian otomatis via Chrome DevTools Protocol (`scratch/test_etik_level.mjs`) 
 
 ---
 
-## 30. Orientasi Fasyankes Wajib (Tour 4 Ruangan RS) & Simulator Bantuan Hidup Dasar (BHD / RJP & AED 7 Langkah)
+## 30. Simulator Bantuan Hidup Dasar (BHD / RJP & Defibrilator AED 7 Langkah)
 
-### 🏢 1. Latar Belakang & Filosofi Edukasi
-Untuk meningkatkan *situational awareness* personel rumah sakit sebelum terjun ke telusur 16 Pokja STARKES, ditambahkan dua sistem utama:
-1. **Orientasi Wajib Fasyankes (Tour Masuk Ruangan RS)**: Pemain diwajibkan meninjau 4 dokumen denah dan tata kelola fasyankes dengan transisi blast door kedap udara khas fasilitas militer modern, efek audio otentik, zoom/pan interaktif, dan inspeksi pin hotspot bercahaya.
-2. **Simulator Bantuan Hidup Dasar (BHD / CPR & Defibrilator AED)**: Modul praktikum ke-6 di *Master Simulation Hub* yang mengadopsi standar AHA (*American Heart Association*) dan Kemenkes RI, dilengkapi simulator interaktif kompresi dada (100-120 BPM, metronom audio, depth gauge 5-6 cm) serta eksekusi kejut listrik AED.
+### 💓 1. Latar Belakang & Filosofi Edukasi BHD
+Sebagai kelengkapan kompetensi fasyankes dan pemenuhan standar akreditasi STARKES (khususnya Pokja SKP, PAB, dan KPS terkait Basic Life Support), ditambahkan modul praktikum ke-6 pada *Master Simulation Hub*: **Simulator Bantuan Hidup Dasar (BHD / RJP & Defibrilator AED)**. Modul ini mengadopsi panduan standar AHA (*American Heart Association*) dan Kemenkes RI, dilengkapi simulator interaktif kompresi dada (100-120 BPM, metronom audio, depth gauge 5-6 cm) serta eksekusi kejut listrik AED.
 
 ---
 
-### 🏛️ 2. Tour Masuk 4 Ruangan Utama RSAU dr. Esnawan Antariksa
-Sistem tour (`HospitalTourController`) mengunci telusur awal pemain sebelum menyelesaikan pengenalan 4 sektor berikut:
-
-1. **Ruang 1: Sektor Tata Pamong & Struktur Organisasi RS**
-   - **Aset Utama**: `assets/strukturorganisasi.jpg`
-   - **Regulasi STARKES**: Standar TKRS (Tata Kelola Rumah Sakit)
-   - **Materi Telusur**: Garis komando Ka RSAU dibantu Dewan Pengawas (DEWAS), Unsur Pembantu Pimpinan (Ses RSAU, SPI, TAUD, Progar, Kamed, Kaku, Jaminan), 10 Komite Medis/Fasyankes independen (Kordik, Medis, Keperawatan, Mutu, Etik, PPI, K3RS, dll.), dan 20 Poliklinik Spesialis.
-   - **Hotspot Interaktif**: Unsur Pimpinan, Unsur Pembantu Staf, Komite Independen RS, dan Unsur Pelaksana Klinis.
-
-2. **Ruang 2: Sektor Master Zoning & Denah Rumah Sakit**
-   - **Aset Utama**: `assets/denahrs.png`
-   - **Regulasi STARKES**: Standar MFK & AKP
-   - **Materi Telusur**: Orientasi spasial rumah sakit mulai dari Gerbang Utama & Pos Jaga, Lobi Medrek, Lapangan Apel & Kandang Rusa Esnawan, Sektor Barat (IGD, ICU, Radiologi, MCU, Lab), Sektor Timur (Bangsal Perawatan Garuda, Nuri, Merpati, Parkit, Camar), hingga Fasilitas Penunjang (GSG, Masjid, IPAL, TPS B3).
-   - **Hotspot Interaktif**: Gerbang Utama, IGD & ICU Cepat, Lapangan Apel & Rusa, Bangsal Rawat Inap, IPAL & TPS Limbah B3.
-
-3. **Ruang 3: Sektor K3RS & Denah Jalur Evakuasi Darurat**
-   - **Aset Utama**: `assets/jalurevakuasi.png`
-   - **Regulasi STARKES**: Standar MFK (Manajemen Fasilitas & Keselamatan / Code Red)
-   - **Materi Telusur**: Penyelamatan jiwa saat kebakaran atau bencana alam, rute panah merah bebas hambatan koridor, pemetaan Titik Kumpul Aman (*Assembly Point*) Lapangan Parkir dan Lapangan Apel, serta posisi sumber air tanggap darurat (Sumur Bor & Pompa Air Dalam).
-   - **Hotspot Interaktif**: Assembly Point Lapangan Parkir, Assembly Point Lapangan Apel, Sumur Bor Cadangan Air, dan Jalur Bebas Hambatan Koridor Merah.
-
-4. **Ruang 4: Sektor Pusat Kendali & 36 Kamera CCTV Pos Jaga**
-   - **Aset Utama**: `assets/cctv.png`
-   - **Regulasi STARKES**: Standar MFK & HPK (Keamanan Pasien & Fasilitas 24 Jam)
-   - **Materi Telusur**: Pemantauan real-time 36 titik kamera CCTV oleh Pos Jaga Sentral 24 jam nonstop untuk mencegah penculikan bayi, mengawasi area parkir, lobi, IGD, rawat inap lantai 2-3, farmasi, dan aset fasyankes.
-   - **Fitur Khusus Animasi**: Dynamic Canvas Radar Overlay yang memproyeksikan sinar pemindai hijau (*sweep beam*) berputar terus menerus mengelilingi pos jaga fasyankes.
-
----
-
-### 💓 3. Laboratorium Praktikum Bantuan Hidup Dasar (BHD / RJP & AED)
+### 💓 2. Algoritma 7 Langkah Bantuan Hidup Dasar (BHD / RJP & AED)
 Modul ke-6 di *Master Simulation Hub* mengimplementasikan algoritma resusitasi henti jantung (`BhdSimulator`) berbasis panduan poster resmi fasyankes `assets/bhd.png`:
 
 | Langkah | Nama Tahapan | Standar Medis & Instruksi Klinis | Interaksi & Animasi Game |
@@ -2123,7 +2092,7 @@ Modul ke-6 di *Master Simulation Hub* mengimplementasikan algoritma resusitasi h
 
 ---
 
-### 📊 4. Matriks 6 Modul Praktikum Master Simulation Hub RS
+### 📊 3. Matriks 6 Modul Praktikum Master Simulation Hub RS
 
 Dengan penambahan BHD, *Master Simulation Hub* kini mencakup seluruh kompetensi wajib rumah sakit:
 1. 🧯 **Lab APAR**: Metode P.A.S.S (*Pull, Aim, Squeeze, Sweep*) dengan fisika api & dry chemical powder dinamis.
@@ -2132,6 +2101,7 @@ Dengan penambahan BHD, *Master Simulation Hub* kini mencakup seluruh kompetensi 
 4. 🤧 **Lab Etika Batuk**: 4 Protokol baku droplet (lengan atas bagian dalam, tisu medis, kantung kuning infeksius, hand hygiene).
 5. 🥼 **Lab Donning & Doffing APD**: Urutan standar pemasangan dan pelepasan hazmat/gown, masker bedah/N95, kacamata goggle, dan sarung tangan steril tanpa kontaminasi silang.
 6. 💓 **Lab BHD / RJP & AED**: 7 Tahapan BHD Kemenkes/AHA, metronom 110 BPM, depth gauge 5-6 cm, eksekusi shock defibrilator dan pemantauan gelombang ROSC.
+
 
 
 
