@@ -1425,5 +1425,27 @@ Berdasarkan tinjauan dan arahan pengguna, dilakukan tiga pemutakhiran besar pada
     2. `[ 🗺️ PILIH MAP LAIN ]`: Membuka modal pemilihan pokja untuk mencoba pokja lain.
     3. `[ 🏠 MENU UTAMA ]`: Kembali ke layar mukadimah awal Kapten Erik.
 
+### 🔬 4. Unifikasi Master Simulasi Hub & Navigasi Silang Seluruh Praktikum RS (5 LAB)
+- **Penyebab Masalah Awal**:
+  - Menu `[ 🧯 SIMULASI ]` di HUD atas sebelumnya hanya memanggil instans simulator MFK (`aparHydrantSimulator.open("APAR")`).
+  - Akibatnya, modul simulasi Pokja PPI (Cuci Tangan 11 Langkah WHO, Etika Batuk & Bersin, dan Donning/Doffing APD) yang berada di modal terpisah (`#ppiSimulasiModal`) tidak dapat diakses dari menu atas dan hanya terbuka saat pemain menjawab kuis di pos telusur PPI.
+- **Pusat Laboratorium Simulasi Interaktif RS (`#masterSimulasiHubModal`)**:
+  - Tombol menu HUD atas kini diupgrade menjadi `[ 🔬 SIMULASI 5 LAB ]` dengan indikator badge multi-lab.
+  - Mengklik tombol menu membuka **Master Simulation Hub Modal** yang menyajikan 5 kartu modul praktikum interaktif lengkap dengan ikon bercahaya, badge standar akreditasi, dan ringkasan kompetensi:
+    1. 🧯 **Simulasi APAR (Metode PASS)**: Simulasi pemadaman api berkobar interaktif dengan 4 langkah baku (Pull pin, Aim nozel, Squeeze tuas, Sweep ke pangkal api) serta semprotan dry powder.
+    2. 🚒 **Simulasi Hydrant Gedung & Lapangan RS**: Praktik kompartemen selang indoor (Hose Reel/Rack) dan pilar hydrant lapangan bertekanan 4.5–7 Bar dengan formasi *Two-Man Hold*.
+    3. 🧼 **Simulasi Cuci Tangan 11 Langkah WHO**: Foto tangan manusia asli beranimasi menggosok dinamis, partikel busa sabun, audio scrub, mode Handwash (40–60s) dan Handrub (20–40s).
+    4. 🤧 **Simulasi Etika Batuk & Bersin Faskes**: 4 protokol baku pengendalian penularan droplet/airborne di fasilitas kesehatan, penanganan tisu, dan pembuangan ke limbah infeksius kantung kuning.
+    5. 🥼 **Simulasi APD (Donning & Doffing)**: Urutan baku pemakaian dan pelepasan Alat Pelindung Diri lapis demi lapis tanpa mengontaminasi tubuh dan lingkungan faskes.
+- **Bar Navigasi Silang Terpadu (*Cross-Navigation Tab Bar*)**:
+  - Di bagian header setiap simulator (baik APAR/Hydrant maupun Cuci Tangan/Batuk/APD), kini tersemat **bar tab navigasi terpadu**:
+    `[ 🏛️ HUB ]` | `[ 🧯 APAR (PASS) ]` | `[ 🚒 HYDRANT RS ]` | `[ 🧼 CUCI TANGAN WHO ]` | `[ 🤧 ETIKA BATUK ]` | `[ 🥼 APD (DON/DOFF) ]`
+  - Pemain dapat langsung melompat antar kelima simulasi dalam 1 kali klik dari simulator mana pun tanpa perlu keluar terlebih dahulu.
+- **Arsitektur Controller (`MasterSimulasiController`)**:
+  - Dikelola oleh kelas `MasterSimulasiController` yang mengoordinasikan transisi antar simulator secara mulus:
+    - Menutup dan menghentikan `requestAnimationFrame` dari simulator aktif (`closeSilently()`) agar tidak terjadi tabrakan kanvas atau konsumsi memori ganda.
+    - Membuka simulator target dan mengaktifkan loop render kanvas yang bersangkutan.
+    - Menjaga integritas siklus hidup game (`GAME_STATE.SIMULATION` saat praktikum, dan restorasi aman ke `GAME_STATE.PLAYING` tanpa glitch fisika saat simulator ditutup).
+
 ---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*

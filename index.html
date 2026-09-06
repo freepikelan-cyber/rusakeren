@@ -158,8 +158,10 @@
                     <span>⏱️</span>
                     <span id="hudTimer">00:00</span>
                 </div>
-                <button id="btnOpenSimulasi" class="glass-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-300 hover:text-white border-amber-500/40 bg-amber-500/10 flex items-center gap-1 transition-all" title="Simulator APAR & Hydrant">
-                    <span>🧯</span> SIMULASI
+                <button id="btnOpenSimulasi" class="glass-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-amber-300 hover:text-white border-amber-500/40 bg-amber-500/10 flex items-center gap-1.5 transition-all" title="Pusat Laboratorium Simulasi RS (APAR, Hydrant, Cuci Tangan, Etika Batuk, APD)">
+                    <span class="text-sm">🔬</span>
+                    <span>SIMULASI</span>
+                    <span class="bg-amber-500/30 text-amber-200 text-[10px] px-1.5 py-0.5 rounded-full border border-amber-400/40 font-mono font-bold">5 LAB</span>
                 </button>
                 <button id="btnPokjaList" class="glass-btn px-2.5 py-1.5 rounded-xl text-xs font-bold text-sky-300 hover:text-white" title="Daftar 16 Pokja">
                     🗺️ POKJA
@@ -701,6 +703,188 @@
         </div>
     </div>
 
+    <!-- ==========================================================================
+         MODAL MASTER: PUSAT LABORATORIUM SIMULASI INTERAKTIF RS (5 LAB POKJA)
+         ========================================================================== -->
+    <div id="masterSimulasiHubModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/92 backdrop-blur-md z-50 p-2 sm:p-4 overflow-y-auto hidden">
+        <div class="glass-panel max-w-4xl w-full max-h-[94vh] rounded-2xl sm:rounded-3xl border-amber-500/40 shadow-2xl flex flex-col overflow-hidden relative my-auto">
+            <!-- Header Modal -->
+            <div class="flex-shrink-0 flex items-center justify-between border-b border-amber-500/30 px-4 sm:px-6 py-3 bg-gradient-to-r from-slate-900 via-amber-950/30 to-slate-900">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl sm:text-3xl animate-pulse">🔬</span>
+                    <div>
+                        <div class="text-[10px] sm:text-[11px] text-amber-400 font-mono tracking-wider uppercase font-bold flex items-center gap-2">
+                            <span>PUSAT LABORATORIUM SIMULASI RS</span>
+                            <span class="bg-amber-500/20 text-amber-300 text-[9px] px-1.5 py-0.5 rounded-full border border-amber-500/40">5 MODUL PRAKTIKUM</span>
+                        </div>
+                        <h2 class="text-sm sm:text-base md:text-lg font-bold text-white leading-tight">Laboratorium Praktik Interaktif Standar Akreditasi KARS & STARKES</h2>
+                    </div>
+                </div>
+                <button id="btnCloseMasterSimulasiHub" class="text-slate-400 hover:text-white text-xl p-1 rounded-lg hover:bg-slate-800/60 transition-all" title="Tutup Menu Simulasi">✕</button>
+            </div>
+
+            <!-- Hub Body Scrollable -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 custom-scrollbar text-left">
+                <!-- Info Banner -->
+                <div class="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-slate-900/90 via-amber-950/20 to-slate-900/90 border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-inner">
+                    <div class="space-y-1 text-xs">
+                        <div class="text-amber-300 font-bold flex items-center gap-1.5">
+                            <span>⭐</span> Pilih simulasi yang ingin Anda latih atau demonstrasikan:
+                        </div>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">
+                            Setiap simulasi dilengkapi animasi interaktif, audio efek realistis, dan panduan langkah demi langkah sesuai regulasi keselamatan rumah sakit.
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 text-[10px] text-slate-300 font-mono flex-shrink-0">
+                        <span class="px-2 py-1 rounded-lg bg-orange-500/20 text-orange-300 border border-orange-500/30 font-bold">2 LAB MFK</span>
+                        <span class="px-2 py-1 rounded-lg bg-teal-500/20 text-teal-300 border border-teal-500/30 font-bold">3 LAB PPI</span>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 1: POKJA MFK (KESELAMATAN & KEBAKARAN) -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-base">🏢</span>
+                        <h3 class="text-xs sm:text-sm font-bold text-orange-400 uppercase tracking-wide">POKJA MFK: PROTEKSI KEBAKARAN & KESELAMATAN FASILITAS</h3>
+                        <div class="flex-1 h-px bg-orange-500/20"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                        <!-- Card 1: APAR (PASS) -->
+                        <div class="rounded-2xl border border-orange-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 flex flex-col justify-between hover:border-orange-400 transition-all group shadow-lg">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🧯</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 border border-orange-500/30">METODE P.A.S.S</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-orange-300 transition-colors">Simulasi APAR (Alat Pemadam Api Ringan)</h4>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    Simulasi pemadaman api realistis dengan 4 langkah baku: <strong>P</strong>ull pin, <strong>A</strong>im nozel, <strong>S</strong>queeze tuas, dan <strong>S</strong>weep sapukan serbuk powder ke titik pangkal api.
+                                </p>
+                                <div class="flex items-center gap-2 text-[10px] text-slate-400 pt-1">
+                                    <span>🔥 Simulasi Api Dinamis</span>
+                                    <span>•</span>
+                                    <span>💨 Semprotan Dry Powder</span>
+                                </div>
+                            </div>
+                            <button onclick="window.masterSimulasi.open('APAR')" class="mt-4 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-orange-950/50 active:scale-95 transition-all">
+                                <span>🧯</span> BUKA LAB APAR
+                            </button>
+                        </div>
+
+                        <!-- Card 2: HYDRANT RS -->
+                        <div class="rounded-2xl border border-sky-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 flex flex-col justify-between hover:border-sky-400 transition-all group shadow-lg">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🚒</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30">INDOOR & OUTDOOR</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">Simulasi Hydrant Gedung & Lapangan RS</h4>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    Praktikum kompartemen selang indoor (Hose Reel/Rack) vs Pilar Hydrant Lapangan. Mempelajari formasi <em>Two-Man Hold</em>, kuda-kuda kokoh bertumpu, dan tekanan kerja 4.5–7 Bar.
+                                </p>
+                                <div class="flex items-center gap-2 text-[10px] text-slate-400 pt-1">
+                                    <span>💦 Tekanan 4.5 - 7 Bar</span>
+                                    <span>•</span>
+                                    <span>👥 Formasi 2 Personel</span>
+                                </div>
+                            </div>
+                            <button onclick="window.masterSimulasi.open('HYDRANT')" class="mt-4 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-950/50 active:scale-95 transition-all">
+                                <span>🚒</span> BUKA LAB HYDRANT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 2: POKJA PPI & SKP (PENGENDALIAN INFEKSI & HYGIENE) -->
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-base">🏥</span>
+                        <h3 class="text-xs sm:text-sm font-bold text-teal-400 uppercase tracking-wide">POKJA PPI & SKP: PENCEGAHAN INFEKSI & KESELAMATAN PASIEN</h3>
+                        <div class="flex-1 h-px bg-teal-500/20"></div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+                        <!-- Card 3: CUCI TANGAN WHO -->
+                        <div class="rounded-2xl border border-teal-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 flex flex-col justify-between hover:border-teal-400 transition-all group shadow-lg">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🧼</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">11 LANGKAH RESMI</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-teal-300 transition-colors">11 Langkah Cuci Tangan WHO</h4>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    Simulasi realistis dengan 11 foto tangan manusia asli, animasi gerakan scrubbing orbital & translasi dinamis, partikel busa, mode Handwash (40-60s) & Handrub (20-40s).
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[10px] text-teal-300 pt-1">
+                                    <span>🖐️ Foto Tangan Nyata</span>
+                                    <span>•</span>
+                                    <span>🫧 Busa Sabun</span>
+                                </div>
+                            </div>
+                            <button onclick="window.masterSimulasi.open('CUCI_TANGAN')" class="mt-4 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-teal-950/50 active:scale-95 transition-all">
+                                <span>🧼</span> BUKA LAB CUCI TANGAN
+                            </button>
+                        </div>
+
+                        <!-- Card 4: ETIKA BATUK & BERSIN -->
+                        <div class="rounded-2xl border border-cyan-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 flex flex-col justify-between hover:border-cyan-400 transition-all group shadow-lg">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🤧</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">PENCEGAHAN DROPLET</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">Etika Batuk & Bersin Faskes</h4>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    4 Protokol baku pengendalian infeksi airborne & droplet: menutup lengan atas bagian dalam, penanganan tisu medis, pembuangan ke kantung kuning, & hand hygiene.
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[10px] text-cyan-300 pt-1">
+                                    <span>😷 Masker Medis</span>
+                                    <span>•</span>
+                                    <span>🗑️ Kantung Kuning</span>
+                                </div>
+                            </div>
+                            <button onclick="window.masterSimulasi.open('BATUK')" class="mt-4 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-cyan-950/50 active:scale-95 transition-all">
+                                <span>🤧</span> BUKA LAB ETIKA BATUK
+                            </button>
+                        </div>
+
+                        <!-- Card 5: APD (DONNING & DOFFING) -->
+                        <div class="rounded-2xl border border-emerald-500/30 bg-gradient-to-b from-slate-900/90 to-slate-950 p-4 flex flex-col justify-between hover:border-emerald-400 transition-all group shadow-lg">
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-2xl group-hover:scale-110 transition-transform">🥼</span>
+                                    <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">DONNING & DOFFING</span>
+                                </div>
+                                <h4 class="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">Donning & Doffing APD</h4>
+                                <p class="text-[11px] text-slate-300 leading-relaxed">
+                                    Urutan baku pemasangan & pelepasan Alat Pelindung Diri tanpa kontaminasi silang (Gown, Masker N95/Bedah, Goggle/Pelindung Wajah, Sarung Tangan Steril/Non-steril).
+                                </p>
+                                <div class="flex items-center gap-1.5 text-[10px] text-emerald-300 pt-1">
+                                    <span>🧤 Anti-Kontaminasi</span>
+                                    <span>•</span>
+                                    <span>🥽 Pelindung Wajah</span>
+                                </div>
+                            </div>
+                            <button onclick="window.masterSimulasi.open('APD')" class="mt-4 w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/50 active:scale-95 transition-all">
+                                <span>🥼</span> BUKA LAB APD
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="flex-shrink-0 flex items-center justify-between border-t border-slate-800 px-4 sm:px-6 py-3 bg-slate-950/90">
+                <div class="text-[10px] sm:text-xs text-slate-400 flex items-center gap-1.5">
+                    <span>💡</span>
+                    <span>Anda juga dapat berganti modul praktikum langsung lewat tab navigasi di bagian atas simulator!</span>
+                </div>
+                <button onclick="window.masterSimulasi.close()" class="py-1.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition-all">
+                    TUTUP
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL 6: SIMULASI ANIMASI APAR (METODE PASS) & HYDRANT (INDOOR & OUTDOOR) -->
     <div id="simulasiModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/90 backdrop-blur-md z-50 p-2 sm:p-4 overflow-y-auto hidden">
         <div class="glass-panel max-w-3xl w-full max-h-[94vh] rounded-2xl sm:rounded-3xl border-orange-500/40 shadow-2xl flex flex-col overflow-hidden relative my-auto">
@@ -716,13 +900,25 @@
                 <button id="btnCloseSimulasi" class="text-slate-400 hover:text-white text-xl p-1">✕</button>
             </div>
 
-            <!-- Tab Switcher: APAR vs HYDRANT -->
-            <div class="flex border-b border-slate-800 bg-slate-950/60 px-4 pt-2 gap-2">
-                <button id="tabSimApar" class="py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-orange-500 text-white bg-orange-500/10 flex items-center gap-1.5 transition-all">
-                    <span>🧯</span> SIMULASI APAR (METODE PASS)
+            <!-- Unified Navigation Bar across ALL 5 Hospital Simulators -->
+            <div class="flex border-b border-slate-800 bg-slate-950/80 px-2 sm:px-4 pt-2 gap-1 sm:gap-1.5 overflow-x-auto custom-scrollbar">
+                <button onclick="window.masterSimulasi.open('HUB')" class="py-2 px-2.5 sm:px-3 rounded-t-xl font-bold text-[11px] sm:text-xs text-amber-300 hover:text-white bg-amber-500/10 border-b-2 border-transparent hover:border-amber-400 flex items-center gap-1 flex-shrink-0 transition-all" title="Kembali ke Ringkasan Semua Simulasi">
+                    <span>🏛️</span> HUB
                 </button>
-                <button id="tabSimHydrant" class="py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-sky-300 flex items-center gap-1.5 transition-all">
-                    <span>🚒</span> SIMULASI HYDRANT (INDOOR & OUTDOOR)
+                <button id="tabSimApar" onclick="window.masterSimulasi.open('APAR')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-orange-500 text-white bg-orange-500/20 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🧯</span> APAR (PASS)
+                </button>
+                <button id="tabSimHydrant" onclick="window.masterSimulasi.open('HYDRANT')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-slate-400 hover:text-sky-300 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🚒</span> HYDRANT RS
+                </button>
+                <button onclick="window.masterSimulasi.open('CUCI_TANGAN')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-teal-400 hover:text-teal-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🧼</span> CUCI TANGAN WHO
+                </button>
+                <button onclick="window.masterSimulasi.open('BATUK')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-cyan-400 hover:text-cyan-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🤧</span> ETIKA BATUK
+                </button>
+                <button onclick="window.masterSimulasi.open('APD')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-emerald-400 hover:text-emerald-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🥼</span> APD (DON/DOFF)
                 </button>
             </div>
 
@@ -845,16 +1041,25 @@
                 <button id="btnClosePpiSimulasi" class="text-slate-400 hover:text-white text-xl p-1">✕</button>
             </div>
 
-            <!-- Tab Switcher: 3 TABS -->
-            <div class="flex border-b border-slate-800 bg-slate-950/60 px-4 pt-2 gap-2 overflow-x-auto">
-                <button id="tabPpiSimCuciTangan" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-teal-400 text-white bg-teal-500/10 flex items-center gap-1.5 transition-all flex-shrink-0">
-                    <span>🧼</span> 6 LANGKAH CUCI TANGAN WHO
+            <!-- Unified Navigation Bar across ALL 5 Hospital Simulators -->
+            <div class="flex border-b border-slate-800 bg-slate-950/80 px-2 sm:px-4 pt-2 gap-1 sm:gap-1.5 overflow-x-auto custom-scrollbar">
+                <button onclick="window.masterSimulasi.open('HUB')" class="py-2 px-2.5 sm:px-3 rounded-t-xl font-bold text-[11px] sm:text-xs text-amber-300 hover:text-white bg-amber-500/10 border-b-2 border-transparent hover:border-amber-400 flex items-center gap-1 flex-shrink-0 transition-all" title="Kembali ke Ringkasan Semua Simulasi">
+                    <span>🏛️</span> HUB
                 </button>
-                <button id="tabPpiSimEtikaBatuk" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0">
-                    <span>🤧</span> ETIKA BATUK & BERSIN
+                <button onclick="window.masterSimulasi.open('APAR')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-orange-400 hover:text-orange-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🧯</span> APAR (PASS)
                 </button>
-                <button id="tabPpiSimApd" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0">
-                    <span>🥼</span> PEMASANGAN & PELEPASAN APD
+                <button onclick="window.masterSimulasi.open('HYDRANT')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-sky-400 hover:text-sky-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🚒</span> HYDRANT RS
+                </button>
+                <button id="tabPpiSimCuciTangan" onclick="window.masterSimulasi.open('CUCI_TANGAN')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-teal-400 text-white bg-teal-500/20 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🧼</span> CUCI TANGAN WHO
+                </button>
+                <button id="tabPpiSimEtikaBatuk" onclick="window.masterSimulasi.open('BATUK')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-cyan-400 hover:text-cyan-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🤧</span> ETIKA BATUK
+                </button>
+                <button id="tabPpiSimApd" onclick="window.masterSimulasi.open('APD')" class="py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-emerald-400 hover:text-emerald-200 flex items-center gap-1 flex-shrink-0 transition-all">
+                    <span>🥼</span> APD (DON/DOFF)
                 </button>
             </div>
 
@@ -5391,9 +5596,6 @@
 
         init() {
             // Button bindings
-            const btnOpen = document.getElementById("btnOpenSimulasi");
-            if (btnOpen) btnOpen.onclick = () => this.open("APAR");
-
             const btnClose = document.getElementById("btnCloseSimulasi");
             if (btnClose) btnClose.onclick = () => this.close();
 
@@ -5492,6 +5694,15 @@
             }
         }
 
+        closeSilently() {
+            this.isOpen = false;
+            if (this.modal) this.modal.classList.add("hidden");
+            if (this.rafId) {
+                cancelAnimationFrame(this.rafId);
+                this.rafId = null;
+            }
+        }
+
         switchTab(tab) {
             this.currentTab = tab;
             const tabApar = document.getElementById("tabSimApar");
@@ -5501,19 +5712,19 @@
 
             if (tab === "APAR") {
                 if (tabApar) {
-                    tabApar.className = "py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-orange-500 text-white bg-orange-500/10 flex items-center gap-1.5 transition-all";
+                    tabApar.className = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-orange-500 text-white bg-orange-500/20 flex items-center gap-1 flex-shrink-0 transition-all";
                 }
                 if (tabHydrant) {
-                    tabHydrant.className = "py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-sky-300 flex items-center gap-1.5 transition-all";
+                    tabHydrant.className = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-slate-400 hover:text-sky-300 flex items-center gap-1 flex-shrink-0 transition-all";
                 }
                 if (viewApar) viewApar.classList.remove("hidden");
                 if (viewHydrant) viewHydrant.classList.add("hidden");
             } else {
                 if (tabApar) {
-                    tabApar.className = "py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-orange-300 flex items-center gap-1.5 transition-all";
+                    tabApar.className = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-slate-400 hover:text-orange-300 flex items-center gap-1 flex-shrink-0 transition-all";
                 }
                 if (tabHydrant) {
-                    tabHydrant.className = "py-2 px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-sky-400 text-white bg-sky-500/10 flex items-center gap-1.5 transition-all";
+                    tabHydrant.className = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-sky-400 text-white bg-sky-500/20 flex items-center gap-1 flex-shrink-0 transition-all";
                 }
                 if (viewApar) viewApar.classList.add("hidden");
                 if (viewHydrant) viewHydrant.classList.remove("hidden");
@@ -6878,6 +7089,13 @@
             this.loop();
         }
 
+        closeSilently() {
+            this.isOpen = false;
+            if (this.modal) this.modal.classList.add("hidden");
+            if (this.rafId) cancelAnimationFrame(this.rafId);
+            this.rafId = null;
+        }
+
         close() {
             if (!this.isOpen) return;
             this.isOpen = false;
@@ -6906,8 +7124,8 @@
             const viewBatuk = document.getElementById("ppiSimEtikaBatukView");
             const viewApd = document.getElementById("ppiSimApdView");
 
-            const activeTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-teal-400 text-white bg-teal-500/10 flex items-center gap-1.5 transition-all flex-shrink-0";
-            const inactiveTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-xs sm:text-sm border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1.5 transition-all flex-shrink-0";
+            const activeTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-teal-400 text-white bg-teal-500/20 flex items-center gap-1 flex-shrink-0 transition-all";
+            const inactiveTabClass = "py-2 px-3 sm:px-4 rounded-t-xl font-bold text-[11px] sm:text-xs border-b-2 border-transparent text-slate-400 hover:text-teal-300 flex items-center gap-1 flex-shrink-0 transition-all";
 
             if (tabCuci) tabCuci.className = (this.currentTab === "CUCI_TANGAN") ? activeTabClass : inactiveTabClass;
             if (tabBatuk) tabBatuk.className = (this.currentTab === "BATUK") ? activeTabClass : inactiveTabClass;
@@ -7834,6 +8052,108 @@
         }
     }
 
+    /* ==========================================================================
+       MASTER SIMULASI CONTROLLER (PUSAT KONTROL 5 LAB SIMULASI RS)
+       Mengintegrasikan:
+       - MFK: 🧯 APAR (Metode PASS) & 🚒 Hydrant RS (Indoor & Outdoor)
+       - PPI: 🧼 Cuci Tangan 11 Langkah WHO, 🤧 Etika Batuk & 🥼 APD (Donning/Doffing)
+       ========================================================================== */
+    class MasterSimulasiController {
+        constructor() {
+            this.hubModal = document.getElementById("masterSimulasiHubModal");
+            this.isOpen = false;
+            this.previousState = GAME_STATE.PLAYING;
+        }
+
+        init() {
+            this.hubModal = document.getElementById("masterSimulasiHubModal");
+            const btnOpen = document.getElementById("btnOpenSimulasi");
+            if (btnOpen) {
+                btnOpen.onclick = (e) => {
+                    if (e && typeof e.stopPropagation === "function") e.stopPropagation();
+                    this.open("HUB");
+                };
+            }
+
+            const btnCloseHub = document.getElementById("btnCloseMasterSimulasiHub");
+            if (btnCloseHub) {
+                btnCloseHub.onclick = () => this.close();
+            }
+
+            // Keyboard shortcut ESC
+            window.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    if (this.isOpen) {
+                        this.close();
+                    } else if (window.aparHydrantSimulator && window.aparHydrantSimulator.isOpen) {
+                        window.aparHydrantSimulator.close();
+                    } else if (window.ppiSimulator && window.ppiSimulator.isOpen) {
+                        window.ppiSimulator.close();
+                    }
+                }
+            });
+        }
+
+        open(target = "HUB") {
+            if (window.sound && typeof window.sound.initContext === "function") {
+                window.sound.initContext();
+            }
+            this.previousState = currentState;
+
+            if (target === "HUB") {
+                if (window.aparHydrantSimulator && window.aparHydrantSimulator.isOpen) {
+                    window.aparHydrantSimulator.closeSilently();
+                }
+                if (window.ppiSimulator && window.ppiSimulator.isOpen) {
+                    window.ppiSimulator.closeSilently();
+                }
+                if (this.hubModal) this.hubModal.classList.remove("hidden");
+                this.isOpen = true;
+                currentState = GAME_STATE.SIMULATION;
+            } else if (target === "APAR" || target === "HYDRANT") {
+                if (this.hubModal) this.hubModal.classList.add("hidden");
+                this.isOpen = false;
+                if (window.ppiSimulator && window.ppiSimulator.isOpen) {
+                    window.ppiSimulator.closeSilently();
+                }
+                if (window.aparHydrantSimulator) {
+                    window.aparHydrantSimulator.open(target);
+                }
+            } else if (target === "CUCI_TANGAN" || target === "BATUK" || target === "APD") {
+                if (this.hubModal) this.hubModal.classList.add("hidden");
+                this.isOpen = false;
+                if (window.aparHydrantSimulator && window.aparHydrantSimulator.isOpen) {
+                    window.aparHydrantSimulator.closeSilently();
+                }
+                if (window.ppiSimulator) {
+                    window.ppiSimulator.open(target);
+                }
+            }
+        }
+
+        close() {
+            if (this.hubModal) this.hubModal.classList.add("hidden");
+            this.isOpen = false;
+            if (window.aparHydrantSimulator && window.aparHydrantSimulator.isOpen) {
+                window.aparHydrantSimulator.closeSilently();
+            }
+            if (window.ppiSimulator && window.ppiSimulator.isOpen) {
+                window.ppiSimulator.closeSilently();
+            }
+
+            // Restore state to playing
+            currentState = GAME_STATE.PLAYING;
+            input.left = false;
+            input.right = false;
+            input.jumpPressed = false;
+            input.jumpReleased = false;
+            input.jumpHeld = false;
+            lastTime = performance.now();
+            window.focus();
+        }
+    }
+
+    const masterSimulasi = new MasterSimulasiController();
     const aparHydrantSimulator = new AparHydrantSimulator();
     const ppiSimulator = new PpiSimulator();
 
@@ -7843,6 +8163,7 @@
         setupInput();
         resizeCanvas();
         setPokja("TKRS");
+        masterSimulasi.init();
         aparHydrantSimulator.init();
         ppiSimulator.init();
         updateHud();
@@ -7850,6 +8171,7 @@
         window.player = player;
         window.getCurrentLevel = () => currentLevel;
         window.setPokja = setPokja;
+        window.masterSimulasi = masterSimulasi;
         window.ppiSimulator = ppiSimulator;
         window.aparHydrantSimulator = aparHydrantSimulator;
         window.openQuizModal = openQuizModal;
