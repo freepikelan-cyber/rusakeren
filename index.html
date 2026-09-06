@@ -463,12 +463,12 @@
                     <span id="badgePAP" class="inline-block mt-2 px-2 py-0.5 rounded bg-rose-500/10 text-rose-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 12. PKPO -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 12</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">PKPO</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Pelayanan Kefarmasian & Penggunaan Obat</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 12. PKPO (ACTIVE) -->
+                <div id="selectPokjaPKPO" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-purple-400 uppercase tracking-wider">MAP 14 / DUNIA 12</div>
+                    <div class="text-xs md:text-sm font-bold text-white">PKPO</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Pelayanan Kefarmasian & Penggunaan Obat (Formularium RS, LASA & High Alert, Suhu Kulkas 2-8°C, Troli Emergensi, Double Check)</div>
+                    <span id="badgePKPO" class="inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 13. KE -->
@@ -2789,71 +2789,114 @@
         }
     ];
 
+    /* ==========================================================================
+       MAP 14: POKJA PKPO (PELAYANAN KEFARMASIAN DAN PENGGUNAAN OBAT)
+       Standar Akreditasi Kemenkes RI (STARKES) - RSAU dr. Esnawan Antariksa
+       ========================================================================== */
     const PKPO_QUIZ_BANK = [
         {
+            id: "pkpo_formularium_rumah_sakit",
+            posName: "Pos 1: Formularium Rumah Sakit & Evaluasi Peresepan",
+            question: "Bagaimana regulasi penyusunan dan evaluasi kepatuhan peresepan obat Formularium di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Formularium disusun oleh Komite Farmasi & Terapi (KFT) mengacu pada Fornas, diperbarui minimal setahun sekali, dan kepatuhan peresepan DPJP dipantau berkala.",
+                "Dokter bebas meresepkan merek obat paten apa pun dari luar negeri tanpa mengacu pada daftar formularium resmi rumah sakit.",
+                "Formularium obat disusun secara sepihak oleh distributor farmasi swasta tanpa persetujuan Direktur Rumah Sakit.",
+                "Daftar obat rumah sakit hanya diperbarui setiap sepuluh tahun sekali saat pergantian komandan pangkalan udara."
+            ],
+            correct: 0,
+            explanation: "Formularium RS disusun secara kolaboratif oleh Komite Farmasi dan Terapi (KFT) mengacu pada Formularium Nasional (Fornas), direvisi minimal setahun sekali, serta kepatuhan peresepan DPJP dievaluasi secara berkala (target standar ≥ 80%)."
+        },
+        {
             id: "pkpo_obat_lasa_tallman",
-            posName: "Pos 1: Pengelolaan Obat LASA/NORUM & Tall Man Lettering",
-            question: "Bagaimana standar penyimpanan dan penulisan obat LASA (Look Alike Sound Alike) / NORUM di rumah sakit?",
+            posName: "Pos 2: Pengelolaan Obat LASA/NORUM & Tall Man Lettering",
+            question: "Bagaimana standar penyimpanan fisik dan penulisan label obat LASA (Look-Alike Sound-Alike) di instalasi farmasi?",
             options: [
-                "Diberi label lingkaran hijau LASA, diberi jarak minimal 2 obat non-LASA, dan ditulis dengan Tall Man Lettering.",
-                "Diletakkan berdampingan langsung dalam satu wadah tanpa pemisah untuk menghemat ruang rak.",
-                "Seluruh obat LASA dilarang disimpan di rumah sakit dan harus diganti dengan obat herbal.",
-                "Ditulis dengan huruf kecil seluruhnya tanpa menggunakan stiker penanda khusus."
+                "Obat LASA disimpan berdampingan rapat dalam satu laci untuk memudahkan pengambilan cepat saat jam sibuk.",
+                "Diberi label stiker kuning LASA, dilarang diletakkan berdampingan (diselingi minimal 1 obat lain), dan ditulis dengan Tall Man Lettering.",
+                "Kemasan obat LASA disamarkan tanpa label agar pasien tidak merasa cemas terhadap potensi tertukarnya obat.",
+                "Semua obat LASA harus dilarang beredar di rumah sakit dan diganti dengan racikan puyer non-standar."
+            ],
+            correct: 1,
+            explanation: "Obat kategori LASA/NORUM wajib diberi stiker penanda khusus, tidak boleh diletakkan berdampingan secara langsung (diselingi obat non-LASA), dan penulisan label menggunakan Tall Man Lettering (contoh: DOPamin vs DOBUTamin, EPINefrin vs EFEdrin) untuk mencegah kekeliruan pengambilan."
+        },
+        {
+            id: "pkpo_elektrolit_konsentrat",
+            posName: "Pos 3: Regulasi Penyimpanan Cairan Elektrolit Konsentrat",
+            question: "Di unit manakah cairan elektrolit pekat (seperti KCl 7,46%, NaCl 3%, MgSO4 20%/40%, NaHCO3 8,4%) diperbolehkan disimpan?",
+            options: [
+                "Tersedia bebas di seluruh laci meja perawat ruang rawat inap biasa tanpa pengawasan khusus.",
+                "Hanya di area perawatan kritis berakses terbatas (IGD, ICU, Kamar Operasi) dengan label 'High Alert - Double Check' dan lemari terkunci.",
+                "Diletakkan di ruang tunggu pasien poliklinik agar keluarga dapat mengambilnya sewaktu-waktu saat darurat.",
+                "Disimpan di pantry ruang rawat inap dekat lemari penyimpanan makanan pasien."
+            ],
+            correct: 1,
+            explanation: "Elektrolit konsentrat dilarang disimpan di unit rawat inap biasa, dan hanya diperbolehkan di unit perawatan kritis (ICU, Kamar Bedah, IGD) dengan akses terbatas, disimpan di lemari terkunci khusus, dan diberi label peringatan merah 'High Alert - Double Check - Wajib Diencerkan'."
+        },
+        {
+            id: "pkpo_narkotika_psikotropika",
+            posName: "Pos 4: Tata Kelola Penyimpanan Obat Narkotika & Psikotropika",
+            question: "Bagaimana standar pengamanan dan penyimpanan fisik sediaan obat Narkotika dan Psikotropika di rumah sakit?",
+            options: [
+                "Disimpan dalam lemari khusus berkunci ganda (double lock) yang menempel kuat pada dinding/lantai, kunci dipegang staf berwenang, dan stok dicatat real-time.",
+                "Diletakkan di rak terbuka ruang racik farmasi agar mudah dijangkau saat peracikan obat banyak.",
+                "Disimpan di dalam tas perawat jaga yang dapat dibawa berpindah-pindah antarruangan bangsal.",
+                "Disatukan dengan stok vitamin dan suplemen makanan di gudang logistik umum rumah sakit."
             ],
             correct: 0,
-            explanation: "Obat LASA diberi stiker lingkaran hijau bertuliskan LASA, diselingi minimal 2 obat non-LASA, dan obat yang dipindahkan kemasannya ditulis dengan Tall Man Lettering (contoh: DIAzepam, LORAzepam)."
+            explanation: "Obat Narkotika dan Psikotropika wajib disimpan dalam lemari khusus berbahan kuat yang menempel pada dinding/lantai, berpengunci ganda (double lock) dengan pemegang kunci berbeda, disertai kartu stok tertib, dan dilaporkan secara berkala melalui sistem SIPNAP Kemenkes."
         },
         {
-            id: "pkpo_elektrolit_pekat",
-            posName: "Pos 2: Penyimpanan Cairan Elektrolit Pekat",
-            question: "Di manakah cairan elektrolit pekat (seperti KCl 7,46% dan NaCl 3%) boleh disimpan di rumah sakit?",
+            id: "pkpo_cold_chain_suhu",
+            posName: "Pos 5: Pemantauan Suhu Obat Termolabil / Kulkas Farmasi",
+            question: "Berapa rentang suhu penyimpanan obat termolabil (vaksin, insulin, suppositoria) dan bagaimana prosedur pemantauannya?",
             options: [
-                "Bebas disimpan di seluruh laci meja perawat ruang rawat inap biasa.",
-                "Hanya di area akses terbatas: Gudang Farmasi, ICU, IGD, Kamar Operasi (OK), dan Hemodialisa dengan label High Alert.",
-                "Diletakkan di meja pendaftaran poliklinik rawat jalan dekat dispenser air minum.",
-                "Disimpan di ruang tunggu pasien agar keluarga mudah mengambilnya saat darurat."
+                "Suhu -10°C hingga 0°C dan hanya perlu diperiksa saat kulkas mengalami kerusakan fatal.",
+                "Suhu 2°C hingga 8°C pada lemari pendingin farmasi, dipantau dan dicatat grafiknya minimal 2 kali sehari (pagi dan sore).",
+                "Suhu ruangan bebas 25°C hingga 30°C dengan sirkulasi udara kipas angin biasa.",
+                "Suhu pemanasan 37°C hingga 40°C agar cairan obat tidak membeku saat musim hujan."
             ],
             correct: 1,
-            explanation: "Elektrolit pekat hanya boleh disimpan di area dengan akses terbatas (IFRS, ICU, IGD, OK, HD) dengan stiker High Alert dan peringatan 'Wajib diencerkan sebelum digunakan'."
+            explanation: "Obat termolabil (vaksin, serum, insulin, suppositoria) wajib disimpan dalam cold chain bersuhu 2°C – 8°C, dilengkapi termometer terkalibrasi, pemantauan dicatat minimal 2 kali sehari (pagi & sore), serta didukung sistem genset darurat otomatis bila listrik padam."
         },
         {
-            id: "pkpo_troli_emergensi",
-            posName: "Pos 3: Kunci & Pengelolaan Troli Obat Emergensi",
-            question: "Bagaimana prosedur pengelolaan troli dan wadah obat emergensi di ruang perawatan pasien?",
+            id: "pkpo_telaah_resep_apoteker",
+            posName: "Pos 6: Pengkajian dan Telaah Resep Sebelum Penyiapan Obat",
+            question: "Apa saja 3 domain utama telaah resep yang wajib dilakukan oleh apoteker/tenaga kefarmasian sebelum obat disiapkan?",
             options: [
-                "Troli dibiarkan tidak terkunci agar siapa saja boleh mengambil obat kapan saja.",
-                "Troli terkunci/disegel, kunci diserahterimakan tiap shift dinas, dan penggunaan diganti resep ke IFRS dalam <= 2 jam.",
-                "Obat emergensi yang terpakai baru boleh diganti saat pemeriksaan audit tahunan pangkalan.",
-                "Kunci troli disimpan oleh keluarga pasien tertua di ruangan rawat inap."
+                "Persyaratan status sosial pasien, kepemilikan rekening tabungan, dan alamat domisili keluarga dokter.",
+                "Kesesuaian administratif (identitas), persyaratan farmasetik (bentuk & dosis), dan pertimbangan klinis (indikasi, alergi, interaksi).",
+                "Kemampuan menawar harga obat, ketersediaan diskon pabrik, dan biaya pengantaran ojek daring.",
+                "Persetujuan tertulis dari RT/RW setempat mengenai legalitas konsumsi obat resep di rumah."
             ],
             correct: 1,
-            explanation: "Troli emergensi wajib disegel/terkunci, kunci diserahterimakan setiap shift dinas, penggunaan segera dimintakan penggantian resep ke IFRS dalam 2 jam, dan disupervisi berkala tiap 3 bulan."
+            explanation: "Telaah resep oleh tenaga farmasi mencakup 3 aspek wajib: 1) Administratif (keabsahan resep, identitas pasien, dokter, tanggal); 2) Farmasetik (bentuk sediaan, dosis, frekuensi, rute, stabilitas); 3) Klinis (ketepatan indikasi, duplikasi, alergi, kontraindikasi, interaksi obat)."
         },
         {
-            id: "pkpo_pelaporan_medication_error",
-            posName: "Pos 4: Pelaporan Insiden Medication Error",
-            question: "Siapa yang wajib melaporkan insiden keselamatan apabila terjadi medication error (kejadian kesalahan obat)?",
+            id: "pkpo_troli_emergensi_segel",
+            posName: "Pos 7: Tata Kelola Troli Emergensi & Penggantian Segel",
+            question: "Bagaimana prosedur penjaminan ketersediaan dan keamanan obat pada troli emergensi di ruang perawatan?",
             options: [
-                "Hanya apoteker kepala gudang farmasi pusat setelah berkoordinasi dengan pengacara rumah sakit.",
-                "Baik dokter maupun perawat yang menemukan kejadian wajib segera melapor sesuai SPO Pelaporan Insiden RS.",
-                "Insiden kesalahan obat tidak perlu dilaporkan bila pasien tidak sampai meninggal dunia.",
-                "Hanya dilaporkan bila keluarga pasien mengajukan tuntutan ganti rugi secara hukum."
+                "Troli dibiarkan terbuka tanpa kunci agar obat dapat dipakai untuk kebutuhan rutin harian pasien bangsal.",
+                "Troli terkunci dengan segel bernomor seri disposabel, diinspeksi berkala, dan bila segel terpakai wajib diisi ulang IFRS dalam ≤ 2 jam.",
+                "Troli emergensi hanya boleh diisi obat setelah ada pasien kritis yang mengalami henti jantung.",
+                "Kunci troli emergensi digantung di luar jendela ruangan agar dapat diambil oleh petugas damkar."
             ],
             correct: 1,
-            explanation: "Baik dokter, perawat, maupun tenaga kefarmasian yang menemukan medication error wajib segera melaporkannya ke Komite Keselamatan Pasien sesuai SPO Pelaporan Insiden."
+            explanation: "Troli emergensi wajib terkunci menggunakan segel bernomor seri unik disposabel untuk menjamin keutuhan isinya, diinspeksi rutin tiap shift, dan jika terpakai untuk resusitasi/Code Blue harus segera diisi ulang (replenish) oleh farmasi dalam waktu maksimal 2 jam lalu disegel kembali."
         },
         {
-            id: "pkpo_kelengkapan_resep",
-            posName: "Pos 5: Persyaratan Resep Obat yang Lengkap",
-            question: "Apa saja unsur yang wajib dicantumkan dalam penulisan resep obat yang lengkap dan legal?",
+            id: "pkpo_double_check_rekonsiliasi",
+            posName: "Pos 8: Prinsip Double Check Obat High Alert & Rekonsiliasi Obat",
+            question: "Kapan dan bagaimana prinsip Double Check independen serta rekonsiliasi obat wajib diterapkan oleh tenaga klinis?",
             options: [
-                "Identitas pasien (nama, umur, no RM), nama obat formularium, dosis, aturan pakai, BB anak, dan riwayat alergi.",
-                "Cukup nama obat saja tanpa perlu mencantumkan dosis, umur, maupun aturan minum.",
-                "Nomor kartu ATM pasien dan nomor telepon kerabat yang dapat dihubungi saat penagihan.",
-                "Tanda tangan saksi minimal dua orang warga sekitar rumah sakit."
+                "Double Check dilakukan dua perawat berbeda sebelum obat High Alert diberikan, dan rekonsiliasi obat dilakukan saat admisi, transfer, dan pemulangan.",
+                "Cukup dilakukan oleh satu mahasiswa magang tanpa perlu konfirmasi dari perawat primer penanggung jawab.",
+                "Double Check hanya diperlukan bila keluarga pasien mencurigai adanya kekeliruan warna cairan infus.",
+                "Rekonsiliasi obat cukup ditanyakan secara lisan saat pasien hendak pulang tanpa perlu pencatatan di rekam medis."
             ],
             correct: 0,
-            explanation: "Resep lengkap wajib mencantumkan identitas pasien (nama, umur, no RM), nama obat formularium, kekuatan/dosis, aturan pakai, berat badan untuk anak, dan riwayat alergi obat."
+            explanation: "Pemberian obat High Alert wajib melalui proses Double Check independen oleh dua orang PPA kompeten (memverifikasi 7 Benar). Rekonsiliasi obat wajib dilakukan sejak awal admisi ranap (membandingkan obat dari rumah), saat transfer unit, dan pemulangan untuk mencegah medication error."
         }
     ];
 
@@ -4046,6 +4089,76 @@
                 ctx.fillStyle = "#059669";
                 ctx.font = "bold 2.5px sans-serif";
                 ctx.fillText("RS", 4, 7);
+            } else if (this.type === "botol_obat_lasa") {
+                // Botol / Vial Obat Farmasi LASA Amber dengan Stiker Kuning Segitiga & Label Tall Man
+                ctx.fillStyle = "#b45309"; // Amber vial glass
+                ctx.beginPath();
+                ctx.roundRect(-8, -9, 16, 22, [2, 2, 4, 4]);
+                ctx.fill();
+                ctx.strokeStyle = "#d97706";
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Tutup Botol / Cap Putih
+                ctx.fillStyle = "#f8fafc";
+                ctx.fillRect(-5, -13, 10, 4);
+
+                // Label Putih/Krem Botol
+                ctx.fillStyle = "#fef08a";
+                ctx.fillRect(-7, -4, 14, 12);
+
+                // Stiker Peringatan LASA Segitiga / Badge Kuning
+                ctx.fillStyle = "#eab308";
+                ctx.strokeStyle = "#854d0e";
+                ctx.lineWidth = 0.6;
+                ctx.beginPath();
+                ctx.moveTo(0, -2);
+                ctx.lineTo(4, 3);
+                ctx.lineTo(-4, 3);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+
+                // Teks LASA
+                ctx.fillStyle = "#1e293b";
+                ctx.font = "bold 3px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("LASA", 0, 6.5);
+            } else if (this.type === "troli_emergensi_kunci") {
+                // Lemari / Troli Emergensi Merah dengan Segel Gembok Bernomor Seri
+                ctx.fillStyle = "#dc2626"; // Merah troli emergensi
+                ctx.beginPath();
+                ctx.roundRect(-10, -11, 20, 24, [3, 3, 2, 2]);
+                ctx.fill();
+                ctx.strokeStyle = "#991b1b";
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Garis Laci Troli Putih
+                ctx.fillStyle = "#f1f5f9";
+                ctx.fillRect(-8, -6, 16, 2.5);
+                ctx.fillRect(-8, -1, 16, 2.5);
+                ctx.fillRect(-8, 4, 16, 2.5);
+
+                // Roda Troli
+                ctx.fillStyle = "#334155";
+                ctx.beginPath();
+                ctx.arc(-6, 13, 2, 0, Math.PI * 2);
+                ctx.arc(6, 13, 2, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Segel Gembok Kuning Bernomor Seri di samping
+                ctx.fillStyle = "#eab308"; // Segel disposabel kuning
+                ctx.fillRect(4, -9, 4, 6);
+                ctx.strokeStyle = "#ca8a04";
+                ctx.lineWidth = 0.6;
+                ctx.strokeRect(4, -9, 4, 6);
+
+                // Teks "✚" Palang Putih Emergensi
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("✚", 0, -6);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -5104,6 +5217,89 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 14: POKJA PKPO (PELAYANAN KEFARMASIAN DAN PENGGUNAAN OBAT)
+       Alur Telusur:
+       Instalasi Farmasi & Ruang KFT Formularium RS, Rak Khusus Obat LASA & NORUM,
+       Depo Kritis Penyimpanan Elektrolit Konsentrat, Lemari Kunci Ganda Narkotika,
+       Ruang Cold Chain Lemari Pendingin Suhu 2-8°C, Meja Pengkajian & Telaah Resep,
+       Pos Kesiapsiagaan Troli Emergensi Segel Bernomor, Unit Verifikasi Double Check
+       ========================================================================== */
+    const PKPO_LEVEL = {
+        id: "PKPO",
+        shortName: "POKJA PKPO",
+        name: "Pokja PKPO • Pelayanan Kefarmasian & Penggunaan Obat (Formularium RS, LASA & High Alert, Suhu Kulkas 2-8°C, Troli Emergensi, Double Check)",
+        accentFloor: "#4c1d95",
+        accentBorder: "#a855f7",
+        width: 6600,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Instalasi Farmasi & Ruang KFT Formularium RS (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Rak Khusus Penyimpanan Obat LASA / NORUM (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Depo Kritis Penyimpanan Elektrolit Konsentrat (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Lemari Kunci Ganda (Double Lock) Narkotika & Psikotropika (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Ruang Rantai Dingin (Cold Chain) Kulkas Suhu 2-8°C (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Meja Pengkajian & Telaah Resep Apoteker (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Pos Kesiapsiagaan Troli Emergensi Segel Bernomor (x: 4580 - 5200)
+            { x: 4580, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 8: Unit Verifikasi Double Check & Rekonsiliasi Obat (x: 5320 - 5800)
+            { x: 5320, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 5500, y: 330, w: 300, h: 24, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor POKJA PKPO (x: 5920 - 6600)
+            { x: 5920, y: 440, w: 680, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2),
+            new MovingPlatform(5220, 410, 85, 20, 70, 0, 1.3),
+            new MovingPlatform(5820, 400, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, PKPO_QUIZ_BANK[0]),  // Pos 1: Formularium RS
+            new QuizTerminal(1140, 270, PKPO_QUIZ_BANK[1]), // Pos 2: Obat LASA/NORUM
+            new QuizTerminal(1920, 380, PKPO_QUIZ_BANK[2]), // Pos 3: Elektrolit Konsentrat
+            new QuizTerminal(2700, 270, PKPO_QUIZ_BANK[3]), // Pos 4: Narkotika & Psikotropika
+            new QuizTerminal(3400, 380, PKPO_QUIZ_BANK[4]), // Pos 5: Cold Chain Suhu 2-8°C
+            new QuizTerminal(4180, 270, PKPO_QUIZ_BANK[5]), // Pos 6: Telaah Resep Apoteker
+            new QuizTerminal(4900, 380, PKPO_QUIZ_BANK[6]), // Pos 7: Troli Emergensi Segel
+            new QuizTerminal(5650, 270, PKPO_QUIZ_BANK[7])  // Pos 8: Double Check & Rekonsiliasi
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "botol_obat_lasa"),
+            new CollectibleDoc(440, 370, "troli_emergensi_kunci"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "botol_obat_lasa"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "troli_emergensi_kunci"),
+            new CollectibleDoc(2100, 390, "botol_obat_lasa"),
+            new CollectibleDoc(2640, 250, "troli_emergensi_kunci"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "botol_obat_lasa"),
+            new CollectibleDoc(3550, 390, "troli_emergensi_kunci"),
+            new CollectibleDoc(4080, 250, "botol_obat_lasa"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "troli_emergensi_kunci"),
+            new CollectibleDoc(5050, 390, "botol_obat_lasa"),
+            new CollectibleDoc(5580, 250, "troli_emergensi_kunci"),
+            new CollectibleDoc(6050, 390, "botol_obat_lasa"),
+            new CollectibleDoc(6250, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
 
@@ -5670,7 +5866,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "AKP") {
+        if (currentLevel.id === "PKPO") {
+            // Suasana Pelayanan Kefarmasian (Ungu Farmasi & Amber Emas Hangat)
+            skyGrad.addColorStop(0, "#3b0764");
+            skyGrad.addColorStop(0.5, "#6b21a8");
+            skyGrad.addColorStop(1, "#c084fc");
+        } else if (currentLevel.id === "AKP") {
             // Suasana Akses & Keberlanjutan Pelayanan (Biru Samudra & Biru Langit Cemerlang)
             skyGrad.addColorStop(0, "#082f49");
             skyGrad.addColorStop(0.5, "#0284c7");
@@ -5737,7 +5938,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "AKP" ? "rgba(186, 230, 253, 0.45)" : (currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))))))));
+        ctx.fillStyle = currentLevel.id === "PKPO" ? "rgba(243, 232, 255, 0.45)" : (currentLevel.id === "AKP" ? "rgba(186, 230, 253, 0.45)" : (currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))))))))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -5750,7 +5951,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))));
+        ctx.fillStyle = currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -5772,15 +5973,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "AKP" ? "#7dd3fc" : (currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))))))));
+            ctx.fillStyle = currentLevel.id === "PKPO" ? "#f59e0b" : (currentLevel.id === "AKP" ? "#7dd3fc" : (currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))))))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))));
+            ctx.fillStyle = currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "AKP" ? "rgba(8, 47, 73, 0.65)" : (currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))))))));
+        ctx.fillStyle = currentLevel.id === "PKPO" ? "rgba(59, 7, 100, 0.65)" : (currentLevel.id === "AKP" ? "rgba(8, 47, 73, 0.65)" : (currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))))))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -5788,7 +5989,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "AKP") {
+            if (currentLevel.id === "PKPO") {
+                ctx.fillStyle = "rgba(107, 33, 168, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("💊 PKPO: FORMULARIUM RS • LASA & HIGH ALERT • SUHU 2-8°C • TROLI EMERGENSI • DOUBLE CHECK", kx + 160, 296);
+                ctx.fillStyle = "rgba(59, 7, 100, 0.65)";
+            } else if (currentLevel.id === "AKP") {
                 ctx.fillStyle = "rgba(2, 132, 199, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -5940,7 +6149,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))))))));
+        ctx.fillStyle = currentLevel.id === "PKPO" ? "#7c3aed" : (currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -6144,9 +6353,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "AKP") {
+        if (currentLevel.id === "PKPO") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-500 hover:from-purple-500 hover:to-indigo-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-amber-200 to-pink-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja PKPO (Pelayanan Kefarmasian dan Penggunaan Obat), kepatuhan peresepan sesuai Formularium RS & Fornas, pelabelan dan penempatan obat LASA/NORUM dengan pembeda Tall Man Lettering, pengamanan ketat cairan elektrolit pekat High Alert di unit khusus, penyimpanan obat narkotika-psikotropika dalam lemari kunci ganda (double lock), pengendalian rantai dingin (Cold Chain) 2°C - 8°C dengan log harian kulkas farmasi, ketelitian telaah resep administratif-farmasetik-klinis oleh apoteker, kesiapsiagaan troli emergensi tersegel bernomor seri dengan penggantian resep ≤ 2 jam, serta kepatuhan verifikasi double check dan rekonsiliasi obat paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Pengelolaan obat LASA, lemari narkotika kunci ganda, dan troli emergensi berjalan prima dengan penguatan kepatuhan dokumentasi suhu kulkas farmasi 2 kali sehari.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan ketertiban verifikasi double check obat High Alert sebelum pemberian dan kelengkapan rekonsiliasi obat pasien baru rawat inap.";
+            }
+        } else if (currentLevel.id === "AKP") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 14: POKJA PKPO ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -6496,7 +6723,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "AKP") {
+        if (pokjaId === "PKPO") {
+            currentLevel = PKPO_LEVEL;
+        } else if (pokjaId === "AKP") {
             currentLevel = AKP_LEVEL;
         } else if (pokjaId === "PP") {
             currentLevel = PP_LEVEL;
@@ -6543,6 +6772,7 @@
         const tabHPK = document.getElementById("tabSelectHPK");
         const tabPP = document.getElementById("tabSelectPP");
         const tabAKP = document.getElementById("tabSelectAKP");
+        const tabPKPO = document.getElementById("tabSelectPKPO");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -6565,6 +6795,7 @@
         const cardHPK = document.getElementById("selectPokjaHPK");
         const cardPP = document.getElementById("selectPokjaPP");
         const cardAKP = document.getElementById("selectPokjaAKP");
+        const cardPKPO = document.getElementById("selectPokjaPKPO");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -6578,6 +6809,7 @@
         const badgeHPK = document.getElementById("badgeHPK");
         const badgePP = document.getElementById("badgePP");
         const badgeAKP = document.getElementById("badgeAKP");
+        const badgePKPO = document.getElementById("badgePKPO");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -6593,6 +6825,7 @@
         if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabPP) tabPP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabAKP) tabAKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPKPO) tabPKPO.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -6647,8 +6880,29 @@
             cardAKP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all";
             if (badgeAKP) { badgeAKP.innerText = "SIAP DITELUSURI"; badgeAKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
         }
+        if (cardPKPO) {
+            cardPKPO.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-purple-950/40 transition-all";
+            if (badgePKPO) { badgePKPO.innerText = "SIAP DITELUSURI"; badgePKPO.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "AKP") {
+        if (currentLevel.id === "PKPO") {
+            if (tabPKPO) tabPKPO.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA PKPO • MAP 14 (AKTIF)";
+                menuSubtitle.className = "text-xs text-purple-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PKPO (<strong>Formularium RS & Fornas</strong>, <strong>Obat LASA & Tall Man Lettering</strong>, <strong>Elektrolit Konsentrat High Alert</strong>, <strong>Lemari Kunci Ganda Narkotika</strong>, <strong>Cold Chain 2°C - 8°C</strong>, <strong>Telaah Resep Apoteker</strong>, <strong>Troli Emergensi Segel Bernomor</strong>, & <strong>Verifikasi Double Check</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 14: POKJA PKPO";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-bold text-base md:text-lg shadow-lg shadow-purple-500/30 transition-all active:scale-98";
+            }
+            if (cardPKPO) {
+                cardPKPO.className = "p-3 rounded-xl bg-purple-500/20 border border-purple-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-purple-500/30 transition-all";
+                if (badgePKPO) { badgePKPO.innerText = "TELUSUR AKTIF"; badgePKPO.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "AKP") {
             if (tabAKP) tabAKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA AKP • MAP 13 (AKTIF)";
@@ -6890,6 +7144,7 @@
     bindTab("tabSelectHPK", "HPK");
     bindTab("tabSelectPP", "PP");
     bindTab("tabSelectAKP", "AKP");
+    bindTab("tabSelectPKPO", "PKPO");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -6964,6 +7219,13 @@
             document.getElementById("pokjaSelectModal").classList.add("hidden");
         };
     }
+    const selectPKPO = document.getElementById("selectPokjaPKPO");
+    if (selectPKPO) {
+        selectPKPO.onclick = () => {
+            setPokja("PKPO");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -6989,6 +7251,8 @@
             setPokja("PP");
         } else if (currentLevel.id === "PP") {
             setPokja("AKP");
+        } else if (currentLevel.id === "AKP") {
+            setPokja("PKPO");
         } else {
             setPokja("TKRS");
         }

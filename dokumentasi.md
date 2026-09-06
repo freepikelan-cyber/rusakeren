@@ -1834,7 +1834,83 @@ Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasi
   - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur akses & kontinuitas pelayanan terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
 
 ---
+
+## 27. Aktivasi Penuh MAP 14: POKJA PKPO (Pelayanan Kefarmasian dan Penggunaan Obat)
+
+Sebagai wujud kepatuhan terhadap Standar Akreditasi Rumah Sakit Kementerian Kesehatan Republik Indonesia (STARKES) pada bab **Pelayanan Kefarmasian dan Penggunaan Obat (PKPO)**, **MAP 14 (DUNIA 12)** telah diaktifkan secara penuh. Pokja ini membekali seluruh apoteker, tenaga vokasi farmasi, dokter spesialis/DPJP, dan perawat RSAU dr. Esnawan Antariksa dengan pemahaman komprehensif mengenai tata kelola regulasi obat faskes, Formularium RS mengacu Fornas, pengelolaan obat LASA/NORUM dengan Tall Man Lettering, penyimpanan elektrolit konsentrat tinggi di area terbatas, tata kelola lemari narkotika/psikotropika berpintu ganda dengan kunci berbeda, pemantauan rantai dingin kulkas farmasi 2°C–8°C, telaah resep 3 dimensi (administratif, farmasetik, klinis), tata kelola troli emergensi berpengunci segel bernomor unik, serta verifikasi double-check obat high alert dan rekonsiliasi obat lintas fase pelayanan.
+
+---
+
+### 💊 1. Kurikulum Edukatif 8 Terminal Kuis Pokja PKPO (`PKPO_QUIZ_BANK`)
+Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasis skenario riil lapangan kefarmasian, dan terverifikasi standar STARKES Kemenkes RI:
+1. **Pos 1: Regulasi Formularium RS & Evaluasi Kepatuhan DPJP**:
+   - Formularium Rumah Sakit disusun dan dievaluasi secara berkala oleh Komite/Tim Farmasi dan Terapi (KFT) mengacu pada Formularium Nasional (Fornas).
+   - Target kepatuhan penulisan resep DPJP terhadap Formularium RS ditetapkan minimal **$\ge 80\%$**.
+   - Resep obat di luar Formularium hanya dapat disetujui melalui mekanisme permohonan khusus non-formularium yang disahkan oleh KFT dan Direktur Rumah Sakit.
+2. **Pos 2: Pengelolaan Obat LASA/NORUM & Tall Man Lettering**:
+   - Obat kategori *Look Alike Sound Alike* (LASA) / *Nama Obat Rupa dan Ucapan Mirip* (NORUM) tidak boleh diletakkan berdampingan secara langsung (wajib diselingi minimal 2 obat non-LASA).
+   - Diberi stiker penanda khusus berlatar kuning dengan tulisan *"LASA"* tebal.
+   - Penulisan nama obat wajib menerapkan teknik **Tall Man Lettering** pada suku kata yang membedakan (contoh: **EPINefrin** vs **NOREPINefrin**, **CEFOtaxime** vs **CEFTriaxone**, **DIAzepam** vs **LORAzepam**) guna meminimalkan risiko tertukar saat peresepan dan penyiapan.
+3. **Pos 3: Penyimpanan Cairan Elektrolit Konsentrat Tinggi (High Alert)**:
+   - Cairan elektrolit konsentrat tinggi (KCl 7.46%, NaCl 3%, Dextrose 40%, MgSO4 20%/40%, Natrium Bikarbonat 8.4%) **dilarang disimpan di ruang rawat inap biasa**.
+   - Hanya diperbolehkan disimpan di area pelayanan kritis terpilih (ICU, IGD, Kamar Operasi / Bedah, dan Instalasi Farmasi).
+   - Disimpan terpisah di lemari khusus berpintu dengan label peringatan warna merah mencolok bertuliskan *"HIGH ALERT"* dan wajib diencerkan sesuai protokol sebelum diberikan kepada pasien.
+4. **Pos 4: Tata Kelola Lemari Narkotika & Psikotropika**:
+   - Lemari penyimpanan sediaan narkotika dan psikotropika wajib memiliki **dua pintu dengan dua kunci berbeda (double lock)** yang dipegang oleh dua personel apoteker/tenaga kefarmasian yang berbeda shift/tugas.
+   - Lemari terbuat dari bahan kuat dan tertempel kokoh pada dinding atau lantai ruangan farmasi.
+   - Dilengkapi kartu stok manual/digital real-time dan dilaporkan secara periodik ke Kemenkes RI melalui aplikasi **SIPNAP (Sistem Pelaporan Narkotika dan Psikotropika)**.
+5. **Pos 5: Pemantauan Suhu Obat Termolabil / Kulkas Farmasi (Cold Chain 2°C–8°C)**:
+   - Vaksin, serum, insulin, oksitosin, dan produk darah wajib disimpan dalam rantai dingin kulkas farmasi khusus pada rentang suhu **$2^\circ\text{C} - 8^\circ\text{C}$**.
+   - Suhu kulkas dipantau dan dicatat dalam logbook suhu minimal **2 kali sehari** (pagi dan sore).
+   - Dilengkapi termometer digital terkalibrasi, alarm indikator suhu bila keluar rentang, serta prosedur kontinjensi pemindahan bila terjadi gangguan listrik (genset otomatis / ice pack cool box).
+6. **Pos 6: Pengkajian dan Telaah Resep Sebelum Penyiapan Obat**:
+   - Apoteker wajib melakukan telaah resep menyeluruh sebelum obat diracik/disiapkan yang mencakup 3 dimensi kajian:
+     1. **Kajian Administratif**: Nama pasien, nomor RM, tanggal lahir/umur, berat badan anak, nama dokter, SIP dokter, tanggal resep, dan paraf/tanda tangan.
+     2. **Kajian Farmasetik**: Nama obat, bentuk sediaan, kekuatan, dosis, jumlah obat, stabilitas, dan aturan cara pakai.
+     3. **Kajian Klinis**: Ketepatan indikasi, dosis, frekuensi, rute pemberian, duplikasi terapi, potensi alergi obat, kontraindikasi, serta potensi interaksi obat yang membahayakan.
+7. **Pos 7: Tata Kelola Troli Emergensi & Penggantian Kunci Segel**:
+   - Troli emergensi di unit pelayanan (IGD, ICU, Bangsal, Poliklinik) wajib selalu dalam keadaan siap pakai dan terkunci dengan **segel bernomor seri unik (disposable lock seal)**.
+   - Pemakaian obat emergensi untuk resusitasi darurat harus segera dilaporkan ke farmasi.
+   - Petugas farmasi wajib mengisi ulang obat dan memasang segel baru dengan nomor seri baru dalam waktu maksimal **$\le 2$ jam** pasca-penggunaan, serta melakukan inspeksi berkala kelayakan dan tanggal kedaluwarsa minimal 1 bulan sekali.
+8. **Pos 8: Prinsip Double Check Obat High Alert & Rekonsiliasi Obat**:
+   - Pemberian obat kategori High Alert (sitostatika, insulin, antikoagulan heparin, elektrolit konsentrat) wajib menerapkan prinsip **Double Check** secara independen oleh dua orang perawat/petugas berwenang sebelum diinjeksikan ke pasien.
+   - Dilakukan verifikasi 7 Benar Pemberian Obat.
+   - Dilakukan proses **Rekonsiliasi Obat** komprehensif untuk membandingkan daftar riwayat obat yang pernah digunakan pasien di rumah dengan instruksi terapi baru saat pasien admisi, transfer antaruang, maupun saat pulang (*discharge*).
+
+---
+
+### 🎮 2. Desain Level MAP 14 (`PKPO_LEVEL`)
+- **Visual & Atmosfer Farmasi Ungu Royal & Amber Emas**:
+  - Lantai platform ubin porselen ungu royal tua dengan lis aksen ungu menyala (`accentFloor: #4c1d95`, `accentBorder: #a855f7`).
+  - Langit gradien ungu royal farmasi (`#3b0764` -> `#6b21a8` -> `#c084fc`).
+  - Siluet gedung faskes dengan lambang palang obat farmasi emas amber menyala (`#f59e0b`).
+  - Banner dinding koridor: `💊 PKPO: FORMULARIUM RS • LASA & HIGH ALERT • SUHU 2-8°C • TROLI EMERGENSI • DOUBLE CHECK`.
+  - Gerbang finish surveyor berwarna ungu royal berkilau (`#7c3aed`).
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Instalasi Farmasi Pusat & Evaluasi Fornas RS, Depo Rawat Jalan & Rak LASA Tall Man, Depo Area Kritis & Elektrolit Konsentrat, Ruang Narkotika & Lemari Double Lock SIPNAP, Ruang Rantai Dingin Kulkas Farmasi 2-8°C, Meja Pengkajian & Telaah Resep Apoteker, Koridor Siap Pakai Troli Emergensi Segel, Ruang Rawat Double Check & Rekonsiliasi Obat, dan Exit Conference Surveyor POKJA PKPO).
+  - 7 Platform bergerak vertikal dan horizontal melintasi void farmasi.
+- **Kolektibel Khusus**:
+  - `botol_obat_lasa`: Botol vial obat sirup/kapsul kaca amber dengan label peringatan kuning berbingkai tebal, segitiga peringatan emas, teks hitam tebal *"LASA"*, dan tutup botol oranye tertutup rapat.
+  - `troli_emergensi_kunci`: Troli emergensi merah terang beroda hitam, dengan 3 laci putih berkancing perak, tiang infus ganda di samping, dan segel gembok bernomor seri kuning cerah di bagian laci atas.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`PKPO_QUIZ_BANK`)**:
+  - 8 Pos QuizTerminal interaktif berstandar STARKES dengan opsi jawaban edukatif seimbang dan penjelasan komprehensif.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_pkpo_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaPKPO`.
+  - Berhasil mengaktifkan `currentLevel = PKPO_LEVEL`, mengubah teks tombol menu menjadi `▶ MULAI TELUSUR MAP 14: POKJA PKPO`, serta menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay PKPO dengan render kanvas tanpa kendala (`pkpo_gameplay.png`).
+  - Membuka Pos 1 Kuis STARKES PKPO, menjawab opsi C (Evaluasi berkala oleh KFT mengacu Fornas dengan target kepatuhan peresepan DPJP minimal $\ge 80\%$), dan menerima umpan balik positif beserta penjelasan lengkap (`pkpo_quiz_feedback.png`).
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur pelayanan kefarmasian dan penggunaan obat terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS` (`pkpo_assessment.png`).
+
+---
+
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
+
 
 
 
