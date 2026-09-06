@@ -255,7 +255,7 @@ try {
     throw new Error("Expected SKP level, got: " + skpInfo.id);
   }
 
-  // 5. Check MAP 4 MFK as well
+  // 5. Check MAP 4 MFK
   console.log("\n--- SWITCHING TO MAP 4 (MFK PLATFORMER) ---");
   await evalCode(`(() => {
     setPokja("MFK");
@@ -271,6 +271,28 @@ try {
     platformsCount: currentLevel.platforms.length
   }))()`);
   console.log("MFK Info:", mfkInfo);
+
+  // 6. Check MAP 9 MRMIK (Sole Mario Bros Platformer)
+  console.log("\n--- SWITCHING TO MAP 9 (MRMIK SOLE MARIO BROS RETRO PLATFORMER) ---");
+  await evalCode(`(() => {
+    setPokja("MRMIK");
+  })()`);
+  await new Promise(r => setTimeout(r, 600));
+
+  const mrmikInfo = await evalCode(`(() => ({
+    id: currentLevel.id,
+    shortName: currentLevel.shortName,
+    gameMode: currentLevel.gameMode || "PLATFORMER",
+    playerX: player.x,
+    playerY: player.y,
+    hudWorld: document.getElementById("hudWorld").innerText,
+    platformsCount: currentLevel.platforms.length
+  }))()`);
+  console.log("MRMIK Info:", mrmikInfo);
+
+  const snap5 = await send("Page.captureScreenshot", { format: "png" });
+  fs.writeFileSync("/Users/elan/.gemini/antigravity-ide/brain/f23f89af-1925-43c2-bd62-e7ae87fea366/mrmik_mario_gameplay.png", Buffer.from(snap5.data, "base64"));
+  console.log("Saved mrmik_mario_gameplay.png");
 
   console.log("\n>>> ALL MULTI-GENRE GAME TESTS COMPLETED WITH 100% SUCCESS! <<<");
   ws.close();
