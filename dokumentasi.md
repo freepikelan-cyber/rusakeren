@@ -2068,6 +2068,71 @@ Pengujian otomatis via Chrome DevTools Protocol (`scratch/test_etik_level.mjs`) 
 
 *Dokumentasi ini membuktikan penyelesaian 100% seluruh kurikulum 16 Pokja STARKES dalam format gamifikasi digital edukatif, siap digunakan untuk sosialisasi, pembelajaran berkala, dan persiapan telusur akreditasi nyata di RSAU dr. Esnawan Antariksa.*
 
+---
+
+## 30. Orientasi Fasyankes Wajib (Tour 4 Ruangan RS) & Simulator Bantuan Hidup Dasar (BHD / RJP & AED 7 Langkah)
+
+### 🏢 1. Latar Belakang & Filosofi Edukasi
+Untuk meningkatkan *situational awareness* personel rumah sakit sebelum terjun ke telusur 16 Pokja STARKES, ditambahkan dua sistem utama:
+1. **Orientasi Wajib Fasyankes (Tour Masuk Ruangan RS)**: Pemain diwajibkan meninjau 4 dokumen denah dan tata kelola fasyankes dengan transisi blast door kedap udara khas fasilitas militer modern, efek audio otentik, zoom/pan interaktif, dan inspeksi pin hotspot bercahaya.
+2. **Simulator Bantuan Hidup Dasar (BHD / CPR & Defibrilator AED)**: Modul praktikum ke-6 di *Master Simulation Hub* yang mengadopsi standar AHA (*American Heart Association*) dan Kemenkes RI, dilengkapi simulator interaktif kompresi dada (100-120 BPM, metronom audio, depth gauge 5-6 cm) serta eksekusi kejut listrik AED.
+
+---
+
+### 🏛️ 2. Tour Masuk 4 Ruangan Utama RSAU dr. Esnawan Antariksa
+Sistem tour (`HospitalTourController`) mengunci telusur awal pemain sebelum menyelesaikan pengenalan 4 sektor berikut:
+
+1. **Ruang 1: Sektor Tata Pamong & Struktur Organisasi RS**
+   - **Aset Utama**: `assets/strukturorganisasi.jpg`
+   - **Regulasi STARKES**: Standar TKRS (Tata Kelola Rumah Sakit)
+   - **Materi Telusur**: Garis komando Ka RSAU dibantu Dewan Pengawas (DEWAS), Unsur Pembantu Pimpinan (Ses RSAU, SPI, TAUD, Progar, Kamed, Kaku, Jaminan), 10 Komite Medis/Fasyankes independen (Kordik, Medis, Keperawatan, Mutu, Etik, PPI, K3RS, dll.), dan 20 Poliklinik Spesialis.
+   - **Hotspot Interaktif**: Unsur Pimpinan, Unsur Pembantu Staf, Komite Independen RS, dan Unsur Pelaksana Klinis.
+
+2. **Ruang 2: Sektor Master Zoning & Denah Rumah Sakit**
+   - **Aset Utama**: `assets/denahrs.png`
+   - **Regulasi STARKES**: Standar MFK & AKP
+   - **Materi Telusur**: Orientasi spasial rumah sakit mulai dari Gerbang Utama & Pos Jaga, Lobi Medrek, Lapangan Apel & Kandang Rusa Esnawan, Sektor Barat (IGD, ICU, Radiologi, MCU, Lab), Sektor Timur (Bangsal Perawatan Garuda, Nuri, Merpati, Parkit, Camar), hingga Fasilitas Penunjang (GSG, Masjid, IPAL, TPS B3).
+   - **Hotspot Interaktif**: Gerbang Utama, IGD & ICU Cepat, Lapangan Apel & Rusa, Bangsal Rawat Inap, IPAL & TPS Limbah B3.
+
+3. **Ruang 3: Sektor K3RS & Denah Jalur Evakuasi Darurat**
+   - **Aset Utama**: `assets/jalurevakuasi.png`
+   - **Regulasi STARKES**: Standar MFK (Manajemen Fasilitas & Keselamatan / Code Red)
+   - **Materi Telusur**: Penyelamatan jiwa saat kebakaran atau bencana alam, rute panah merah bebas hambatan koridor, pemetaan Titik Kumpul Aman (*Assembly Point*) Lapangan Parkir dan Lapangan Apel, serta posisi sumber air tanggap darurat (Sumur Bor & Pompa Air Dalam).
+   - **Hotspot Interaktif**: Assembly Point Lapangan Parkir, Assembly Point Lapangan Apel, Sumur Bor Cadangan Air, dan Jalur Bebas Hambatan Koridor Merah.
+
+4. **Ruang 4: Sektor Pusat Kendali & 36 Kamera CCTV Pos Jaga**
+   - **Aset Utama**: `assets/cctv.png`
+   - **Regulasi STARKES**: Standar MFK & HPK (Keamanan Pasien & Fasilitas 24 Jam)
+   - **Materi Telusur**: Pemantauan real-time 36 titik kamera CCTV oleh Pos Jaga Sentral 24 jam nonstop untuk mencegah penculikan bayi, mengawasi area parkir, lobi, IGD, rawat inap lantai 2-3, farmasi, dan aset fasyankes.
+   - **Fitur Khusus Animasi**: Dynamic Canvas Radar Overlay yang memproyeksikan sinar pemindai hijau (*sweep beam*) berputar terus menerus mengelilingi pos jaga fasyankes.
+
+---
+
+### 💓 3. Laboratorium Praktikum Bantuan Hidup Dasar (BHD / RJP & AED)
+Modul ke-6 di *Master Simulation Hub* mengimplementasikan algoritma resusitasi henti jantung (`BhdSimulator`) berbasis panduan poster resmi fasyankes `assets/bhd.png`:
+
+| Langkah | Nama Tahapan | Standar Medis & Instruksi Klinis | Interaksi & Animasi Game |
+|:---:|:---|:---|:---|
+| **1** | **Aman 3A** | Aman Diri (APD), Aman Pasien (alas datar keras), Aman Lingkungan (bebas bahaya). | Tombol verifikasi 3 perisai pelindung 3A. |
+| **2** | **Cek Respon & Napas** | Tepuk kedua bahu, panggil suara lantang *"Pak/Bu, buka mata!"*, raba arteri karotis & amati dada 10 detik. | Sensor deteksi respon dan palpasi karotis Kapten Erik. |
+| **3** | **Aktivasi Code Blue** | Berteriak meminta tolong: *"Tolong, ada pasien henti jantung! Aktifkan Code Blue ruangan ini!"* | Sirene darurat Code Blue berbunyi kencang dengan lampu merah berkedip. |
+| **4** | **Tim Sekunder & AED Tiba** | Tim resusitasi sekunder tiba di TKP membawa defibrilator otomatis (AED). Pasang elektroda pad di bawah klavikula kanan & apeks kiri. | Tas AED kuning terbuka, pad elektroda menempel di dada pasien. |
+| **5** | **Kompresi Dada 100-120 BPM** | Kompresi kuat (5-6 cm) dan cepat (100-120 BPM) di pertengahan dada (*sternum*), lengan lurus tegak lurus, recoil dada penuh. | Minigame interaktif tombol PUSH / Spasi, depth gauge indikator kedalaman 5-6 cm, metronom audio 110 BPM, counter 30 kompresi. |
+| **6** | **Defibrilasi (Shock AED)** | AED menganalisis irama *Ventricular Fibrillation (VF)*. Intruksikan: *"Stand clear! Jangan sentuh pasien!"*. Tekan tombol Shock. | Lingkaran batas aman perimeter merah berkedip, kilatan layar kejut 200 Joule (*shock flash*). |
+| **7** | **Siklus 30:2 & Evaluasi ROSC** | Berikan 2 napas bantuan, lanjutkan siklus 30 kompresi : 2 ventilasi sampai tercapai *Return of Spontaneous Circulation* (ROSC). | Monitor EKG menunjukkan irama sinus normal 78 BPM, suara detak jantung pulih, dan sertifikat keberhasilan BHD. |
+
+---
+
+### 📊 4. Matriks 6 Modul Praktikum Master Simulation Hub RS
+
+Dengan penambahan BHD, *Master Simulation Hub* kini mencakup seluruh kompetensi wajib rumah sakit:
+1. 🧯 **Lab APAR**: Metode P.A.S.S (*Pull, Aim, Squeeze, Sweep*) dengan fisika api & dry chemical powder dinamis.
+2. 🚒 **Lab Hydrant**: Kompartemen selang gedung (Hose Reel) & Pilar Lapangan, formasi *two-man hold*, tekanan 4.5-7 Bar.
+3. 🧼 **Lab Cuci Tangan WHO**: 11 Langkah ilustrasi tangan manusia nyata, mode Handwash (40-60 detik) & Handrub (20-40 detik), partikel busa sabun.
+4. 🤧 **Lab Etika Batuk**: 4 Protokol baku droplet (lengan atas bagian dalam, tisu medis, kantung kuning infeksius, hand hygiene).
+5. 🥼 **Lab Donning & Doffing APD**: Urutan standar pemasangan dan pelepasan hazmat/gown, masker bedah/N95, kacamata goggle, dan sarung tangan steril tanpa kontaminasi silang.
+6. 💓 **Lab BHD / RJP & AED**: 7 Tahapan BHD Kemenkes/AHA, metronom 110 BPM, depth gauge 5-6 cm, eksekusi shock defibrilator dan pemantauan gelombang ROSC.
+
 
 
 
