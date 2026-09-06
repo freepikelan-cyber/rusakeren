@@ -1909,6 +1909,75 @@ Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasi
 
 ---
 
+## 28. Aktivasi Penuh MAP 15: POKJA KE (Komunikasi dan Edukasi)
+
+Sebagai wujud kepatuhan terhadap Standar Akreditasi Rumah Sakit Kementerian Kesehatan Republik Indonesia (STARKES) pada bab **Komunikasi dan Edukasi (KE)**, **MAP 15 (DUNIA 13)** telah diaktifkan secara penuh. Pokja ini membekali seluruh Profesional Pemberi Asuhan (PPA: Dokter/DPJP, Perawat, Bidan, Apoteker, Dietisien/Nutrisionis, dan Fisioterapis) serta staf non-klinis RSAU dr. Esnawan Antariksa dengan pemahaman mendalam mengenai pedoman komunikasi efektif, 5 dimensi asesmen pra-edukasi pasien/keluarga, verifikasi pemahaman dengan *Teach-Back Method* dan re-demonstrasi, pendokumentasian Formulir Edukasi Terintegrasi di rekam medis, format komunikasi antar-staf klinis SBAR, verifikasi instruksi verbal/telepon teknik TBaK $\le 24$ jam, materi edukasi perencanaan pemulangan pasien, serta program Promosi Kesehatan Rumah Sakit (PKRS) bagi komunitas.
+
+---
+
+### 📢 1. Kurikulum Edukatif 8 Terminal Kuis Pokja KE (`KE_QUIZ_BANK`)
+Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasis skenario riil lapangan, dan terverifikasi standar STARKES Kemenkes RI:
+1. **Pos 1: PPA Berkompeten Pemberi Edukasi**:
+   - Edukasi pasien dan keluarga dilaksanakan secara kolaboratif oleh seluruh Profesional Pemberi Asuhan (PPA) multi-profesi: Dokter (DPJP), Perawat, Bidan, Apoteker/Farmasi, Dietisien/Nutrisionis, dan Fisioterapis sesuai dengan kebutuhan asuhan klinis masing-masing.
+2. **Pos 2: 5 Dimensi Asesmen Pra-Edukasi Pasien & Keluarga**:
+   - Sebelum edukasi diberikan, staf klinis wajib melakukan asesmen awal terhadap 5 dimensi kebutuhan edukasi:
+     1. Keyakinan dan nilai-nilai agama/budaya yang dianut.
+     2. Kemampuan membaca dan tingkat literasi kesehatan (*health literacy*).
+     3. Bahasa yang dipahami sehari-hari (termasuk kesiapan penerjemah bahasa daerah/isyarat jika ada kendala).
+     4. Hambatan emosional, kognitif, atau keterbatasan fisik (gangguan penglihatan, pendengaran, atau afasia).
+     5. Kesediaan dan motivasi pasien serta keluarga untuk menerima informasi edukasi.
+3. **Pos 3: Verifikasi Pemahaman Pasien (*Teach-Back Method*)**:
+   - Metode baku untuk memastikan keberhasilan edukasi adalah teknik **Teach-Back** (meminta pasien mengulang inti penjelasan dengan kata-katanya sendiri) dan **Re-demonstrasi** (meminta pasien memperagakan langsung keterampilan asuhan, misalnya cara cuci tangan, teknik penyuntikan insulin, atau pemakaian inhaler).
+4. **Pos 4: Bukti Pendokumentasian Edukasi di Rekam Medis**:
+   - Bukti otentik penyelenggaraan edukasi adalah pengisian lengkap **Formulir Komunikasi dan Edukasi Terintegrasi** di berkas rekam medis yang memuat tanggal, topik materi, metode evaluasi pemahaman, serta dibubuhi tanda tangan/paraf PPA pemberi edukasi dan penerima edukasi (pasien/keluarga).
+5. **Pos 5: Komunikasi Antar-Staf Klinis Format SBAR**:
+   - Komunikasi antar-staf medis dan perawat saat melaporkan kondisi kritis pasien, konsultasi DPJP, maupun timbang terima (*handover/operan shift*) wajib menerapkan format terstruktur **SBAR**:
+     - **S (Situation)**: Identitas pasien dan kondisi mendesak/masalah yang sedang terjadi saat ini.
+     - **B (Background)**: Riwayat medis penting, diagnosis masuk, tindakan yang telah dilakukan, dan hasil pemeriksaan sebelumnya.
+     - **A (Assessment)**: Temuan klinis terkini dan analisis penilaian kondisi pasien oleh pelapor.
+     - **R (Recommendation)**: Tindakan darurat atau rekomendasi instruksi lanjutan yang diusulkan kepada dokter penerima laporan.
+6. **Pos 6: Konfirmasi Instruksi Verbal / Telepon Teknik TBaK**:
+   - Saat menerima instruksi medis per telepon atau secara verbal dalam keadaan darurat, penerima instruksi wajib menjalankan teknik **TBaK**:
+     - **T (Tulis)**: Menuliskan secara lengkap isi instruksi dokter pada formulir CPPT/catatan medis.
+     - **Ba (Baca)**: Membacakan kembali seluruh isi instruksi kepada dokter pemberi pesan.
+     - **K (Konfirmasi)**: Mendapatkan konfirmasi kebenaran instruksi lisan dari dokter, serta memastikan DPJP menandatangani konfirmasi verifikasi tertulis dalam kurun waktu **$\le 1\times 24$ jam**.
+7. **Pos 7: Materi Wajib Edukasi Pasien Pulang**:
+   - Sebelum meninggalkan rumah sakit, pasien dan keluarga wajib dibekali edukasi perencanaan pemulangan komprehensif yang mencakup: aturan pakai dan potensi efek samping obat pulang, panduan diet dan nutrisi klinis, perawatan diri dan alat medis mandiri di rumah, serta tanda-tanda bahaya darurat (*warning signs*) kapan harus segera kembali ke IGD.
+8. **Pos 8: Program Promosi Kesehatan Rumah Sakit (PKRS)**:
+   - Unit PKRS RSAU dr. Esnawan Antariksa menyelenggarakan edukasi kesehatan promotif dan preventif terprogram melalui penyuluhan berkala di ruang tunggu poliklinik/bangsal, distribusi leaflet/media edukasi faskes, penyiaran informasi kesehatan digital, serta edukasi kesehatan komunitas di pangkalan udara dan masyarakat luas.
+
+---
+
+### 🎮 2. Desain Level MAP 15 (`KE_LEVEL`)
+- **Visual & Atmosfer Zamrud & Cyan Komunikasi Segar**:
+  - Lantai platform ubin porselen hijau zamrud tua dengan lis aksen mint bercahaya (`accentFloor: #065f46`, `accentBorder: #34d399`).
+  - Langit gradien hijau zamrud toska komunikasi (`#022c22` -> `#0d9488` -> `#6ee7b7`).
+  - Siluet gedung faskes dengan lambang palang hijau toska mint menyala (`#34d399`).
+  - Banner dinding koridor: `📢 KE: EDUKASI PPA • 5 ASESMEN PRA-EDUKASI • TEACH-BACK METHOD • SBAR & TBAK • PKRS`.
+  - Gerbang finish surveyor berwarna hijau zamrud berkilau (`#10b981`).
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Pusat PKRS & Tim Edukasi PPA Multi-Profesi, Ruang Asesmen 5 Dimensi Pra-Edukasi Pasien, Unit Simulasi Verifikasi Pemahaman Teach-Back, Meja Pendokumentasian Formulir Edukasi di RM, Koridor Komunikasi Antar-Staf Format SBAR, Pos Konfirmasi Instruksi Verbal/Telepon TBaK, Ruang Perencanaan Pemulangan Pasien Pulang, Panggung Penyuluhan Kelompok Komunitas PKRS, dan Exit Conference Surveyor POKJA KE).
+  - 7 Platform bergerak vertikal dan horizontal melintasi void rumah sakit.
+- **Kolektibel Khusus**:
+  - `leaflet_edukasi_pkrs`: Brosur leaflet lipat tiga (*trifold*) toska cerah dengan 3 panel informasi terlipat, ikon palang medis, garis teks edukasi rapi, dan lencana bintang emas PKRS.
+  - `mikrofon_penyuluhan`: Mikrofon penyuluhan kesehatan silver chrome dengan kepala jaring berbingkai emas, gagang hitam elegan, dan gelombang suara nirkabel biru cyan memancar.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`KE_QUIZ_BANK`)**:
+  - 8 Pos QuizTerminal interaktif berstandar STARKES dengan opsi jawaban edukatif seimbang dan penjelasan komprehensif.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_ke_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaKE`.
+  - Berhasil mengaktifkan `currentLevel = KE_LEVEL`, mengubah teks tombol menu menjadi `▶ MULAI TELUSUR MAP 15: POKJA KE`, serta menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay KE dengan render kanvas tanpa kendala (`ke_gameplay.png`).
+  - Membuka Pos 1 Kuis STARKES KE, menjawab opsi B (Seluruh tim PPA multi-profesi: Dokter, Perawat, Bidan, Apoteker, Dietisien, Fisioterapis), dan menerima umpan balik positif beserta penjelasan lengkap (`ke_quiz_feedback.png`).
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur komunikasi dan edukasi terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS` (`ke_assessment.png`).
+
+---
+
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
 
 
