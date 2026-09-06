@@ -495,12 +495,12 @@
                     <span id="badgePROGNAS" class="inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/10 text-purple-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 16. KPS-MED -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 16</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">ETIK</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Etik Rumah Sakit & Tata Nilai</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 16. ETIK (ACTIVE) -->
+                <div id="selectPokjaETIK" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-amber-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-amber-400 uppercase tracking-wider">MAP 16 / DUNIA 16</div>
+                    <div class="text-xs md:text-sm font-bold text-white">ETIK</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Etik Rumah Sakit & Tata Nilai (Komite Etik & Hukum, KODERSI, Dilema Etik Klinis, WBS, Just Culture, KEPK)</div>
+                    <span id="badgeETIK" class="inline-block mt-2 px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
             </div>
         </div>
@@ -2845,6 +2845,116 @@
         }
     ];
 
+    /* ==========================================================================
+       MAP 16: POKJA ETIK (ETIK RUMAH SAKIT, TATA NILAI & KOMITE ETIK HUKUM)
+       Standar Akreditasi Kemenkes RI (STARKES) - RSAU dr. Esnawan Antariksa
+       ========================================================================== */
+    const ETIK_QUIZ_BANK = [
+        {
+            id: "etik_komite_etik_hukum",
+            posName: "Pos 1: Kedudukan & Fungsi Komite Etik Hukum RS",
+            question: "Berdasarkan Permenkes No. 42 Tahun 2018, apakah peran dan fungsi utama Komite Etik dan Hukum Rumah Sakit (KEHRS) di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Memberikan pertimbangan etis dan telaah hukum kepada Direktur RS dalam penanganan dilema asuhan pasien dan tata kelola faskes.",
+                "Mengambil alih fungsi kepolisian militer dalam menyelidiki tindak pidana murni personel pangkalan udara.",
+                "Menentukan tarif sewa lahan parkir dan tarif kantin rumah sakit untuk keperluan komersial koperasi.",
+                "Menjatuhkan vonis hukum pidana secara sepihak kepada tenaga medis tanpa proses sidang peradilan profesi."
+            ],
+            correct: 0,
+            explanation: "Sesuai Permenkes No. 42/2018, Komite Etik dan Hukum Rumah Sakit (KEHRS) berfungsi memberikan pertimbangan etis dan telaah hukum kepada Kepala/Direktur Rumah Sakit, menyusun pedoman perilaku (KODERSI), serta memfasilitasi mediasi penyelesaian dilema etik asuhan pasien dan sengketa medikolegal faskes."
+        },
+        {
+            id: "etik_kodersi_tata_nilai",
+            posName: "Pos 2: Kode Etik Rumah Sakit Indonesia (KODERSI)",
+            question: "Siapa sajakah pihak yang wajib mematuhi dan menginternalisasi Kode Etik Rumah Sakit Indonesia (KODERSI) di lingkungan RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Hanya dokter spesialis bedah dan apoteker pengelola instalasi farmasi rumah sakit.",
+                "Seluruh civitas hospitalia: jajaran direksi, staf medis, keperawatan, tenaga kesehatan lain, hingga staf penunjang dan manajemen.",
+                "Hanya pasien rawat jalan yang berobat menggunakan fasilitas jaminan kesehatan BPJS.",
+                "Hanya kontraktor pemborong bangunan yang sedang mengerjakan proyek renovasi gedung."
+            ],
+            correct: 1,
+            explanation: "KODERSI mengikat seluruh insan rumah sakit (civitas hospitalia) tanpa terkecuali, meliputi pimpinan/direksi, seluruh dokter dan perawat, tenaga penunjang medis, tenaga administratif, hingga staf pendukung dalam menjaga martabat profesi dan kehormatan institusi rumah sakit."
+        },
+        {
+            id: "etik_dilema_etik_klinis",
+            posName: "Pos 3: Penyelesaian Dilema Etik Klinis",
+            question: "Bagaimanakah alur baku penyelesaian apabila terjadi dilema etik klinis yang pelik dalam asuhan pasien (misalnya perbedaan pendapat keluarga mengenai penghentian terapi penopang hidup/withholding life support)?",
+            options: [
+                "Dokter mengambil keputusan sepihak tergesa-gesa tanpa mendiskusikan dengan keluarga pasien maupun komite etik.",
+                "Melakukan konsultasi multidisiplin bersama Komite Etik dan Hukum RS untuk musyawarah telaah etis, menghormati hak otonomi pasien, dan mencari konsensus terbaik (beneficence).",
+                "Segera memulangkan paksa pasien ke rumah tanpa memberikan bantuan medis darurat lanjutan.",
+                "Menyerahkan keputusan sepenuhnya kepada opini warganet di media sosial melalui pemungutan suara daring (online polling)."
+            ],
+            correct: 1,
+            explanation: "Penanganan dilema etik klinis wajib difasilitasi melalui konsultasi etik multidisiplin oleh Tim/Subkomite Etik Klinis KEHRS, melibatkan DPJP, perawat, komite medik, serta pasien/keluarga guna menelaah prinsip otonomi (autonomy), kebaikan (beneficence), tidak merugikan (non-maleficence), dan keadilan (justice)."
+        },
+        {
+            id: "etik_benturan_kepentingan",
+            posName: "Pos 4: Pencegahan Benturan Kepentingan & Gratifikasi",
+            question: "Bagaimanakah regulasi pencegahan benturan kepentingan (Conflict of Interest) dan gratifikasi bagi staf rumah sakit sesuai standar STARKES?",
+            options: [
+                "Staf dilarang menerima gratifikasi/hadiah dari pihak ketiga yang berpotensi memengaruhi objektivitas pelayanan dan wajib mendeklarasikan potensi benturan kepentingan.",
+                "Dokter diperbolehkan menerima komisi uang tunai dari distributor obat tertentu asalkan resep obat ditebus pasien di apotek luar.",
+                "Staf pengadaan bebas menerima tiket liburan dan akomodasi mewah dari rekanan vendor alat kesehatan tanpa melapor.",
+                "Rumah sakit mewajibkan setiap pasien memberikan uang pelicin kepada perawat agar mendapatkan pelayanan yang lebih ramah."
+            ],
+            correct: 0,
+            explanation: "Standar etik rumah sakit mewajibkan kebijakan pengendalian gratifikasi dan benturan kepentingan yang ketat. Seluruh pimpinan, staf medis, dan staf pengadaan dilarang menerima imbalan/hadiah dari vendor farmasi/rekanan serta wajib menandatangani formulir deklarasi bebas benturan kepentingan secara periodik."
+        },
+        {
+            id: "etik_whistleblowing_system",
+            posName: "Pos 5: Whistleblowing System (WBS) & Proteksi Pelapor",
+            question: "Apakah prinsip utama penyelenggaraan Whistleblowing System (WBS) dalam menampung laporan dugaan pelanggaran etik atau kecurangan di rumah sakit?",
+            options: [
+                "Menjamin kerahasiaan identitas pelapor (whistleblower), memberikan perlindungan dari ancaman/retaliasi, dan memproses investigasi secara objektif independen.",
+                "Mengumumkan nama lengkap dan nomor telepon pelapor di papan pengumuman lobi utama rumah sakit.",
+                "Mengharuskan pelapor membayar uang jaminan perkara sebelum pengaduan dugaan pelanggaran diperiksa.",
+                "Menolak seluruh laporan anonim tanpa verifikasi awal bukti pendukung dugaan insiden."
+            ],
+            correct: 0,
+            explanation: "Whistleblowing System (WBS) rumah sakit menjamin kerahasiaan penuh identitas pelapor, memberikan proteksi dari tindakan intimidasi/hukuman administratif (non-retaliation), serta melakukan telaah bukti secara objektif dan independen melalui Komite Etik dan Hukum."
+        },
+        {
+            id: "etik_just_culture",
+            posName: "Pos 6: Budaya Adil (Just Culture) Respon Insiden",
+            question: "Bagaimanakah prinsip budaya adil (Just Culture) diterapkan oleh pimpinan RSAU dr. Esnawan Antariksa dalam merespons terjadinya insiden keselamatan pasien?",
+            options: [
+                "Membedakan antara kesalahan manusia (human error) yang perlu perbaikan sistem, perilaku berisiko (at-risk) yang butuh edukasi, dan pelanggaran sengaja (reckless) yang dikenakan sanksi tegas.",
+                "Langsung menghukum dan memotong gaji seluruh perawat yang berada di ruangan saat insiden terjadi tanpa investigasi kronologi.",
+                "Menutup-nutupi seluruh insiden keselamatan pasien agar nama baik dan citra rumah sakit tidak tercemar di mata publik.",
+                "Membebaskan pelaku kelalaian berat yang disengaja dari segala tanggung jawab hukum dan disiplin profesi."
+            ],
+            correct: 0,
+            explanation: "Konsep Just Culture menciptakan lingkungan yang adil di mana pelaporan insiden tidak serta-merta dihukum secara membabi buta (non-punitive for honest mistakes). Sistem membedakan human error (pembelajaran sistemik), at-risk behavior (pembinaan dan coaching), serta reckless behavior (kecerobohan/disengaja yang wajib ditindak disipliner tegas)."
+        },
+        {
+            id: "etik_penelitian_kesehatan",
+            posName: "Pos 7: Kaji Etik Penelitian Kesehatan (KEPK)",
+            question: "Sebelum melaksanakan riset medis atau uji klinis yang mengikutsertakan pasien atau rekam medis di rumah sakit, kewajiban etik apakah yang harus dipenuhi peneliti?",
+            options: [
+                "Memperoleh persetujuan etik (Ethical Clearance) dari Komite Etik Penelitian Kesehatan (KEPK) terakreditasi dan Informed Consent khusus penelitian.",
+                "Cukup meminta izin lisan kepada petugas keamanan gerbang masuk tanpa perlu telaah protokol penelitian.",
+                "Langsung mengambil sampel darah pasien tanpa memberitahukan tujuan dan potensi risiko efek samping penelitian.",
+                "Mempublikasikan data identitas pribadi dan foto wajah pasien penelitian secara terbuka di jurnal ilmiah internasional."
+            ],
+            correct: 0,
+            explanation: "Seluruh riset klinis dan kesehatan yang melibatkan subjek manusia, bahan biologis tersimpan, maupun rekam medis wajib memiliki surat Ethical Clearance dari KEPK serta memperoleh Informed Consent tertulis dari subjek penelitian untuk melindungi hak asasi, privasi, dan keselamatan responden."
+        },
+        {
+            id: "etik_tatanilai_esnawan",
+            posName: "Pos 8: Tata Nilai & Kehormatan RSAU dr. Esnawan Antariksa",
+            question: "Bagaimanakah integrasi tata nilai keprajuritan TNI AU dan budaya keselamatan diterapkan dalam pelayanan sehari-hari di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Menjunjung tinggi nilai Swa Bhuwana Paksa: integritas moral, loyalitas pengabdian, disiplin tinggi, berpadu dengan pelayanan asuhan berorientasi pasien (Patient-Centered Care) yang humanis.",
+                "Mengutamakan sikap kaku militeristis tanpa memperhatikan empati dan kebutuhan kenyamanan pasien yang sedang sakit.",
+                "Membeda-bedakan kualitas asuhan antara pasien keluarga militer dengan masyarakat sipil umum.",
+                "Mengabaikan standar prosedur operasional rumah sakit jika ada perintah informal yang bertentangan dengan keselamatan medis."
+            ],
+            correct: 0,
+            explanation: "Nilai luhur RSAU dr. Esnawan Antariksa mengintegrasikan etos keprajuritan TNI Angkatan Udara (Kehormatan, Integritas, Disiplin, Loyalitas) dengan profesionalisme kedokteran militer dan asuhan berpusat pada pasien (Patient-Centered Care) yang hangat, adil, bermutu, dan berfokus pada keselamatan jiwa."
+        }
+    ];
 
     /* ==========================================================================
        MAP 14: POKJA PKPO (PELAYANAN KEFARMASIAN DAN PENGGUNAAN OBAT)
@@ -4293,6 +4403,89 @@
                 ctx.beginPath();
                 ctx.arc(0, -6, 12, -Math.PI * 0.3, Math.PI * 0.3);
                 ctx.stroke();
+            } else if (this.type === "timbangan_keadilan") {
+                // Timbangan Keadilan Emas (Scales of Justice) Komite Etik & Hukum
+                // Tiang Penyangga Tengah
+                ctx.fillStyle = "#f59e0b"; // Gold / Brass
+                ctx.fillRect(-1.5, -12, 3, 22);
+                
+                // Puncak Tiang (Bola Emas)
+                ctx.beginPath();
+                ctx.arc(0, -12, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Balok Lengan Kiri & Kanan
+                ctx.fillStyle = "#fbbf24";
+                ctx.fillRect(-11, -8, 22, 2.5);
+
+                // Tali / Rantai Cawan Kiri
+                ctx.strokeStyle = "#d97706";
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(-9, -7); ctx.lineTo(-12, 1);
+                ctx.moveTo(-9, -7); ctx.lineTo(-6, 1);
+                ctx.stroke();
+
+                // Cawan Timbangan Kiri
+                ctx.fillStyle = "#fbbf24";
+                ctx.beginPath();
+                ctx.arc(-9, 1, 4.5, 0, Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = "#b45309";
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+
+                // Tali / Rantai Cawan Kanan
+                ctx.strokeStyle = "#d97706";
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(9, -7); ctx.lineTo(6, 1);
+                ctx.moveTo(9, -7); ctx.lineTo(12, 1);
+                ctx.stroke();
+
+                // Cawan Timbangan Kanan
+                ctx.fillStyle = "#fbbf24";
+                ctx.beginPath();
+                ctx.arc(9, 1, 4.5, 0, Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = "#b45309";
+                ctx.lineWidth = 0.7;
+                ctx.stroke();
+
+                // Dudukan / Landasan Bawah Timbangan
+                ctx.fillStyle = "#b45309";
+                ctx.beginPath();
+                ctx.roundRect(-6, 10, 12, 3, [1, 1, 1, 1]);
+                ctx.fill();
+            } else if (this.type === "buku_kodersi_etik") {
+                // Buku Pedoman KODERSI & Tata Nilai Etik Navy Midnight Berbalut Emas
+                ctx.fillStyle = "#1e1b4b"; // Navy midnight
+                ctx.beginPath();
+                ctx.roundRect(-9, -11, 18, 22, [2, 3, 3, 2]);
+                ctx.fill();
+                ctx.strokeStyle = "#fbbf24"; // Gold border
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // Punggung Buku Emas di Sisi Kiri
+                ctx.fillStyle = "#f59e0b";
+                ctx.fillRect(-9, -11, 3.5, 22);
+
+                // Garis Lembaran Halaman Buku Putih di Sisi Kanan
+                ctx.fillStyle = "#f8fafc";
+                ctx.fillRect(7, -9, 2, 18);
+
+                // Lambang Timbangan / Palang Etik Emas di Sampul
+                ctx.fillStyle = "#fbbf24";
+                ctx.font = "bold 7px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("⚖️", 0.5, 0);
+
+                // Teks ETIK di Sampul Depan
+                ctx.fillStyle = "#fef08a";
+                ctx.font = "bold 3px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("ETIK", 0, 6.5);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -5517,6 +5710,88 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 16: POKJA ETIK (ETIK RUMAH SAKIT, TATA NILAI & KOMITE ETIK HUKUM)
+       Alur Telusur:
+       Sekretariat Komite Etik dan Hukum RS (KEHRS), Ruang Sidang Pedoman KODERSI,
+       Unit Musyawarah Penyelesaian Dilema Etik Klinis, Meja Deklarasi Benturan Kepentingan,
+       Ruang Saluran Pengaduan Whistleblowing System (WBS), Koridor Penerapan Budaya Adil Just Culture,
+       Laboratorium Kaji Etik Penelitian Kesehatan (KEPK), Balai Swa Bhuwana Paksa Kehormatan RSAU
+       ========================================================================== */
+    const ETIK_LEVEL = {
+        id: "ETIK",
+        shortName: "POKJA ETIK",
+        name: "Pokja ETIK • Etik Rumah Sakit, Tata Nilai & Komite Etik Hukum (KODERSI, Dilema Etik Klinis, WBS, Just Culture, KEPK)",
+        accentFloor: "#1e1b4b",
+        accentBorder: "#fbbf24",
+        width: 6600,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Sekretariat Komite Etik dan Hukum RS (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Ruang Sidang Pedoman KODERSI (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Unit Musyawarah Penyelesaian Dilema Etik Klinis (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Meja Deklarasi Benturan Kepentingan & Anti-Gratifikasi (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Ruang Saluran Pengaduan Whistleblowing System WBS (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Koridor Penerapan Budaya Adil Just Culture (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Laboratorium Kaji Etik Penelitian Kesehatan KEPK (x: 4580 - 5200)
+            { x: 4580, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 8: Balai Swa Bhuwana Paksa Tata Nilai Kehormatan RSAU (x: 5320 - 5800)
+            { x: 5320, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 5500, y: 330, w: 300, h: 24, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor POKJA ETIK (x: 5920 - 6600)
+            { x: 5920, y: 440, w: 680, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2),
+            new MovingPlatform(5220, 410, 85, 20, 70, 0, 1.3),
+            new MovingPlatform(5820, 400, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, ETIK_QUIZ_BANK[0]),  // Pos 1: Komite Etik & Hukum RS
+            new QuizTerminal(1140, 270, ETIK_QUIZ_BANK[1]), // Pos 2: KODERSI & Tata Nilai
+            new QuizTerminal(1920, 380, ETIK_QUIZ_BANK[2]), // Pos 3: Dilema Etik Klinis
+            new QuizTerminal(2700, 270, ETIK_QUIZ_BANK[3]), // Pos 4: Benturan Kepentingan
+            new QuizTerminal(3400, 380, ETIK_QUIZ_BANK[4]), // Pos 5: WBS & Proteksi Pelapor
+            new QuizTerminal(4180, 270, ETIK_QUIZ_BANK[5]), // Pos 6: Just Culture
+            new QuizTerminal(4900, 380, ETIK_QUIZ_BANK[6]), // Pos 7: KEPK Ethical Clearance
+            new QuizTerminal(5650, 270, ETIK_QUIZ_BANK[7])  // Pos 8: Tata Nilai Kehormatan
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "timbangan_keadilan"),
+            new CollectibleDoc(440, 370, "buku_kodersi_etik"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "timbangan_keadilan"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "buku_kodersi_etik"),
+            new CollectibleDoc(2100, 390, "timbangan_keadilan"),
+            new CollectibleDoc(2640, 250, "buku_kodersi_etik"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "timbangan_keadilan"),
+            new CollectibleDoc(3550, 390, "buku_kodersi_etik"),
+            new CollectibleDoc(4080, 250, "timbangan_keadilan"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "buku_kodersi_etik"),
+            new CollectibleDoc(5050, 390, "timbangan_keadilan"),
+            new CollectibleDoc(5580, 250, "buku_kodersi_etik"),
+            new CollectibleDoc(6050, 390, "timbangan_keadilan"),
+            new CollectibleDoc(6250, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
 
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
@@ -6084,7 +6359,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "KE") {
+        if (currentLevel.id === "ETIK") {
+            // Suasana Komite Etik & Hukum RS (Navy Midnight & Gold Amber Kehormatan)
+            skyGrad.addColorStop(0, "#0f172a");
+            skyGrad.addColorStop(0.5, "#1e1b4b");
+            skyGrad.addColorStop(1, "#fbbf24");
+        } else if (currentLevel.id === "KE") {
             // Suasana Komunikasi & Promosi Kesehatan RS (Hijau Zamrud & Cyan Segar)
             skyGrad.addColorStop(0, "#022c22");
             skyGrad.addColorStop(0.5, "#0d9488");
@@ -6161,7 +6441,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "KE" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PKPO" ? "rgba(243, 232, 255, 0.45)" : (currentLevel.id === "AKP" ? "rgba(186, 230, 253, 0.45)" : (currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))))))))));
+        ctx.fillStyle = currentLevel.id === "ETIK" ? "rgba(254, 243, 199, 0.45)" : (currentLevel.id === "KE" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PKPO" ? "rgba(243, 232, 255, 0.45)" : (currentLevel.id === "AKP" ? "rgba(186, 230, 253, 0.45)" : (currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))))))))))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -6174,7 +6454,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "KE" ? "#022c22" : (currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))))));
+        ctx.fillStyle = currentLevel.id === "ETIK" ? "#0f172a" : (currentLevel.id === "KE" ? "#022c22" : (currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -6196,15 +6476,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "KE" ? "#34d399" : (currentLevel.id === "PKPO" ? "#f59e0b" : (currentLevel.id === "AKP" ? "#7dd3fc" : (currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))))))))));
+            ctx.fillStyle = currentLevel.id === "ETIK" ? "#fbbf24" : (currentLevel.id === "KE" ? "#34d399" : (currentLevel.id === "PKPO" ? "#f59e0b" : (currentLevel.id === "AKP" ? "#7dd3fc" : (currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))))))))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "KE" ? "#022c22" : (currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))))));
+            ctx.fillStyle = currentLevel.id === "ETIK" ? "#0f172a" : (currentLevel.id === "KE" ? "#022c22" : (currentLevel.id === "PKPO" ? "#3b0764" : (currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "KE" ? "rgba(2, 44, 34, 0.65)" : (currentLevel.id === "PKPO" ? "rgba(59, 7, 100, 0.65)" : (currentLevel.id === "AKP" ? "rgba(8, 47, 73, 0.65)" : (currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))))))))));
+        ctx.fillStyle = currentLevel.id === "ETIK" ? "rgba(30, 27, 75, 0.65)" : (currentLevel.id === "KE" ? "rgba(2, 44, 34, 0.65)" : (currentLevel.id === "PKPO" ? "rgba(59, 7, 100, 0.65)" : (currentLevel.id === "AKP" ? "rgba(8, 47, 73, 0.65)" : (currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))))))))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -6212,7 +6492,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "KE") {
+            if (currentLevel.id === "ETIK") {
+                ctx.fillStyle = "rgba(245, 158, 11, 0.9)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#1e1b4b";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("⚖️ ETIK: KOMITE ETIK & HUKUM • KODERSI • DILEMA ETIK • WBS • JUST CULTURE • KEPK", kx + 160, 296);
+                ctx.fillStyle = "rgba(30, 27, 75, 0.65)";
+            } else if (currentLevel.id === "KE") {
                 ctx.fillStyle = "rgba(13, 148, 136, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -6380,7 +6668,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "KE" ? "#10b981" : (currentLevel.id === "PKPO" ? "#7c3aed" : (currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))))))))));
+        ctx.fillStyle = currentLevel.id === "ETIK" ? "#f59e0b" : (currentLevel.id === "KE" ? "#10b981" : (currentLevel.id === "PKPO" ? "#7c3aed" : (currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -6584,9 +6872,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "KE") {
+        if (currentLevel.id === "ETIK") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-emerald-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa menuntaskan seluruh 16 Pokja STARKES melalui pemenuhan standar paripurna Pokja ETIK (Etik Rumah Sakit dan Tata Nilai), pembentukan dan tata kelola independen Komite Etik dan Hukum RS (KEHRS) berdasarkan Permenkes No. 42 Tahun 2018, penegakan Kode Etik Rumah Sakit Indonesia (KODERSI), tata laksana penyelesaian dilema etik klinis dan etik operasional multidisiplin, penandatanganan pakta integritas dan deklarasi bebas benturan kepentingan (Conflict of Interest) serta tolak gratifikasi, implementasi saluran pengaduan pelanggaran aman dan rahasia Whistleblowing System (WBS), internalisasi budaya adil tanpa menyalahkan Just Culture dalam pelaporan insiden keselamatan, penjaminan kelayakan etik riset kesehatan oleh KEPK (Ethical Clearance), serta pengamalan sejati Tata Nilai Kehormatan Prajurit TNI AU 'Swa Bhuwana Paksa' paripurna di seluruh lini rumah sakit!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola Komite Etik dan Hukum, sosialisasi KODERSI, dan mekanisme Just Culture berjalan prima dengan rekomendasi percepatan tindak lanjut laporan Whistleblowing System (WBS).";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan sosialisasi alur musyawarah dilema etik klinis pada PPA dan ketertiban pembaruan deklarasi tahunan benturan kepentingan.";
+            }
+        } else if (currentLevel.id === "KE") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 16: POKJA ETIK ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-yellow-500 hover:from-amber-500 hover:to-yellow-400 text-slate-900 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -6972,7 +7278,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "KE") {
+        if (pokjaId === "ETIK") {
+            currentLevel = ETIK_LEVEL;
+        } else if (pokjaId === "KE") {
             currentLevel = KE_LEVEL;
         } else if (pokjaId === "PKPO") {
             currentLevel = PKPO_LEVEL;
@@ -7025,6 +7333,7 @@
         const tabAKP = document.getElementById("tabSelectAKP");
         const tabPKPO = document.getElementById("tabSelectPKPO");
         const tabKE = document.getElementById("tabSelectKE");
+        const tabETIK = document.getElementById("tabSelectETIK");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -7049,6 +7358,7 @@
         const cardAKP = document.getElementById("selectPokjaAKP");
         const cardPKPO = document.getElementById("selectPokjaPKPO");
         const cardKE = document.getElementById("selectPokjaKE");
+        const cardETIK = document.getElementById("selectPokjaETIK");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -7064,6 +7374,7 @@
         const badgeAKP = document.getElementById("badgeAKP");
         const badgePKPO = document.getElementById("badgePKPO");
         const badgeKE = document.getElementById("badgeKE");
+        const badgeETIK = document.getElementById("badgeETIK");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -7081,6 +7392,7 @@
         if (tabAKP) tabAKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabPKPO) tabPKPO.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabKE) tabKE.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabETIK) tabETIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-amber-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -7143,8 +7455,29 @@
             cardKE.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-emerald-950/40 transition-all";
             if (badgeKE) { badgeKE.innerText = "SIAP DITELUSURI"; badgeKE.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold"; }
         }
+        if (cardETIK) {
+            cardETIK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-amber-950/40 transition-all";
+            if (badgeETIK) { badgeETIK.innerText = "SIAP DITELUSURI"; badgeETIK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "KE") {
+        if (currentLevel.id === "ETIK") {
+            if (tabETIK) tabETIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-amber-400/80 bg-amber-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA ETIK • MAP 16 (AKTIF)";
+                menuSubtitle.className = "text-xs text-amber-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja ETIK (<strong>Komite Etik & Hukum RS / KEHRS</strong> Permenkes 42/2018, <strong>Kode Etik RS Indonesia / KODERSI</strong>, <strong>Musyawarah Dilema Etik Klinis</strong>, <strong>Deklarasi Bebas Benturan Kepentingan & Anti-Gratifikasi</strong>, <strong>Whistleblowing System / WBS</strong>, <strong>Budaya Adil Just Culture</strong>, <strong>Ethical Clearance KEPK</strong>, & <strong>Tata Nilai Swa Bhuwana Paksa RSAU</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 16: POKJA ETIK";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500 hover:from-amber-500 hover:to-yellow-400 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-amber-500/30 transition-all active:scale-98";
+            }
+            if (cardETIK) {
+                cardETIK.className = "p-3 rounded-xl bg-amber-500/20 border border-amber-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-amber-500/30 transition-all";
+                if (badgeETIK) { badgeETIK.innerText = "TELUSUR AKTIF"; badgeETIK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "KE") {
             if (tabKE) tabKE.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA KE • MAP 15 (AKTIF)";
@@ -7422,6 +7755,7 @@
     bindTab("tabSelectAKP", "AKP");
     bindTab("tabSelectPKPO", "PKPO");
     bindTab("tabSelectKE", "KE");
+    bindTab("tabSelectETIK", "ETIK");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -7510,6 +7844,13 @@
             document.getElementById("pokjaSelectModal").classList.add("hidden");
         };
     }
+    const selectETIK = document.getElementById("selectPokjaETIK");
+    if (selectETIK) {
+        selectETIK.onclick = () => {
+            setPokja("ETIK");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -7539,6 +7880,8 @@
             setPokja("PKPO");
         } else if (currentLevel.id === "PKPO") {
             setPokja("KE");
+        } else if (currentLevel.id === "KE") {
+            setPokja("ETIK");
         } else {
             setPokja("TKRS");
         }

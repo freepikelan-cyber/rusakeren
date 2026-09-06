@@ -1978,7 +1978,96 @@ Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasi
 
 ---
 
-*Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
+## 29. Aktivasi Penuh MAP 16: POKJA ETIK (Etik Rumah Sakit, Tata Nilai & Komite Etik Hukum) dan Penuntasan 100% Seluruh 16 Pokja STARKES
+
+Dengan diaktifkannya **MAP 16 (DUNIA 15): POKJA ETIK**, seluruh 16 Kelompok Kerja Standar Akreditasi Rumah Sakit Kementerian Kesehatan Republik Indonesia (**STARKES Kemenkes RI**) di RSAU dr. Esnawan Antariksa kini telah **100% aktif, terimplementasi penuh, dan terhubung dalam rantai telusur berkelanjutan (continuous infinite loop)**.
+
+Pokja ETIK berfokus pada penegakan tata nilai luhur, etika profesi kedokteran dan keperawatan, tata kelola rumah sakit yang berintegritas tinggi, pengelolaan dilema etik klinis, pencegahan konflik kepentingan (*conflict of interest*), perlindungan pelapor pelanggaran (*whistleblowing system*), budaya keselamatan berkeadilan (*just culture*), kelaikan etik riset klinis oleh Komite Etik Penelitian Kesehatan (KEPK), serta integrasi nilai-nilai kejuangan prajurit TNI Angkatan Udara (*Swa Bhuwana Paksa*) dalam dedikasi pelayanan kesehatan.
+
+---
+
+### ⚖️ 1. Kurikulum Edukatif 8 Terminal Kuis Pokja ETIK (`ETIK_QUIZ_BANK`)
+
+Seluruh materi kuis disusun berstandar STARKES Kemenkes RI dan Permenkes RI No. 42 Tahun 2018, dengan opsi jawaban edukatif seimbang dan berbobot ilmiah-etik:
+
+1. **Pos 1: Komite Etik dan Hukum Rumah Sakit (Permenkes RI No. 42/2018)**:
+   - Sesuai Permenkes 42/2018, Komite Etik dan Hukum Rumah Sakit (KEHRS) adalah perangkat organisasi non-struktural yang bertugas membantu Kepala/Direktur Rumah Sakit dalam menyusun kebijakan etik dan hukum RS, menangani sengketa etik dan medikolegal, membina etika civitas hospitalia, serta memberikan rekomendasi pertimbangan etik dan hukum bagi pimpinan.
+2. **Pos 2: Kode Etik Rumah Sakit Indonesia (KODERSI)**:
+   - KODERSI yang diterbitkan oleh PERSI memuat panduan moral fundamental: mengutamakan keselamatan dan hak pasien di atas kepentingan finansial pribadi/golongan, melarang praktik diskriminasi layanan, menjunjung tinggi rahasia kedokteran, menghormati profesi kesehatan lain, dan senantiasa memelihara citra luhur perumahsakitan Indonesia.
+3. **Pos 3: Tata Laksana Dilema Etik Klinis**:
+   - Jika timbul dilema etik dalam asuhan (misalnya perbedaan persepsi kelanjutan terapi antara keluarga dan DPJP), PPA wajib mengutamakan prinsip keselamatan dan kepentingan terbaik pasien (*best interest of the patient*), memfasilitasi musyawarah keluarga secara transparan, menghormati hak *second opinion*, serta berkonsultasi kepada Komite Etik dan Hukum Rumah Sakit untuk telaah multidisiplin.
+4. **Pos 4: Pengelolaan Benturan / Konflik Kepentingan (*Conflict of Interest*)**:
+   - Staf klinis maupun struktural dilarang keras menerima gratifikasi, komisi, sponsor langsung yang mengikat pemilihan obat/alat kesehatan tertentu, atau memanfaatkan fasilitas rumah sakit demi kepentingan pribadi yang mencederai objektivitas keputusan medis dan tata kelola RS yang bersih.
+5. **Pos 5: Whistleblowing System (WBS) & Perlindungan Pelapor**:
+   - Sistem Pelaporan Pelanggaran (WBS) di RSAU dr. Esnawan Antariksa menjamin kanal pelaporan yang aman, independen, dan rahasia; memberikan perlindungan identitas pelapor secara penuh (anonimitas); serta menjamin bebas dari intimidasi, retaliasi administratif, maupun ancaman karier bagi saksi/pelapor dugaan pelanggaran etik dan hukum.
+6. **Pos 6: Penerapan Budaya Keselamatan yang Adil (*Just Culture*)**:
+   - Pendekatan *Just Culture* membedakan secara tegas antara kesalahan manusiawi tanpa sengaja (*human error* yang memerlukan perbaikan sistem dan konseling suportif), perilaku berisiko (*at-risk behavior* yang memerlukan edukasi ulang), dan tindakan ceroboh sengaja mengabaikan SOP (*reckless behavior* yang dikenai tindakan disiplin proporsional).
+7. **Pos 7: Persetujuan Etik (*Ethical Clearance*) KEPK untuk Riset Klinis**:
+   - Setiap penelitian klinis yang melibatkan subjek manusia, rekam medis pasien, atau sampel biologis di RSAU dr. Esnawan Antariksa wajib memperoleh Persetujuan Etik (*Ethical Clearance*) resmi dari Komite Etik Penelitian Kesehatan (KEPK) sebelum penelitian dapat dilaksanakan.
+8. **Pos 8: Nilai Luhur TNI AU dalam Pelayanan Kesehatan RSAU dr. Esnawan Antariksa**:
+   - Setiap insan kesehatan RSAU dr. Esnawan Antariksa memadukan Sapta Marga, Sumpah Prajurit, dan 8 Wajib TNI dengan Kode Etik Pelayanan Kesehatan demi mewujudkan layanan yang berintegritas tinggi, berdisiplin baja, penuh empati, serta berorientasi pada keselamatan pasien sesuai semboyan *Swa Bhuwana Paksa*.
+
+---
+
+### 🎮 2. Desain Level MAP 16 (`ETIK_LEVEL`)
+
+- **Visual & Atmosfer Kehormatan Navy Indigo & Emas Keadilan**:
+  - Lantai platform ubin porselen indigo gelap dengan lis emas berkilau (`accentFloor: #1e1b4b`, `accentBorder: #fbbf24`).
+  - Langit gradien malam kehormatan etik (`#0f172a` -> `#1e1b4b` -> `#fbbf24`).
+  - Siluet gedung faskes dengan lambang palang emas keadilan menyala (`#fbbf24`).
+  - Banner dinding koridor: `⚖️ ETIK: KOMITE ETIK & HUKUM • KODERSI • DILEMA ETIK • WBS • JUST CULTURE • KEPK`.
+  - Gerbang finish surveyor berwarna emas amber megah (`#f59e0b`).
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Sekretariat Komite Etik & Hukum RS Permenkes 42/2018, Balai Kode Etik RS Indonesia KODERSI, Ruang Konsultasi Musyawarah Dilema Etik, Meja Deklarasi & Pakta Integritas Bebas Konflik Kepentingan, Bilik Aman Whistleblowing System WBS, Aula Sosialisasi Budaya Keselamatan Adil Just Culture, Laboratorium Kelaikan Etik Riset Klinis KEPK, Monumen Kehormatan Tata Nilai Luhur Swa Bhuwana Paksa TNI AU, dan Exit Conference POKJA ETIK Surveyor STARKES).
+  - 7 Platform bergerak vertikal dan horizontal melintasi void rumah sakit.
+- **Kolektibel Khusus**:
+  - `timbangan_keadilan`: Neraca keadilan emas murni (*scales of justice*) berporos tegak dengan dua piringan neraca seimbang berkilau, tiang bermahkota runcing, dan pijakan melingkar elegan.
+  - `buku_kodersi_etik`: Buku pedoman tebal biru tua navy (*navy blue leatherbound book*) berbingkai emas ganda, bertuliskan *"KODERSI"* di bagian tengah, dilengkapi lencana timbangan keadilan emas kecil ⚖️ dan pita pembatas buku merah terjuntai.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`ETIK_QUIZ_BANK`)**:
+  - 8 Pos QuizTerminal interaktif berstandar STARKES dengan opsi jawaban edukatif seimbang dan penjelasan komprehensif.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+
+Pengujian otomatis via Chrome DevTools Protocol (`scratch/test_etik_level.mjs`) pada environment browser Chrome:
+1. **Pemilihan Map di Modal**: Membuka modal pemilih map dan mengklik kartu ke-16 `selectPokjaETIK`. Kartu berubah aktif dengan lencana emas dan keterangan materi telusur komprehensif.
+2. **Halaman Menu Utama**: Judul dan kartu aktif memperlihatkan `MAP 16: POKJA ETIK (Etik Rumah Sakit, Tata Nilai & Komite Etik Hukum)` dengan tombol `▶ MULAI TELUSUR MAP 16: POKJA ETIK`.
+3. **Gameplay Platformer**: Kanvas game merender karakter Kapten Rusa Erik, latar belakang langit gradien indigo-emas, banner dinding koridor etik, platform ubin indigo berlis emas, serta kolektibel timbangan keadilan dan buku KODERSI secara akurat tanpa artefak visual atau drop FPS.
+4. **Terminal Kuis & Umpan Balik**: Membuka Pos 1 Kuis STARKES ETIK, menjawab opsi A (Komite Etik dan Hukum Rumah Sakit sesuai Permenkes RI No. 42/2018), memvalidasi dialog umpan balik berwarna hijau dengan skor kelulusan dan penjelasan regulasi lengkap.
+5. **Exit Conference Surveyor STARKES**: Memvalidasi modal penutupan telusur berpredikat **LULUS PARIPURNA (BINTANG 5)** dengan teks kelulusan puncak:
+   > *"Selamat! Anda telah menuntaskan seluruh 16 Bab Pokja STARKES di RSAU dr. Esnawan Antariksa dengan predikat PARIPURNA! Siklus telusur akreditasi kini lengkap dan siap diputar kembali untuk pemantauan mutu berkelanjutan."*
+6. **Tombol Infinite Loop**: Tombol penutup bertuliskan `🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔` yang menyambungkan akhir Map 16 kembali ke Map 1 untuk siklus pembelajaran tanpa henti.
+
+---
+
+### 🏆 4. Rangkuman Puncak: Matriks 16 Pokja STARKES 100% Aktif & Terintegrasi
+
+| No | Pokja STARKES | Tema & Subtansi Utama | Aksen Visual Level | Kolektibel Khas | Status |
+|:---:|:---|:---|:---|:---|:---:|
+| **1** | **TKRS** | Tata Kelola Rumah Sakit, Corporate Bylaws, Renstra, Struktur | Biru Navy & Emas | `buku_pedoman`, `stempel_legal` | **100% AKTIF** |
+| **2** | **PMKP** | Peningkatan Mutu & Keselamatan Pasien, SI IMUT, Insiden | Hijau Zamrud | `chart_indikator`, `lencana_mutu` | **100% AKTIF** |
+| **3** | **SKP** | Sasaran Keselamatan Pasien, 6 Sasaran, 7 Benar Obat | Biru Laut Medis | `gelang_pasien`, `centang_aman` | **100% AKTIF** |
+| **4** | **MFK** | Manajemen Fasilitas & Keselamatan, APAR PASS, Hydrant | Oranye Merah Api | `tabung_apar`, `helm_k3` | **100% AKTIF** |
+| **5** | **PROGNAS** | Program Nasional: PPRA, TB, HIV, Stunting, PONEK | Merah Darah Marun | `stetoskop_prognas`, `antimikroba` | **100% AKTIF** |
+| **6** | **PAP** | Pelayanan & Asuhan Pasien Terpadu, CPPT SOAP, EWS | Ungu Amethyst | `lembar_cppt`, `grafik_vital` | **100% AKTIF** |
+| **7** | **PPI** | Pencegahan & Pengendalian Infeksi, Cuci Tangan WHO, APD | Toska Kebersihan | `handrub_dispenser`, `safety_box` | **100% AKTIF** |
+| **8** | **KPS** | Kualifikasi & Pendidikan Staf, Kredensial, SPK/RKK | Biru Kehormatan | `kredensial_badge`, `spk_rkk_doc` | **100% AKTIF** |
+| **9** | **MRMIK** | Manajemen Rekam Medis & Info Kesehatan, RME, KLPCM | Hijau Hutan Mint | `mrmik_folder`, `simrs_chip` | **100% AKTIF** |
+| **10** | **PPK** | Pendidikan Pelayanan Kesehatan, RS Pendidikan FK, Supervisi | Biru Safir Kampus | `buku_logbook`, `spk_didik` | **100% AKTIF** |
+| **11** | **HPK** | Hak Pasien & Keluarga, 17 Hak, Informed Consent, DNR | Ungu Lavender | `general_consent`, `lembar_dnr` | **100% AKTIF** |
+| **12** | **PP** | Pelayanan Pasien, Pengkajian Awal Medis, Skrining Gizi, Nilai Kritis | Hijau Zaitun Sehat | `folder_pengkajian`, `skrining_gizi` | **100% AKTIF** |
+| **13** | **AKP** | Akses & Kontinuitas Pelayanan, Triage ATS, Transfer, Rujuk | Oranye Amber Cepat | `triage_tag`, `ringkasan_pulang` | **100% AKTIF** |
+| **14** | **PKPO** | Pelayanan Kefarmasian & Penggunaan Obat, LASA, High Alert | Ungu Royal Farmasi | `botol_obat_lasa`, `troli_emergensi` | **100% AKTIF** |
+| **15** | **KE** | Komunikasi & Edukasi, Teach-Back, SBAR, TBaK, PKRS | Hijau Zamrud Cyan | `leaflet_edukasi`, `mikrofon_penyuluhan` | **100% AKTIF** |
+| **16** | **ETIK** | Etik Rumah Sakit, KODERSI, Dilema Etik, WBS, Just Culture, KEPK | Indigo Gelap Emas | `timbangan_keadilan`, `buku_kodersi` | **100% AKTIF** |
+
+---
+
+*Dokumentasi ini membuktikan penyelesaian 100% seluruh kurikulum 16 Pokja STARKES dalam format gamifikasi digital edukatif, siap digunakan untuk sosialisasi, pembelajaran berkala, dan persiapan telusur akreditasi nyata di RSAU dr. Esnawan Antariksa.*
+
 
 
 
