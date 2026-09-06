@@ -1369,4 +1369,56 @@ Untuk menjaga tampilan depan tetap bersih, fokus, dan tidak membuat pemain kewal
 4. **Respon Cepat Antar Muka**: Memilih salah satu map pada modal akan langsung memperbarui kartu status, deskripsi materi telusur, dan teks tombol utama di halaman depan menjadi `▶ MULAI TELUSUR MAP [X]: POKJA [NAMA]`.
 
 ---
+
+## 21. Revisi Mutu & Edukasi: Simulator Cuci Tangan Gambar Tangan Asli, Standarisasi Kuis Edukatif, dan Modal Game Over Atribut Game
+
+Berdasarkan tinjauan dan arahan pengguna, dilakukan tiga pemutakhiran besar pada game:
+
+### 🧼 1. Simulator Cuci Tangan: Integrasi Ilustrasi Tangan Manusia Nyata (11 Langkah)
+- **Transformasi Aset Visual**: Menggantikan bentuk primitif rounded rectangle (`roundRect`) dengan ilustrasi tangan nyata beresolusi tinggi yang disarikan langsung dari **Poster Resmi Cuci Tangan Kemenkes RI / WHO** (`media_1788658216850.jpg`).
+- **11 Langkah Lengkap**:
+  1. **Langkah 1**: Basahi tangan dengan air bersih mengalir dari kran.
+  2. **Langkah 2**: Tuangkan sabun cair secukupnya (3–5 ml).
+  3. **Langkah 3 (★ WHO 1)**: Gosok kedua telapak tangan memutar lembut.
+  4. **Langkah 4 (★ WHO 2)**: Gosok punggung tangan kanan dan kiri secara bersilangan.
+  5. **Langkah 5 (★ WHO 3)**: Gosok sela-sela jari bagian dalam dengan posisi bertaut (*interlaced*).
+  6. **Langkah 6 (★ WHO 4)**: Gosok punggung jari dengan posisi saling mengunci (*interlocked*).
+  7. **Langkah 7 (★ WHO 5)**: Gosok ibu jari kanan dan kiri dengan genggaman memutar.
+  8. **Langkah 8 (★ WHO 6)**: Gosok ujung jari dan kuku pada telapak tangan memutar.
+  9. **Langkah 9**: Bilas tangan dengan air mengalir hingga bersih tanpa sisa busa.
+  10. **Langkah 10**: Keringkan tangan dengan handuk bersih sekali pakai atau tisu.
+  11. **Langkah 11**: Tangan bersih, bebas kuman patogen, dan siap melayani pasien!
+- **Aksen Prosedural Dinamis**:
+  - Aliran air kristal biru mengalir untuk langkah 1 dan 9.
+  - Tetesan sabun cair dinamis untuk langkah 2.
+  - Busa sabun antiseptik (*floating suds & lather bubbles*) dan highlight keemasan untuk 6 Langkah Inti WHO (langkah 3–8).
+  - Kilau bintang kebersihan (*radiant sparkles*) untuk langkah 11.
+  - Gauge hitungan putar (1–6 atau 1–4) dan panel 5 Momen WHO di kanan-kiri kanvas.
+
+---
+
+### 🧠 2. Standarisasi Kuis Edukatif Semua Pokja (8 MAP STARKES)
+- **Eliminasi Opsi Panjang Mencolok**: Sebelumnya, opsi jawaban benar sering kali memiliki panjang kalimat 3-4 baris sedangkan opsi salah sangat pendek/berupa lelucon, sehingga pemain dapat menebak jawaban tanpa membaca esensi standar akreditasi.
+- **Keseimbangan Kalimat & Pemahaman Nyata**: Seluruh opsi jawaban (A, B, C, D) distandarisasi ke panjang setara (rata-rata 10–20 kata), menggunakan terminologi resmi akreditasi rumah sakit (STARKES), dan menyajikan distraktor yang masuk akal (*plausible distractor*) guna menguji pemahaman sejati pegawai rumah sakit.
+- **Distribusi Kunci Jawaban**: Kunci jawaban benar didistribusikan merata ke indeks A (0), B (1), C (2), dan D (3), menghilangkan pola tebakan monoton.
+
+---
+
+### 💔 3. Modal Evaluasi Terhenti: Atribut Game di Tengah Layar (Tanpa Browser Alert)
+- **Pembersihan Browser Alert**: Menghilangkan notifikasi browser `alert("Evaluasi terhenti...")` yang memotong alur permainan dan merusak estetika HUD.
+- **Modal Berbasis Atribut Game (`evaluasiTerhentiModal`)**:
+  - Ditampilkan di tengah layar (*centered modal*) dengan latar belakang gelap blur (*backdrop-blur-md*).
+  - Garis bahaya neon beranimasi di bagian atas (*hazard stripe pulse*).
+  - Ikon patah hati 💔 dan badge *"Peringatan Surveior Akreditasi"*.
+  - Indikator nyawa evaluasi habis: `0 / 3 ❌`.
+  - Kartu Ringkasan Performa:
+    - **Pos Lolos**: Menampilkan jumlah terminal regulasi yang berhasil dijawab.
+    - **Bukti Dokumen**: Menampilkan jumlah berkas SOP/SK yang berhasil dikumpulkan.
+    - **Skor Mutu**: Menampilkan skor capaian poin pemain.
+  - **Tombol Aksi Utama**:
+    1. `[ 🔄 ULANGI TELUSUR POKJA (NAMA) ]`: Tombol gradien merah-emas untuk merestart telusur pokja yang bersangkutan seketika.
+    2. `[ 🗺️ PILIH MAP LAIN ]`: Membuka modal pemilihan pokja untuk mencoba pokja lain.
+    3. `[ 🏠 MENU UTAMA ]`: Kembali ke layar mukadimah awal Kapten Erik.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*

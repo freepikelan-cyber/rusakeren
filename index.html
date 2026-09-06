@@ -872,12 +872,12 @@
                         </button>
                     </div>
 
-                    <!-- Canvas Animasi Cuci Tangan -->
+                    <!-- Canvas Animasi Cuci Tangan Realistis -->
                     <div class="rounded-2xl border border-teal-500/30 overflow-hidden bg-slate-950 relative shadow-inner flex flex-col items-center">
-                        <canvas id="ppiCuciTanganCanvas" width="680" height="240" class="w-full max-w-full block bg-gradient-to-b from-slate-950 via-teal-950/30 to-stone-950"></canvas>
+                        <canvas id="ppiCuciTanganCanvas" width="680" height="250" class="w-full max-w-full block bg-gradient-to-b from-slate-950 via-teal-950/30 to-stone-950"></canvas>
                         <div class="absolute top-2 left-3 right-3 flex items-center justify-between pointer-events-none">
                             <span id="ppiStepBadge" class="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">
-                                LANGKAH 1 / 6: TELAPAK TANGAN
+                                LANGKAH 1 / 11: BASAHI TANGAN DENGAN AIR MENGALIR
                             </span>
                             <span id="ppiTimerText" class="text-xs font-bold text-teal-300 bg-slate-900/80 px-2 py-0.5 rounded">
                                 Hitungan: 1/6 • Durasi: 45s
@@ -885,38 +885,64 @@
                         </div>
                     </div>
 
-                    <!-- 6 Step Buttons -->
-                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
-                        <button id="btnPpiStep1" class="py-2 px-1.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all shadow">
-                            <span>1. Telapak</span>
-                            <span class="text-[9px] text-teal-200 font-normal">Ratakan busa</span>
-                        </button>
-                        <button id="btnPpiStep2" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
-                            <span>2. Punggung</span>
-                            <span class="text-[9px] text-slate-400 font-normal">Sela luar</span>
-                        </button>
-                        <button id="btnPpiStep3" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
-                            <span>3. Sela Jari</span>
-                            <span class="text-[9px] text-slate-400 font-normal">Bertaut dalam</span>
-                        </button>
-                        <button id="btnPpiStep4" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
-                            <span>4. Kunci Jari</span>
-                            <span class="text-[9px] text-slate-400 font-normal">Buku-buku</span>
-                        </button>
-                        <button id="btnPpiStep5" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
-                            <span>5. Ibu Jari</span>
-                            <span class="text-[9px] text-slate-400 font-normal">Genggam putar</span>
-                        </button>
-                        <button id="btnPpiStep6" class="py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all">
-                            <span>6. Ujung Kuku</span>
-                            <span class="text-[9px] text-slate-400 font-normal">Kuncup putar</span>
-                        </button>
+                    <!-- 11 Step Buttons (Berdasarkan Panduan Poster Referensi) -->
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between text-[11px] text-teal-300 font-semibold px-1">
+                            <span>11 Langkah Cuci Tangan Kemenkes / WHO:</span>
+                            <span class="text-amber-300 font-bold text-[10px] sm:text-[11px]">★ Langkah 3-8: 6 Langkah Inti WHO</span>
+                        </div>
+                        <div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-11 gap-1" id="ppiStepButtonsGrid">
+                            <button id="btnPpiStep1" class="py-1.5 px-1 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all shadow">
+                                <span>1. Basahi Air</span>
+                                <span class="text-[8px] text-teal-200 font-normal">Air kran</span>
+                            </button>
+                            <button id="btnPpiStep2" class="py-1.5 px-1 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>2. Sabun</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Secukupnya</span>
+                            </button>
+                            <button id="btnPpiStep3" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>3. Telapak ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Kedua telapak</span>
+                            </button>
+                            <button id="btnPpiStep4" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>4. Punggung ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Kanan & kiri</span>
+                            </button>
+                            <button id="btnPpiStep5" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>5. Sela Jari ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Saling bertaut</span>
+                            </button>
+                            <button id="btnPpiStep6" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>6. Kunci Jari ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Buku mengunci</span>
+                            </button>
+                            <button id="btnPpiStep7" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>7. Ibu Jari ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Genggam putar</span>
+                            </button>
+                            <button id="btnPpiStep8" class="py-1.5 px-1 rounded-xl border border-amber-500/40 bg-slate-900/60 text-amber-300 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>8. Ujung Kuku ★</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Putar di telapak</span>
+                            </button>
+                            <button id="btnPpiStep9" class="py-1.5 px-1 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>9. Bilas Air</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Air mengalir</span>
+                            </button>
+                            <button id="btnPpiStep10" class="py-1.5 px-1 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>10. Keringkan</span>
+                                <span class="text-[8px] text-slate-400 font-normal">Handuk / tisu</span>
+                            </button>
+                            <button id="btnPpiStep11" class="py-1.5 px-1 rounded-xl border border-emerald-500/40 bg-slate-900/60 text-emerald-300 hover:border-emerald-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all">
+                                <span>11. Bersih ✨</span>
+                                <span class="text-[8px] text-emerald-200 font-normal">Siap aktivitas</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Step Instruction & 5 Momen Card -->
                     <div class="p-3.5 rounded-2xl bg-slate-900/70 border border-teal-500/20 text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
                         <div id="ppiStepInstruction" class="font-medium text-teal-200">
-                            💡 <strong>Langkah 1:</strong> Ratakan sabun/gel dengan menggosokkan kedua telapak tangan secara memutar.
+                            💡 <strong>Langkah 1:</strong> Basahi kedua tangan dengan air bersih mengalir sebelum menggunakan sabun.
                         </div>
                         <div class="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-300">
                             <div>
@@ -1029,6 +1055,69 @@
         </div>
     </div>
 
+    <!-- MODAL EVALUASI TERHENTI / NYAWA HABIS (GAME OVER ATTRIBUTE) -->
+    <div id="evaluasiTerhentiModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/90 backdrop-blur-md z-50 p-4 hidden">
+        <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-red-950/70 border-2 border-red-500/80 rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center text-white shadow-2xl shadow-red-950/80 relative overflow-hidden animate-in zoom-in-95">
+            <!-- Hazard top stripe -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-red-600 via-amber-500 to-red-600 animate-pulse"></div>
+
+            <!-- Warning Badge & Icon -->
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-400 text-xs font-bold uppercase tracking-wider mb-3">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                Peringatan Surveior Akreditasi
+            </div>
+
+            <div class="text-5xl sm:text-6xl mb-2 filter drop-shadow">💔</div>
+
+            <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-white mb-1">
+                EVALUASI TELUSUR TERHENTI!
+            </h2>
+            <div class="text-red-400 font-bold text-sm sm:text-base mb-4 flex items-center justify-center gap-2">
+                <span>Nyawa Evaluasi Habis</span>
+                <span class="px-2 py-0.5 rounded bg-red-950 border border-red-800 text-xs font-mono font-black">0 / 3 ❌</span>
+            </div>
+
+            <!-- Narrative / Explanation -->
+            <p class="text-xs sm:text-sm text-slate-300 mb-5 leading-relaxed bg-slate-950/60 p-3.5 rounded-2xl border border-red-500/20 text-left sm:text-center">
+                Surveior akreditasi mencatat batas toleransi kesalahan telusur terlampaui pada <strong id="evaluasiPokjaName" class="text-amber-300">POKJA TKRS</strong>. Silakan tinjau kembali pemahaman standar sebelum mengulang telusur!
+            </p>
+
+            <!-- Game Performance Stats -->
+            <div class="grid grid-cols-3 gap-2 mb-6 text-center">
+                <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase">Pos Lolos</div>
+                    <div id="evaluasiPosStats" class="text-sm sm:text-base font-black text-amber-400">0 / 8</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase">Bukti Dokumen</div>
+                    <div id="evaluasiDocStats" class="text-sm sm:text-base font-black text-sky-400">0 Berkas</div>
+                </div>
+                <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <div class="text-[10px] text-slate-400 font-bold uppercase">Skor Mutu</div>
+                    <div id="evaluasiScoreStats" class="text-sm sm:text-base font-black text-emerald-400">0 Pts</div>
+                </div>
+            </div>
+
+            <!-- Prominent Center Action Buttons (Game Attributes) -->
+            <div class="space-y-2.5">
+                <button id="btnUlangiTelusur" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-red-600 via-amber-600 to-red-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-sm tracking-wide shadow-lg shadow-red-950/60 flex items-center justify-center gap-2 transform active:scale-95 transition-all">
+                    <span>🔄</span>
+                    <span id="btnUlangiTelusurText">ULANGI TELUSUR POKJA TKRS</span>
+                </button>
+<div class="grid grid-cols-2 gap-2">
+                    <button id="btnEvaluasiPilihMap" class="py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-700 transition-all">
+                        <span>🗺️</span>
+                        <span>PILIH MAP LAIN</span>
+                    </button>
+                    <button id="btnEvaluasiMenuUtama" class="py-2.5 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 border border-slate-800 transition-all">
+                        <span>🏠</span>
+                        <span>MENU UTAMA</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- PURE JAVASCRIPT GAME ENGINE FOR AKREDITASI -->
     <script>
     /* ==========================================================================
@@ -1038,119 +1127,119 @@
         {
             id: "visi",
             posName: "Pos 1: Visi Rumah Sakit",
-            question: "Apa VISI dari RSAU dr. Esnawan Antariksa?",
+            question: "Apa fokus utama dalam rumusan VISI RSAU dr. Esnawan Antariksa?",
             options: [
-                "Menjadikan RSAU dr. Esnawan Antariksa Rumah Sakit yang berwawasan ilmu pengetahuan, berteknologi modern, berkarakter dan profesional dalam melaksanakan dukungan dan pelayanan kesehatan bagi anggota TNI AU/TNI dan keluarganya serta masyarakat umum.",
-                "Menjadi rumah sakit rujukan komersial terbesar dengan tarif termahal dan fasilitas perhotelan bintang lima.",
-                "Menyelenggarakan pengobatan medis alternatif tanpa prosedur standar keselamatan pasien.",
-                "Menjadi pusat penerbangan militer khusus tanpa memberikan pelayanan bagi masyarakat umum."
+                "Menjadi pusat rujukan komersial swasta dengan orientasi profit tertinggi.",
+                "RS berwawasan iptek modern dan profesional bagi prajurit TNI, keluarga, serta masyarakat umum.",
+                "Pusat karantina kesehatan khusus yang tertutup bagi masyarakat sipil.",
+                "Fasilitas kesehatan primer militer yang hanya melayani rawat jalan darurat."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Visi RSAU dr. Esnawan Antariksa berlandaskan wawasan iptek terkini, teknologi modern, karakter prajurit, dan profesionalisme baik untuk keluarga besar TNI maupun masyarakat umum."
+            correct: 1,
+            explanation: "Tepat! Visi RSAU dr. Esnawan Antariksa berorientasi pada wawasan iptek modern dan profesionalisme dalam melayani anggota TNI AU/TNI, keluarga, serta masyarakat umum."
         },
         {
             id: "motto",
             posName: "Pos 2: Motto Pelayanan",
-            question: "Apa MOTTO pelayanan yang senantiasa dijiwai dan diamalkan oleh seluruh personel RSAU dr. Esnawan Antariksa?",
+            question: "Manakah MOTTO resmi pelayanan RSAU dr. Esnawan Antariksa?",
             options: [
-                "Cepat, Mahal, dan Terkenal",
                 "Melayani Dengan Ikhlas Tanpa Batas",
-                "Mengutamakan Tindakan Tanpa Persetujuan",
-                "Bekerja Sesuai Jam Kantor Saja"
+                "Disiplin, Tegas, dan Tanggap Bencana",
+                "Pelayanan Cepat Tanpa Antrean",
+                "Kesehatan Prajurit Prioritas Tunggal"
             ],
-            correct: 1,
-            explanation: "Sangat Benar! Motto resmi RSAU dr. Esnawan Antariksa adalah 'Melayani Dengan Ikhlas Tanpa Batas', mencerminkan keikhlasan tulus prajurit kesehatan TNI AU dalam mengabdi."
+            correct: 0,
+            explanation: "Sangat Benar! Motto resmi adalah 'Melayani Dengan Ikhlas Tanpa Batas', mencerminkan keikhlasan tulus prajurit kesehatan TNI AU dalam memberikan pengabdian terbaik."
         },
         {
             id: "falsafah",
             posName: "Pos 3: Falsafah Institusi",
-            question: "FALSAFAH apa yang menjadi jiwa pengabdian dukungan dan pelayanan kesehatan di RSAU dr. Esnawan Antariksa?",
+            question: "Falsafah pengabdian RSAU dr. Esnawan Antariksa berlandaskan pada...?",
             options: [
-                "Jiwa dan Semangat Pengabdian TNI Untuk Melaksanakan Dukungan Kesehatan dan Pelayanan Kesehatan",
-                "Keuntungan materiil adalah tolok ukur utama keberhasilan manajemen rumah sakit",
-                "Membatasi pemberian informasi rekam medis kepada pasien dan keluarga",
-                "Melaksanakan pelayanan medis tanpa koordinasi antar profesi"
+                "Kepatuhan administratif semata pada instansi kesehatan daerah setempat.",
+                "Efisiensi anggaran operasional di atas standar mutu pelayanan klinis.",
+                "Jiwa dan semangat pengabdian TNI untuk melaksanakan dukungan dan pelayanan kesehatan.",
+                "Penerapan sistem pelayanan kesehatan komersial swasta berstandar internasional."
             ],
-            correct: 0,
-            explanation: "Hebat! Falsafah RSAU dr. Esnawan Antariksa berakar dari Jiwa dan Semangat Pengabdian TNI untuk menyelenggarakan dukungan dan pelayanan kesehatan bermutu tinggi."
+            correct: 2,
+            explanation: "Hebat! Falsafah RSAU berakar dari jiwa dan semangat pengabdian prajurit TNI dalam menyelenggarakan dukungan kesehatan operasi militer dan pelayanan kesehatan paripurna."
         },
         {
             id: "misi",
             posName: "Pos 4: Empat Pilar Misi",
-            question: "Manakah di bawah ini yang BUKAN merupakan salah satu dari 4 MISI RSAU dr. Esnawan Antariksa?",
+            question: "Manakah pernyataan di bawah ini yang BUKAN merupakan salah satu dari 4 MISI RSAU?",
             options: [
                 "Menyelenggarakan dukungan kesehatan dalam kegiatan operasi TNI AU/TNI.",
-                "Menyelenggarakan pelayanan kesehatan secara profesional dan bermutu baik promotif, preventif maupun kuratif.",
-                "Meningkatkan kualitas pelayanan secara berkesinambungan dengan memanfaatkan teknologi modern dan penerapan iptek terkini.",
-                "Meniadakan layanan gawat darurat dan tanggap darurat bencana demi penghematan anggaran operasional."
+                "Menyelenggarakan pelayanan kesehatan promotif, preventif, kuratif, dan rehabilitatif.",
+                "Meningkatkan kualitas pelayanan secara berkesinambungan dengan teknologi modern.",
+                "Meniadakan layanan penanggulangan keadaan darurat bencana demi penghematan anggaran."
             ],
             correct: 3,
-            explanation: "Tepat! Pernyataan [D] bukan misi, karena salah satu Misi pokok RSAU dr. Esnawan Antariksa adalah 'Turut aktif dalam pengabdian kepada masyarakat serta penanggulangan keadaan darurat dan bencana'."
+            explanation: "Tepat! RSAU justru berkomitmen aktif dalam pengabdian masyarakat serta penanggulangan keadaan darurat dan bencana sebagai salah satu dari 4 pilar misinya."
         },
         {
             id: "tujuan",
             posName: "Pos 5: Tujuan Pokok",
-            question: "Terbentuknya sumber daya manusia yang profesional, berkompetensi, serta memiliki integritas dan komitmen yang kuat merupakan butir dari...?",
+            question: "Terbentuknya SDM profesional, berkompetensi, berintegritas, dan berkomitmen kuat adalah...?",
             options: [
-                "Salah satu TUJUAN Pokok RSAU dr. Esnawan Antariksa",
-                "Rencana Anggaran Pembelian Mesin Genset",
-                "Jadwal Gilir Dinas Keamanan Satpom",
-                "Daftar Tarif Parkir Kendaraan Bermotor"
+                "Salah satu dari 3 Tujuan pokok RSAU dr. Esnawan Antariksa.",
+                "Uraian tugas administratif panitia pengadaan logistik rumah sakit.",
+                "Persyaratan izin mendirikan bangunan fasilitas gedung pelayanan baru.",
+                "Indikator kepatuhan pembayaran premi asuransi kesehatan pasien."
             ],
             correct: 0,
-            explanation: "Sempurna! Membentuk SDM kesehatan yang profesional, kompeten, dan memiliki integritas kokoh adalah salah satu dari 3 Tujuan utama rumah sakit."
+            explanation: "Sempurna! Membentuk SDM yang profesional, kompeten, berintegritas, dan berkomitmen kuat merupakan salah satu dari 3 Tujuan utama rumah sakit."
         },
         {
             id: "corporate_bylaws_def",
             posName: "Pos 6: Definisi Corporate Bylaws",
-            question: "Apakah pengertian dari Peraturan Internal Korporasi (Corporate Bylaws) di RSAU dr. Esnawan Antariksa?",
+            question: "Apakah fungsi pokok Peraturan Internal Korporasi (Corporate Bylaws) di rumah sakit?",
             options: [
-                "Aturan yang mengatur agar tata kelola korporasi (corporate governance) terselenggara dengan baik melalui pengaturan hubungan antara pemilik atau representasi pemilik (Kapuskesau) dengan kepala RSAU (Ka RSAU dr. Esnawan Antariksa).",
-                "Aturan jam besuk pasien rawat inap dan pembatasan pengunjung di ruang rawat intensif.",
-                "Petunjuk teknis pengoperasian mesin genset dan sistem pendingin udara di gedung rumah sakit.",
-                "Pedoman tata cara permohonan cuti tahunan bagi staf administrasi non-kesehatan."
+                "Mengatur teknis asuhan medis harian antar dokter penanggung jawab pelayanan.",
+                "Mengatur tata kelola korporasi antara Pemilik/Representasi Pemilik dengan Kepala RSAU.",
+                "Menetapkan rincian tarif tindakan medis operatif dan biaya kamar perawatan.",
+                "Mengatur jadwal jaga dinas dan pembagian insentif bulanan perawat."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Berdasarkan Hospital Bylaws, Corporate Bylaws mengatur agar tata kelola korporasi (corporate governance) terselenggara dengan baik melalui pengaturan hubungan antara pemilik/representasi pemilik (Kapuskesau) dengan kepala RSAU (Ka RSAU dr. Esnawan Antariksa)."
+            correct: 1,
+            explanation: "Tepat sekali! Corporate Bylaws mengatur agar corporate governance berjalan baik melalui pengaturan hubungan antara Pemilik/Representasi Pemilik (Kapuskesau) dengan Kepala RSAU."
         },
         {
             id: "hospital_owner",
             posName: "Pos 7: Pemilik Rumah Sakit & Pendelegasian",
-            question: "Berdasarkan Corporate Bylaws, siapakah Pemilik Rumah Sakit RSAU dr. Esnawan Antariksa dan kepada siapa kewenangan tersebut didelegasikan?",
+            question: "Siapakah Pemilik Rumah Sakit RSAU dr. Esnawan Antariksa dan delegasi kewenangannya?",
             options: [
-                "Pemilik Rumah Sakit adalah Kepala Staf Angkatan Udara (Kasau) yang didelegasikan kepada Kepala Pusat Kesehatan Angkatan Udara (Kapuskesau).",
-                "Pemilik Rumah Sakit adalah Direktur Jenderal Pelayanan Kesehatan Kemenkes RI secara sepihak.",
-                "Pemilik Rumah Sakit adalah Kepala Dinas Kesehatan Provinsi DKI Jakarta.",
-                "Pemilik Rumah Sakit adalah Ketua Komite Medis RSAU dr. Esnawan Antariksa."
+                "Menteri Kesehatan RI didelegasikan kepada Direktur Jenderal Pelayanan Kesehatan.",
+                "Kepala Dinas Kesehatan DKI Jakarta didelegasikan kepada Suku Dinas Kesehatan.",
+                "Kepala Staf Angkatan Udara (Kasau) yang didelegasikan kepada Kapuskesau.",
+                "Komandan Lanud Halim Perdanakusuma didelegasikan kepada Kepala Seksi Kesehatan."
             ],
-            correct: 0,
-            explanation: "Sangat Benar! Pemilik Rumah Sakit adalah Kepala Staf Angkatan Udara (Kasau) yang didelegasikan kewenangannya kepada Kepala Pusat Kesehatan Angkatan Udara (Kapuskesau) sebagai representasi pemilik."
+            correct: 2,
+            explanation: "Sangat Benar! Pemilik Rumah Sakit adalah Kasau yang mendelegasikan kewenangannya kepada Kapuskesau sebagai representasi pemilik rumah sakit."
         },
         {
             id: "hospital_identity",
             posName: "Pos 8: Identitas & Alamat Resmi",
-            question: "Manakah nama resmi institusi dan alamat lengkap kedudukan rumah sakit sebagaimana tertuang dalam Corporate Bylaws?",
+            question: "Manakah nama resmi institusi dan kedudukan alamat RSAU dr. Esnawan Antariksa?",
             options: [
-                "Rumah Sakit Angkatan Udara dokter Esnawan Antariksa (disingkat RSAU dr. Esnawan Antariksa), beralamat di JL. Merpati No. 2 Komplek Lanud Halim Perdana Kusumah Jakarta Timur.",
-                "Rumah Sakit Garnisun Pusat Dirgantara, beralamat di Jalan Raya Pondok Gede Jakarta Timur.",
-                "Pusat Pemulihan Kesehatan Penerbang TNI AU, beralamat di Pangkalan Udara Iswahjudi Madiun.",
-                "Balai Pengobatan Utama Halim, beralamat di Jalan Merdeka Barat No. 3 Jakarta Pusat."
+                "RSAU dr. Esnawan Antariksa, beralamat di Jl. Merpati No. 2 Komplek Lanud Halim PK, Jakarta Timur.",
+                "Rumah Sakit Garnisun Halim, beralamat di Jalan Raya Pondok Gede No. 4, Jakarta Timur.",
+                "Lembaga Kesehatan Penerbangan TNI AU, beralamat di Komplek Mabes TNI Cilangkap, Jakarta Timur.",
+                "Pusat Pemulihan Kesehatan Militer, beralamat di Pangkalan Udara Iswahjudi, Madiun."
             ],
             correct: 0,
-            explanation: "Hebat! Nama resmi institusi adalah Rumah Sakit Angkatan Udara dokter Esnawan Antariksa (RSAU dr. Esnawan Antariksa), berkedudukan di JL. Merpati No. 2 Komplek Lanud Halim Perdana Kusumah Jakarta Timur."
+            explanation: "Hebat! Nama resmi adalah RSAU dr. Esnawan Antariksa yang berkedudukan di Jl. Merpati No. 2 Komplek Lanud Halim Perdana Kusumah, Jakarta Timur."
         },
         {
             id: "hospital_head",
             posName: "Pos 9: Pengangkatan Kepala RSAU",
-            question: "Berdasarkan Corporate Bylaws, siapakah Kepala Rumah Sakit dan oleh siapa pejabat tersebut diangkat dalam pengelolaan rumah sakit?",
+            question: "Berdasarkan Corporate Bylaws, siapakah pejabat yang berwenang mengangkat Kepala RSAU?",
             options: [
-                "Kepala Rumah Sakit adalah pimpinan rumah sakit yang diangkat oleh Kasau yang bertugas dalam pengelolaan rumah sakit.",
-                "Kepala Rumah Sakit adalah pimpinan yang diangkat melalui pemungutan suara perawat dan pasien.",
-                "Kepala Rumah Sakit adalah direktur sipil yang dikontrak oleh pihak vendor farmasi luar.",
-                "Kepala Rumah Sakit adalah komandan batalyon keamanan pangkalan udara."
+                "Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi.",
+                "Ketua Komite Medis RSAU melalui voting seluruh staf fungsional.",
+                "Kepala Staf Angkatan Udara (Kasau) untuk memimpin pengelolaan rumah sakit.",
+                "Direktur Utama BPJS Kesehatan Kantor Cabang Utama Jakarta Timur."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Kepala Rumah Sakit adalah pimpinan rumah sakit yang diangkat langsung oleh Kepala Staf Angkatan Udara (Kasau) yang bertugas memimpin pengelolaan operasional rumah sakit."
+            correct: 2,
+            explanation: "Luar biasa! Kepala Rumah Sakit diangkat langsung oleh Kasau dan bertugas memimpin pengelolaan operasional rumah sakit."
         }
     ];
 
@@ -1161,106 +1250,106 @@
         {
             id: "patient_safety_def",
             posName: "Pos 1: Definisi Keselamatan Pasien",
-            question: "Apa yang dimaksud dengan Keselamatan Pasien (Patient Safety) rumah sakit?",
+            question: "Apa esensi dari Keselamatan Pasien (Patient Safety) di rumah sakit?",
             options: [
-                "Suatu sistem di mana rumah sakit membuat asuhan pasien lebih aman, meliputi asesmen risiko, identifikasi & pengelolaan risiko pasien, pelaporan & analisis insiden, kemampuan belajar dari insiden & tindak lanjutnya serta implementasi solusi untuk meminimalkan timbulnya risiko dan mencegah terjadinya cedera akibat kesalahan tindakan atau tidak dilakukannya tindakan yang seharusnya.",
-                "Sistem pembatasan jam kunjung pasien agar staf medis tidak terganggu saat jam istirahat malam.",
-                "Prosedur penagihan biaya rawat inap dan asuransi yang dilakukan secara terpusat oleh bagian keuangan.",
-                "Pemeriksaan identitas kendaraan dinas yang keluar-masuk gerbang komplek pangkalan udara TNI AU."
+                "Penetapan pembatasan jam kunjung keluarga agar staf rumah sakit dapat beristirahat.",
+                "Sistem terpadu membuat asuhan lebih aman, mencegah cedera, dan belajar dari insiden.",
+                "Pemberian jaminan kompensasi finansial penuh apabila pasien merasa tidak puas.",
+                "Penyediaan kamar rawat inap khusus berpenjagaan personel pengamanan militer 24 jam."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Keselamatan Pasien RS adalah sistem terpadu asuhan pasien yang lebih aman: asesmen risiko, manajemen & analisis insiden, pembelajaran berkelanjutan, serta implementasi solusi pencegahan cedera baik tindakan keliru (commission) maupun kelalaian tindakan (omission)."
+            correct: 1,
+            explanation: "Tepat! Keselamatan Pasien adalah sistem terpadu meliputi asesmen risiko, pelaporan & analisis insiden, pembelajaran berkelanjutan, dan solusi pencegahan cedera."
         },
         {
             id: "ikp_classification",
             posName: "Pos 2: Klasifikasi 5 Insiden Keselamatan Pasien",
-            question: "Manakah di bawah ini yang merupakan 5 jenis Insiden Keselamatan Pasien (IKP) yang wajib dipahami dan dilaporkan?",
+            question: "Manakah susunan 5 jenis Insiden Keselamatan Pasien (IKP) yang baku sesuai standar?",
             options: [
-                "Kejadian Tidak Diharapkan (KTD), Kejadian Nyaris Cedera (KNC), Kejadian Tidak Cidera (KTC), Kondisi Potensial Cidera (KPC), dan Kejadian Sentinel.",
-                "Karyawan Tidak Disiplin (KTD), Karyawan Nyaris Cuti (KNC), Kasus Tidak Cepat (KTC), dan Petugas Khusus.",
-                "Kompensasi Tarif Dokter (KTD), Kupon Nilai Cair (KNC), dan Komisi Tarif Cek.",
-                "Kasus Ringan, Kasus Sedang, Kasus Berat, dan Kasus Pidana Militer."
+                "Kejadian Tidak Diharapkan (KTD), KNC, KTC, KPC, dan Kejadian Sentinel.",
+                "Insiden Ringan, Insiden Sedang, Insiden Berat, Malpraktik, dan Kematian Pasien.",
+                "Kesalahan Resep, Kesalahan Dosis Obat, Reaksi Alergi, Infeksi Luka, dan Komplikasi.",
+                "Insiden Primer, Insiden Sekunder, Insiden Tersier, Bahaya Lingkungan, dan Bencana."
             ],
             correct: 0,
-            explanation: "Sangat Benar! Klasifikasi baku insiden keselamatan pasien terdiri dari: KTD (mengakibatkan cedera), KNC (belum terpapar pasien/dicegah), KTC (sudah terpapar tapi tidak cedera), KPC (kondisi berpotensi cedera), dan Kejadian Sentinel (kematian/cedera permanen serius)."
+            explanation: "Sangat Benar! 5 jenis IKP baku adalah KTD (cedera), KNC (dicegah sebelum terpapar), KTC (terpapar tapi tanpa cedera), KPC (kondisi berpotensi cedera), dan Sentinel (cedera berat/kematian)."
         },
         {
             id: "ktc_case_example",
             posName: "Pos 3: Kasus Transfusi Darah (KTC vs KTD vs KNC)",
-            question: "Darah transfusi yang salah sempat dialirkan ke tubuh pasien, tetapi beruntung tidak timbul cedera maupun reaksi inkompatibilitas. Peristiwa ini dikategorikan sebagai...?",
+            question: "Darah transfusi yang salah sempat dialirkan ke pasien, namun tidak timbul reaksi maupun cedera. Apa jenis insidennya?",
             options: [
-                "Kejadian Tidak Cidera (KTC) — Insiden sudah terpapar langsung ke pasien tetapi tidak menimbulkan cedera.",
-                "Kejadian Nyaris Cedera (KNC) — Karena insiden belum sempat dipasangkan ke tubuh pasien.",
-                "Kejadian Tidak Diharapkan (KTD) — Karena pasien mengalami syok hemolitik berat.",
-                "Kondisi Potensial Cidera (KPC) — Karena hanya berupa kantung darah kadaluarsa di bank darah."
+                "Kejadian Nyaris Cedera (KNC), karena pasien masih dapat diselamatkan.",
+                "Kondisi Potensial Cedera (KPC), karena hanya berupa kesalahan prosedur kantong darah.",
+                "Kejadian Tidak Cedera (KTC), karena insiden telah terpapar tetapi tidak menimbulkan cedera.",
+                "Kejadian Tidak Diharapkan (KTD), karena darah yang salah sudah masuk ke tubuh pasien."
             ],
-            correct: 0,
-            explanation: "Hebat! KTC (Kejadian Tidak Cedera) adalah insiden yang sudah terpapar ke pasien tetapi tidak menimbulkan cedera (contoh: darah salah dialirkan tapi tanpa gejala/komplikasi). Jika timbul cedera = KTD; jika dibatalkan sebelum dialirkan = KNC."
+            correct: 2,
+            explanation: "Hebat! Karena darah salah sudah mengalir ke tubuh pasien (terpapar) tetapi alhamdulillah tidak menimbulkan reaksi atau cedera, maka insiden ini diklasifikasikan sebagai KTC (Kejadian Tidak Cedera)."
         },
         {
             id: "si_imut_integration",
             posName: "Pos 4: Integrasi Portal SI IMUT RSAU",
-            question: "Bagaimana mekanisme pelaporan indikator mutu di RSAU dr. Esnawan Antariksa?",
+            question: "Bagaimana mekanisme pelaporan indikator mutu pada portal SI IMUT RSAU?",
             options: [
-                "Telah terintegrasi pada program SI IMUT (https://imut.rsauesnawan.com/), dilaporkan oleh PIC seluruh Unit setiap bulan, diverifikasi Validator (Ka. Unit/Ruangan/Bagian), lalu direkap Komite Mutu.",
-                "Dicatat di buku folio manual oleh perawat piket malam tanpa sistem verifikasi kepala unit.",
-                "Hanya dilaporkan secara lisan kepada surveyor akreditasi saat kunjungan penilaian lapangan tiba.",
-                "Dikirimkan melalui pesan singkat media sosial tanpa verifikasi data institusi."
+                "Input bulanan oleh PIC Unit -> Verifikasi Validator (Ka Unit/Ruangan) -> Rekapitulasi Komite Mutu.",
+                "Pencatatan langsung oleh pasien rawat inap melalui formulir survei kepuasan digital.",
+                "Pengisian manual di buku ekspedisi yang diserahkan ke direksi setiap akhir tahun anggaran.",
+                "Pelaporan lisan oleh perawat jaga kepada dokter spesialis saat kunjungan visite pagi."
             ],
             correct: 0,
-            explanation: "Sempurna! Sistem Indikator Mutu di RSAU dr. Esnawan Antariksa telah terintegrasi digital pada aplikasi SI IMUT (https://imut.rsauesnawan.com/). Alur: PIC Unit input bulanan -> Validator (Ka Unit/Ruangan/Bagian) verifikasi -> Komite Mutu rekapitulasi."
+            explanation: "Sempurna! SI IMUT RSAU (imut.rsauesnawan.com) menggunakan alur berjenjang: PIC Unit memasukkan data bulanan, Validator memverifikasi, lalu Komite Mutu merekapitulasi."
         },
         {
             id: "kemenkes_report_schedule",
             posName: "Pos 5: Jadwal Pelaporan Kemenkes RI",
-            question: "Kapan jadwal resmi pelaporan Indikator Mutu Nasional (INM) dan Insiden Keselamatan Pasien (IKP) ke Kemenkes RI setiap bulannya?",
+            question: "Kapan jadwal pelaporan bulanan INM dan IKP ke Kementerian Kesehatan RI?",
             options: [
-                "Pelaporan INM ke Kemenkes tiap tanggal 10, dan pelaporan IKP tiap tanggal 30/31 (akhir bulan) setiap bulannya.",
-                "Pelaporan INM tiap tanggal 1, dan pelaporan IKP tiap tanggal 5 setiap bulannya.",
-                "Kedua laporan dikirimkan serentak tiap tanggal 15 setiap triwulan saja.",
-                "Pelaporan INM tiap tanggal 28, sedangkan IKP tidak perlu dilaporkan ke Kemenkes."
+                "INM dilaporkan tiap tanggal 1, sedangkan IKP tiap tanggal 15 setiap bulannya.",
+                "INM dilaporkan tiap tanggal 10, sedangkan IKP tiap tanggal 30/31 (akhir bulan).",
+                "Kedua laporan dikirimkan serentak tiap tanggal 20 per triwulan kalender berjalan.",
+                "INM dilaporkan tiap tanggal 25, sedangkan IKP dilaporkan hanya jika diminta Kemenkes."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Berdasarkan regulasi Kemenkes RI, pelaporan INM wajib dilaporkan tiap tanggal 10 setiap bulannya, sedangkan pelaporan IKP dikirim tiap tanggal 30/31/akhir bulan setiap bulannya."
+            correct: 1,
+            explanation: "Tepat sekali! Sesuai ketentuan regulasi Kemenkes RI, pelaporan INM jatuh pada tanggal 10 setiap bulannya, sedangkan IKP dilaporkan di akhir bulan (tanggal 30/31)."
         },
         {
             id: "three_quality_indicators",
             posName: "Pos 6: Tiga Indikator Mutu Rumah Sakit",
-            question: "Apa saja 3 macam Indikator Mutu di RSAU dr. Esnawan Antariksa dan dari mana Indikator Mutu Prioritas (IMP) kini dipilih?",
+            question: "Apa saja 3 kategori indikator mutu yang wajib dipantau di lingkungan rumah sakit?",
             options: [
-                "Terdiri dari: INM (Standar Kemenkes RI), IMP (dipilih dari Indikator Mutu Unit yang telah di-'GRADING'), dan IMU (ditetapkan Kep Penetapan Indikator Mutu Unit oleh Ka RSAU dr. Esnawan Antariksa).",
-                "Terdiri dari: Mutu Rawat Jalan, Mutu Rawat Inap, dan Mutu VIP yang dipilih berdasarkan laba keuntungan.",
-                "Terdiri dari: Mutu Primer, Mutu Sekunder, dan Mutu Tersier yang ditetapkan sepihak oleh vendor swasta.",
-                "Hanya ada 1 indikator mutu yaitu Indikator Parkir dan Keamanan Markas."
+                "Indikator Finansial, Indikator Logistik Obat, dan Indikator Kepegawaian Personalia.",
+                "Indikator Mutu Medis, Indikator Mutu Keperawatan, dan Indikator Mutu Farmasi.",
+                "Indikator Mutu Nasional (INM), Prioritas RS (IMP-RS), dan Prioritas Unit (IMP-Unit).",
+                "Indikator Rawat Jalan, Indikator Rawat Inap, dan Indikator Kamar Operasi Bedah."
             ],
-            correct: 0,
-            explanation: "Luar biasa! 3 Indikator Mutu: INM (seluruh RS sama standar Kemenkes), IMP (kini dipilih dari Indikator Mutu Unit yang telah di-GRADING, bukan lagi hanya dari layanan unggulan saja), dan IMU (ditetapkan masing-masing unit dengan Kep Ka RSAU)."
+            correct: 2,
+            explanation: "Benar! Tiga pilar indikator mutu adalah INM (standar nasional kemenkes), IMP-RS (prioritas tingkat rumah sakit), dan IMP-Unit (prioritas tiap unit kerja)."
         },
         {
-            id: "incident_first_response",
-            posName: "Pos 7: Tindakan Pertama & Batas Lapor 2x24 Jam",
-            question: "Jika terjadi insiden keselamatan pasien di unit/ruangan, apa langkah pertama yang wajib dilakukan dan berapa batas maksimal pelaporannya?",
+            id: "incident_reporting_flow",
+            posName: "Pos 7: Alur Pelaporan Insiden & Batas Waktu",
+            question: "Berapa batas waktu pelaporan awal insiden keselamatan pasien ke Komite Mutu?",
             options: [
-                "Segera tangani dan tolong pasien terlebih dahulu (utamakan keselamatan pasien), lalu buat laporan kejadian paling lambat 2×24 jam (2 hari) kepada atasan langsung.",
-                "Tinggalkan pasien untuk membuat laporan tertulis selama 3 hari terlebih dahulu.",
-                "Menyembunyikan kejadian agar tidak diketahui oleh kepala unit maupun Komite Mutu.",
-                "Pasien dibiarkan menunggu visit dokter esok hari sebelum diberi pertolongan pertama."
+                "Maksimal 1x12 jam setelah serah terima tugas jaga perawat ruangan.",
+                "Maksimal 2x24 jam (48 jam) setelah insiden keselamatan pasien ditemukan.",
+                "Maksimal 7 hari kerja menunggu hasil investigasi internal selesai disusun.",
+                "Maksimal akhir bulan bersamaan dengan rekapitulasi data indikator mutu."
             ],
-            correct: 0,
-            explanation: "Sangat Tepat! Prinsip keselamatan pasien nomor satu: Pasien harus langsung ditolong! Setelah kondisi tertangani aman, kejadian dibuat laporan paling lambat 2×24 jam (2 hari) dan diserahkan ke atasan langsung."
+            correct: 1,
+            explanation: "Hebat! Laporan insiden internal wajib disampaikan ke atasan dan Komite Mutu & Keselamatan Pasien selambat-lambatnya 2x24 jam (48 jam) pasca temuan insiden."
         },
         {
-            id: "grading_and_rca",
-            posName: "Pos 8: Penilaian Tingkat Kejadian (Grading) & RCA",
-            question: "Bagaimana tindak lanjut hasil penilaian tingkat keparahan (grading risiko) insiden antara kategori Hijau/Biru dengan Kuning/Merah?",
+            id: "risk_grading_matrix",
+            posName: "Pos 8: Analisis Akar Masalah (RCA)",
+            question: "Investigasi Komprehensif / Root Cause Analysis (RCA) wajib dilakukan jika grading insiden berada pada...?",
             options: [
-                "Hijau/Biru (ringan) dilakukan investigasi sederhana & rekomendasi perbaikan; sedangkan Kuning/Merah (serius) dilaporkan ke Komite Mutu RS, dilakukan analisis mendalam dengan RCA (Root Cause Analysis), dan dilaporkan ke Kepala RSAU.",
-                "Hijau/Biru langsung diberikan sanksi militer, sedangkan Kuning/Merah diabaikan.",
-                "Semua insiden baik ringan maupun berat hanya diarsipkan tanpa perlu ada tindak lanjut.",
-                "Kuning/Merah diselesaikan sepihak oleh staf jaga tanpa melibatkan Komite Mutu dan Kepala Rumah Sakit."
+                "Pita Biru dan pita Hijau dengan batas waktu investigasi maksimal 1 minggu.",
+                "Pita Kuning dan pita Merah dengan batas waktu investigasi maksimal 45 hari.",
+                "Semua jenis insiden keselamatan pasien tanpa membedakan dampak keparahan cedera.",
+                "Hanya pada insiden yang dilaporkan langsung oleh keluarga pasien ke komite etik."
             ],
-            correct: 0,
-            explanation: "Sempurna! Grading insiden: 🟢 Hijau/Biru (ringan) ditindaklanjuti investigasi sederhana unit; 🟡 Kuning/Merah (serius) dilaporkan ke Komite Mutu RS untuk investigasi mendalam RCA (Root Cause Analysis), mencari akar masalah, lapor Kepala RSAU, serta feedback perbaikan ke unit!"
+            correct: 1,
+            explanation: "Luar biasa! Pita Kuning (risiko tinggi) dan Merah (risiko ekstrem) wajib ditindaklanjuti dengan investigasi mendalam metode RCA dengan batas waktu maksimal 45 hari."
         }
     ];
 
@@ -1271,119 +1360,119 @@
         {
             id: "skp_identifikasi_tujuan",
             posName: "Pos 1: Maksud & Tujuan Identifikasi Pasien",
-            question: "Apa maksud dan tujuan utama pelaksanaan proses identifikasi pasien di rumah sakit?",
+            question: "Kapan proses identifikasi pasien wajib dilakukan secara aktif dan benar?",
             options: [
-                "a. Mengidentifikasi pasien sebagai individu yang akan diberi layanan, tindakan atau pengobatan tertentu secara tepat; b. Mencocokkan layanan atau perawatan yang akan diberikan dengan pasien.",
-                "a. Memastikan kemampuan finansial dan pembayaran asuransi pasien; b. Menentukan kelas tarif kamar rawat inap.",
-                "a. Menghafal seluruh nama sanak keluarga pasien; b. Mengunci pintu ruangan agar pasien tidak keluar kamar.",
-                "a. Menghindari keluhan pasien di media sosial; b. Mengurangi beban arsip petugas rekam medis rumah sakit."
+                "Hanya pada saat pasien pertama kali mendaftarkan diri di loket admisi pendaftaran.",
+                "Sebelum pemberian obat, transfusi darah, pengambilan spesimen darah, dan tindakan medis.",
+                "Saat pasien meminta rincian kuitansi pembayaran tindakan medis di bagian kasir.",
+                "Hanya jika perawat belum mengenal nama panggilan pasien di ruang perawatan."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Sesuai standar SKP 1, tujuan identifikasi pasien adalah: a) Mengidentifikasi pasien sebagai individu yang akan diberi layanan, tindakan/pengobatan tertentu secara tepat; b) Mencocokkan layanan/perawatan yang akan diberikan dengan pasien."
+            correct: 1,
+            explanation: "Tepat! Identifikasi aktif wajib dilakukan sebelum pemberian obat, transfusi darah, pengambilan darah/spesimen, dan sebelum intervensi/tindakan medis apapun."
         },
         {
-            id: "skp_prosedur_identifikasi",
-            posName: "Pos 2: Prosedur Identifikasi Pasien di RS",
-            question: "Bagaimana prosedur resmi di RSAU dr. Esnawan Antariksa dalam mengidentifikasi pasien rawat inap dan bayi baru lahir?",
+            id: "skp_identifikasi_prosedur",
+            posName: "Pos 2: Dua Parameter Identifikasi Pasien",
+            question: "Manakah 2 parameter identitas utama yang sah digunakan untuk identifikasi pasien di RS?",
             options: [
-                "Setiap pasien rawat inap dipasang gelang identitas dengan 2 bentuk identifikasi: NAMA LENGKAP dan TANGGAL LAHIR (disesuaikan tanda pengenal resmi KTP); untuk bayi baru lahir menggunakan nama ibunya dan tanggal lahir bayi; pada kondisi darurat/koma/disorientasi/IGD bertanya ke keluarga dan memeriksa gelang identitas.",
-                "Hanya menggunakan nomor kamar atau nomor bed tempat tidur pasien tanpa perlu memeriksa gelang identitas.",
-                "Cukup memanggil nama panggilan santai pasien saat membagikan obat atau menyuntikkan obat.",
-                "Bayi baru lahir menggunakan nama kakeknya dan estimasi tanggal rencana kepulangan dari rumah sakit."
+                "Nomor tempat tidur dan diagnosis klinis dokter penanggung jawab pelayanan.",
+                "Nama lengkap pasien dan tanggal lahir (didukung nomor rekam medis).",
+                "Nama panggilan pasien dan nama kesatuan dinas militer keluarga.",
+                "Alamat tempat tinggal pasien dan nama perawat yang memasang infus."
             ],
-            correct: 0,
-            explanation: "Sangat Benar! Prosedur resmi RSAU: Pasien rawat inap wajib dipasang gelang identitas. Menggunakan 2 bentuk identifikasi: NAMA LENGKAP & TANGGAL LAHIR (disesuaikan identitas resmi). Bayi baru lahir menggunakan nama ibu & tgl lahir bayi. Pengecualian darurat/koma: tanya keluarga & cek gelang!"
+            correct: 1,
+            explanation: "Sangat Benar! Standar SKP 1 mewajibkan minimal 2 identitas: Nama lengkap dan Tanggal Lahir (atau Nomor Rekam Medis). Nomor kamar atau tempat tidur DILARANG dijadikan identitas!"
         },
         {
             id: "skp_pasien_khusus",
-            posName: "Pos 3: Verifikasi Pasien Khusus (Tn./Ny. X & Rawat Jalan)",
-            question: "Bagaimana prosedur verifikasi identitas pada pasien terlantar/tanpa identitas, pasien jiwa, dan pasien rawat jalan?",
+            posName: "Pos 3: Pasien Khusus (Tn/Ny X & Bencana)",
+            question: "Bagaimana prosedur identifikasi bagi korban darurat tanpa identitas yang masuk ke IGD?",
             options: [
-                "Pasien terlantar/tanpa identitas diberi identitas 'Tn. X / Ny. X' sampai teridentifikasi benar; pasien jiwa foto diri ditempelkan pada sampul rekam medis; pasien rawat jalan tidak menggunakan gelang melainkan konfirmasi nama & tanggal lahir pertanyaan terbuka serta mencocokkan stiker rekam medis.",
-                "Pasien terlantar tidak boleh dirawat atau diberi pertolongan medis sebelum keluarga membawa kartu identitas asli.",
-                "Pasien rawat jalan wajib dipasangkan gelang pengenal berbahan logam tahan karat di pintu masuk poli.",
-                "Pasien jiwa tidak perlu memiliki rekam medis demi kerahasiaan institusi pangkalan militer."
+                "Diberi identitas sementara (Tn/Ny X) disertai nomor rekam medis darurat dan gender.",
+                "Menunggu hingga keluarga korban datang membawa kartu tanda penduduk (KTP) asli.",
+                "Menggunakan nama personel polisi atau sopir ambulans yang mengantarkan korban.",
+                "Membiarkan tanpa gelang hingga kondisi medis korban sadar dan mampu berbicara."
             ],
             correct: 0,
-            explanation: "Luar biasa! Ketentuan khusus identifikasi: Pasien terlantar/tanpa identitas diberi nama Tn. X / Ny. X sampai teridentifikasi; pasien jiwa foto diri ditempelkan pada sampul catatan rekam medis; pasien rawat jalan tidak memakai gelang tetapi konfirmasi nama & tgl lahir dengan pertanyaan terbuka serta mencocokkan stiker rekam medis!"
+            explanation: "Hebat! Korban tanpa identitas diberi penamaan standar Tn/Ny X disertai nomor rekam medis darurat, jenis kelamin, dan tanggal/jam masuk IGD sampai identitas resmi terverifikasi."
         },
         {
             id: "skp_warna_gelang",
-            posName: "Pos 4: Lima Kode Warna Gelang Identifikasi",
-            question: "Gelang identifikasi apa saja yang digunakan di RSAU dr. Esnawan Antariksa beserta artinya?",
+            posName: "Pos 4: Gelang Penanda Khusus Alergi",
+            question: "Pasien dengan riwayat reaksi anafilaksis obat harus dipasangi gelang penanda warna...?",
             options: [
-                "1) Biru Muda: Pasien Laki-laki, 2) Merah Muda: Pasien Wanita, 3) Kuning: Pasien Risiko Jatuh, 4) Merah: Pasien Alergi, 5) Ungu: Pasien DNR (Do Not Resuscitate).",
-                "1) Biru: Pasien TNI AU, 2) Hijau: Pasien BPJS, 3) Merah: Pasien Umum, 4) Emas: Pasien VIP, 5) Putih: Pasien Anak.",
-                "1) Kuning: Pasien Hepatitis, 2) Merah: Pasien Infeksius, 3) Hitam: Pasien Meninggal, 4) Cokelat: Pasien Bedah.",
-                "Semua pasien hanya menggunakan satu gelang berwarna putih transparan tanpa penanda risiko."
+                "Kuning (penanda risiko jatuh tinggi)",
+                "Ungu (penanda status Do Not Resuscitate)",
+                "Merah (penanda riwayat alergi obat/makanan)",
+                "Putih (penanda identitas jenis kelamin ambigu)"
             ],
-            correct: 0,
-            explanation: "Sempurna! 5 Warna Gelang Identifikasi RS: 👦 Biru Muda (Laki-laki), 👧 Merah Muda (Wanita), ⚠️ Kuning (Risiko Jatuh), 🚫 Merah (Alergi), dan 🛑 Ungu (Do Not Resuscitate / DNR)!"
+            correct: 2,
+            explanation: "Sempurna! Gelang/klip MERAH digunakan khusus untuk risiko alergi; KUNING untuk risiko jatuh; UNGU untuk penolakan resusitasi (DNR)."
         },
         {
-            id: "skp_spo_pemasangan",
-            posName: "Pos 5: SPO Pemasangan & Pelepasan Gelang",
-            question: "Sesuai SPO Pemasangan Gelang Identifikasi Pasien, apa langkah penting saat memasang dan bagaimana prosedur pelepasannya?",
+            id: "skp_pelepasan_gelang",
+            posName: "Pos 5: Pelepasan Gelang Identitas",
+            question: "Kapan gelang identifikasi pasien rawat inap boleh dilepaskan oleh tenaga medis?",
             options: [
-                "Pastikan kecocokan gelang dari admission -> perkenalan diri -> jelaskan maksud & tujuan -> verifikasi pemahaman pasien/keluarga -> informasikan wajib dipakai terus sampai pulang -> gelang dilepas oleh perawat dengan cara digunting saat pulang.",
-                "Gelang dipasang saat pasien tertidur pulas -> gelang ditarik paksa sampai putus oleh keluarga pasien di rumah.",
-                "Gelang dititipkan di meja satpam pangkalan untuk dipasang sendiri oleh pasien sebelum masuk kamar rawat.",
-                "Gelang dilepas sendiri oleh pasien menggunakan gunting kuku sebelum dokter datang visit."
+                "Setiap malam hari sebelum pasien tidur agar tidak mengganggu sirkulasi darah.",
+                "Saat pasien resmi diperbolehkan pulang dan telah menyelesaikan seluruh admisi.",
+                "Bila pasien hendak mandi atau berganti pakaian perawatan rumah sakit.",
+                "Saat pasien dipindahkan antar bangsal perawatan dalam satu rumah sakit."
             ],
-            correct: 0,
-            explanation: "Hebat! SPO Pemasangan: Pastikan kecocokan dari admission -> perkenalkan diri -> jelaskan maksud & tujuan -> verifikasi pemahaman pasien/keluarga -> wajib dipakai selalu -> gelang dilepas resmi oleh PERAWAT dengan cara DIGUNTING saat pasien diperbolehkan pulang!"
+            correct: 1,
+            explanation: "Tepat! Gelang identitas pasien rawat inap hanya boleh digunting/dilepas saat pasien secara resmi selesai dirawat dan siap meninggalkan rumah sakit."
         },
         {
-            id: "skp_tujuh_benar_obat",
-            posName: "Pos 6: Tujuh Prinsip Benar Pemberian Obat",
-            question: "Apa saja 7 (tujuh) prinsip benar dalam pemberian obat guna mencegah terjadinya medication error?",
+            id: "skp_7_benar_obat",
+            posName: "Pos 6: Prinsip 7 Benar Pemberian Obat",
+            question: "Manakah butir di bawah ini yang BUKAN merupakan bagian dari prinsip 7 Benar obat?",
             options: [
-                "a. Benar Obat, b. Benar Dosis, c. Benar Waktu, d. Benar Cara pemberian/rute, e. Benar Pasien, f. Benar Informasi, g. Benar Dokumentasi.",
-                "a. Benar Harga, b. Benar Resep, c. Benar Apotek, d. Benar Pabrik, e. Benar Kemasan, f. Benar Kasir, g. Benar Diskon.",
-                "a. Benar Dokter, b. Benar Perawat, c. Benar Ruangan, d. Benar Meja, e. Benar Lemari, f. Benar Jam, g. Benar Shift.",
-                "a. Benar Merek, b. Benar Warna, c. Benar Rasa, d. Benar Ukuran, e. Benar Pembeli, f. Benar Suplier, g. Benar Faktur."
+                "Benar Pasien dan Benar Obat yang diresepkan DPJP.",
+                "Benar Dosis, Benar Rute Pemberian, dan Benar Waktu Pemberian.",
+                "Benar Harga Termurah yang disetujui keluarga pasien.",
+                "Benar Dokumentasi Rekam Medis dan Benar Informasi Edukasi."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! 7 Prinsip Benar Pemberian Obat: 1. Benar Obat, 2. Benar Dosis, 3. Benar Waktu, 4. Benar Cara/Rute Pemberian, 5. Benar Pasien, 6. Benar Informasi, 7. Benar Dokumentasi!"
+            correct: 2,
+            explanation: "Hebat! Prinsip 7 Benar meliputi: Benar Pasien, Obat, Dosis, Waktu, Rute, Informasi/Edukasi, dan Dokumentasi. Harga tidak termasuk dalam kaidah keselamatan farmasi."
         },
         {
-            id: "skp_medication_error",
-            posName: "Pos 7: Alur Lapor Medication Error & Batas Grading",
-            question: "Bagaimana alur pelaporan kesalahan pemberian obat (medication error) dan batas waktu investigasi berdasarkan hasil grading risiko?",
+            id: "skp_medication_error_flow",
+            posName: "Pos 7: Alur Medication Error",
+            question: "Perawat menyadari etiket nama obat tertukar sebelum sempat disuntikkan ke pasien. Peristiwa ini adalah...?",
             options: [
-                "Tindak lanjuti segera dampak insiden (KNC, KTD, KTC) -> isi formulir lapor atasan langsung akhir shift (max 2×24 jam) -> atasan grading risiko: Grade Biru (max 1 minggu), Grade Hijau (max 2 minggu), Grade Kuning/RCA Komite Mutu (max 45 hari) -> lapor Tim KP RSAU.",
-                "Insiden obat ditunda pelaporannya sampai akhir tahun kalender untuk menghemat kertas formulir.",
-                "Kesalahan obat dirahasiakan oleh staf dinas malam agar tidak mempengaruhi nilai indeks kinerja.",
-                "Semua grade investigasi kesalahan obat diserahkan ke pihak kepolisian militer selama 6 bulan."
+                "Kejadian Nyaris Cedera (KNC), karena kesalahan dicegah sebelum mengenai pasien.",
+                "Kejadian Tidak Cedera (KTC), karena obat belum menimbulkan efek samping beracun.",
+                "Kejadian Tidak Diharapkan (KTD), karena telah terjadi pelanggaran prosedur farmasi.",
+                "Kejadian Sentinel, karena obat suntik termasuk kategori obat high alert."
             ],
             correct: 0,
-            explanation: "Sangat Tepat! Medication Error: Segera ditangani -> formulir laporan akhir shift ke atasan langsung (max 2×24 jam) -> grading atasan: 🔵 Grade Biru (investigasi sederhana max 1 minggu), 🟢 Grade Hijau (investigasi sederhana max 2 minggu), 🟡 Grade Kuning (investigasi komprehensif/RCA oleh Tim KP Komite Mutu max 45 hari) -> lapor ke Tim KP RSAU dr. Esnawan Antariksa!"
+            explanation: "Tepat sekali! Karena kesalahan label terdeteksi dan dihentikan sebelum terpapar ke tubuh pasien, insiden ini tergolong KNC (Kejadian Nyaris Cedera)."
         },
         {
             id: "skp_site_marking",
             posName: "Pos 8: Penandaan Lokasi Operasi (Site Marking)",
-            question: "Bagaimana prosedur penandaan lokasi operasi (site marking) yang benar menurut standar SKP 4?",
+            question: "Kapan proses penandaan lokasi operasi (Site Marking) wajib dilakukan pada pasien bedah?",
             options: [
-                "Dilakukan sebelum tindakan operasi saat pasien masih sadar (melibatkan pasien) oleh operator bedah, dengan tanda checklist (√) spidol hitam tidak mudah luntur pada tubuh dan warna merah hitam pada formulir, serta masih terlihat jelas setelah pasien sadar.",
-                "Dibuat tanda silang (X) besar oleh perawat poliklinik sehari sebelum jadwal operasi di rumah pasien.",
-                "Ditandai saat pasien sudah terbius total di ruang operasi tanpa perlu melibatkan pasien.",
-                "Cukup diingat-ingat oleh asisten perawat bedah tanpa perlu tanda fisik pada bagian tubuh pasien."
+                "Setelah pasien diberi anestesi umum dan terbaring di atas meja kamar bedah.",
+                "Sebelum tindakan operasi dimulai saat pasien masih sadar dan ikut memverifikasi lokasi.",
+                "Setelah prosedur operasi selesai dilakukan saat perawat memasang perban luka.",
+                "Cukup didokumentasikan di lembar informed consent tanpa menandai fisik tubuh pasien."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Site Marking (Penandaan Lokasi Operasi): Wajib dilakukan sebelum operasi saat pasien SADAR (melibatkan pasien) oleh OPERATOR bedah langsung, menggunakan tanda checklist (√) dengan spidol hitam tidak luntur di tubuh & merah hitam di formulir, serta masih terlihat jelas pasca pasien sadar!"
+            correct: 1,
+            explanation: "Luar biasa! Site marking wajib dilakukan oleh operator sebelum induksi anestesi dengan melibatkan pasien secara sadar agar sisi operasi tepat 100%."
         },
         {
-            id: "skp_enam_sasaran",
-            posName: "Pos 9: Enam Sasaran Keselamatan Pasien (SKP)",
-            question: "Sebutkan 6 (enam) Sasaran Keselamatan Pasien (SKP) standar akreditasi rumah sakit!",
+            id: "skp_6_sasaran_who",
+            posName: "Pos 9: Enam Sasaran Keselamatan Pasien",
+            question: "Sasaran Keselamatan Pasien ke-5 (SKP 5) berfokus pada sasaran prioritas...?",
             options: [
-                "1. Mengidentifikasi pasien dengan benar; 2. Meningkatkan komunikasi yang efektif; 3. Meningkatkan keamanan obat-obat yang harus diwaspadai (High Alert); 4. Memastikan sisi yang benar, prosedur yang benar, pasien yang benar pada pembedahan/tindakan invasif; 5. Mengurangi risiko infeksi akibat perawatan kesehatan; 6. Mengurangi risiko cedera pasien akibat jatuh.",
-                "1. Pendaftaran kilat; 2. Kasir ramah; 3. Seragam rapi; 4. Kebersihan kamar mandi; 5. Makanan hangat; 6. Parkir gratis.",
-                "1. Ketepatan dokter; 2. Kemegahan gedung; 3. Kelancaran internet; 4. Keramahan satpam; 5. Kecepatan lift; 6. Keindahan taman.",
-                "1. Penjualan obat paten; 2. Pemeriksaan laboratorium lengkap; 3. Pengetatan jam besuk; 4. Pemasangan CCTV; 5. Penghijauan komplek; 6. Penghematan listrik."
+                "Peningkatan efektivitas komunikasi antar profesional pemberi asuhan (SBAR/TBAK).",
+                "Pengurangan risiko infeksi terkait pelayanan kesehatan (Health-care Associated Infections).",
+                "Peningkatan keamanan penggunaan obat-obatan yang perlu diwaspadai (High Alert).",
+                "Kepastian tepat lokasi, tepat prosedur, dan tepat pasien operasi bedah."
             ],
-            correct: 0,
-            explanation: "Sempurna! 6 Sasaran Keselamatan Pasien (SKP): 1. Mengidentifikasi pasien benar, 2. Komunikasi efektif, 3. Keamanan obat High Alert, 4. Memastikan lokasi/prosedur/pasien benar pada operasi, 5. Mengurangi risiko infeksi (HAIs), 6. Mengurangi risiko cedera akibat jatuh!"
+            correct: 1,
+            explanation: "Sempurna! SKP 5 berfokus pada pengurangan risiko infeksi melalui kepatuhan kebersihan tangan (Hand Hygiene) dan prinsip pencegahan infeksi nosokomial."
         }
     ];
 
@@ -1393,107 +1482,107 @@
     const MFK_QUIZ_BANK = [
         {
             id: "mfk_titik_kumpul",
-            posName: "Pos 1: Titik Kumpul Evakuasi Bencana RSAU",
-            question: "Di manakah lokasi 5 Titik Kumpul (Assembly Point) resmi saat evakuasi darurat di RSAU dr. Esnawan Antariksa?",
+            posName: "Pos 1: Titik Kumpul Evakuasi Bencana",
+            question: "Karakteristik utama lokasi Titik Kumpul (Assembly Point) evakuasi darurat rumah sakit adalah...?",
             options: [
-                "Lapangan Apel, Depan GSB, Samping Gedung MCU, Depan Kantor Staff, dan Lapangan Parkir depan gedung HD.",
-                "Di dalam lift gedung utama, kamar mandi IGD, dan lorong radiologi bertekanan tinggi.",
-                "Di area helipad khusus dan ruang instalasi genset listrik pangkalan udara.",
-                "Di gudang logistik farmasi dan ruang rapat pimpinan tertutup."
+                "Berada di dalam ruang auditorium tertutup di lantai dua gedung perawatan.",
+                "Area terbuka di luar gedung yang aman dari bahaya runtuhan dan mudah dijangkau armada damkar.",
+                "Di lorong penghubung bawah tanah antara instalasi gawat darurat dan kamar mayat.",
+                "Di area rooftop gedung utama dekat dengan instalasi penangkal petir rumah sakit."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Sesuai standar MFK, 5 Titik Kumpul evakuasi resmi di RSAU dr. Esnawan Antariksa adalah: 1) Lapangan Apel, 2) Depan GSB, 3) Samping Gedung MCU, 4) Depan Kantor Staff, dan 5) Lapangan Parkir depan gedung HD."
+            correct: 1,
+            explanation: "Tepat! Titik kumpul wajib berada di area terbuka luar gedung (seperti halaman/lapangan parkir) yang bebas dari ancaman reruntuhan bangunan, kaca jatuh, atau paparan api."
         },
         {
             id: "mfk_kode_darurat_1",
-            posName: "Pos 2: Kode Darurat (Merah, Biru, Hijau, & Oranye)",
-            question: "Apa arti dari KODE MERAH, KODE BIRU, KODE HIJAU, dan KODE ORANYE di rumah sakit?",
+            posName: "Pos 2: Kode Darurat Henti Jantung (Code Blue)",
+            question: "Aktivasi panggilan darurat 'CODE BLUE' di rumah sakit menandakan adanya kondisi...?",
             options: [
-                "KODE MERAH: Kebakaran & Asap; KODE BIRU: Kegawatan Resusitasi (Henti Jantung/Napas); KODE HIJAU: Disaster Plan (Bencana Massal); KODE ORANYE: Insiden Bahan Berbahaya (B3).",
-                "KODE MERAH: Pasien BPJS; KODE BIRU: Pasien Asuransi Swasta; KODE HIJAU: Rawat Jalan; KODE ORANYE: Pasien Umum.",
-                "KODE MERAH: Pembayaran Kasir; KODE BIRU: Stok Darah Habis; KODE HIJAU: Kamar Kosong; KODE ORANYE: Ambulans Masuk.",
-                "KODE MERAH: Dokter Datang; KODE BIRU: Perawat Piket; KODE HIJAU: Apotek Buka; KODE ORANYE: Jam Istirahat."
+                "Ancaman bahaya kebakaran atau kepulan asap pekat di instalasi rawat inap.",
+                "Kegawatdaruratan henti jantung dan henti napas pada pasien, staf, atau pengunjung rumah sakit.",
+                "Tumpahan cairan kimia berbahaya atau tumpahan limbah infeksius di laboratorium.",
+                "Ancaman gempa bumi dahsyat yang mengharuskan evakuasi seluruh gedung."
             ],
-            correct: 0,
-            explanation: "Sangat Benar! 🔴 KODE MERAH (CODE RED) = Kegawatdaruratan kebakaran & asap; 🔵 KODE BIRU (CODE BLUE) = Kegawatan resusitasi; 🟢 KODE HIJAU (CODE GREEN) = Disaster Plan (bencana); 🟠 KODE ORANYE (CODE ORANGE) = Insiden bahan berbahaya (B3)!"
+            correct: 1,
+            explanation: "Sangat Benar! Code Blue adalah kode gawat darurat medis henti jantung/napas yang memanggil Tim Resusitasi Cepat untuk membawa defibrilator dan obat emergency."
         },
         {
             id: "mfk_kode_darurat_2",
-            posName: "Pos 3: Kode Darurat (Hitam, Pink, Ungu, & Abu-abu)",
-            question: "Apa makna dari KODE HITAM, KODE MERAH MUDA (PINK), KODE UNGU, dan KODE ABU-ABU (GREY)?",
+            posName: "Pos 3: Kode Penculikan Bayi (Code Pink)",
+            question: "Panggilan darurat 'CODE PINK' di lingkungan rumah sakit mengindikasikan adanya peristiwa...?",
             options: [
-                "KODE HITAM: Ancaman Bom; KODE MERAH MUDA: Penculikan/Kehilangan Bayi atau Anak; KODE UNGU: Pengaktifan Evakuasi Pasien, Pengunjung & Pegawai ke Titik Kumpul; KODE ABU-ABU: Gangguan Keamanan dalam bentuk apa pun.",
-                "KODE HITAM: Pemadaman Listrik; KODE MERAH MUDA: Kelahiran Bayi Kembar; KODE UNGU: Kunjungan Tamu; KODE ABU-ABU: Hujan Badai.",
-                "KODE HITAM: Kematian Pasien; KODE MERAH MUDA: Poliklinik Ibu & Anak; KODE UNGU: Seragam Perawat; KODE ABU-ABU: Perbaikan AC.",
-                "KODE HITAM: Disiplin Militer; KODE MERAH MUDA: Tarif Rawat Inap; KODE UNGU: Rapat Komite; KODE ABU-ABU: Pengecatan Gedung."
+                "Penculikan bayi atau anak yang memerlukan penutupan dan pemeriksaan di seluruh pintu keluar gerbang rumah sakit.",
+                "Ancaman bom atau paket mencurigakan yang berpotensi meledak di area lobi.",
+                "Pasien kabur dari ruang isolasi penyakit menular tanpa persetujuan dokter.",
+                "Kerusuhan fisik massal di area loket pendaftaran rawat jalan."
             ],
             correct: 0,
-            explanation: "Luar biasa! ⚫ KODE HITAM = Ancaman Bom; 🌸 KODE MERAH MUDA = Penculikan/kehilangan bayi/anak; 🟣 KODE UNGU = Pengaktifan evakuasi pasien/staf ke titik kumpul; 🩶 KODE ABU-ABU = Gangguan keamanan dalam bentuk apa pun!"
+            explanation: "Hebat! Code Pink adalah kode darurat penculikan bayi/anak. Respon standarnya adalah menutup seluruh akses keluar masuk dan memeriksa setiap orang yang membawa tas/bayi."
         },
         {
             id: "mfk_apar_pass",
-            posName: "Pos 4: Penggunaan APAR (Metode PASS)",
-            question: "Bagaimana urutan 4 langkah penggunaan Alat Pemadam Api Ringan (APAR) dengan metode P.A.S.S. yang benar?",
+            posName: "Pos 4: Pengoperasian APAR Metode PASS",
+            question: "Apakah urutan baku pengoperasian APAR menggunakan teknik PASS?",
             options: [
-                "1. P (Pull): Tarik pin pengaman tabung APAR; 2. A (Aim): Arahkan corong/nozel ke dasar/pangkal api; 3. S (Squeeze): Tekan tuas pegangan; 4. S (Sweep): Sapukan semprotan merata dari kiri ke kanan searah arah angin.",
-                "1. Push (Dorong tabung); 2. Air (Beri udara); 3. Stop (Berhenti); 4. Save (Selamatkan diri sendiri).",
-                "1. Pass (Oper tabung); 2. Ask (Tanya satpam); 3. See (Lihat api); 4. Shout (Berteriak keras).",
-                "1. Pour (Siram air); 2. Apply (Oleskan kain basah); 3. Shake (Kocok tabung); 4. Shoot (Tembakkan ke langit)."
+                "Push valve pemadam, Adjust jarak semprot, Shake tabung silinder, dan Stop kebakaran.",
+                "Pull pin pengaman, Aim corong ke pangkal api, Squeeze tuas semprot, dan Sweep sapukan nozzle merata.",
+                "Press handle, Aim ke ujung asap, Spray secara vertikal, dan Secure area.",
+                "Pump tenaga manual, Aim ke kobaran api, Squeeze terus menerus, dan Save diri sendiri."
             ],
-            correct: 0,
-            explanation: "Sempurna! Metode PASS untuk APAR: P (Pull) Tarik pin pengaman, A (Aim) Arahkan nozel ke dasar api, S (Squeeze) Tekan tuas pegangan, S (Sweep) Sapukan semprotan merata ke kiri-kanan searah arah angin!"
+            correct: 1,
+            explanation: "Tepat sekali! PASS: P (Pull/cabut pin pengaman), A (Aim/arahkan corong ke pangkal api, bukan asap), S (Squeeze/tekan tuas semprot), S (Sweep/sapukan ke kiri dan ke kanan secara merata)."
         },
         {
             id: "mfk_hydrant_indoor",
-            posName: "Pos 5: Prosedur Hydrant Indoor (Gedung)",
-            question: "Bagaimana prosedur pengoperasian Hydrant Indoor (Kotak Hydrant Gedung) saat penanganan kebakaran?",
+            posName: "Pos 5: Komponen Hydrant Indoor Gedung",
+            question: "Komponen apa saja yang wajib selalu tersedia lengkap di dalam kotak hydrant indoor?",
             options: [
-                "Buka pintu kotak hydrant -> bentangkan selang (fire hose) ke arah api tanpa terlipat/terpuntir -> pasang nozel di ujung selang & sambungkan ke katup -> buka katup air (valve) perlahan berlawanan arah jarum jam -> pegang nozel kokoh (formasi 2 orang) semprotkan ke dasar api.",
-                "Keluarkan selang lalu lemparkan gulungannya ke arah api agar air keluar otomatis.",
-                "Cukup buka katup air tanpa perlu mengeluarkan selang dari dalam kotak hydrant.",
-                "Katup diputar searah jarum jam sekencang-kencangnya lalu ditinggalkan agar membanjiri lantai."
+                "Kapak darurat, baju tahan api pemadam, dan tangga lipat aluminium portabel.",
+                "Katup kran air (valve), gulungan selang kanvas bertekanan, dan pipa pemancar (nozzle).",
+                "Tabung gas nitrogen, masker oksigen darurat, dan selimut basah pemadam api.",
+                "Pompa air manual tenaga tangan, ember pasir silika, dan pengukur tekanan digital."
             ],
-            correct: 0,
-            explanation: "Hebat! Prosedur Hydrant Indoor: Buka box -> bentang selang lurus tanpa terlipat -> pasang nozel & sambungkan kopling -> buka katup air berlawanan arah jarum jam -> semprotkan air dengan kuda-kuda kokoh 2 personel ke pangkal api!"
+            correct: 1,
+            explanation: "Benar! Kotak hydrant indoor wajib memuat katup pasokan air bertekanan, selang kanvas dalam kondisi rapi, dan nozzle pemancar air."
         },
         {
             id: "mfk_hydrant_outdoor",
-            posName: "Pos 6: Prosedur Hydrant Outdoor (Pilar Halaman)",
-            question: "Bagaimana prosedur pengoperasian Hydrant Outdoor (Pilar Halaman) dan apa yang harus diperhatikan mengenai tekanannya?",
+            posName: "Pos 6: Pilar Hydrant Halaman Outdoor",
+            question: "Apa fungsi utama pilar hydrant outdoor yang terpasang di halaman luar gedung rumah sakit?",
             options: [
-                "Buka kotak hydrant luar, ambil selang & kunci hydrant (wrench) -> pasang kopling selang ke pilar hydrant & pasang nozel -> buka kran pilar berlawanan jarum jam dengan kunci khusus -> pegang nozel formasi minimal 2-3 orang untuk menahan gaya tolak balik (recoil) tekanan air tinggi -> arahkan ke sumber api.",
-                "Hydrant outdoor dapat dioperasikan seorang diri dengan santai tanpa perlu menahan tekanan semprotan air.",
-                "Kran pilar dibuka menggunakan obeng kecil dan selang tidak perlu disambungkan ke pilar.",
-                "Hydrant outdoor hanya boleh dibuka saat hujan deras turun membasahi halaman rumah sakit."
+                "Menyuplai pasokan air bertekanan tinggi bagi mobil armada pemadam kebakaran dinas.",
+                "Saluran cadangan untuk pengurasan limbah cair medis sebelum mengalir ke instalasi IPAL.",
+                "Fasilitas penyiraman taman penghijauan dan pencucian kendaraan operasional pangkalan.",
+                "Penampungan air bersih darurat untuk mencuci linen kotor di instalasi laundry."
             ],
             correct: 0,
-            explanation: "Tepat sekali! Hydrant Outdoor bertekanan tinggi: Gunakan kunci hydrant khusus (wrench) untuk membuka pilar, pasang selang & nozel, dan wajib formasi 2-3 personel kuda-kuda kuat untuk menahan daya recoil/tendangan semprotan air bertekanan tinggi!"
+            explanation: "Hebat! Pilar hydrant outdoor berfungsi sebagai sumber pasokan air bertekanan tinggi untuk armada mobil damkar agar tidak kehabisan air saat pemadaman berlangsung."
         },
         {
             id: "mfk_evakuasi_pasien",
-            posName: "Pos 7: Alur Evakuasi Pasien & Kode Ungu",
-            question: "Kapan KODE UNGU diaktifkan dan bagaimana alur evakuasi pasien saat keadaan darurat bencana/kebakaran?",
+            posName: "Pos 7: Prioritas Evakuasi Pasien (Code Purple)",
+            question: "Saat evakuasi bencana (Code Purple), pasien dengan kriteria apa yang diprioritaskan dievakuasi duluan?",
             options: [
-                "KODE UNGU diaktifkan saat ada instruksi resmi evakuasi darurat; pasien dievakuasi teratur sesuai prioritas triage (pasien mandiri, dibantu, hingga tirah baring/alat medis), staf membawa dokumen medis penting, bergerak melalui tangga darurat (dilarang menggunakan lift), menuju 5 Titik Kumpul yang aman.",
-                "Pasien diminta menyelamatkan diri masing-masing melompat dari jendela lantai atas.",
-                "Seluruh pasien dan staf berebut masuk ke dalam lift gedung agar cepat sampai ke lantai dasar.",
-                "KODE UNGU hanya diaktifkan saat jam istirahat makan siang untuk mengosongkan poli rawat jalan."
+                "Pasien kritis koma di ruang ICU yang terpasang ventilator mesin pernapasan.",
+                "Pasien mandiri (triage hijau) yang dapat berjalan sendiri diarahkan keluar terlebih dahulu.",
+                "Pasien meninggal dunia di instalasi forensik kamar jenazah rumah sakit.",
+                "Hanya pasien rawat jalan yang memiliki kartu asuransi kesehatan swasta."
             ],
-            correct: 0,
-            explanation: "Sangat Tepat! KODE UNGU = Evakuasi terarah menuju Titik Kumpul. Gunakan tangga darurat (dilarang lift), evakuasi pasien berjenjang sesuai prioritas medis, dan berkumpul di assembly point (Lapangan Apel, GSB, MCU, Kantor Staff, HD)!"
+            correct: 1,
+            explanation: "Luar biasa! Pada evakuasi massal, pasien mandiri/dapat berjalan (Hijau) dikeluarkan duluan agar koridor bersih, disusul pasien kursi roda (Kuning), lalu pasien tirah baring/kritis (Merah)."
         },
         {
             id: "mfk_keselamatan_b3",
-            posName: "Pos 8: Manajemen Fasilitas & Penanganan B3",
-            question: "Apa ruang lingkup utama Manajemen Fasilitas dan Keselamatan (MFK) serta penanganan KODE ORANYE (Tumpahan B3)?",
+            posName: "Pos 8: Dokumen Keselamatan Bahan B3",
+            question: "Dokumen apa yang wajib tersedia di setiap unit tempat penyimpanan Bahan Berbahaya dan Beracun (B3)?",
             options: [
-                "MFK menjamin keselamatan fasilitas, keamanan, B3, proteksi kebakaran, utilitas, & mitigasi bencana; saat KODE ORANYE aktif, petugas menggunakan Spill Kit B3 (APD lengkap, serbuk penyerap/pasir, kantong limbah medis kuning), isolasi area, dan laporkan insiden.",
-                "Tumpahan B3 cukup disiram dengan air teh manis lalu dibiarkan kering sendiri tanpa APD.",
-                "Ruang lingkup MFK hanya mencakup pembelian AC baru dan pengecatan pagar gerbang masuk.",
-                "Limbah B3 dibuang langsung ke selokan komplek pangkalan udara tanpa pengelolaan limbah B3."
+                "Surat bukti pembayaran faktur pajak barang dari distributor logistik farmasi.",
+                "Lembar Data Keselamatan Bahan (Material Safety Data Sheet / MSDS) dan fasilitas spill kit penanganan tumpahan.",
+                "Daftar absensi giliran piket staf pembersih ruangan instalasi sanitasi rumah sakit.",
+                "Surat keputusan penugasan dokter spesialis farmakologi klinik rumah sakit."
             ],
-            correct: 0,
-            explanation: "Sempurna! Standar Pokja MFK meliputi keselamatan fisik, proteksi kebakaran (APAR/Hydrant), utilitas darurat, penanggulangan bencana (Disaster Plan), dan mitigasi tumpahan B3 (Spill Kit APD) saat KODE ORANYE aktif!"
+            correct: 1,
+            explanation: "Sempurna! Setiap lokasi penyimpanan B3 wajib memiliki MSDS (Material Safety Data Sheet) berbahasa Indonesia, simbol piktogram B3, APD khusus, dan Spill Kit tumpahan B3."
         }
     ];
 
@@ -1503,411 +1592,411 @@
     const PROGNAS_QUIZ_BANK = [
         {
             id: "ppra_definisi",
-            posName: "Pos 1: Definisi Program PPRA Rumah Sakit",
-            question: "Apa yang dimaksud dengan Program Pengendalian Resistensi Antimikroba (PPRA) di rumah sakit?",
+            posName: "Pos 1: Definisi Program PPRA",
+            question: "Apa tujuan utama dibentuknya Program Pengendalian Resistensi Antimikroba (PPRA) di RS?",
             options: [
-                "Program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak dan rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan.",
-                "Program promosi penjualan obat antibiotik baru dengan diskon farmasi untuk meningkatkan pendapatan rumah sakit.",
-                "Program penghentian total seluruh penggunaan antibiotik bagi semua pasien rawat inap tanpa terkecuali.",
-                "Program pembersihan ruangan operasi hanya menggunakan desinfektan lantai tanpa uji laboratorium kultur."
+                "Menghentikan secara total peresepan semua jenis antibiotik pada pasien rawat inap.",
+                "Mengoptimalkan penggunaan antibiotik bijak dan rasional guna menekan resistensi kuman patogen.",
+                "Mempromosikan peresepan antibiotik paten generasi terbaru dengan harga paling mahal.",
+                "Mengganti terapi antibiotik medis konvensional dengan suplemen imunomodulator herbal."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Sesuai standar Kemenkes, PPRA adalah program rumah sakit untuk mengendalikan penggunaan antibiotik secara bijak dan rasional guna menekan resistensi kuman, meningkatkan keselamatan pasien, dan mutu pelayanan."
+            correct: 1,
+            explanation: "Tepat! PPRA bertujuan mengendalikan resistensi kuman patogen dengan memastikan antibiotik diresepkan secara rasional, bijak, dan berbasis bukti mikrobiologis."
         },
         {
             id: "ppra_tujuan",
-            posName: "Pos 2: Empat Tujuan Utama PPRA",
-            question: "Apa sajakah 4 tujuan utama diselenggarakannya program PPRA di RSAU dr. Esnawan Antariksa?",
+            posName: "Pos 2: Empat Sasaran Utama PPRA",
+            question: "Manakah di bawah ini yang BUKAN merupakan salah satu sasaran strategis dari program PPRA?",
             options: [
-                "1) Mengoptimalkan penggunaan antibiotik secara rasional; 2) Menurunkan kejadian resistensi antimikroba; 3) Meningkatkan keselamatan pasien; 4) Menurunkan angka infeksi dan biaya pelayanan kesehatan.",
-                "1) Menghabiskan stok antibiotik kedaluwarsa; 2) Menambah kuota impor obat; 3) Mengurangi jumlah perawat; 4) Meniadakan pemeriksaan kultur kuman.",
-                "1) Menaikkan tarif rawat inap; 2) Mempercepat pemulangan pasien tanpa obat; 3) Mengganti semua obat oral dengan suntikan; 4) Menghapus resep dokter.",
-                "1) Membeli alat laboratorium termahal; 2) Membatasi kunjungan keluarga; 3) Mengurangi tes alergi obat; 4) Menghapus formularium obat."
+                "Menurunkan angka morbiditas dan mortalitas pasien akibat infeksi bakteri resisten obat.",
+                "Mencegah muncul dan menyebarnya galur mikroba resisten di lingkungan bangsal perawatan.",
+                "Mendorong peresepan antibiotik lini akhir secara bebas tanpa konfirmasi uji mikrobiologi.",
+                "Menjamin ketersediaan obat antibiotik yang cost-effective bagi seluruh lapisan masyarakat."
             ],
-            correct: 0,
-            explanation: "Sangat Benar! 4 Tujuan utama PPRA: 1) Mengoptimalkan penggunaan antibiotik rasional, 2) Menurunkan resistensi antimikroba, 3) Meningkatkan keselamatan pasien, dan 4) Menurunkan angka infeksi serta biaya pelayanan kesehatan!"
+            correct: 2,
+            explanation: "Benar! PPRA justru membatasi dan mengawasi ketat peresepan antibiotik lini akhir (reserve) agar tidak terjadi kekebalan mutlak bakteri di rumah sakit."
         },
         {
             id: "ppra_prinsip_rasional",
-            posName: "Pos 3: Enam Prinsip Penggunaan Antibiotik Rasional (6 Tepat)",
-            question: "Sebutkan 6 prinsip penggunaan antibiotik secara rasional menurut kaidah PPRA!",
+            posName: "Pos 3: Prinsip 6 Tepat Peresepan Antibiotik",
+            question: "Prinsip 6 Tepat penggunaan antibiotik bijak meliputi tepat indikasi, tepat obat, tepat pasien, dan...?",
             options: [
-                "Tepat Indikasi, Tepat Pasien, Tepat Obat, Tepat Dosis, Tepat Rute Pemberian, serta Tepat Waktu dan Lama Pemberian.",
-                "Tepat Merk Obat, Tepat Kemasan, Tepat Harga Murah, Tepat Pabrik, Tepat Kurir, dan Tepat Lokasi Apotek.",
-                "Tepat Selera Pasien, Tepat Warna Kapsul, Tepat Tanggal Gajian, Tepat Promosi Sponsor, Tepat Ruangan, dan Tepat Waktu Pulang.",
-                "Tepat Pembayaran Tunai, Tepat Asuransi, Tepat Antrean Poli, Tepat Parkir Mobil, Tepat Jam Dokter, dan Tepat Resep."
+                "Tepat dosis obat, tepat rute pemberian, serta tepat durasi/lama pemberian terapi.",
+                "Tepat potongan harga diskon, tepat kemasan botol sirup, dan tepat tanggal kadaluarsa.",
+                "Tepat merek paten, tepat ruang kamar rawat, dan tepat jenis asuransi penjamin.",
+                "Tepat apotek luar rekanan, tepat pabrik pembuat, dan tepat sistem penagihan kasir."
             ],
             correct: 0,
-            explanation: "Luar biasa! 6 Prinsip Penggunaan Antibiotik Rasional: 1. Tepat Indikasi, 2. Tepat Pasien, 3. Tepat Obat, 4. Tepat Dosis, 5. Tepat Rute Pemberian, dan 6. Tepat Waktu & Lama Pemberian!"
+            explanation: "Hebat! Enam Prinsip Tepat PPRA: 1. Tepat Indikasi, 2. Tepat Pasien, 3. Tepat Pemilihan Obat, 4. Tepat Dosis, 5. Tepat Rute, 6. Tepat Lama Pemberian (Durasi)."
         },
         {
             id: "ppra_indikator_keberhasilan",
-            posName: "Pos 4: Indikator Keberhasilan PPRA",
-            question: "Apa sajakah 4 indikator utama keberhasilan pelaksanaan program PPRA di rumah sakit?",
+            posName: "Pos 4: Pengukuran Kuantitas Antibiotik",
+            question: "Satuan baku internasional yang digunakan rumah sakit untuk mengukur kuantitas penggunaan antibiotik adalah...?",
             options: [
-                "Kepatuhan penggunaan antibiotik sesuai pedoman, evaluasi penggunaan antibiotik (kuantitatif DDD & kualitatif Gyssens), pola resistensi kuman (antibiogram), dan audit penggunaan antibiotik.",
-                "Jumlah penjualan obat antibiotik terbanyak, keuntungan laba apotek, banyaknya resep luar, dan ketiadaan komplain harga.",
-                "Penurunan jumlah pasien yang berobat ke IGD, pengurangan dokter spesialis, penghapusan lembar resep, dan stok gudang habis.",
-                "Hanya dihitung dari jumlah poster edukasi yang ditempel di dinding lorong tanpa audit rekam medis."
+                "Jumlah botol infus antibiotik yang dibuang ke limbah medis setiap pergantian shift jaga.",
+                "Defined Daily Dose (DDD) per 100 hari rawat inap pasien (patient-days) sesuai standar WHO.",
+                "Persentase lembar resep antibiotik yang dibeli pasien di depo apotek rawat jalan.",
+                "Total gram berat serbuk antibiotik yang diracik di ruang farmasi steril rumah sakit."
             ],
-            correct: 0,
-            explanation: "Sempurna! 4 Indikator PPRA meliputi: 1) Kepatuhan peresepan sesuai pedoman PPAB, 2) Evaluasi kuantitatif (Defined Daily Dose/DDD) & kualitatif (Gyssens), 3) Pemetaan pola resistensi kuman berkala (antibiogram), dan 4) Audit berkala penggunaan antibiotik!"
+            correct: 1,
+            explanation: "Tepat sekali! Pengukuran baku kuantitas antibiotik WHO dihitung dalam satuan Defined Daily Dose (DDD) per 100 hari rawat inap (patient-days)."
         },
         {
             id: "ppra_strategi_utama",
-            posName: "Pos 5: Strategi Utama Tim PPRA",
-            question: "Apa sajakah 6 strategi utama PPRA dalam mengendalikan resistensi kuman di lingkungan rumah sakit?",
+            posName: "Pos 5: Penatagunaan Antimikroba (PGA)",
+            question: "Apa tugas utama tim Penatagunaan Antimikroba (PGA / Antimicrobial Stewardship) di rumah sakit?",
             options: [
-                "Pedoman penggunaan antibiotik, audit penggunaan antibiotik, restriksi antibiotik tertentu, surveilans resistensi, edukasi tenaga kesehatan, serta monitoring dan evaluasi.",
-                "Memberikan antibiotik spektrum luas langsung ke semua pasien tanpa indikasi dan melarang dokter konsultasi farmasi.",
-                "Menutup laboratorium mikrobiologi dan menyerahkan pemilihan obat sepenuhnya pada kemauan pasien.",
-                "Menghilangkan kewajiban cuci tangan dan melarang audit kepatuhan klinis oleh Komite Farmasi."
+                "Melakukan audit prospektif, restriksi peresepan antibiotik tertentu, dan memberi masukan klinis bagi DPJP.",
+                "Menghapus seluruh persediaan antibiotik generik demi memaksimalkan pendapatan apotek rumah sakit.",
+                "Memberi kebebasan kepada dokter muda meresepkan antibiotik spektrum luas tanpa indikasi infeksi.",
+                "Menghentikan uji kultur mikrobiologi dan uji sensitivitas antibiotik di laboratorium patologi klinik."
             ],
             correct: 0,
-            explanation: "Hebat! 6 Strategi Utama PPRA: 1. Pedoman Penggunaan Antibiotik (PPAB), 2. Audit penggunaan antibiotik, 3. Restriksi antibiotik tertentu (lini restriksi), 4. Surveilans resistensi kuman, 5. Edukasi nakes (dokter, apoteker, perawat), dan 6. Monitoring & evaluasi berkelanjutan!"
+            explanation: "Luar biasa! Tim PGA bertugas menerapkan pre-otorisasi antibiotik restricted, melakukan audit berkala, dan mengarahkan terapi antibiotik berbasis peta kuman rumah sakit."
         },
         {
             id: "ppra_restriksi_lini",
-            posName: "Pos 6: Restriksi Antibiotik & Otorisasi Reserve",
-            question: "Dalam kebijakan restriksi antibiotik Tim PPRA, bagaimana tata laksana penggunaan antibiotik kelompok Reserve / Lini 3?",
+            posName: "Pos 6: Regulasi Antibiotik Kategori Reserve",
+            question: "Kapan antibiotik kelompok 'Reserve' (seperti Colistin atau Meropenem resisten) boleh diresepkan ke pasien?",
             options: [
-                "Antibiotik kelompok Reserve dicadangkan untuk infeksi bakteri multiresisten (MDRO), memerlukan formulir persetujuan khusus/otorisasi Tim PPRA (atau Dokter Spesialis Konsultan), serta diberlakukan Automatic Stop Order (ASO).",
-                "Antibiotik Reserve boleh diresepkan bebas tanpa resep dan dibeli bebas oleh keluarga pasien di kasir.",
-                "Antibiotik Reserve diberikan sebagai terapi pencegahan flu biasa bagi seluruh staf administrasi.",
-                "Semua dokter muda bebas memberikan antibiotik Reserve lini 3 tanpa indikasi hasil kultur laboratorium mikrobiologi."
+                "Boleh langsung diresepkan secara bebas bila diminta oleh keluarga pasien rawat inap.",
+                "Setelah ada konfirmasi hasil kultur kuman resisten serta persetujuan resmi Tim PPRA/PGA.",
+                "Bila persediaan antibiotik lini pertama di instalasi farmasi kebetulan sedang habis.",
+                "Hanya jika pasien dirawat di ruang rawat kelas VIP atau ruang paviliun eksekutif."
             ],
-            correct: 0,
-            explanation: "Sangat Tepat! Restriksi Antibiotik: Golongan Reserve (lini 3) hanya untuk infeksi kuman resisten (MDRO) yang terbukti via kultur, wajib mendapatkan otorisasi/persetujuan Tim PPRA, dan dipantau ketat dengan Automatic Stop Order (ASO) demi mencegah 'superbug'!"
+            correct: 1,
+            explanation: "Sempurna! Antibiotik golongan Reserve hanya diizinkan untuk infeksi kuman kebal terbukti kultur dan wajib mendapatkan otorisasi persetujuan Tim PPRA/PGA."
         }
     ];
 
     /* ==========================================================================
-       1F. BANK SOAL & DATA POKJA PAP (Pelayanan dan Asuhan Pasien Terpadu)
+       1F. BANK SOAL & DATA POKJA PAP (Pelayanan & Asuhan Pasien)
        ========================================================================== */
     const PAP_QUIZ_BANK = [
         {
-            id: "pap_asuhan_seragam",
-            posName: "Pos 1: Asuhan Pasien Seragam & 7 Alur Koordinasi PPA",
-            question: "Apa yang dimaksud dengan pelayanan asuhan pasien seragam di seluruh unit RS dan bagaimana 7 alur koordinasi asuhan terpadu?",
+            id: "pap_asuhan_seragam_alur",
+            posName: "Pos 1: Pelayanan Asuhan Pasien Seragam",
+            question: "Apa prinsip dasar dari Pelayanan Asuhan Pasien yang Seragam di rumah sakit?",
             options: [
-                "Perawatan berkualitas sama dan berstandar tinggi tanpa membedakan status sosial, ekonomi, agama, ras, maupun kemampuan bayar; melalui 7 alur: 1) Asesmen awal PPA, 2) Visite bersama/Ronde Bangsal, 3) Rencana asuhan terpadu DPJP, 4) Pencatatan CPPT metode SOAP, 5) Fasilitasi MPP/Case Manager, 6) Edukasi & persetujuan keluarga, 7) Evaluasi & Discharge Planning.",
-                "Pelayanan seragam berarti seluruh pasien mendapatkan satu jenis menu obat yang sama persis tanpa perlu pemeriksaan dokter spesialis.",
-                "Pelayanan hanya dibedakan berdasarkan tingkat kepangkatan militer dan kemampuan membayar biaya kelas VIP tanpa asesmen klinis.",
-                "Pasien langsung dipulangkan pada hari pertama tanpa perlu ronde bangsal bersama tim PPA."
+                "Semua pasien wajib menerima obat dan menu makanan yang sama tanpa memperhatikan diagnosis medis.",
+                "Mutu dan kompetensi asuhan klinis yang diterima pasien setara, tanpa membedakan status jaminan finansial.",
+                "Setiap dokter spesialis penanggung jawab wajib memakai warna baju dinas yang serupa setiap hari.",
+                "Tindakan medis hanya boleh dilakukan pada hari kerja dinas dan dilarang pada hari libur nasional."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Asuhan seragam menjamin kualitas berstandar tinggi bagi semua pasien tanpa diskriminasi melalui 7 alur: Asesmen awal PPA, Ronde bangsal, Rencana asuhan DPJP, Dokumentasi CPPT SOAP, Fasilitasi MPP, Edukasi keluarga, dan Discharge Planning berkala!"
+            correct: 1,
+            explanation: "Tepat! Asuhan seragam menjamin bahwa seluruh pasien menerima standar mutu pelayanan medis dan keperawatan yang setara, tanpa membedakan status sosial atau kelas perawatan."
         },
         {
-            id: "pap_cppt_soap_dpjp",
-            posName: "Pos 2: Tata Kelola CPPT, Metode SOAP & Visite Harian DPJP",
-            question: "Siapa saja PPA yang menulis di CPPT, apa 3 prinsip penting penulisan CPPT, dan bagaimana kewajiban visite harian DPJP?",
+            id: "pap_cppt_soap_visite",
+            posName: "Pos 2: Dokumentasi Asuhan di Lembar CPPT",
+            question: "Di manakah seluruh Profesional Pemberi Asuhan (PPA) mendokumentasikan perkembangan kondisi pasien?",
             options: [
-                "Penulis: Dokter (DPJP/ruangan/umum/spesialis), Perawat/Bidan, Apoteker klinik, Ahli Gizi, Fisioterapis, Psikolog, Pekerja Sosial; Prinsip: Terintegrasi 1 lembar bersama, Verifikasi/paraf DPJP, Diisi minimal 1x per shift/24 jam (metode SOAP: Subjektif, Objektif, Asesmen, Plan). DPJP wajib visite setiap hari termasuk akhir pekan, asesmen awal rawat inap maks 24 jam, dan instruksi verbal TBAK diverifikasi ttd dokter maks 1x24 jam.",
-                "CPPT hanya boleh diisi oleh staf administrasi kasir pada saat pasien menyelesaikan pembayaran akhir kamar rawat inap.",
-                "Hanya dokter spesialis bedah yang boleh menulis, perawat dan ahli gizi dilarang mencatat perkembangan pasien di rekam medis.",
-                "CPPT cukup diisi satu kali saja saat pasien pertama kali mendaftar di loket admisi tanpa perlu verifikasi paraf dokter."
+                "Catatan Perkembangan Pasien Terintegrasi (CPPT) menggunakan format penulisan SOAP.",
+                "Buku agenda catatan pribadi perawat jaga tanpa perlu diverifikasi oleh dokter DPJP.",
+                "Formulir rincian pembayaran biaya kamar perawatan di loket kasir keuangan rumah sakit.",
+                "Buku register buku tamu di pos penjagaan keamanan gerbang depan rumah sakit."
             ],
             correct: 0,
-            explanation: "Sangat Benar! CPPT adalah wadah rekam medis terpadu multidisiplin (Dokter, Perawat, Farmasi, Gizi, Terapi) dengan metode SOAP, diverifikasi paraf DPJP harian (termasuk akhir pekan), asesmen awal terintegrasi maks 24 jam, dan instruksi verbal TBAK diverifikasi maks 1x24 jam!"
+            explanation: "Sangat Benar! Semua PPA (dokter, perawat, apoteker, gizi, fisioterapi) mendokumentasikan asuhan terintegrasi di lembar CPPT menggunakan kaidah SOAP."
         },
         {
-            id: "pap_pasien_pelayanan_risti",
-            posName: "Pos 3: Kriteria Pasien & Pelayanan Risiko Tinggi (Risti) serta ICP",
-            question: "Apa saja kriteria Pasien Risiko Tinggi, Pelayanan Risiko Tinggi, serta peran Integrated Clinical Pathway (ICP)?",
+            id: "pap_asesmen_igd_triage",
+            posName: "Pos 3: Kategori Triage Merah di IGD",
+            question: "Pasien dengan label Triage MERAH di Instalasi Gawat Darurat memerlukan penanganan klinis...?",
             options: [
-                "Pasien Risti: Emergensi, koma, alat bantuan hidup, penyakit jantung/HT/stroke/DM, risiko bunuh diri; Pelayanan Risti: Penyakit menular/KLB, immuno-suppressed, dialisis, restrain, kemoterapi, paliatif, geriatri; ICP (Integrated Clinical Pathway): Alur asuhan terpadu lintas profesi untuk memprediksi mutu pelayanan dan lama hari rawat (LOS).",
-                "Pasien risiko tinggi hanyalah pasien yang menolak membayar uang muka kamar rawat inap di bagian pendaftaran.",
-                "Integrated Clinical Pathway adalah denah jalur evakuasi kebakaran menuju pintu keluar darurat rumah sakit.",
-                "Pelayanan risiko tinggi hanya berlaku untuk pasien rawat jalan poli gigi anak."
+                "Tindakan resusitasi darurat segera karena mengalami kegawatan yang mengancam nyawa atau jalan napas.",
+                "Pemeriksaan dokter yang dapat ditunda selama 30 sampai 60 menit karena kondisi fisiknya stabil.",
+                "Pelayanan poliklinik rawat jalan terjadwal untuk pengambilan resep obat rutin bulanan dinas.",
+                "Penempatan di ruang observasi biasa sambil menunggu keluarga menyelesaikan berkas BPJS."
             ],
             correct: 0,
-            explanation: "Luar biasa! Standar PAP mewajibkan rumah sakit mengidentifikasi Pasien Risti (emergensi, koma, life-support, risiko bunuh diri) dan Pelayanan Risti (dialisis, restrain, kemo, paliatif, isolasi) serta menerapkan ICP/PPK terintegrasi untuk standarisasi mutu dan LOS!"
+            explanation: "Hebat! Triage Merah menandakan kondisi gawat darurat kritis (sumbatan jalan napas, syok, henti jantung) yang memerlukan intervensi medis seketika."
         },
         {
-            id: "pap_dekubitus_norton_vap",
-            posName: "Pos 4: Pencegahan Komplikasi: Skala Norton Dekubitus & VAP",
-            question: "Bagaimana cara penilaian risiko luka tekan (dekubitus) dengan Skala Norton dan apa saja faktor risiko terjadinya VAP pada pasien ventilator?",
+            id: "pap_ews_deteriorasi",
+            posName: "Pos 4: Deteksi Dini Early Warning System (EWS)",
+            question: "Kapan skor peringatan dini Early Warning System (EWS) pada pasien rawat inap wajib dilaporkan segera ke DPJP?",
             options: [
-                "Skala Norton menilai 5 parameter skor 1-4 (Kondisi fisik, mental, aktivitas, mobilitas, inkontinensia) total skor 5-20: Skor <13 = Risiko Tinggi luka tekan (skor 14-15 sedang, >16 rendah; alternatif: Skala Braden). Faktor risiko VAP: Durasi intubasi lama, aspirasi sekret lendir ETT ke paru, oral hygiene rendah, usia lanjut/komorbid, sedasi dalam, dan posisi tidur datar <30-45 derajat.",
-                "Skala Norton digunakan untuk mengukur tekanan darah arteri rata-rata pasien pasca operasi.",
-                "Dekubitus dinilai dari nafsu makan pasien dan VAP hanya terjadi jika pasien batuk pilek biasa.",
-                "Skor Norton di atas 18 menandakan pasien harus segera dipasang gips pada kedua kakinya."
+                "Hanya jika pasien mengajukan surat permohonan resmi untuk pindah kamar ke kelas yang lebih tinggi.",
+                "Saat perhitungan skor EWS menunjukkan perburukan fisiologis signifikan (Skor Merah / EWS >= 7).",
+                "Hanya saat pergantian shift perawat di pagi hari bersamaan dengan penimbangan berat badan.",
+                "Bila pasien mengeluhkan rasa masakan instalasi gizi rumah sakit terasa kurang sedap."
             ],
-            correct: 0,
-            explanation: "Sempurna! Skala Norton (5-20): Skor <13 menandakan risiko tinggi dekubitus (memerlukan reposisi miring kanan-kiri tiap 2 jam dan kasur dekubitus). Pencegahan VAP: pertahankan posisi kepala 30-45°, suction lendir ETT, oral hygiene teratur, dan kaji kesiapan ekstubasi sedini mungkin!"
+            correct: 1,
+            explanation: "Tepat sekali! Skor EWS tinggi (kategori merah/kritis) menandakan risiko deteriorasi klinis atau henti jantung, sehingga wajib dilaporkan segera ke DPJP/Tim Medis Reaksi Cepat."
         },
         {
-            id: "pap_tindakan_restrain",
-            posName: "Pos 5: Kebijakan & Tata Laksana Tindakan Restrain Pasien",
-            question: "Apakah tujuan dilakukannya tindakan restrain dan apa sajakah jenis-jenis restrain yang diterapkan di rumah sakit?",
+            id: "pap_morse_fall_risk",
+            posName: "Pos 5: Penanda Pasien Risiko Jatuh Tinggi",
+            question: "Pasien dewasa dengan skor Morse Fall Scale kategori Risiko Jatuh Tinggi wajib dipasangi tanda visual...?",
             options: [
-                "Tujuan: Tindakan pembatasan fisik atau kimiawi pada pergerakan pasien untuk mencegah cedera pada diri sendiri maupun orang lain (khususnya pasien gaduh gelisah/delirium/mencabut alat medis); Jenis: 1) Restrain Fisik (pengikatan anggota gerak tangan/kaki menggunakan alat pengekang lembut/kasa), 2) Restrain Kimiawi (pemberian obat penenang/sedasi sesuai instruksi tertulis dokter).",
-                "Restrain adalah hukuman kurungan bagi pasien yang tidak mematuhi jam besuk keluarga di ruangan rawat inap.",
-                "Restrain fisik boleh dilakukan tanpa persetujuan keluarga dan dibiarkan terikat tanpa pemantauan sirkulasi ekstremitas.",
-                "Restrain hanya boleh menggunakan borgol besi polisi militer di ruang rawat inap umum."
+                "Gelang klip kuning pada pergelangan tangan dan tanda segitiga jatuh di dekat bed tempat tidur pasien.",
+                "Gelang ungu penanda penolakan tindakan resusitasi jantung paru dan isolasi kamar tertutup.",
+                "Gelang merah penanda alergi serta pembatasan kunjungan keluarga selama masa perawatan inap.",
+                "Tidak memerlukan penanda fisik cukup diingatkan secara lisan oleh petugas kebersihan bangsal."
             ],
             correct: 0,
-            explanation: "Hebat! Restrain adalah tindakan perlindungan keselamatan (bukan hukuman) bagi pasien gaduh gelisah: Restrain Fisik (fiksasi anggota gerak dengan manset lembut & cek sirkulasi berkala) dan Restrain Kimiawi (obat sedasi dokter), wajib informed consent dan evaluasi ketat!"
+            explanation: "Luar biasa! Penanda visual risiko jatuh adalah gelang/klip warna KUNING serta penanda segitiga jatuh pada tempat tidur/pintu kamar pasien."
         },
         {
-            id: "pap_ews_pews_codeblue",
-            posName: "Pos 6: Monitoring EWS Dewasa, PEWS Anak & Panggilan Code Blue Ext 3030",
-            question: "Bagaimana interpretasi skor sistem peringatan dini EWS dewasa dan PEWS anak, serta nomor ekstensi & susunan Tim Code Blue RSAU?",
+            id: "pap_pain_management",
+            posName: "Pos 6: Penilaian Intensitas Nyeri Dewasa",
+            question: "Metode baku yang digunakan untuk mengukur derajat intensitas nyeri pada pasien dewasa sadar adalah...?",
             options: [
-                "EWS Dewasa: Skor 0-4 (Rendah, monitor 4-12 jam), 5-6 (Sedang, lapor dokter jaga), ≥7 (Tinggi/Darurat, aktivasi panggilan darurat/ICU). PEWS Anak: Kardiovaskular, respirasi, perilaku (0-2 rendah, 3-4 sedang, ≥5 darurat tim reaksi cepat). Code Blue RSAU: Telepon darurat Ext 3030 / nomor piketan; Tim: Dokter jaga (Ketua), 4 Perawat (airway, sirkulasi, defibrilator, dokumentasi), 1 Petugas Farmasi membawa tas emergency merah dari Depo Merak/Garuda.",
-                "EWS dan PEWS hanya dinilai satu kali seminggu oleh petugas administrasi rekam medis.",
-                "Panggilan Code Blue RSAU menggunakan bel lonceng manual dan tidak melibatkan dokter jaga ruangan.",
-                "Skor EWS 8 menandakan pasien sudah boleh langsung pulang ke rumah tanpa obat."
+                "Skala FLACC (Face, Legs, Activity, Cry, Consolability) untuk observasi perilaku tubuh bayi/anak.",
+                "Numeric Rating Scale (NRS) angka 0 sampai 10 atau Visual Analog Scale (VAS).",
+                "Glasgow Coma Scale (GCS) penilaian respons membuka mata, motorik, dan respons verbal.",
+                "Skala Norton untuk menilai tingkat keparahan risiko timbulnya luka tekan dekubitus pada kulit."
             ],
-            correct: 0,
-            explanation: "Sangat Tepat! Early Warning System mendeteksi perburukan klinis: EWS dewasa (≥7 panggil tim darurat/ICU), PEWS anak (≥5 reaksi cepat). Jika henti jantung/napas: Aktifkan KODE BIRU ke Ext 3030, Tim Code Blue (Dokter jaga + 4 Perawat + Farmasi tas emergency merah Merak/Garuda) segera resusitasi!"
+            correct: 1,
+            explanation: "Sempurna! Pasien dewasa sadar dinilai dengan Numeric Rating Scale (NRS 0-10) atau Wong-Baker Faces Scale. FLACC digunakan khusus untuk bayi/anak kecil yang belum bisa berbicara."
         },
         {
-            id: "pap_transfusi_darah_gizi",
-            posName: "Pos 7: Prosedur Transfusi Darah & Pengelolaan Nutrisi/Diet Pasien",
-            question: "Bagaimana tahapan aman transfusi darah, pemantauan reaksinya, serta aturan jam makan dan makanan dari luar RS?",
+            id: "pap_terminal_palliative",
+            posName: "Pos 7: Fokus Asuhan Pasien Tahap Terminal",
+            question: "Prioritas utama asuhan medis bagi pasien pada tahap akhir kehidupan (End of Life Care) adalah...?",
             options: [
-                "Transfusi Darah: Informed consent -> uji cocok serasi (crossmatching) -> simpan di bank darah lab -> verifikasi 2 identitas + gol darah + masa kadaluarsa + vol + no seri -> 15-30 menit pertama diobservasi ketat reaksi alergi & TTV (waspadai demam, menggigil, sesak napas, anafilaksis). Pelayanan Gizi: Skrining malnutrisi awal oleh perawat -> konsul dietisien; Jadwal makan teratur (Pagi 06-07 snack 09-10, Siang 12-13 snack 15-16, Sore 17-18); Makanan luar dilarang tanpa izin demi kesesuaian diet medis.",
-                "Darah transfusi boleh langsung dihangatkan di dalam microwave dapur bangsal rawat inap.",
-                "Keluarga bebas membawa makanan pedas berminyak dari luar RS tanpa perlu berkonsultasi dengan ahli gizi/dokter.",
-                "Satu kantong darah harus dihabiskan dalam waktu 1 menit dengan pompa tekanan tinggi tanpa memantau tanda vital."
+                "Melakukan tindakan operatif bedah invasif agresif untuk memperpanjang usia monitor rumah sakit.",
+                "Kenyamanan fisik pasien, peredaan rasa sakit, serta pendampingan emosional dan spiritual keluarga.",
+                "Menghentikan secara total seluruh pemberian asuhan keperawatan dan perawatan higienitas tubuh.",
+                "Memindahkan pasien dari kamar rawat inap ke ruang tunggu umum rumah sakit."
             ],
-            correct: 0,
-            explanation: "Sempurna! Transfusi darah memerlukan verifikasi ganda ketat (crossmatch, 2 identitas, gol darah, no seri) dan monitoring TTV 15-30 menit awal guna deteksi cepat reaksi transfusi. Makanan pasien terjadwal ketat dan makanan luar dilarang tanpa izin agar sesuai preskripsi diet medis!"
+            correct: 1,
+            explanation: "Benar! Asuhan tahap terminal (paliatif) menitikberatkan pada peredaan rasa sakit, penghormatan martabat pasien, kenyamanan fisik, dan dukungan spiritual bagi keluarga."
         },
         {
-            id: "pap_manajemen_nyeri_terminal",
-            posName: "Pos 8: Manajemen Nyeri (PQRST), Pasien Terminal & Tim Binroh",
-            question: "Bagaimana pengkajian nyeri metode PQRST & alat ukurnya, kriteria pasien tahap terminal, serta siapa sajakah Tim Bimbingan Rohani (Binroh) di RSAU?",
+            id: "pap_informed_consent",
+            posName: "Pos 8: Penandatanganan Informed Consent",
+            question: "Kapan formulir Persetujuan Tindakan Kedokteran (Informed Consent) wajib ditandatangani oleh pasien/wali?",
             options: [
-                "Nyeri: PQRST (Provokasi, Kualitas, Radiasi, Skala 0-10, Timing); Alat ukur: NRS (dewasa sadar), Wong-Baker FACES (anak/kognitif), VAS, BPS/CPOT (ICU/ventilator), Comfort Scale (8-40: 8-16 sedasi dalam, 17-26 nyaman, 27-40 nyeri). Monitor: 60 menit pasca analgesik, tiap 8 jam bersama TTV, pasca operasi tiap 15 menit jam pertama. Pasien Terminal: Penyakit progresif harapan hidup ≤6 bulan, fokus kenyamanan paliatif (asesmen awal, harian gejala, end-of-life/rahang jatuh, Cheyne-Stokes). Tim Binroh RSAU: Drg. Janti Hiantje R (Protestan), I.G.A. Ayu Wiratih (Hindu), Gretta Yuliana (Katolik), Supriyadi (Islam).",
-                "Skala nyeri dinilai hanya dengan menanyakan apakah pasien ingin es krim atau tidak.",
-                "Pasien tahap terminal dilarang mendapatkan bimbingan rohani dan harus diisolasi sendiri tanpa keluarga.",
-                "Comfort Scale hanya digunakan untuk mengukur kenyamanan kasur tempat tidur rumah sakit."
+                "Setelah pasien sadar kembali di ruang pemulihan pasca operasi bedah mayor selesai dilakukan.",
+                "Sebelum tindakan invasif dilakukan setelah DPJP memberi edukasi lengkap mengenai risiko dan alternatif.",
+                "Saat pasien melunasi seluruh pembayaran kuitansi tagihan di loket administrasi rumah sakit.",
+                "Cukup dengan persetujuan lisan perawat jaga tanpa memerlukan bukti tanda tangan di rekam medis."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Manajemen nyeri terstruktur (PQRST, NRS, Wong-Baker, CPOT, Comfort Scale) dengan evaluasi 60 mnt pasca obat. Perawatan terminal berfokus pada martabat dan paliatif, didukung pelayanan pastoral Bimbingan Rohani (Binroh) lintas agama resmi RSAU dr. Esnawan Antariksa!"
+            correct: 1,
+            explanation: "Hebat! Informed consent wajib diperoleh SEBELUM tindakan medis invasif dilakukan, setelah pasien/wali mendapatkan penjelasan memadai mengenai diagnosis, risiko, manfaat, dan alternatif terapi."
         }
     ];
 
     /* ==========================================================================
-       1G. BANK SOAL & DATA POKJA PPI (PENCEGAHAN & PENGENDALIAN INFEKSI - MAP 7)
+       1G. BANK SOAL & DATA POKJA PPI (Pencegahan & Pengendalian Infeksi)
        ========================================================================== */
     const PPI_QUIZ_BANK = [
         {
             id: "ppi_program_komite",
-            posName: "Pos 1: Program PPI & Tim/Panitia PPI RS",
-            question: "Apa yang dimaksud dengan Program Pencegahan dan Pengendalian Infeksi (PPI) di rumah sakit dan bagaimana pelaksanaannya di RSAU dr. Esnawan Antariksa?",
+            posName: "Pos 1: Sasaran Perlindungan Program PPI",
+            question: "Siapakah sasaran perlindungan utama dari pelaksanaan Program PPI di rumah sakit?",
             options: [
-                "Program untuk mengidentifikasikan, mengendalikan, melindungi, dan menurunkan risiko infeksi yang dibuat dan ditularkan di antara pasien, staf, tenaga profesional kesehatan, tenaga kontrak, tenaga sukarela, pengunjung, dan lingkungan RS; Rumah Sakit membentuk Tim/Panitia PPI untuk menjalankan program PPI RS secara menyeluruh dan berkesinambungan.",
-                "Program pengadaan obat antibiotik komersial untuk dijual bebas kepada keluarga pasien rawat jalan.",
-                "Program pembersihan taman dan halaman luar rumah sakit sebulan sekali oleh dinas kebersihan kota.",
-                "Program sterilisasi khusus yang hanya berlaku bagi ruang kantor staf personalia."
+                "Hanya dokter spesialis bedah dan perawat yang bertugas di ruang isolasi penyakit menular.",
+                "Pasien, tenaga kesehatan, tenaga penunjang, pengunjung, serta lingkungan sekitar rumah sakit.",
+                "Hanya pasien rawat inap yang terkonfirmasi mengidap penyakit infeksi tuberkulosis paru.",
+                "Staf administrasi keuangan yang mengelola klaim penagihan biaya jaminan kesehatan."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Program PPI RS bertujuan mengidentifikasikan, mengendalikan, melindungi, dan menurunkan risiko transmisi infeksi bagi seluruh populasi RS (pasien, nakes, staf, kontrak, sukarela, pengunjung, lingkungan) yang dipimpin oleh Tim/Panitia PPI RS!"
+            correct: 1,
+            explanation: "Tepat! Program PPI melindungi seluruh populasi rumah sakit: pasien, staf medis/penunjang, pengunjung, hingga kelestarian lingkungan rumah sakit dari risiko transmisi infeksi."
         },
         {
             id: "ppi_5_momen_handhygiene",
-            posName: "Pos 2: Lima (5) Momen Kebersihan Tangan WHO",
-            question: "Kapan sajakah 5 Momen Praktik Kebersihan Tangan (Hand Hygiene) wajib dilakukan sesuai pedoman WHO?",
+            posName: "Pos 2: Lima Momen Kebersihan Tangan WHO",
+            question: "Manakah situasi di bawah ini yang BUKAN merupakan salah satu dari 5 Momen Kebersihan Tangan WHO?",
             options: [
-                "1) Sebelum kontak dengan pasien, 2) Sebelum tindakan aseptik, 3) Setelah terkena cairan tubuh pasien, 4) Setelah kontak dengan pasien, 5) Setelah meninggalkan lingkungan Rumah Sakit.",
-                "1) Hanya saat diawasi supervisor, 2) Saat jam istirahat makan, 3) Sebelum apel pagi, 4) Saat masuk lobi utama, 5) Saat mencuci piring di kantin.",
-                "1) Setelah menyentuh stetoskop saja, 2) Sebelum membaca rekam medis, 3) Setelah minum obat, 4) Sebelum tidur, 5) Saat pulang kerja.",
-                "1) Tiap 10 menit sekali tanpa memandang ada kontak dengan pasien atau tidak."
+                "Sebelum kontak dengan pasien dan sebelum melakukan tindakan aseptik bersih.",
+                "Setelah terkena risiko paparan cairan tubuh pasien dan setelah kontak fisik dengan pasien.",
+                "Setelah menyapa rekan kerja di lorong administrasi tanpa menyentuh pasien atau lingkungannya.",
+                "Setelah kontak fisik dengan lingkungan dan benda-benda di sekitar tempat tidur pasien."
             ],
-            correct: 0,
-            explanation: "Sangat Benar! 5 Momen Kebersihan Tangan WHO adalah standar emas proteksi: 1. Sebelum kontak pasien, 2. Sebelum tindakan aseptik, 3. Setelah terkena cairan tubuh, 4. Setelah kontak pasien, dan 5. Setelah meninggalkan lingkungan rumah sakit!"
+            correct: 2,
+            explanation: "Sangat Benar! 5 Momen WHO adalah: 1. Sebelum sentuh pasien, 2. Sebelum prosedur aseptik, 3. Setelah kena cairan tubuh, 4. Setelah sentuh pasien, 5. Setelah sentuh lingkungan pasien."
         },
         {
             id: "ppi_etika_batuk",
-            posName: "Pos 3: Pedoman Etika Saat Batuk atau Bersin di RS",
-            question: "Bagaimanakah etika yang benar saat batuk atau bersin di lingkungan fasilitas pelayanan kesehatan?",
+            posName: "Pos 3: Pedoman Etika Batuk & Bersin",
+            question: "Saat batuk atau bersin di lingkungan rumah sakit, tindakan pertama yang benar adalah...?",
             options: [
-                "1) Tutup hidung atau mulut dengan menggunakan tisu/sapu tangan atau lengan dalam baju anda, 2) Segera buang tisu yang sudah dipakai ke dalam tempat sampah, 3) Cuci tangan dengan air bersih dan sabun atau pencuci berbasis alkohol, 4) Gunakan Masker.",
-                "Tutup mulut dengan kedua telapak tangan lalu segera bersalaman dengan pasien lain agar kuman hilang.",
-                "Batuk menghadap ke arah orang lain tanpa menutup hidung dan mulut.",
-                "Buang tisu bekas batuk ke bawah kolong tempat tidur bangsal rawat inap."
+                "Menutup hidung dan mulut menggunakan telapak tangan terbuka secara langsung.",
+                "Menutup hidung dan mulut menggunakan tisu sekali pakai atau lengan bagian dalam baju atas.",
+                "Membuka masker medis lebar-lebar agar droplet udara leluasa keluar ke ruangan.",
+                "Menundukkan kepala dan batuk ke arah lantai koridor perawatan tanpa penghalang apapun."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Etika batuk/bersin: Tutup hidung/mulut menggunakan tisu atau lengan baju bagian dalam (bukan telapak tangan!), segera buang tisu ke tempat sampah tertutup, cuci tangan dengan air mengalir & sabun atau handrub alkohol, lalu kenakan masker medis!"
+            correct: 1,
+            explanation: "Hebat! Batuk/bersin harus ditutup dengan tisu atau lengan baju bagian dalam atas (bukan telapak tangan) agar kuman tidak berpindah ke gagang pintu atau saat bersalaman."
         },
         {
             id: "ppi_handwash_vs_handrub",
-            posName: "Pos 4: Dua (2) Cara Cuci Tangan: Handwash vs Handrub",
-            question: "Apa perbedaan mendasar antara metode HANDWASH dan HANDRUB terkait media pembersih dan durasi waktunya?",
+            posName: "Pos 4: Durasi Standar Handwash vs Handrub",
+            question: "Berapa durasi standar cuci tangan menggunakan sabun & air mengalir dibanding handrub alkohol?",
             options: [
-                "HANDWASH: dengan air mengalir dan sabun waktunya 40–60 detik (6 hitungan); HANDRUB: dengan gel berbasis alkohol waktunya 20–40 detik (4 hitungan).",
-                "Handwash hanya butuh waktu 5 detik menggunakan air kobokan, Handrub butuh waktu 2 jam menggunakan cairan pemutih.",
-                "Handwash dilakukan saat tangan tampak bersih, Handrub hanya untuk mencuci kaki sebelum tidur.",
-                "Kedua metode sama-sama membutuhkan waktu 15 menit menggunakan alkohol pekat 96%."
+                "Handwash 10 sampai 15 detik, sedangkan Handrub cukup 5 detik saja.",
+                "Handwash 40 sampai 60 detik, sedangkan Handrub 20 sampai 40 detik.",
+                "Handwash 2 sampai 3 menit, sedangkan Handrub 1 sampai 2 menit.",
+                "Kedua metode memiliki durasi yang identik yaitu tepat 15 detik setiap langkahnya."
             ],
-            correct: 0,
-            explanation: "Sempurna! HANDWASH dilakukan dengan air mengalir & sabun bila tangan tampak kotor selama 40–60 detik (6 hitungan per langkah). HANDRUB menggunakan gel berbasis alkohol bila tangan tampak bersih selama 20–40 detik (4 hitungan per langkah)!"
+            correct: 1,
+            explanation: "Tepat sekali! Standar baku WHO/Kemenkes: Cuci tangan dengan air dan sabun (Handwash) membutuhkan waktu 40-60 detik; sedangkan pembersih berbasis alkohol (Handrub) 20-40 detik."
         },
         {
             id: "ppi_6_langkah_who",
-            posName: "Pos 5: Enam (6) Langkah Cuci Tangan yang Benar Sesuai WHO",
-            question: "Sebutkan urutan 6 langkah cuci tangan yang benar sesuai pedoman WHO (akronim Tepung Selaci Puput)!",
+            posName: "Pos 5: Urutan 6 Langkah Cuci Tangan WHO",
+            question: "Urutan 6 langkah kebersihan tangan WHO (TEPUNG SELACI PUPUT) yang benar diawali dari...?",
             options: [
-                "1) Telapak Tangan, 2) Punggung Tangan, 3) Sela-sela jari tangan, 4) Empat Jari saling mengunci, 5) Sekeliling ibu jari putar-putar, 6) Ujung jari putar-putar di telapak tangan.",
-                "1) Kuku jari, 2) Pergelangan tangan, 3) Siku tangan, 4) Ibu jari, 5) Telapak kaki, 6) Wajah.",
-                "1) Punggung tangan saja lalu dibilas air panas tanpa menyentuh sela-sela jari.",
-                "1) Gosok sabun ke pakaian kerja lalu usap telapak tangan bolak-balik."
+                "Telapak tangan, Punggung tangan, Sela-sela jari, Mengunci jari, Putar ibu jari, Putar kuku di telapak.",
+                "Punggung tangan, Telapak tangan, Sela-sela jari, Putar ibu jari, Mengunci jari, Bilas air kran.",
+                "Ibu jari, Kuku dan ujung jari, Telapak tangan, Punggung tangan, Sela-sela jari, Keringkan handuk.",
+                "Sela-sela jari, Kunci punggung jari, Putar ibu jari, Telapak tangan, Punggung tangan, Usap tisu."
             ],
             correct: 0,
-            explanation: "Hebat! 6 Langkah Cuci Tangan WHO: Te-Pung-Sela-Ci-Pu-Put: 1. Telapak tangan, 2. Punggung tangan bergantian, 3. Sela-sela jari, 4. Mengunci empat jari, 5. Putar sekeliling ibu jari bergantian, 6. Putar ujung jari pada telapak tangan bergantian!"
+            explanation: "Luar biasa! Jembatan keledai 'TEPUNG SELACI PUPUT': TElapak tangan, PUNGgung tangan, SELA-sela jari, MengunCI jari, PUtar ibu jari, PUtar ujung kuku/jari di telapak."
         },
         {
             id: "ppi_limbah_padat_medis",
-            posName: "Pos 6: Pengelolaan 4 Jenis Limbah Padat Medis RS",
-            question: "Bagaimana pemilahan dan pewadahan 4 jenis limbah padat medis di rumah sakit beserta wadah kantung plastiknya?",
+            posName: "Pos 6: Pemilahan Kantong Sampah Medis",
+            question: "Kassa bernoda darah dan sarung tangan medis bekas tindakan pasien kotor wajib dibuang ke dalam...?",
             options: [
-                "1) Limbah Infeksius (terkontaminasi cairan tubuh): kantung KUNING (infus set, kateter/kantung urine, masker, sarung tangan, jaringan tubuh); 2) Limbah Non-Infeksius: kantung HITAM (plastik pembungkus spuit, kertas); 3) Limbah Benda Tajam: safety box KUNING tahan tusuk (jarum suntik, pisau bedah); 4) Limbah Daur Ulang: kantung PUTIH (plabot, botol infus/vial tak terkontaminasi).",
-                "Semua jenis limbah rumah sakit dicampur menjadi satu di dalam kantung plastik warna merah tanpa pemilahan.",
-                "Jarum suntik dan pisau bedah dibuang ke dalam kantung plastik tipis warna hitam bersama sisa makanan kantin.",
-                "Limbah infeksius dibuang ke kantung putih dan limbah daur ulang dibakar di halaman rumah sakit."
+                "Kantong plastik warna HITAM untuk sampah domestik non-medis.",
+                "Kantong plastik warna KUNING berlambang biohazard untuk limbah medis infeksius.",
+                "Safety box kardus tebal khusus wadah benda tajam dan jarum suntik bekas.",
+                "Kantong plastik warna UNGU khusus penampungan limbah sitotoksik kemoterapi kanker."
             ],
-            correct: 0,
-            explanation: "Sangat Tepat! Pemilahan limbah padat: KUNING = Infeksius; HITAM = Non-Infeksius / Domestik; SAFETY BOX KUNING = Benda Tajam menusuk; PUTIH = Daur Ulang non-kontaminasi cairan tubuh!"
+            correct: 1,
+            explanation: "Sempurna! Kassa, kapas berdarah, perban luka, dan sarung tangan medis dibuang ke kantong KUNING (infeksius). Kantong HITAM untuk limbah domestik umum (kertas/sisa makanan)."
         },
         {
             id: "ppi_limbah_cair_apd",
-            posName: "Pos 7: Tata Kelola Limbah Cair Medis & Prinsip APD",
-            question: "Bagaimanakah pengelolaan limbah cair medis rumah sakit dan apa saja prinsip pemilihan Alat Pelindung Diri (APD)?",
+            posName: "Pos 7: Batas Pengisian Safety Box Jarum Suntik",
+            question: "Kapan wadah Safety Box jarum suntik bekas wajib ditutup rapat dan diganti dengan yang baru?",
             options: [
-                "Limbah cair medis dari seluruh kegiatan RS dialirkan melalui saluran kedap air tertutup menuju IPAL (Instalasi Pengolahan Air Limbah) dengan pengujian baku mutu berkala; APD (sarung tangan, masker bedah/N95, gaun/apron, goggle/face shield) dipilih sesuai jenis transmisi dan dilepas dengan urutan benar untuk mencegah kontaminasi diri.",
-                "Limbah cair medis boleh dialirkan langsung ke selokan perumahan umum tanpa pengolahan IPAL.",
-                "Petugas dilarang menggunakan sarung tangan dan masker saat menangani pasien menular di ruang isolasi.",
-                "Penggunaan APD hanya diperbolehkan jika staf sedang berfoto untuk keperluan media sosial."
+                "Saat telah terisi 3/4 bagian kotak dan jarum DILARANG ditutup kembali (no recapping).",
+                "Hanya setelah kotak benar-benar penuh meluap hingga jarum suntik menonjol keluar penutup.",
+                "Setiap satu minggu sekali tanpa memperhitungkan berapa banyak jarum di dalamnya.",
+                "Setelah seluruh jarum suntik ditutup kembali secara manual menggunakan kedua belah tangan."
             ],
             correct: 0,
-            explanation: "Benar Sekali! Limbah cair wajib diolah di IPAL hingga memenuhi parameter baku mutu lingkungan hidup. APD wajib dipakai sesuai derajat transmisi infeksi dan dilepas dengan tata cara doffing aman!"
+            explanation: "Hebat! Safety box wajib ditutup saat isi mencapai 3/4 volume. Jarum suntik DILARANG dipatahkan atau ditutup kembali (no recapping) untuk mencegah tertusuk jarum (needle stick injury)."
         },
         {
             id: "ppi_simulasi_lab",
-            posName: "Pos 8: Laboratorium Praktik Simulasi Terpadu PPI",
-            question: "Mengapa simulasi praktik cuci tangan 6 langkah, etika batuk, dan donning-doffing APD menjadi indikator krusial dalam akreditasi Pokja PPI?",
+            posName: "Pos 8: Indikasi Wajib Cuci Tangan Air Mengalir",
+            question: "Kapan tenaga medis WAJIB mencuci tangan menggunakan sabun & air mengalir dibanding handrub?",
             options: [
-                "Karena kepatuhan teknik fisik yang benar secara konsisten adalah benteng utama memutus mata rantai penularan Healthcare-Associated Infections (HAIs) bagi pasien, tenaga medis, staf, maupun pengunjung RSAU dr. Esnawan Antariksa.",
-                "Hanya untuk memenuhi syarat formalitas sesi wawancara telusur surveyor di atas kertas.",
-                "Agar staf rumah sakit menghabiskan persediaan sabun dan handrub antiseptik sebelum akhir tahun anggaran.",
-                "Simulasi cuci tangan dan APD hanya ditujukan bagi mahasiswa magang yang baru pertama kali masuk RS."
+                "Hanya saat pergantian shift jaga pagi ke shift jaga sore di ruang perawatan bangsal.",
+                "Bila tangan tampak kotor terkontaminasi darah/cairan tubuh atau setelah merawat pasien diare spora.",
+                "Setiap kali berpindah memeriksa dari satu pasien ke pasien lain di poliklinik rawat jalan.",
+                "Hanya jika botol dispenser handrub alkohol di atas meja perawat kebetulan sedang kosong."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Simulasi praktik fisik menjamin kompetensi nyata seluruh civitas rumah sakit dalam kebersihan tangan, etika pernapasan, dan pemakaian APD demi keselamatan pasien (Patient Safety) paripurna!"
+            correct: 1,
+            explanation: "Luar biasa! Bila tangan tampak kotor secara kasat mata, terkena cairan tubuh, atau setelah kontak dengan spora bakteri (seperti Clostridium difficile), WAJIB handwash dengan air mengalir dan sabun!"
         }
     ];
 
     /* ==========================================================================
-       1H. BANK SOAL & DATA POKJA KPS (KUALIFIKASI & PENDIDIKAN STAF - MAP 8)
+       1H. BANK SOAL & DATA POKJA KPS (Kualifikasi & Pendidikan Staf)
        ========================================================================== */
     const KPS_QUIZ_BANK = [
         {
             id: "kps_uraian_jabatan",
-            posName: "Pos 1: Uraian Jabatan Staf & Lokasi Penyimpanan Dokumen",
-            question: "Apakah yang dimaksud dengan Uraian Jabatan staf dan di manakah dokumen resminya disimpan di RSAU dr. Esnawan Antariksa?",
+            posName: "Pos 1: Tiga Lokasi Penyimpanan Uraian Jabatan",
+            question: "Di manakah 3 lokasi resmi penyimpanan dokumen Uraian Jabatan staf rumah sakit?",
             options: [
-                "Uraian jabatan adalah penjelasan tentang dasar penugasan jabatan yang bersifat personal tergantung pada jabatan yang dimiliki; Disimpan oleh bagian personalia / urusan personel (Urpers), unit kerja tempat bertugas, dan salinannya harus dimiliki oleh staf yang bersangkutan.",
-                "Uraian jabatan adalah daftar gaji rahasia yang hanya boleh dilihat oleh bendahara pengeluaran rumah sakit.",
-                "Uraian jabatan disimpan di pos penjagaan satpam gerbang depan dan tidak boleh dibaca oleh staf yang bersangkutan.",
-                "Uraian jabatan hanya dibuat untuk direktur rumah sakit, sedangkan perawat dan dokter tidak memilikinya."
+                "Gudang arsip pusat pangkalan, pos penjagaan satpam, dan ruang perpustakaan dinas kesehatan.",
+                "Urusan Personalia (Urpers), Unit Kerja tempat staf bertugas, dan pada Staf yang bersangkutan.",
+                "Depo instalasi farmasi, ruang rapat komite medis, dan ruang tunggu poliklinik spesialis.",
+                "Kamar jenazah rumah sakit, instalasi gizi, dan kantor perwakilan serikat pekerja rumah sakit."
             ],
-            correct: 0,
-            explanation: "Tepat sekali! Uraian jabatan adalah dasar penugasan personal staf. Dokumen resminya disimpan di Urpers (personalia), unit kerja tempat bertugas, dan salinan resminya wajib dipegang oleh staf yang bersangkutan!"
+            correct: 1,
+            explanation: "Tepat! Dokumen Uraian Jabatan wajib tersedia di 3 tempat: file kepegawaian personalia (Urpers), arsip unit kerja tempat bertugas, dan salinan yang dipegang oleh staf yang bersangkutan."
         },
         {
             id: "kps_medical_staff_bylaws_audit",
-            posName: "Pos 2: Medical Staff Bylaws & Audit Medis Profesional",
-            question: "Apa yang dimaksud dengan Peraturan Internal Staf Medis (Medical Staff Bylaws) dan Audit Medis di rumah sakit?",
+            posName: "Pos 2: Peraturan Internal Staf Medis (MSBL)",
+            question: "Apa tujuan utama ditetapkannya Peraturan Internal Staf Medis (Medical Staff Bylaws) di RS?",
             options: [
-                "Medical Staff Bylaws: aturan yang mengatur tata kelola klinis (clinical governance) untuk menjaga profesionalisme staf medis di RS; Audit Medis: upaya evaluasi secara profesional terhadap mutu pelayanan medis yang diberikan kepada pasien dengan menggunakan rekam medisnya yang dilaksanakan oleh profesi medis.",
-                "Medical Staff Bylaws adalah buku tarif kamar rawat inap, Audit medis adalah pemeriksaan keuangan oleh kantor pajak.",
-                "Medical Staff Bylaws mengatur tata cara renovasi gedung rawat inap rumah sakit.",
-                "Audit Medis adalah pemecatan dokter secara sepihak tanpa menelaah rekam medis pasien."
+                "Mengatur tata kelola klinis (clinical governance) dan etika profesi staf medik fungsional.",
+                "Menetapkan besaran sewa ruangan poliklinik dan persentase pembagian tarif jasa medis dokter.",
+                "Mengatur pembagian jadwal cuti tahunan dan jam kerja dinas bagi staf administrasi non-kesehatan.",
+                "Menentukan kriteria seragam dinas militer dan aturan penggunaan lapangan upacara pangkalan."
             ],
             correct: 0,
-            explanation: "Sangat Benar! Medical Staff Bylaws adalah landasan tata kelola klinis (clinical governance) profesi dokter, sedangkan Audit Medis mengevaluasi mutu pelayanan berbasis rekam medis secara kolegial oleh profesi medis!"
+            explanation: "Sangat Benar! Medical Staff Bylaws mengatur tata kelola klinis (clinical governance), hak, kewajiban, serta etika dan mutu pelayanan medis staf dokter di rumah sakit."
         },
         {
             id: "kps_kewenangan_penugasan_klinis",
-            posName: "Pos 3: Kewenangan Klinis (Clinical Privilege) & Penugasan Klinis",
-            question: "Apa perbedaan antara Kewenangan Klinis (Clinical Privilege) dan Penugasan Klinis (Clinical Appointment)?",
+            posName: "Pos 3: Kewenangan Klinis vs Penugasan Klinis",
+            question: "Apakah perbedaan antara Kewenangan Klinis (Clinical Privilege) dan Penugasan Klinis (Clinical Appointment)?",
             options: [
-                "Kewenangan Klinis (Clinical Privilege): hak khusus seorang staf medis untuk melakukan sekelompok pelayanan medis tertentu dalam RS untuk suatu periode tertentu berdasarkan penugasan klinis; Penugasan Klinis (Clinical Appointment): penugasan Kepala/Direktur Rumah Sakit kepada staf medis untuk melakukan pelayanan medis berdasarkan daftar kewenangan klinis yang ditetapkan baginya.",
-                "Kewenangan klinis diberikan oleh pasien saat mendaftar, penugasan klinis ditentukan oleh perawat ruangan.",
-                "Clinical privilege hanya berlaku untuk perawat magang, clinical appointment untuk dokter umum saja.",
-                "Kewenangan klinis dan penugasan klinis adalah surat izin mengemudi ambulans rumah sakit."
+                "Clinical Privilege diterbitkan oleh Menteri Kesehatan, sedangkan Clinical Appointment oleh Direktur BPJS.",
+                "Clinical Privilege rincian lingkup tindakan medis dokter, Clinical Appointment surat penugasan dari Kepala RSAU.",
+                "Kedua istilah tersebut bermakna identik dan dapat saling menggantikan dalam administrasi rumah sakit.",
+                "Clinical Privilege diperuntukkan bagi perawat, sedangkan Clinical Appointment khusus bagi dokter spesialis."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Kewenangan Klinis (Clinical Privilege) adalah rincian lingkup pelayanan medis yang boleh dilakukan, yang disahkan melalui Surat Penugasan Klinis (SPK / Clinical Appointment) oleh Kepala Rumah Sakit!"
+            correct: 1,
+            explanation: "Hebat! Clinical Privilege (Kewenangan Klinis) adalah rincian kewenangan tindakan medis hasil telaah kredensial Komite Medik; Clinical Appointment (Penugasan Klinis/SPK) adalah surat keputusan pengangkatan dari Kepala RSAU."
         },
         {
             id: "kps_kredensial_rekredensial_mitra",
-            posName: "Pos 4: Kredensial, Rekredensial Tiap 3 Tahun & Mitra Bestari",
-            question: "Apa pengertian Kredensial, Rekredensial, dan peran Mitra Bestari (Peer Group) di RSAU dr. Esnawan Antariksa?",
+            posName: "Pos 4: Periode Rekredensial Staf Medis",
+            question: "Berapa tahun sekali pelaksanaan proses Rekredensial staf medis dan siapa yang menelaah kompetensinya?",
             options: [
-                "Kredensial: proses evaluasi staf medis untuk kelayakan kewenangan klinis; Rekredensial: proses reevaluasi kelayakan kewenangan klinis yang telah dimiliki, dilaksanakan setiap 3 tahun atau bila ada penambahan/pengurangan kewenangan; Mitra Bestari (Peer Group): sekelompok staf medis bereputasi dan kompetensi baik untuk menelaah hal terkait profesi medis.",
-                "Kredensial dilakukan setiap hari senin pagi sebelum pelayanan poli rawat jalan dibuka.",
-                "Mitra Bestari adalah perhimpunan keluarga pasien yang mengawasi harga obat di apotek.",
-                "Rekredensial hanya dilaksanakan jika staf medis mengundurkan diri dari rumah sakit."
+                "Setiap 1 tahun sekali ditelaah oleh tim audit inspektorat jenderal kementerian pertahanan.",
+                "Setiap 3 tahun sekali ditelaah oleh Subkomite Kredensial bersama Mitra Bestari (Peer Group).",
+                "Setiap 5 tahun sekali bersamaan dengan perpanjangan masa berlaku surat izin mengemudi dinas.",
+                "Hanya dilakukan satu kali seumur hidup saat pertama kali staf medis diterima bekerja di RSAU."
             ],
-            correct: 0,
-            explanation: "Sempurna! Kredensial menentukan kelayakan awal, Rekredensial mengevaluasi berkala setiap 3 tahun (atau bila kompetensi berubah), dan Mitra Bestari (Peer Group) menelaah secara objektif dan profesional!"
+            correct: 1,
+            explanation: "Tepat sekali! Rekredensial dilakukan secara berkala tiap 3 tahun sekali oleh Subkomite Kredensial Komite Medik dengan melibatkan Mitra Bestari (Peer Group) spesialis terkait."
         },
         {
             id: "kps_alur_kredensial_whitepaper",
-            posName: "Pos 5: Tahapan Kredensial Staf Medis & Buku Putih (White Paper)",
-            question: "Bagaimanakah tahapan awal pemberian kewenangan klinis staf medis oleh Rumah Sakit?",
+            posName: "Pos 5: Buku Putih (White Paper) Staf Medis",
+            question: "Dokumen resmi yang menjadi acuan standar kompetensi dan rincian kewenangan klinis staf medis adalah...?",
             options: [
-                "a) Staf medis mengajukan permohonan ke Kepala RS dengan formulir rincian kewenangan klinis, b) Berkas lengkap disampaikan Kepala RS ke Komite Medik, c) Pengkajian formulir, d) Subkomite Kredensial membentuk panel ad-hoc melibatkan Mitra Bestari berdasarkan Buku Putih (White Paper) dengan mempertimbangkan reputasi, kompetensi, dan bebas konflik kepentingan.",
-                "Staf medis langsung bertugas di ruang bedah tanpa permohonan tertulis maupun kajian komite medik.",
-                "Kepala RS langsung memberikan kewenangan klinis tanpa melibatkan komite medik dan mitra bestari.",
-                "Buku Putih (White Paper) digunakan untuk mencatat presensi kehadiran harian perawat."
+                "Buku Putih (White Paper) yang disusun oleh Komite Medik bersama perhimpunan profesi spesialis.",
+                "Buku kas penerimaan keuangan bukan pajak instalasi rawat inap rumah sakit.",
+                "Daftar riwayat hidup dan sertifikat pelatihan yang diunduh dari akun media sosial staf.",
+                "Buku pedoman tata tertib kedisiplinan prajurit garnisun pangkalan udara."
             ],
             correct: 0,
-            explanation: "Hebat! Alur kredensial resmi: Permohonan staf ke Kepala RS -> Komite Medik -> Subkomite Kredensial bersama Mitra Bestari menelaah berkas berpedoman pada Buku Putih (White Paper) demi mutu dan keselamatan!"
+            explanation: "Luar biasa! Buku Putih (White Paper) memuat syarat kualifikasi, pelatihan, dan daftar rincian kewenangan klinis yang menjadi tolok ukur dalam proses kredensial dokter."
         },
         {
             id: "kps_delineation_privilege_rekomendasi",
-            posName: "Pos 6: Delineation of Clinical Privilege & 6 Rekomendasi Rekredensial",
-            question: "Bagaimanakah penyusunan Rincian Kewenangan Klinis diperoleh dan apa saja 6 bentuk rekomendasi hasil rekredensial?",
+            posName: "Pos 6: Hasil Rekomendasi Kredensial",
+            question: "Rekomendasi dari Subkomite Kredensial kepada Kepala Rumah Sakit dapat berupa kewenangan penuh atau...?",
             options: [
-                "Diperoleh dari masukan kelompok staf medis, telaah pemohon, kaji periodik, dan rekomendasi komite medik; Rekomendasi Rekredensial: 1) Dilanjutkan, 2) Ditambah, 3) Dikurangi, 4) Dibekukan untuk waktu tertentu, 5) Diubah/dimodifikasi, 6) Diakhiri.",
-                "Rekomendasi rekredensial hanya satu yaitu pemotongan pangkat militer staf medis.",
-                "Rincian kewenangan klinis diperoleh dengan cara undian acak saat rapat komite medik.",
-                "Rekomendasi rekredensial berupa pemberian libur cuti 6 bulan tanpa evaluasi rekam medis."
+                "Kewenangan dengan supervisi (pendampingan), modifikasi, pembatasan kewenangan, atau penolakan.",
+                "Pemberian pangkat kehormatan militer secara otomatis tanpa melalui sidang dewan perwira.",
+                "Pemindahan tugas secara paksa staf medis menjadi petugas keamanan pangkalan udara.",
+                "Pemberian pembebasan tugas klinis seumur hidup tanpa pengurangan penghasilan bulanan."
             ],
             correct: 0,
-            explanation: "Sangat Tepat! Delineation of Clinical Privilege dikaji berjenjang. Hasil rekredensial memberikan 6 rekomendasi: Dilanjutkan, Ditambah, Dikurangi, Dibekukan sementara, Dimodifikasi, atau Diakhiri!"
+            explanation: "Sempurna! Rekomendasi kredensial dapat berupa: disetujui penuh, disetujui dengan supervisi, dimodifikasi/dibatasi, atau ditolak bila kompetensi belum memenuhi syarat standar."
         },
         {
             id: "kps_masa_spk_proctoring",
-            posName: "Pos 7: Masa Berlaku SPK, Proses Rekredensial & Pendampingan (Proctoring)",
-            question: "Berapa lama masa berlaku Surat Penugasan Klinis (SPK) dan bagaimana pemulihan kewenangan klinis melalui pendampingan (proctoring)?",
+            posName: "Pos 7: Masa Berlaku SPK & Pendampingan (Proctoring)",
+            question: "Berapa lama masa berlaku Surat Penugasan Klinis (SPK) dan bagaimana staf medis memulihkan kewenangannya?",
             options: [
-                "SPK berlaku untuk periode tertentu (misal 2 tahun); Rekredensial lebih sederhana karena RS sudah memiliki rekam jejak performa staf; Staf medis yang ingin memulihkan kewenangan klinis yang dikurangi atau menambah baru mengajukan ke Komite Medik melalui pembinaan profesi mekanisme pendampingan (proctoring).",
-                "SPK berlaku seumur hidup tanpa perlu diperbarui sampai masa pensiun tiba.",
-                "Proctoring adalah tindakan pengasingan staf medis di ruangan arsip tanpa boleh melayani pasien.",
-                "Masa berlaku SPK habis setiap minggu dan dokter harus ujian kompetensi ulang dari awal."
+                "SPK berlaku selama 6 bulan dan pemulihan kewenangan dilakukan melalui voting seluruh staf bangsal.",
+                "SPK berlaku selama 3 tahun dan pemulihan kewenangan klinis dibina melalui mekanisme pendampingan (proctoring).",
+                "SPK berlaku seumur hidup tanpa evaluasi berkala dan kewenangan klinis tidak dapat dipulihkan bila dikurangi.",
+                "SPK diperbarui setiap minggu kalender melalui tes tertulis di bagian urusan personalia rumah sakit."
             ],
-            correct: 0,
-            explanation: "Benar Sekali! SPK berlaku periodik (misal 2 tahun). Rekredensial memanfaatkan data performa historis, dan pemulihan/penambahan kewenangan klinis dibina melalui mekanisme pendampingan (proctoring) oleh sejawat ahli!"
+            correct: 1,
+            explanation: "Benar! SPK dan RKK berlaku selama 3 tahun. Penambahan atau pemulihan kewenangan klinis yang sempat dibatasi dapat diajukan melalui mekanisme pendampingan (proctoring) oleh sejawat ahli."
         },
         {
             id: "kps_pencabutan_pemulihan_kewenangan",
-            posName: "Pos 8: Evaluasi Kinerja Profesi, Pencabutan & Pemulihan Kewenangan",
-            question: "Atas dasar pertimbangan apa kewenangan klinis dapat dicabut oleh Kepala RS dan bagaimana mekanisme pemberiannya kembali?",
+            posName: "Pos 8: Dasar Pencabutan Kewenangan Klinis",
+            question: "Kondisi apa yang dapat menjadi dasar bagi Kepala RSAU untuk mencabut sementara kewenangan klinis staf medis?",
             options: [
-                "Pencabutan didasarkan pada kinerja profesi di lapangan (gangguan kesehatan fisik/mental, kecelakaan medis diduga inkompetensi, atau tindakan disiplin komite medik); Kewenangan dapat diberikan kembali bila staf medis telah pulih kompetensinya setelah melalui pembinaan subkomite mutu profesi dan rekomendasi komite medik kepada Kepala RS.",
-                "Pencabutan kewenangan klinis dilakukan jika dokter menolak mengenakan seragam dinas hari jumat.",
-                "Kewenangan klinis yang dicabut tidak dapat dipulihkan kembali untuk selamanya tanpa alasan apapun.",
-                "Kepala RS dapat mencabut kewenangan klinis staf tanpa perlu rekomendasi komite medik maupun pembinaan."
+                "Bila staf medis menolak menghadiri jamuan makan malam informal bersama vendor obat swasta.",
+                "Bila terjadi pelanggaran disiplin profesi berat, gangguan kesehatan fisik/mental, atau kecelakaan medis inkompetensi.",
+                "Bila staf medis mempublikasikan tulisan ilmiah di jurnal kedokteran terindeks internasional.",
+                "Bila staf medis mengajukan permohonan cuti tahunan pada hari kerja reguler rumah sakit."
             ],
-            correct: 0,
-            explanation: "Luar biasa! Pencabutan melindungi keselamatan pasien bila ada kendala kesehatan fisik/mental, insiden inkompetensi, atau disiplin. Pemulihan kewenangan dilakukan setelah kompetensi terbukti pulih lewat pembinaan mutu profesi dan rekomendasi resmi Komite Medik ke Kepala RS!"
+            correct: 1,
+            explanation: "Hebat! Demi keselamatan pasien, kewenangan klinis dapat dicabut/dibekukan bila ada kendala kesehatan fisik/mental, insiden kelalaian medis berat, atau pelanggaran etika dan disiplin profesi."
         }
     ];
 
@@ -2094,6 +2183,10 @@
             gain.connect(this.masterGain);
             osc.start(now);
             osc.stop(now + 0.36);
+        }
+
+        playDamage() {
+            this.playQuizWrong();
         }
 
         playMudSplash() {
@@ -4657,8 +4750,42 @@
 
     function handleGameOver() {
         currentState = GAME_STATE.GAME_OVER;
-        alert(`Evaluasi terhenti. Nyawa habis! Mengulang telusur ${currentLevel.shortName}...`);
-        restartGame();
+        sound.playDamage();
+
+        const pokjaName = currentLevel ? (currentLevel.name || currentLevel.shortName) : "POKJA TKRS";
+        const shortName = currentLevel ? currentLevel.shortName : "TKRS";
+
+        const elName = document.getElementById("evaluasiPokjaName");
+        if (elName) elName.innerText = pokjaName;
+
+        const elBtnText = document.getElementById("btnUlangiTelusurText");
+        if (elBtnText) elBtnText.innerText = `ULANGI TELUSUR ${shortName}`;
+
+        const elPos = document.getElementById("evaluasiPosStats");
+        if (elPos && currentLevel) {
+            const totalPos = currentLevel.terminals ? currentLevel.terminals.length : 8;
+            elPos.innerText = `${quizVerifiedCount} / ${totalPos}`;
+        }
+
+        const elDoc = document.getElementById("evaluasiDocStats");
+        if (elDoc && currentLevel) {
+            const totalDoc = currentLevel.collectibles ? currentLevel.collectibles.length : 8;
+            elDoc.innerText = `${docsCollectedCount} / ${totalDoc} Berkas`;
+        }
+
+        const elScore = document.getElementById("evaluasiScoreStats");
+        if (elScore) elScore.innerText = `${totalScore} Pts`;
+
+        // Hide other modals
+        document.getElementById("assessmentModal")?.classList.add("hidden");
+        document.getElementById("quizModal")?.classList.add("hidden");
+        document.getElementById("menuModal")?.classList.add("hidden");
+        document.getElementById("takeshiOverlayBanner")?.classList.add("hidden");
+        document.getElementById("ppiSimulasiModal")?.classList.add("hidden");
+
+        // Display centered game attribute Game Over modal
+        const modal = document.getElementById("evaluasiTerhentiModal");
+        if (modal) modal.classList.remove("hidden");
     }
 
     /* ==========================================================================
@@ -4705,6 +4832,7 @@
         document.getElementById("quizModal").classList.add("hidden");
         document.getElementById("menuModal").classList.add("hidden");
         document.getElementById("takeshiOverlayBanner").classList.add("hidden");
+        document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
 
         updateHud();
         currentState = GAME_STATE.PLAYING;
@@ -4713,8 +4841,12 @@
     function togglePause() {
         if (currentState === GAME_STATE.PLAYING) {
             currentState = GAME_STATE.PAUSED;
-            alert("⏸️ GAME DIJEDA (PAUSE)\nTekan OK untuk melanjutkan telusur akreditasi.");
+            const btn = document.getElementById("btnPauseToggle");
+            if (btn) btn.innerText = "▶️";
+        } else if (currentState === GAME_STATE.PAUSED) {
             currentState = GAME_STATE.PLAYING;
+            const btn = document.getElementById("btnPauseToggle");
+            if (btn) btn.innerText = "⏸️";
         }
     }
 
@@ -5065,6 +5197,36 @@
         document.getElementById("btnAudioToggle").innerText = isMuted ? "🔇" : "🔊";
     };
     document.getElementById("btnPauseToggle").onclick = () => togglePause();
+
+    // Evaluasi Terhenti Modal Action Listeners
+    const btnUlangiTelusur = document.getElementById("btnUlangiTelusur");
+    if (btnUlangiTelusur) {
+        btnUlangiTelusur.onclick = () => {
+            document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
+            restartGame();
+        };
+    }
+    const btnEvaluasiPilihMap = document.getElementById("btnEvaluasiPilihMap");
+    if (btnEvaluasiPilihMap) {
+        btnEvaluasiPilihMap.onclick = () => {
+            document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
+            document.getElementById("assessmentModal")?.classList.add("hidden");
+            document.getElementById("quizModal")?.classList.add("hidden");
+            document.getElementById("takeshiOverlayBanner")?.classList.add("hidden");
+            document.getElementById("pokjaSelectModal")?.classList.remove("hidden");
+        };
+    }
+    const btnEvaluasiMenuUtama = document.getElementById("btnEvaluasiMenuUtama");
+    if (btnEvaluasiMenuUtama) {
+        btnEvaluasiMenuUtama.onclick = () => {
+            document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
+            document.getElementById("assessmentModal")?.classList.add("hidden");
+            document.getElementById("quizModal")?.classList.add("hidden");
+            document.getElementById("takeshiOverlayBanner")?.classList.add("hidden");
+            document.getElementById("menuModal")?.classList.remove("hidden");
+            currentState = GAME_STATE.MENU;
+        };
+    }
 
     // Loop
     let lastTime = 0;
@@ -6356,10 +6518,10 @@
             this.rafId = null;
             this.previousState = GAME_STATE.PLAYING;
 
-            // State Cuci Tangan (6 Langkah WHO)
+            // State Cuci Tangan (11 Langkah Berdasarkan Poster Resmi & 6 Langkah WHO)
             this.cuci = {
                 mode: "handwash", // "handwash" (40-60s, 6 hitungan) | "handrub" (20-40s, 4 hitungan)
-                step: 1, // 1 to 6
+                step: 1, // 1 to 11
                 count: 1, // 1 to 6 or 1 to 4
                 timerSeconds: 45,
                 isPlaying: true,
@@ -6368,36 +6530,96 @@
                 lastTickTime: 0
             };
 
+            // Preload 11 gambar ilustrasi tangan realistis dari poster
+            this.cuciImages = {};
+            const isAkreditasiDir = window.location.pathname.includes('/akreditasi/');
+            const basePath = isAkreditasiDir ? 'assets/handwash/' : 'akreditasi/assets/handwash/';
+            for (let i = 1; i <= 11; i++) {
+                const img = new Image();
+                img.src = `${basePath}step_${i}.png`;
+                img.onerror = () => {
+                    img.src = img.src.includes('akreditasi/assets') ? `assets/handwash/step_${i}.png` : `akreditasi/assets/handwash/step_${i}.png`;
+                };
+                this.cuciImages[i] = img;
+            }
+
             this.cuciStepData = [
                 {
-                    title: "Langkah 1 / 6: Gosok Kedua Telapak Tangan",
-                    desc: "Ratakan sabun dengan air mengalir (atau gel berbasis alkohol) dengan menggosokkan kedua telapak tangan secara lembut berputar.",
-                    poseName: "Telapak Tangan"
+                    num: 1,
+                    isCore6: false,
+                    title: "Langkah 1: Basahi Tangan dengan Air Mengalir",
+                    desc: "Basahi kedua belah tangan dengan air bersih mengalir dari kran sebelum mengaplikasikan sabun pembersih.",
+                    poseName: "Basahi Air Mengalir"
                 },
                 {
-                    title: "Langkah 2 / 6: Gosok Punggung & Sela-sela Jari Luar",
-                    desc: "Gosok punggung dan sela-sela jari tangan kiri dengan telapak tangan kanan, dan lakukan sebaliknya secara bergantian.",
-                    poseName: "Punggung Tangan"
+                    num: 2,
+                    isCore6: false,
+                    title: "Langkah 2: Gunakan Sabun Secukupnya",
+                    desc: "Tuangkan sabun cair secukupnya (3-5 ml) untuk mencakup dan membasahi seluruh permukaan kedua telapak tangan.",
+                    poseName: "Gunakan Sabun Cair"
                 },
                 {
-                    title: "Langkah 3 / 6: Gosok Telapak & Sela-sela Jari Dalam",
-                    desc: "Rapatkan kedua telapak tangan dengan jari-jari bertaut (interlaced) dan gosok sela-sela jari tangan bagian dalam secara merata.",
-                    poseName: "Sela-sela Jari"
+                    num: 3,
+                    isCore6: true,
+                    title: "Langkah 3 (WHO 1): Gosok Kedua Telapak Tangan",
+                    desc: "Ratakan sabun dengan menggosokkan kedua telapak tangan secara lembut memutar hingga menghasilkan busa melimpah.",
+                    poseName: "Gosok Kedua Telapak"
                 },
                 {
-                    title: "Langkah 4 / 6: Empat Jari Saling Mengunci",
-                    desc: "Jari-jari sisi dalam dari kedua tangan saling mengunci (interlocked) dan gosok punggung jari-jari pada telapak tangan di hadapannya.",
-                    poseName: "Empat Jari Mengunci"
+                    num: 4,
+                    isCore6: true,
+                    title: "Langkah 4 (WHO 2): Gosok Punggung Tangan Kanan dan Kiri",
+                    desc: "Gosok punggung tangan kiri dengan telapak tangan kanan beserta sela-sela jari luar, lalu lakukan sebaliknya.",
+                    poseName: "Punggung & Sela Luar"
                 },
                 {
-                    title: "Langkah 5 / 6: Sekeliling Ibu Jari Putar-putar",
-                    desc: "Genggam ibu jari kiri dengan tangan kanan lalu gosok memutar, lakukan sebaliknya secara bergantian untuk membersihkan area peripangkal ibu jari.",
+                    num: 5,
+                    isCore6: true,
+                    title: "Langkah 5 (WHO 3): Gosok Sela-Sela Jari Bagian Dalam",
+                    desc: "Rapatkan kedua telapak tangan dengan jari-jari saling bertaut (interlaced) dan gosok sela-sela jari bagian dalam.",
+                    poseName: "Sela Jari Dalam"
+                },
+                {
+                    num: 6,
+                    isCore6: true,
+                    title: "Langkah 6 (WHO 4): Gosok Punggung Jari Saling Mengunci",
+                    desc: "Punggung jari-jari kedua tangan saling mengunci (interlocked) pada telapak tangan yang berhadapan untuk membersihkan buku jari.",
+                    poseName: "Jari Saling Mengunci"
+                },
+                {
+                    num: 7,
+                    isCore6: true,
+                    title: "Langkah 7 (WHO 5): Gosok Ibu Jari Kanan dan Kiri",
+                    desc: "Genggam ibu jari kiri dengan telapak tangan kanan lalu putar menggosok memutar, lakukan sebaliknya secara bergantian.",
                     poseName: "Putar Ibu Jari"
                 },
                 {
-                    title: "Langkah 6 / 6: Ujung Kuku & Jari Putar di Telapak",
-                    desc: "Kuncupkan ujung-ujung jari tangan kanan, lalu putar-putar menggosok telapak tangan kiri ke depan dan ke belakang, lalu lakukan sebaliknya.",
-                    poseName: "Putar Ujung Jari"
+                    num: 8,
+                    isCore6: true,
+                    title: "Langkah 8 (WHO 6): Gosok Ujung Jari dan Kuku pada Telapak",
+                    desc: "Kuncupkan ujung jari kanan dan putar menggosok telapak tangan kiri maju mundur, lakukan sebaliknya bergantian.",
+                    poseName: "Ujung Kuku di Telapak"
+                },
+                {
+                    num: 9,
+                    isCore6: false,
+                    title: "Langkah 9: Bilas Tangan dengan Air Mengalir",
+                    desc: "Bilas kedua tangan di bawah kran air mengalir hingga seluruh sisa sabun, kotoran, dan mikroorganisme hanyut bersih.",
+                    poseName: "Bilas Air Mengalir"
+                },
+                {
+                    num: 10,
+                    isCore6: false,
+                    title: "Langkah 10: Keringkan Tangan dengan Handuk Bersih / Tisu",
+                    desc: "Keringkan kedua tangan secara menyeluruh menggunakan handuk bersih sekali pakai atau tisu kering yang higienis.",
+                    poseName: "Keringkan Handuk/Tisu"
+                },
+                {
+                    num: 11,
+                    isCore6: false,
+                    title: "Langkah 11: Tangan Bersih dan Siap Beraktivitas",
+                    desc: "Tangan telah bersih bebas kuman patogen! Matikan kran dengan tisu atau siku dan siap memberikan pelayanan medis yang aman.",
+                    poseName: "Tangan Bersih Bebas Kuman"
                 }
             ];
 
@@ -6441,73 +6663,79 @@
                     desc: "Lakukan kebersihan tangan dengan handwash atau handrub alkohol sebelum menyentuh perlengkapan APD steril."
                 },
                 {
-                    title: "Donning 2 / 5: Kenakan Gaun Pelindung (Gown / Apron)",
-                    item: "Gaun Pelindung (Gown Isolasi)",
-                    status: "Tubuh Terlindungi",
-                    desc: "Kenakan gaun pelindung menutupi badan dari leher hingga lutut, lengan hingga pergelangan. Ikat erat tali leher dan pinggang di belakang."
+                    title: "Donning 2 / 5: Kenakan Gaun Pelindung (Gown / Coverall)",
+                    item: "Gaun Pelindung Medis",
+                    status: "Menutupi Batang Tubuh",
+                    desc: "Kenakan gaun pelindung yang menutupi tubuh dari leher hingga lutut, lengan hingga pergelangan tangan, lalu ikat kencang tali di belakang leher dan pinggang."
                 },
                 {
-                    title: "Donning 3 / 5: Pasang Masker Bedah / Masker N95",
-                    item: "Masker Bedah / N95 Respirator",
-                    status: "Saluran Napas Rapat",
-                    desc: "Pasang masker menutupi hidung dan mulut hingga dagu. Sesuaikan klip logam fleksibel pada batang hidung dan pastikan tidak ada kebocoran (fit check)."
+                    title: "Donning 3 / 5: Pasang Masker Respirator (N95 / Masker Bedah)",
+                    item: "Masker Bedah / N95",
+                    status: "Pas Rapat (Fit Test)",
+                    desc: "Posisikan masker menutupi hidung dan dagu, kaitkan tali ke telinga atau kepala, lalu tekan strip logam di hidung agar kedap udara."
                 },
                 {
-                    title: "Donning 4 / 5: Pasang Pelindung Mata (Goggles) / Face Shield",
-                    item: "Kacamata Goggle / Pelindung Wajah",
-                    status: "Mukosa Mata Terlindungi",
-                    desc: "Kenakan kacamata goggle atau pelindung wajah (face shield) di atas mata dan masker. Sesuaikan tali pengikat agar nyaman dan tidak menghalangi pandangan."
+                    title: "Donning 4 / 5: Pasang Pelindung Mata / Wajah (Goggles / Faceshield)",
+                    item: "Goggles / Faceshield",
+                    status: "Mata & Muka Terlindungi",
+                    desc: "Pasang pelindung mata atau perisai wajah menutupi seluruh area muka agar terlindung dari cipratan droplet infeksius."
                 },
                 {
                     title: "Donning 5 / 5: Kenakan Sarung Tangan Steril / Medis (Gloves)",
-                    item: "Sarung Tangan Medis (Nitrile/Latex)",
-                    status: "APD Lengkap Paripurna!",
-                    desc: "Tarik sarung tangan hingga menutupi manset pergelangan gaun pelindung. Pastikan tidak ada celah kulit terbuka. Siap melayani pasien risti!"
+                    item: "Sarung Tangan Medis",
+                    status: "Menutupi Manset Gaun",
+                    desc: "Tarik manset sarung tangan hingga menutupi ujung pergelangan gaun pelindung. APD lengkap dan siap masuk area berisiko tinggi."
                 }
             ];
 
             this.doffingStepData = [
                 {
-                    title: "Doffing 1 / 6: Lepas Sarung Tangan (Bagian Paling Terkontaminasi)",
+                    title: "Doffing 1 / 6: Lepaskan Sarung Tangan (Bagian Paling Terkontaminasi)",
                     item: "Sarung Tangan Kotor",
-                    status: "Kantung Plastik Kuning",
-                    desc: "Pegang bagian luar sarung tangan dengan tangan bersarung tangan lainnya, kupas ke arah luar. Buang langsung ke tempat sampah infeksius kantung kuning!"
+                    status: "Tarik Luar ke Dalam",
+                    desc: "Pegang sisi luar sarung tangan dengan tangan bersarung lain, kupas keluar, genggam dengan tangan satunya, lalu selipkan jari tangan telanjang di bawah pergelangan dan buang ke sampah medis."
                 },
                 {
-                    title: "Doffing 2 / 6: Lakukan Kebersihan Tangan Antara (Hand Hygiene)",
+                    title: "Doffing 2 / 6: Lepaskan Gaun Pelindung (Gown)",
+                    item: "Gaun Pelindung",
+                    status: "Lipat Sisi Bersih ke Luar",
+                    desc: "Lepaskan ikatan tali, tarik gaun menjauhi tubuh dari leher dan bahu, balikkan sisi kotor ke arah dalam menjadi gulungan, lalu buang ke limbah medis."
+                },
+                {
+                    title: "Doffing 3 / 6: Lakukan Kebersihan Tangan Segera (Handrub Alkohol)",
                     item: "Handrub Alkohol",
-                    status: "Dekontaminasi Tangan",
-                    desc: "Gunakan handrub berbasis alkohol selama 20 detik sebelum menyentuh tali pengikat gaun untuk mencegah kontaminasi silang."
+                    status: "Dekontaminasi Tangan Sela",
+                    desc: "Bersihkan tangan dengan alkohol handrub selama 20–30 detik sebelum menyentuh bagian wajah atau tali pelindung mata/masker."
                 },
                 {
-                    title: "Doffing 3 / 6: Lepas Gaun Pelindung (Gown)",
-                    item: "Gaun Pelindung Kotor",
-                    status: "Gulung Menjauhi Tubuh",
-                    desc: "Buka ikatan tali. Tarik gaun dari leher dan bahu, balik bagian dalam ke luar. Gulung gaun menjauhi tubuh dan buang ke kantung kuning (atau bin laundry infeksius)."
+                    title: "Doffing 4 / 6: Lepaskan Pelindung Mata / Wajah (Goggles / Faceshield)",
+                    item: "Goggles / Faceshield",
+                    status: "Pegang Bagian Tali Belakang",
+                    desc: "Lepaskan dengan hanya memegang tali pengikat di kepala bagian belakang tanpa menyentuh permukaan depan yang terkontaminasi, lalu taruh di wadah dekontaminasi."
                 },
                 {
-                    title: "Doffing 4 / 6: Lepas Pelindung Mata (Goggles / Face Shield)",
-                    item: "Goggle / Face Shield",
-                    status: "Pegang Dari Tali Belakang",
-                    desc: "Pegang tali pengikat dari belakang kepala tanpa menyentuh bagian depan goggle yang berisiko terkontaminasi percikan droplet. Letakkan di wadah dekontaminasi."
-                },
-                {
-                    title: "Doffing 5 / 6: Lepas Masker Medis / N95",
+                    title: "Doffing 5 / 6: Lepaskan Masker Medis / Respirator N95",
                     item: "Masker Bedah / N95",
-                    status: "Lepas Tali Belakang",
-                    desc: "Pegang tali pengait belakang atau telinga tanpa menyentuh permukaan depan masker. Buang masker langsung ke kantung kuning infeksius."
+                    status: "Tarik Tali Belakang",
+                    desc: "Lepaskan tali pengait belakang tanpa menyentuh bagian depan masker, condongkan kepala sedikit ke depan, lalu buang ke tempat sampah tertutup."
                 },
                 {
-                    title: "Doffing 6 / 6: Cuci Tangan Bersih Paripurna (Handwash)",
+                    title: "Doffing 6 / 6: Cuci Tangan Akhir dengan Air Mengalir & Sabun",
                     item: "Air Mengalir & Sabun",
-                    status: "Dekontaminasi Total 100%",
-                    desc: "Cuci tangan dengan air mengalir dan sabun selama 40–60 detik sesuai 6 langkah WHO. Pelepasan APD selesai dengan aman tanpa kontaminasi silang!"
+                    status: "Dekontaminasi Paripurna",
+                    desc: "Lakukan cuci tangan 6 langkah WHO lengkap dengan air mengalir dan sabun selama 40–60 detik. Anda kini aman dan dekontaminasi selesai!"
                 }
             ];
+
+            this.initEvents();
         }
 
         init() {
-            // Tab Switchers
+            this.initEvents();
+        }
+
+        initEvents() {
+            // Tab Buttons
             const tabCuci = document.getElementById("tabPpiSimCuciTangan");
             const tabBatuk = document.getElementById("tabPpiSimEtikaBatuk");
             const tabApd = document.getElementById("tabPpiSimApd");
@@ -6516,7 +6744,7 @@
             if (tabBatuk) tabBatuk.onclick = () => this.switchTab("BATUK");
             if (tabApd) tabApd.onclick = () => this.switchTab("APD");
 
-            // Close buttons
+            // Modal Close Buttons
             const btnClose = document.getElementById("btnClosePpiSimulasi");
             const btnCloseFooter = document.getElementById("btnClosePpiSimulasiFooter");
             if (btnClose) btnClose.onclick = () => this.close();
@@ -6528,7 +6756,7 @@
             if (btnHandwash) btnHandwash.onclick = () => this.setCuciMode("handwash");
             if (btnHandrub) btnHandrub.onclick = () => this.setCuciMode("handrub");
 
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 11; i++) {
                 const btnStep = document.getElementById(`btnPpiStep${i}`);
                 if (btnStep) btnStep.onclick = () => this.setCuciStep(i);
             }
@@ -6543,7 +6771,7 @@
             }
             if (btnCuciNext) {
                 btnCuciNext.onclick = () => {
-                    const nextS = (this.cuci.step % 6) + 1;
+                    const nextS = (this.cuci.step % 11) + 1;
                     this.setCuciStep(nextS);
                 };
             }
@@ -6582,8 +6810,8 @@
             this.cuci.foamParticles = [];
             for (let i = 0; i < 28; i++) {
                 this.cuci.foamParticles.push({
-                    x: 280 + Math.random() * 120,
-                    y: 80 + Math.random() * 80,
+                    x: 220 + Math.random() * 240,
+                    y: 40 + Math.random() * 150,
                     r: 3 + Math.random() * 8,
                     vx: (Math.random() - 0.5) * 1.5,
                     vy: (Math.random() - 0.5) * 1.5,
@@ -6642,7 +6870,7 @@
         }
 
         setCuciStep(step) {
-            this.cuci.step = Math.max(1, Math.min(6, step));
+            this.cuci.step = Math.max(1, Math.min(11, step));
             this.cuci.count = 1;
             this.updateCuciUI();
         }
@@ -6660,13 +6888,29 @@
                 }
             }
 
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 11; i++) {
                 const btn = document.getElementById(`btnPpiStep${i}`);
                 if (btn) {
-                    if (this.cuci.step === i) {
-                        btn.className = "py-2 px-1.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all shadow";
+                    const isSelected = (this.cuci.step === i);
+                    const isCore = (i >= 3 && i <= 8);
+                    const isFinish = (i === 11);
+
+                    if (isSelected) {
+                        if (isCore) {
+                            btn.className = "py-1.5 px-1 rounded-xl border-2 border-amber-400 bg-amber-500/25 text-amber-200 font-black text-[10px] flex flex-col items-center gap-0.5 transition-all shadow-lg shadow-amber-950/50 scale-[1.03]";
+                        } else if (isFinish) {
+                            btn.className = "py-1.5 px-1 rounded-xl border-2 border-emerald-400 bg-emerald-500/25 text-emerald-200 font-black text-[10px] flex flex-col items-center gap-0.5 transition-all shadow-lg shadow-emerald-950/50 scale-[1.03]";
+                        } else {
+                            btn.className = "py-1.5 px-1 rounded-xl border-2 border-teal-400 bg-teal-500/25 text-teal-200 font-black text-[10px] flex flex-col items-center gap-0.5 transition-all shadow-lg shadow-teal-950/50 scale-[1.03]";
+                        }
                     } else {
-                        btn.className = "py-2 px-1.5 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-300 hover:border-teal-400 font-bold text-[10px] sm:text-xs flex flex-col items-center gap-0.5 transition-all";
+                        if (isCore) {
+                            btn.className = "py-1.5 px-1 rounded-xl border border-amber-500/30 bg-slate-900/60 text-amber-300/80 hover:border-amber-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all hover:bg-slate-800/80";
+                        } else if (isFinish) {
+                            btn.className = "py-1.5 px-1 rounded-xl border border-emerald-500/30 bg-slate-900/60 text-emerald-300/80 hover:border-emerald-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all hover:bg-slate-800/80";
+                        } else {
+                            btn.className = "py-1.5 px-1 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 hover:border-teal-400 font-bold text-[10px] flex flex-col items-center gap-0.5 transition-all hover:bg-slate-800/80";
+                        }
                     }
                 }
             }
@@ -6677,9 +6921,16 @@
             const instruct = document.getElementById("ppiStepInstruction");
 
             const maxHitungan = (this.cuci.mode === "handwash") ? 6 : 4;
-            if (badge) badge.innerText = `LANGKAH ${this.cuci.step} / 6: ${stepInfo.poseName.toUpperCase()}`;
-            if (timer) timer.innerText = `Hitungan: ${this.cuci.count}/${maxHitungan} • Timer: ${this.cuci.timerSeconds}s (${this.cuci.mode.toUpperCase()})`;
-            if (instruct) instruct.innerHTML = `💡 <strong>${stepInfo.title}:</strong> ${stepInfo.desc}`;
+            if (badge) {
+                const coreTag = stepInfo.isCore6 ? ` [★ WHO ${stepInfo.num - 2}]` : "";
+                badge.innerText = `LANGKAH ${this.cuci.step} / 11: ${stepInfo.poseName.toUpperCase()}${coreTag}`;
+            }
+            if (timer) {
+                timer.innerText = `Hitungan: ${this.cuci.count}/${maxHitungan} • Timer: ${this.cuci.timerSeconds}s (${this.cuci.mode.toUpperCase()})`;
+            }
+            if (instruct) {
+                instruct.innerHTML = `💡 <strong>${stepInfo.title}:</strong> ${stepInfo.desc}`;
+            }
         }
 
         setBatukStep(step) {
@@ -6754,14 +7005,14 @@
             this.batuk.animPhase += 0.04;
             this.apd.animPhase += 0.04;
 
-            // Auto timer & counter for cuci tangan
+            // Auto timer & counter for cuci tangan (11 langkah berulang)
             if (this.cuci.isPlaying && now - this.cuci.lastTickTime > 800) {
                 this.cuci.lastTickTime = now;
                 const maxH = (this.cuci.mode === "handwash") ? 6 : 4;
                 this.cuci.count++;
                 if (this.cuci.count > maxH) {
                     this.cuci.count = 1;
-                    this.cuci.step = (this.cuci.step % 6) + 1;
+                    this.cuci.step = (this.cuci.step % 11) + 1;
                 }
                 if (this.cuci.timerSeconds > 0) this.cuci.timerSeconds--;
                 else this.cuci.timerSeconds = (this.cuci.mode === "handwash") ? 50 : 30;
@@ -6786,168 +7037,259 @@
 
             ctx.clearRect(0, 0, w, h);
 
-            // Background Lab Sink / Antiseptic Washroom
+            // 1. Latar Belakang Stasiun Cuci Tangan Medis (Clean Clinical Theme)
             const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
-            bgGrad.addColorStop(0, "#042f2e");
-            bgGrad.addColorStop(0.5, "#0f766e");
-            bgGrad.addColorStop(1, "#022c22");
+            bgGrad.addColorStop(0, "#02131d");
+            bgGrad.addColorStop(0.5, "#06283b");
+            bgGrad.addColorStop(1, "#02121d");
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, w, h);
 
-            // Water faucet / dispenser in the top center
-            ctx.fillStyle = "#94a3b8";
-            ctx.fillRect(w / 2 - 12, 10, 24, 30);
-            ctx.fillStyle = "#cbd5e1";
-            ctx.fillRect(w / 2 - 8, 36, 16, 14);
-
-            // Flowing water if handwash, or gel drop if handrub
-            if (this.cuci.mode === "handwash") {
-                ctx.fillStyle = "rgba(186, 230, 253, 0.55)";
-                ctx.fillRect(w / 2 - 4, 48, 8, 80 + Math.sin(this.cuci.animPhase * 8) * 8);
-            } else {
-                ctx.fillStyle = "rgba(94, 234, 212, 0.75)";
-                ctx.beginPath();
-                ctx.arc(w / 2, 54 + (this.cuci.animPhase * 12 % 40), 5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            // Draw Hands based on step
+            // Subtle Sterile Grid Lines
             ctx.save();
-            const cx = w / 2;
-            const cy = 145;
-            const osc = Math.sin(this.cuci.animPhase * 6) * 16;
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.04)";
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 34) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = 0; y < h; y += 25) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+            ctx.restore();
 
-            ctx.lineWidth = 3;
-            ctx.strokeStyle = "#ca8a04";
+            const stepInfo = this.cuciStepData[this.cuci.step - 1] || this.cuciStepData[0];
+            const isCore = stepInfo.isCore6;
+            const isFinish = (this.cuci.step === 11);
+            const themeColor = isCore ? "#f59e0b" : (isFinish ? "#10b981" : "#38bdf8");
 
-            if (this.cuci.step === 1) {
-                // Step 1: Telapak tangan berhadapan saling menggesek horizontal
-                ctx.fillStyle = "#fde047";
-                // Tangan kiri
-                ctx.beginPath();
-                ctx.roundRect(cx - 70 + osc, cy - 35, 55, 70, 16);
-                ctx.fill();
-                ctx.stroke();
-                // Tangan kanan
-                ctx.beginPath();
-                ctx.roundRect(cx + 15 - osc, cy - 35, 55, 70, 16);
-                ctx.fill();
-                ctx.stroke();
-                // Garis jari
-                ctx.strokeStyle = "#a16207";
-                ctx.lineWidth = 2;
-                for (let i = -1; i <= 2; i++) {
-                    ctx.beginPath();
-                    ctx.moveTo(cx - 50 + osc + i * 10, cy - 30);
-                    ctx.lineTo(cx - 50 + osc + i * 10, cy - 50);
-                    ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(cx + 35 - osc + i * 10, cy - 30);
-                    ctx.lineTo(cx + 35 - osc + i * 10, cy - 50);
-                    ctx.stroke();
-                }
-            } else if (this.cuci.step === 2) {
-                // Step 2: Punggung tangan & sela luar
-                ctx.fillStyle = "#fde047";
-                // Tangan bawah
-                ctx.beginPath();
-                ctx.roundRect(cx - 50, cy - 30, 100, 60, 16);
-                ctx.fill();
-                ctx.stroke();
-                // Tangan atas menggosok serong
-                ctx.fillStyle = "#fef08a";
-                ctx.beginPath();
-                ctx.roundRect(cx - 60 + osc, cy - 45, 90, 50, 16);
-                ctx.fill();
-                ctx.stroke();
-            } else if (this.cuci.step === 3) {
-                // Step 3: Sela jari bertaut dalam
-                ctx.fillStyle = "#fde047";
-                ctx.beginPath();
-                ctx.roundRect(cx - 65, cy - 35 + osc * 0.4, 60, 75, 14);
-                ctx.fill();
-                ctx.stroke();
-                ctx.fillStyle = "#fef08a";
-                ctx.beginPath();
-                ctx.roundRect(cx + 5, cy - 35 - osc * 0.4, 60, 75, 14);
-                ctx.fill();
-                ctx.stroke();
-                // Jari-jari bersilangan
-                ctx.fillStyle = "#ca8a04";
-                for (let i = 0; i < 4; i++) {
-                    ctx.fillRect(cx - 20, cy - 25 + i * 14 + osc * 0.2, 40, 6);
-                }
-            } else if (this.cuci.step === 4) {
-                // Step 4: Mengunci empat jari
-                ctx.fillStyle = "#fde047";
-                ctx.beginPath();
-                ctx.roundRect(cx - 55 + osc * 0.5, cy - 30, 55, 60, 12);
-                ctx.fill();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.roundRect(cx, cy - 30 - osc * 0.5, 55, 60, 12);
-                ctx.fill();
-                ctx.stroke();
-                // Kaitan buku jari
-                ctx.fillStyle = "#eab308";
-                ctx.fillRect(cx - 15, cy - 20, 30, 40);
-            } else if (this.cuci.step === 5) {
-                // Step 5: Ibu jari digenggam dan diputar
-                ctx.fillStyle = "#fde047";
-                // Ibu jari tegak
-                ctx.beginPath();
-                ctx.roundRect(cx - 40, cy - 50, 24, 60, 12);
-                ctx.fill();
-                ctx.stroke();
-                // Tangan menggenggam memutar
-                ctx.fillStyle = "#fef08a";
-                ctx.beginPath();
-                ctx.arc(cx - 28 + Math.cos(this.cuci.animPhase * 6) * 15, cy - 20 + Math.sin(this.cuci.animPhase * 6) * 10, 32, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.stroke();
+            // 2. Center Card: Kartu Gambar Tangan Nyata (Real Human Hand Illustration)
+            const cardW = 285;
+            const cardH = 190;
+            const cardX = Math.floor((w - cardW) / 2);
+            const cardY = 22;
+
+            // Outer Glow & Shadow
+            ctx.save();
+            ctx.shadowColor = themeColor;
+            ctx.shadowBlur = 16;
+            ctx.fillStyle = "#091422";
+            ctx.beginPath();
+            ctx.roundRect(cardX, cardY, cardW, cardH, 16);
+            ctx.fill();
+            ctx.restore();
+
+            // Draw Real Hand Image (Clipped inside rounded rectangle)
+            ctx.save();
+            ctx.beginPath();
+            ctx.roundRect(cardX, cardY, cardW, cardH, 16);
+            ctx.clip();
+
+            const img = this.cuciImages[this.cuci.step];
+            if (img && img.complete && img.naturalWidth > 0) {
+                ctx.drawImage(img, cardX, cardY, cardW, cardH);
             } else {
-                // Step 6: Ujung kuku kuncup diputar di telapak
-                ctx.fillStyle = "#fde047";
-                // Telapak terbuka datar
-                ctx.beginPath();
-                ctx.roundRect(cx - 70, cy - 20, 80, 50, 14);
-                ctx.fill();
-                ctx.stroke();
-                // Ujung jari kuncup berputar di atasnya
-                ctx.fillStyle = "#fef08a";
-                const qx = cx - 30 + Math.cos(this.cuci.animPhase * 8) * 18;
-                const qy = cy + 5 + Math.sin(this.cuci.animPhase * 8) * 12;
-                ctx.beginPath();
-                ctx.arc(qx, qy - 25, 20, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.stroke();
-                // Titik kuncup kuku
-                ctx.fillStyle = "#a16207";
-                for (let k = -2; k <= 2; k++) {
-                    ctx.fillRect(qx + k * 4 - 2, qy - 12, 4, 8);
-                }
+                ctx.fillStyle = "#091422";
+                ctx.fillRect(cardX, cardY, cardW, cardH);
+                ctx.fillStyle = "#94a3b8";
+                ctx.font = "bold 12px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(`Memuat Ilustrasi Tangan ${this.cuci.step}...`, cardX + cardW / 2, cardY + cardH / 2);
             }
 
-            // Busa sabun & partikel antiseptik mengambang
-            ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
-            this.cuci.foamParticles.forEach((p, idx) => {
-                p.x += p.vx;
-                p.y += p.vy;
-                if (p.x < cx - 120 || p.x > cx + 120) p.vx *= -1;
-                if (p.y < cy - 60 || p.y > cy + 60) p.vy *= -1;
+            // Top-left floating badge inside card
+            ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+            ctx.beginPath();
+            ctx.roundRect(cardX + 10, cardY + 10, 115, 22, 6);
+            ctx.fill();
+            ctx.fillStyle = themeColor;
+            ctx.font = "bold 10px sans-serif";
+            ctx.textAlign = "left";
+            ctx.fillText(`Langkah ${this.cuci.step} / 11`, cardX + 16, cardY + 25);
 
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fill();
+            ctx.restore();
 
-                // Kilau bintang mikro
-                if (idx % 4 === 0) {
-                    ctx.fillStyle = "#5eead4";
-                    ctx.fillText("✨", p.x - 4, p.y - 4);
-                    ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+            // Card Frame Border
+            ctx.save();
+            ctx.strokeStyle = themeColor;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.roundRect(cardX, cardY, cardW, cardH, 16);
+            ctx.stroke();
+            ctx.restore();
+
+            // 3. Efek Prosedural Dinamis Sesuai Langkah:
+            // a. Aliran Air Kran Mengalir untuk Langkah 1 & 9
+            if (this.cuci.step === 1 || this.cuci.step === 9) {
+                ctx.save();
+                for (let i = 0; i < 9; i++) {
+                    const wx = cardX + cardW * 0.42 + i * 3.5 + Math.sin(this.cuci.animPhase * 8 + i) * 2.5;
+                    const wy = cardY + ((this.cuci.animPhase * 130 + i * 20) % cardH);
+                    ctx.fillStyle = "rgba(186, 230, 253, 0.75)";
+                    ctx.beginPath();
+                    ctx.arc(wx, wy, 2.5, 0, Math.PI * 2);
+                    ctx.fill();
                 }
+                ctx.restore();
+            }
+
+            // b. Tetesan Sabun Cair untuk Langkah 2
+            if (this.cuci.step === 2) {
+                ctx.save();
+                const dropY = cardY + 60 + ((this.cuci.animPhase * 60) % 70);
+                ctx.fillStyle = "#38bdf8";
+                ctx.beginPath();
+                ctx.arc(cardX + cardW * 0.44, dropY, 5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // c. Busa Sabun / Lather Partikel untuk Langkah 3 - 8 (6 Langkah Inti WHO)
+            if (this.cuci.step >= 3 && this.cuci.step <= 8) {
+                ctx.save();
+                this.cuci.foamParticles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < cardX + 25 || p.x > cardX + cardW - 25) p.vx *= -1;
+                    if (p.y < cardY + 35 || p.y > cardY + cardH - 25) p.vy *= -1;
+
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    // Bubble border highlight
+                    ctx.strokeStyle = "rgba(186, 230, 253, 0.85)";
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+
+                    // Highlight point
+                    ctx.fillStyle = "#ffffff";
+                    ctx.beginPath();
+                    ctx.arc(p.x - p.r * 0.3, p.y - p.r * 0.3, p.r * 0.25, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.restore();
+            }
+
+            // d. Kilau Bintang Kebersihan Paripurna untuk Langkah 11
+            if (this.cuci.step === 11) {
+                ctx.save();
+                for (let s = 0; s < 7; s++) {
+                    const sx = cardX + 35 + ((s * 39 + Math.sin(this.cuci.animPhase * 3 + s) * 20) % (cardW - 70));
+                    const sy = cardY + 30 + ((s * 25 + Math.cos(this.cuci.animPhase * 4 + s) * 15) % (cardH - 60));
+                    const size = 7 + Math.sin(this.cuci.animPhase * 5 + s) * 3;
+                    ctx.fillStyle = (s % 2 === 0) ? "#34d399" : "#fbbf24";
+                    ctx.font = `${Math.floor(size + 10)}px sans-serif`;
+                    ctx.fillText("✨", sx, sy);
+                }
+                ctx.restore();
+            }
+
+            // 4. Panel Info Kiri: Pose Tangan, Kategori WHO & Hitungan
+            ctx.save();
+            ctx.fillStyle = "#ffffff";
+            ctx.font = "bold 13px sans-serif";
+            ctx.textAlign = "left";
+            ctx.fillText(stepInfo.poseName, 18, 45);
+
+            ctx.fillStyle = themeColor;
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText(stepInfo.isCore6 ? "★ 6 LANGKAH INTI WHO" : "LANGKAH STANDAR", 18, 65);
+
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "10px sans-serif";
+            ctx.fillText(this.cuci.mode === "handwash" ? "Air Bersih & Sabun Cair" : "Gel Alkohol (Handrub)", 18, 86);
+            ctx.fillText(this.cuci.mode === "handwash" ? "Durasi Standar: 40-60 Detik" : "Durasi Standar: 20-40 Detik", 18, 102);
+
+            // Kotak Hitungan Gerakan
+            ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
+            ctx.beginPath();
+            ctx.roundRect(18, 120, 160, 92, 12);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.25)";
+            ctx.stroke();
+
+            ctx.fillStyle = "#38bdf8";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText("HITUNGAN GERAKAN:", 28, 140);
+
+            const maxH = (this.cuci.mode === "handwash") ? 6 : 4;
+            for (let hIdx = 1; hIdx <= maxH; hIdx++) {
+                const hx = 28 + (hIdx - 1) * 24;
+                const hy = 165;
+                const isCurrent = (hIdx === this.cuci.count);
+                ctx.fillStyle = isCurrent ? themeColor : "rgba(30, 41, 59, 0.9)";
+                ctx.beginPath();
+                ctx.roundRect(hx, hy - 14, 20, 20, 6);
+                ctx.fill();
+                ctx.strokeStyle = isCurrent ? "#ffffff" : "rgba(100, 116, 139, 0.5)";
+                ctx.stroke();
+                ctx.fillStyle = isCurrent ? "#000000" : "#cbd5e1";
+                ctx.font = "bold 10px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText(hIdx, hx + 10, hy);
+            }
+            ctx.textAlign = "left";
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "9px sans-serif";
+            ctx.fillText(`${this.cuci.count} dari ${maxH} hitungan putar`, 28, 198);
+            ctx.restore();
+
+            // 5. Panel Info Kanan: 5 Momen Kebersihan Tangan WHO
+            const rx = w - 178;
+            ctx.save();
+            ctx.fillStyle = "rgba(15, 23, 42, 0.75)";
+            ctx.beginPath();
+            ctx.roundRect(rx, 22, 160, 190, 12);
+            ctx.fill();
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.25)";
+            ctx.stroke();
+
+            ctx.fillStyle = "#fbbf24";
+            ctx.font = "bold 11px sans-serif";
+            ctx.fillText("5 MOMEN WHO", rx + 12, 42);
+
+            ctx.fillStyle = "#cbd5e1";
+            ctx.font = "9px sans-serif";
+            const moments = [
+                "1. Sblm kontak pasien",
+                "2. Sblm tindakan aseptik",
+                "3. Stlh terkena cairan tubuh",
+                "4. Stlh kontak pasien",
+                "5. Stlh sentuh ruang pasien"
+            ];
+            moments.forEach((m, mi) => {
+                ctx.fillText(m, rx + 12, 64 + mi * 17);
             });
 
+            ctx.fillStyle = "#10b981";
+            ctx.font = "bold 10px sans-serif";
+            ctx.fillText("🛡️ PPI RSAU ESNAWAN", rx + 12, 172);
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "8.5px sans-serif";
+            ctx.fillText("Tangan Bersih, Pasien Aman", rx + 12, 188);
+            ctx.fillText("Bebas Infeksi Nosokomial", rx + 12, 200);
+            ctx.restore();
+
+            // 6. Indikator Titik 11 Langkah di Bawah Card
+            ctx.save();
+            const startDotX = cardX + 15;
+            const dotSpacing = (cardW - 30) / 10;
+            for (let d = 1; d <= 11; d++) {
+                const dx = startDotX + (d - 1) * dotSpacing;
+                const dy = 230;
+                const isActive = (d === this.cuci.step);
+                const isPast = (d < this.cuci.step);
+                ctx.fillStyle = isActive ? themeColor : (isPast ? "rgba(45, 212, 191, 0.6)" : "rgba(148, 163, 184, 0.3)");
+                ctx.beginPath();
+                ctx.arc(dx, dy, isActive ? 5 : 3, 0, Math.PI * 2);
+                ctx.fill();
+                if (isActive) {
+                    ctx.strokeStyle = "#ffffff";
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+            }
             ctx.restore();
         }
 
