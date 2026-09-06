@@ -431,12 +431,12 @@
                     <span id="badgePPK" class="inline-block mt-2 px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 8. AKP -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 8</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">AKP</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Akses & Keberlanjutan Pelayanan</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 8. AKP (ACTIVE) -->
+                <div id="selectPokjaAKP" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-sky-400 uppercase tracking-wider">MAP 13 / DUNIA 8</div>
+                    <div class="text-xs md:text-sm font-bold text-white">AKP</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Akses & Keberlanjutan Pelayanan (Skrining Triase IGD, Kriteria Masuk ICU, Edukasi Penundaan, Rujukan SISRUTE, Discharge Planning, PAPS, Pasien Kabur)</div>
+                    <span id="badgeAKP" class="inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 9. HPK (ACTIVE) -->
@@ -2614,6 +2614,126 @@
         }
     ];
 
+    /* ==========================================================================
+       MAP 13: POKJA AKP (AKSES DAN KEBERLANJUTAN PELAYANAN)
+       Bank Soal Resmi STARKES Kemenkes RI - RSAU dr. Esnawan Antariksa
+       Materi:
+       1. Skrining Visual & Triase IGD (Australasian Triage Scale / ESI / Kode Warna)
+       2. Kriteria Pasien Masuk ICU (Prioritas 1, 2, 3, 4)
+       3. Edukasi & Alur Penundaan Pelayanan / Pengobatan (Delay in Care)
+       4. Prosedur Rujukan Antar Faskes (SISRUTE, SBAR, Kategori Transfer, Ambulans)
+       5. Perencanaan Pemulangan Pasien (Discharge Planning Sejak Awal Admisi)
+       6. Ringkasan Pasien Pulang (Resume Medis DPJP Maksimal 1x24 Jam)
+       7. Pasien Pulang Atas Permintaan Sendiri (PAPS, Edukasi Risiko, Formulir)
+       8. Tata Kelola Pasien Melarikan Diri / Kabur (Pencarian Internal, POM AU)
+       ========================================================================== */
+    const AKP_QUIZ_BANK = [
+        {
+            id: "akp_skrining_triase_igd",
+            posName: "Pos 1: Skrining Visual & Kategori Triase IGD",
+            question: "Bagaimana alur dan penentuan prioritas penanganan pasien saat tiba di Instalasi Gawat Darurat (IGD)?",
+            options: [
+                "Pasien dilayani berdasarkan siapa yang tiba lebih dulu di loket pendaftaran tanpa memandang keparahan kondisi fisik.",
+                "Petugas triase melakukan skrining cepat memilah pasien: Merah (resusitasi/gawat darurat), Kuning (darurat tidak gawat), Hijau (tidak gawat darurat), dan Hitam (meninggal).",
+                "Pasien langsung diminta beristirahat di ruang rawat inap sebelum dilakukan pemeriksaan tanda vital oleh perawat triase.",
+                "Hanya pasien pemegang kartu asuransi prioritas yang diperbolehkan masuk ke area resusitasi IGD."
+            ],
+            correct: 1,
+            explanation: "Triase IGD memprioritaskan pasien berdasarkan kegawatdaruratan klinis menggunakan sistem kode warna: Merah (kondisi mengancam nyawa, penanganan segera), Kuning (kondisi darurat memerlukan tindakan cepat), Hijau (kondisi ringan/rawat jalan), dan Hitam (meninggal dunia)."
+        },
+        {
+            id: "akp_kriteria_masuk_icu",
+            posName: "Pos 2: Kriteria Pasien Masuk Unit Perawatan Intensif (ICU)",
+            question: "Pasien manakah yang menjadi Prioritas 1 untuk dirawat di Intensive Care Unit (ICU) RSAU?",
+            options: [
+                "Pasien rawat jalan dengan keluhan flu musiman yang menginginkan ruangan perawatan yang tenang dan ber-AC dingin.",
+                "Pasien kritis tidak stabil yang memerlukan terapi intensif dan bantuan ventilasi mekanis kontinu serta titrasi obat vasoaktif.",
+                "Pasien geriatri tahap akhir penyakit keganasan dengan instruksi DNR lengkap yang menolak seluruh tindakan medis invasif.",
+                "Pasien pascaoperasi kecil tanpa komplikasi yang menunggu jadwal kontrol jahitan luka keesokan harinya."
+            ],
+            correct: 1,
+            explanation: "Prioritas 1 masuk ICU mencakup pasien kritis tidak stabil yang membutuhkan terapi intensif seperti ventilasi mekanis, pemantauan hemodinamik ketat, dan titrasi obat inotropik/vasoaktif kontinu."
+        },
+        {
+            id: "akp_penundaan_pelayanan",
+            posName: "Pos 3: Edukasi dan Tata Kelola Penundaan Pelayanan",
+            question: "Apa kewajiban rumah sakit apabila terjadi penundaan pelayanan atau pengobatan pasien karena keterbatasan fasilitas atau antrean?",
+            options: [
+                "Memberikan penjelasan kepada pasien dan keluarga mengenai alasan penundaan, perkiraan waktu tunggu, dan alternatif solusi pelayanan.",
+                "Meminta pasien pulang tanpa memberikan jadwal kunjungan ulang atau alternatif rujukan faskes terdekat.",
+                "Membatalkan seluruh pendaftaran tindakan medis secara sepihak tanpa mencatat konfirmasi di rekam medis.",
+                "Menolak memberikan informasi estimasi waktu tunggu karena dianggap rahasia internal operasional rumah sakit."
+            ],
+            correct: 0,
+            explanation: "Sesuai standar STARKES AKP, bila terjadi penundaan pelayanan atau pengobatan, staf wajib menginformasikan kepada pasien/keluarga tentang alasan penundaan, perkiraan waktu layanan tersedia, dan opsi alternatif yang dapat dipilih."
+        },
+        {
+            id: "akp_rujukan_eksternal_sisrute",
+            posName: "Pos 4: Prosedur dan Alur Rujukan Antar Fasilitas Kesehatan",
+            question: "Bagaimana prosedur baku pelaksanaan rujukan pasien antar faskes agar keselamatan pasien tetap terjamin?",
+            options: [
+                "Pasien diminta mencari rumah sakit rujukan sendiri menggunakan kendaraan pribadi tanpa membawa ringkasan resume medis.",
+                "Pasien langsung diberangkatkan dengan ambulans tanpa perlu konfirmasi ketersediaan tempat tidur di faskes penerima.",
+                "Koordinasi faskes tujuan via SISRUTE, komunikasi SBAR, pendampingan staf berkompeten, ambulans memadai, dan membawa resume transfer rujukan.",
+                "Rujukan hanya boleh dilakukan apabila pasien telah melunasi seluruh biaya perawatan selama tiga bulan ke depan."
+            ],
+            correct: 2,
+            explanation: "Rujukan pasien antar faskes wajib dilakukan terencana: terkoordinasi via platform SISRUTE, konfirmasi penerimaan faskes tujuan, didampingi staf kompeten sesuai derajat transfer, fasilitas ambulans memadai, dan membawa ringkasan klinis transfer."
+        },
+        {
+            id: "akp_discharge_planning",
+            posName: "Pos 5: Perencanaan Pemulangan Pasien (Discharge Planning)",
+            question: "Kapan perencanaan pemulangan pasien (Discharge Planning) harus mulai diinisiasi oleh tim PPA?",
+            options: [
+                "Satu jam sebelum pasien melunasi biaya administrasi di loket kasir rumah sakit.",
+                "Sejak awal pasien masuk rawat inap (saat pengkajian awal) untuk mengidentifikasi kebutuhan kesinambungan asuhan di rumah.",
+                "Setelah pasien berada di rumah selama 3 hari melalui pesan singkat dari staf administrasi.",
+                "Hanya apabila diminta secara tertulis oleh keluarga pasien yang memiliki latar belakang tenaga medis."
+            ],
+            correct: 1,
+            explanation: "Discharge planning terintegrasi wajib dimulai sejak awal asesmen pasien masuk rawat inap (1x24 jam) guna mengidentifikasi kebutuhan kesinambungan asuhan, edukasi obat pulang, perawatan luka, dan dukungan keluarga pasca rawat inap."
+        },
+        {
+            id: "akp_resume_medis_pulang",
+            posName: "Pos 6: Batas Waktu dan Distribusi Ringkasan Pasien Pulang (Resume Medis)",
+            question: "Kapan Ringkasan Pasien Pulang (Discharge Summary / Resume Medis) harus diselesaikan oleh DPJP dan kepada siapa salinannya diberikan?",
+            options: [
+                "Wajib diselesaikan dalam waktu 1x24 jam saat pasien pulang; salinan diberikan ke rekam medis, pasien/keluarga, dan dokter/faskes perujuk.",
+                "Boleh diselesaikan dalam waktu 30 hari kalender setelah pasien pulang dan hanya disimpan di lemari arsip poliklinik.",
+                "Cukup dikirimkan secara lisan melalui telepon kepada pihak keluarga tanpa perlu dokumen fisik atau tanda tangan DPJP.",
+                "Hanya dibuat bila pasien dirawat di kamar kelas VIP atau presiden suite."
+            ],
+            correct: 0,
+            explanation: "Resume medis rawat inap wajib diselesaikan DPJP paling lambat 1x24 jam saat pemulangan pasien. Salinan resume diberikan ke berkas rekam medis RS, diserahkan kepada pasien/keluarga, dan diberikan kepada faskes perujuk."
+        },
+        {
+            id: "akp_pulang_atas_permintaan_sendiri",
+            posName: "Pos 7: Pasien Pulang Atas Permintaan Sendiri (PAPS / APS)",
+            question: "Bagaimana tata laksana rumah sakit bila pasien atau keluarga menolak melanjutkan perawatan dan menghendaki Pulang Atas Permintaan Sendiri (PAPS)?",
+            options: [
+                "Pasien ditahan di ruangan rawat inap secara paksa dan tidak diizinkan membawa pulang pakaian pribadi.",
+                "Edukasi konsekuensi risiko medis/komplikasi yang mengancam jiwa, tandatangani Formulir PAPS, beri instruksi tindak lanjut dan obat pulang.",
+                "Seluruh catatan rekam medis pasien langsung dimusnahkan dan pasien dilarang kembali berobat ke rumah sakit seumur hidup.",
+                "Dokter tidak perlu memberikan penjelasan apa pun karena keputusan kepulangan sepenuhnya urusan pribadi keluarga pasien."
+            ],
+            correct: 1,
+            explanation: "Rumah sakit menghormati hak pasien pulang APS dengan kewajiban memberikan edukasi risiko medis perburukan kondisi, menandatangani Formulir Pernyataan PAPS, serta tetap membekali pasien dengan resume kepulangan dan instruksi penanganan darurat."
+        },
+        {
+            id: "akp_pasien_melarikan_diri",
+            posName: "Pos 8: Tata Kelola Pasien Meninggalkan Rumah Sakit Tanpa Izin (Kabur)",
+            question: "Apa tindakan baku rumah sakit apabila pasien rawat inap meninggalkan ruangan tanpa izin (melarikan diri / kabur)?",
+            options: [
+                "Pencarian internal area RS, lapor Supervisor Keperawatan & Satpam/POM AU, hubungi keluarga, dan buat laporan insiden resmi.",
+                "Mengabaikan ketiadaan pasien karena mengurangi beban kerja perawat di shift dinas tersebut.",
+                "Mengumumkan nama dan nomor kamar pasien melalui pengeras suara kota tanpa koordinasi dengan pihak keluarga.",
+                "Menagihkan denda finansial ganda ke rekening bank pasien tanpa melacak keberadaan fisik pasien."
+            ],
+            correct: 0,
+            explanation: "Bila pasien melarikan diri tanpa izin, tim ruangan segera melakukan pencarian internal di area RS, berkoordinasi dengan Satpam/POM AU dan Supervisor Keperawatan, menghubungi pihak keluarga, serta mendokumentasikan laporan insiden."
+        }
+    ];
+
     const KE_QUIZ_BANK = [
         {
             id: "ke_petugas_edukasi",
@@ -3873,6 +3993,59 @@
                 ctx.font = "bold 4px sans-serif";
                 ctx.textAlign = "center";
                 ctx.fillText("≤30m", 0, -3.5);
+            } else if (this.type === "kartu_triase_ats") {
+                // Kartu Triase Cepat IGD 4 Warna (Merah, Kuning, Hijau, Hitam)
+                ctx.fillStyle = "#ffffff";
+                ctx.fillRect(-12, -10, 24, 20);
+                ctx.strokeStyle = "#0284c7"; // border biru cerah
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-11, -9, 22, 18);
+                // Header Triase IGD
+                ctx.fillStyle = "#0369a1";
+                ctx.font = "bold 3.5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("TRIASE IGD", 0, -5.5);
+                // 4 Bar Kategori Triase (Merah Resusitasi, Kuning Urgent, Hijau Non-urgent, Hitam Exitus)
+                ctx.fillStyle = "#ef4444"; // Merah
+                ctx.fillRect(-9, -2, 4, 8);
+                ctx.fillStyle = "#f59e0b"; // Kuning
+                ctx.fillRect(-4, -2, 4, 8);
+                ctx.fillStyle = "#10b981"; // Hijau
+                ctx.fillRect(1, -2, 4, 8);
+                ctx.fillStyle = "#1e293b"; // Hitam
+                ctx.fillRect(6, -2, 4, 8);
+                // Palang Medis Mini di pojok bawah
+                ctx.fillStyle = "#dc2626";
+                ctx.font = "bold 4.5px sans-serif";
+                ctx.fillText("✚", 0, 7.5);
+            } else if (this.type === "surat_rujukan_sisrute") {
+                // Dokumen Formulir Rujukan Terintegrasi SISRUTE
+                ctx.fillStyle = "#f0f9ff"; // Kertas putih kebiruan bersih
+                ctx.fillRect(-11, -12, 22, 24);
+                ctx.strokeStyle = "#0284c7"; // Border biru laut
+                ctx.lineWidth = 1;
+                ctx.strokeRect(-10, -11, 20, 22);
+                // Header Pita SISRUTE
+                ctx.fillStyle = "#0284c7";
+                ctx.fillRect(-10, -11, 20, 5);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 3.5px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("SISRUTE", 0, -7.5);
+                // Garis data transfer rujukan medis
+                ctx.fillStyle = "#94a3b8";
+                ctx.fillRect(-7, -3, 14, 1.2);
+                ctx.fillRect(-7, 0, 14, 1.2);
+                ctx.fillRect(-7, 3, 10, 1.2);
+                // Stempel Faskes Rujukan Biru / Hijau
+                ctx.strokeStyle = "#059669";
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.arc(4, 6, 3, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.fillStyle = "#059669";
+                ctx.font = "bold 2.5px sans-serif";
+                ctx.fillText("RS", 4, 7);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -4848,6 +5021,89 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 13: POKJA AKP (AKSES DAN KEBERLANJUTAN PELAYANAN)
+       Alur Telusur:
+       Triase IGD & Skrining Visual, Unit Perawatan Intensif (ICU Prioritas 1-4),
+       Loket Edukasi Penundaan Pelayanan, Unit Rujukan Terintegrasi SISRUTE,
+       Ruang Discharge Planning Sejak Admisi, Verifikasi Resume Medis Pulang 1x24 Jam,
+       Konseling Pulang Atas Permintaan Sendiri (PAPS), Pos Pengamanan Pasien Kabur
+       ========================================================================== */
+    const AKP_LEVEL = {
+        id: "AKP",
+        shortName: "POKJA AKP",
+        name: "Pokja AKP • Akses & Keberlanjutan Pelayanan (Skrining Triase IGD, Kriteria Masuk ICU, Rujukan SISRUTE, Discharge Planning, PAPS)",
+        accentFloor: "#0369a1",
+        accentBorder: "#38bdf8",
+        width: 6600,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Triase IGD Cepat & Skrining Visual (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Unit Perawatan Intensif (ICU Prioritas 1-4) (x: 940 - 1500)
+            { x: 940, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 3: Loket Informasi & Edukasi Penundaan Pelayanan (x: 1640 - 2260)
+            { x: 1640, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 4: Unit Rujukan Terintegrasi SISRUTE (x: 2350 - 2960)
+            { x: 2350, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 2540, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Ruang Perencanaan Pemulangan Pasien (Discharge Planning) (x: 3080 - 3700)
+            { x: 3080, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 6: Meja Verifikasi Resume Medis Pasien Pulang (x: 3820 - 4460)
+            { x: 3820, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 4010, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Ruang Konseling Pulang Atas Permintaan Sendiri (PAPS) (x: 4580 - 5200)
+            { x: 4580, y: 440, w: 620, h: 100, type: "solid" },
+            // Koridor 8: Pos Pengamanan & Tata Kelola Pasien Kabur / Absconding (x: 5320 - 5800)
+            { x: 5320, y: 380, w: 150, h: 18, type: "one-way" },
+            { x: 5500, y: 330, w: 300, h: 24, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor POKJA AKP (x: 5920 - 6600)
+            { x: 5920, y: 440, w: 680, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1520, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2980, 400, 90, 20, 0, -70, 1.2),
+            new MovingPlatform(3720, 410, 90, 20, 70, 0, 1.3),
+            new MovingPlatform(4480, 410, 85, 20, 0, -60, 1.2),
+            new MovingPlatform(5220, 410, 85, 20, 70, 0, 1.3),
+            new MovingPlatform(5820, 400, 85, 20, 0, -60, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, AKP_QUIZ_BANK[0]),  // Pos 1: Skrining & Triase IGD
+            new QuizTerminal(1140, 270, AKP_QUIZ_BANK[1]), // Pos 2: Kriteria Masuk ICU
+            new QuizTerminal(1920, 380, AKP_QUIZ_BANK[2]), // Pos 3: Penundaan Pelayanan
+            new QuizTerminal(2700, 270, AKP_QUIZ_BANK[3]), // Pos 4: Rujukan Eksternal SISRUTE
+            new QuizTerminal(3400, 380, AKP_QUIZ_BANK[4]), // Pos 5: Discharge Planning
+            new QuizTerminal(4180, 270, AKP_QUIZ_BANK[5]), // Pos 6: Resume Medis Pulang 1x24 Jam
+            new QuizTerminal(4900, 380, AKP_QUIZ_BANK[6]), // Pos 7: Pulang Atas Permintaan Sendiri (PAPS)
+            new QuizTerminal(5650, 270, AKP_QUIZ_BANK[7])  // Pos 8: Tata Kelola Pasien Melarikan Diri
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "kartu_triase_ats"),
+            new CollectibleDoc(440, 370, "surat_rujukan_sisrute"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "kartu_triase_ats"),
+            new CollectibleDoc(1360, 250, "star_mutu"),
+            new CollectibleDoc(1780, 390, "surat_rujukan_sisrute"),
+            new CollectibleDoc(2100, 390, "kartu_triase_ats"),
+            new CollectibleDoc(2640, 250, "surat_rujukan_sisrute"),
+            new CollectibleDoc(2840, 250, "star_mutu"),
+            new CollectibleDoc(3240, 390, "kartu_triase_ats"),
+            new CollectibleDoc(3550, 390, "surat_rujukan_sisrute"),
+            new CollectibleDoc(4080, 250, "kartu_triase_ats"),
+            new CollectibleDoc(4340, 250, "star_mutu"),
+            new CollectibleDoc(4720, 390, "surat_rujukan_sisrute"),
+            new CollectibleDoc(5050, 390, "kartu_triase_ats"),
+            new CollectibleDoc(5580, 250, "surat_rujukan_sisrute"),
+            new CollectibleDoc(6050, 390, "kartu_triase_ats"),
+            new CollectibleDoc(6250, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
 
@@ -5414,7 +5670,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "PP") {
+        if (currentLevel.id === "AKP") {
+            // Suasana Akses & Keberlanjutan Pelayanan (Biru Samudra & Biru Langit Cemerlang)
+            skyGrad.addColorStop(0, "#082f49");
+            skyGrad.addColorStop(0.5, "#0284c7");
+            skyGrad.addColorStop(1, "#7dd3fc");
+        } else if (currentLevel.id === "PP") {
             // Suasana Pelayanan Pasien (Klinis Teal & Zamrud Bersih)
             skyGrad.addColorStop(0, "#042f2e");
             skyGrad.addColorStop(0.5, "#0d9488");
@@ -5476,7 +5737,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))))))));
+        ctx.fillStyle = currentLevel.id === "AKP" ? "rgba(186, 230, 253, 0.45)" : (currentLevel.id === "PP" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "HPK" ? "rgba(233, 213, 255, 0.45)" : (currentLevel.id === "PPK" ? "rgba(191, 219, 254, 0.45)" : (currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))))))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -5489,7 +5750,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))));
+        ctx.fillStyle = currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -5511,15 +5772,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))))))));
+            ctx.fillStyle = currentLevel.id === "AKP" ? "#7dd3fc" : (currentLevel.id === "PP" ? "#99f6e4" : (currentLevel.id === "HPK" ? "#d8b4fe" : (currentLevel.id === "PPK" ? "#93c5fd" : (currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))))))));
+            ctx.fillStyle = currentLevel.id === "AKP" ? "#082f49" : (currentLevel.id === "PP" ? "#042f2e" : (currentLevel.id === "HPK" ? "#2e1065" : (currentLevel.id === "PPK" ? "#0b1329" : (currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))))))));
+        ctx.fillStyle = currentLevel.id === "AKP" ? "rgba(8, 47, 73, 0.65)" : (currentLevel.id === "PP" ? "rgba(4, 47, 46, 0.65)" : (currentLevel.id === "HPK" ? "rgba(46, 16, 101, 0.65)" : (currentLevel.id === "PPK" ? "rgba(15, 23, 42, 0.65)" : (currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -5527,7 +5788,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "PP") {
+            if (currentLevel.id === "AKP") {
+                ctx.fillStyle = "rgba(2, 132, 199, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("🚑 AKP: TRIASE IGD • KRITERIA ICU • RUJUKAN SISRUTE • DISCHARGE PLANNING • PAPS", kx + 160, 296);
+                ctx.fillStyle = "rgba(8, 47, 73, 0.65)";
+            } else if (currentLevel.id === "PP") {
                 ctx.fillStyle = "rgba(13, 148, 136, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -5671,7 +5940,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))));
+        ctx.fillStyle = currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -5875,9 +6144,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "PP") {
+        if (currentLevel.id === "AKP") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-cyan-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja AKP (Akses dan Keberlanjutan Pelayanan), penerapan Triase IGD berbasis kegawatdaruratan (Merah, Kuning, Hijau, Hitam), kepatuhan kriteria Prioritas 1-4 masuk Intensive Care Unit (ICU), tata kelola dan edukasi penundaan pelayanan, integrasi sistem rujukan antarfaskes via SISRUTE dengan pendampingan staf berkompeten dan ambulans standar, perencanaan pemulangan pasien (Discharge Planning) terintegrasi sejak awal admisi rawat inap, penyelesaian Ringkasan Pasien Pulang (Resume Medis) DPJP tepat waktu 1x24 jam, perlindungan hak pasien Pulang Atas Permintaan Sendiri (PAPS) disertai edukasi risiko medis, serta prosedur cepat penanganan pasien melarikan diri (kabur) berkoordinasi dengan POM AU paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola Triase IGD, kriteria masuk ICU, dan sistem rujukan SISRUTE berjalan tertib dengan catatan percepatan penyelesaian resume medis pasien pulang.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan kepatuhan inisiasi discharge planning sejak 24 jam pertama admisi dan kelengkapan penandatanganan formulir edukasi penundaan pelayanan.";
+            }
+        } else if (currentLevel.id === "PP") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 13: POKJA AKP ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -6209,7 +6496,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "PP") {
+        if (pokjaId === "AKP") {
+            currentLevel = AKP_LEVEL;
+        } else if (pokjaId === "PP") {
             currentLevel = PP_LEVEL;
         } else if (pokjaId === "HPK") {
             currentLevel = HPK_LEVEL;
@@ -6253,6 +6542,7 @@
         const tabPPK = document.getElementById("tabSelectPPK");
         const tabHPK = document.getElementById("tabSelectHPK");
         const tabPP = document.getElementById("tabSelectPP");
+        const tabAKP = document.getElementById("tabSelectAKP");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -6274,6 +6564,7 @@
         const cardPPK = document.getElementById("selectPokjaPPK");
         const cardHPK = document.getElementById("selectPokjaHPK");
         const cardPP = document.getElementById("selectPokjaPP");
+        const cardAKP = document.getElementById("selectPokjaAKP");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -6286,6 +6577,7 @@
         const badgePPK = document.getElementById("badgePPK");
         const badgeHPK = document.getElementById("badgeHPK");
         const badgePP = document.getElementById("badgePP");
+        const badgeAKP = document.getElementById("badgeAKP");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -6300,6 +6592,7 @@
         if (tabPPK) tabPPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-blue-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabHPK) tabHPK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabPP) tabPP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabAKP) tabAKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -6350,8 +6643,29 @@
             cardPP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-teal-950/40 transition-all";
             if (badgePP) { badgePP.innerText = "SIAP DITELUSURI"; badgePP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-teal-500/10 text-teal-400 text-[9px] font-semibold"; }
         }
+        if (cardAKP) {
+            cardAKP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all";
+            if (badgeAKP) { badgeAKP.innerText = "SIAP DITELUSURI"; badgeAKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "PP") {
+        if (currentLevel.id === "AKP") {
+            if (tabAKP) tabAKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA AKP • MAP 13 (AKTIF)";
+                menuSubtitle.className = "text-xs text-sky-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja AKP (<strong>Skrining & Triase IGD ATS</strong>, <strong>Kriteria Masuk ICU Prioritas 1-4</strong>, <strong>Edukasi Penundaan Pelayanan</strong>, <strong>Rujukan Antarfaskes via SISRUTE</strong>, <strong>Discharge Planning Terintegrasi</strong>, <strong>Resume Medis Pulang 1x24 Jam</strong>, <strong>Pulang Atas Permintaan Sendiri (PAPS)</strong>, & <strong>Tata Kelola Pasien Melarikan Diri</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 13: POKJA AKP";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 text-white font-bold text-base md:text-lg shadow-lg shadow-sky-500/30 transition-all active:scale-98";
+            }
+            if (cardAKP) {
+                cardAKP.className = "p-3 rounded-xl bg-sky-500/20 border border-sky-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-sky-500/30 transition-all";
+                if (badgeAKP) { badgeAKP.innerText = "TELUSUR AKTIF"; badgeAKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "PP") {
             if (tabPP) tabPP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-teal-400/80 bg-teal-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PP • MAP 12 (AKTIF)";
@@ -6575,6 +6889,7 @@
     bindTab("tabSelectPPK", "PPK");
     bindTab("tabSelectHPK", "HPK");
     bindTab("tabSelectPP", "PP");
+    bindTab("tabSelectAKP", "AKP");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -6642,6 +6957,13 @@
             document.getElementById("pokjaSelectModal").classList.add("hidden");
         };
     }
+    const selectAKP = document.getElementById("selectPokjaAKP");
+    if (selectAKP) {
+        selectAKP.onclick = () => {
+            setPokja("AKP");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -6665,6 +6987,8 @@
             setPokja("HPK");
         } else if (currentLevel.id === "HPK") {
             setPokja("PP");
+        } else if (currentLevel.id === "PP") {
+            setPokja("AKP");
         } else {
             setPokja("TKRS");
         }

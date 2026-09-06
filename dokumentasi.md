@@ -1751,6 +1751,89 @@ Modul PP mengintegrasikan 8 instrumen telusur asuhan pasien dan laboratorium kli
   - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur pelayanan pasien terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
 
 ---
+
+## 26. Aktivasi Penuh MAP 13: POKJA AKP (Akses dan Keberlanjutan Pelayanan)
+
+Sebagai wujud kepatuhan terhadap Standar Akreditasi Rumah Sakit Kementerian Kesehatan Republik Indonesia (STARKES) pada bab **Akses dan Keberlanjutan Pelayanan (AKP)**, **MAP 13 (DUNIA 8)** telah diaktifkan secara penuh. Pokja ini membekali seluruh tenaga medis, keperawatan, dan staf klinis RSAU dr. Esnawan Antariksa dengan pemahaman mendalam mengenai alur akses faskes, triase gawat darurat, kriteria rawat intensif (ICU), tata kelola penundaan layanan, rujukan SISRUTE, perencanaan pemulangan (*discharge planning*), hak pulang atas permintaan sendiri (PAPS), serta prosedur pengamanan pasien melarikan diri (*absconding*).
+
+---
+
+### 📋 1. Kurikulum Edukatif 8 Terminal Kuis Pokja AKP (`AKP_QUIZ_BANK`)
+Seluruh materi kuis disusun dengan opsi jawaban yang seimbang, berbobot, berbasis skenario riil lapangan, dan terverifikasi standar STARKES Kemenkes RI:
+1. **Pos 1: Skrining Visual & Kategori Triase IGD**:
+   - Pasien yang tiba di Instalasi Gawat Darurat (IGD) diskrining cepat oleh perawat/petugas triase bersertifikat untuk memilah derajat keparahan dan prioritas penanganan menggunakan sistem kode warna internasional (ATS/ESI):
+     - **Merah (Resusitasi/Gawat Darurat)**: Kondisi mengancam nyawa atau jalan napas yang memerlukan intervensi medis seketika tanpa penundaan.
+     - **Kuning (Darurat Tidak Gawat)**: Kondisi serius dengan potensi perburukan yang memerlukan tindakan segera dalam waktu singkat.
+     - **Hijau (Tidak Gawat Tidak Darurat)**: Kondisi ringan yang stabil dan dapat ditangani pada jalur rawat jalan biasa.
+     - **Hitam (Meninggal Dunia / Death on Arrival)**: Pasien datang dalam keadaan meninggal dunia dan diarahkan ke ruang jenazah untuk prosedur medikolegal.
+2. **Pos 2: Kriteria Masuk Intensive Care Unit (ICU)**:
+   - Rumah sakit menetapkan kriteria prioritas masuk ruang rawat intensif (ICU) guna memastikan pemanfaatan tempat tidur intensif tepat sasaran:
+     - **Prioritas 1 (Prioritas Utama)**: Pasien kritis tidak stabil yang memerlukan terapi intensif dan bantuan ventilasi mekanik, titrasi obat vasoaktif, atau pemantauan hemodinamik invasif kontinu (misal: syok septik, gagal napas akut).
+     - **Prioritas 2**: Pasien yang memerlukan pemantauan invasif canggih pascaoperasi bedah mayor.
+     - **Prioritas 3**: Pasien kritis dengan penyakit dasar berat atau prognosis buruk yang memerlukan terapi intensif untuk mengatasi penyakit akutnya namun tidak sampai intubasi.
+     - **Prioritas 4**: Pasien terminal dengan status DNR (*Do Not Resuscitate*) atau mati batang otak (bukan indikasi masuk ICU).
+3. **Pos 3: Tata Kelola & Edukasi Penundaan Pelayanan (*Delay in Care*)**:
+   - Sesuai standar STARKES AKP, bila terjadi penundaan pelayanan diagnostik, tindakan operasi, atau pengobatan melebihi waktu tunggu standar yang ditetapkan, staf wajib memberikan penjelasan transparan kepada pasien/keluarga mengenai:
+     - Alasan penyebab keterlambatan/penundaan pelayanan.
+     - Perkiraan durasi waktu hingga layanan dapat tersedia kembali.
+     - Opsi alternatif solusi yang dapat dipilih (misal: penjadwalan ulang, konsultasi ke dokter spesialis pengganti, atau rujukan).
+     - Penjelasan tersebut dicatat secara resmi pada lembar edukasi rekam medis.
+4. **Pos 4: Prosedur Rujukan Antarfaskes Eksternal Terintegrasi SISRUTE**:
+   - Pelaksanaan rujukan pasien ke fasyankes lain wajib mengikuti alur baku:
+     - Mengirim permohonan rujukan antarfaskes via aplikasi terintegrasi **SISRUTE (Sistem Informasi Rujukan Terintegrasi)** Kemenkes RI dan memastikan rumah sakit rujukan telah memberikan persetujuan/konfirmasi penerimaan (*accepted*).
+     - Pasien dalam kondisi terstabilisasi sebelum keberangkatan.
+     - Menggunakan ambulans standar lengkap dengan peralatan medis dan obat emergensi.
+     - Didampingi oleh staf medis/keperawatan yang kompeten sesuai derajat keparahan klinis pasien.
+     - Melakukan serah terima pasien dan berkas rekam medis menggunakan teknik komunikasi efektif format **SBAR**.
+5. **Pos 5: Rencana Pemulangan Pasien Terintegrasi (*Discharge Planning*)**:
+   - Proses perencanaan pemulangan pasien rawat inap terintegrasi (*integrated discharge planning*) wajib dimulai **sejak awal admisi rawat inap (dalam 24 jam pertama)** saat dokter penanggung jawab pelayanan (DPJP) dan perawat melakukan asesmen awal.
+   - Bertujuan untuk mengidentifikasi kebutuhan asuhan lanjutan di rumah, edukasi obat, nutrisi, alat bantu, transportasi, serta kesiapan keluarga merawat pasien pascarawat.
+6. **Pos 6: Batas Waktu Penyelesaian Ringkasan Pasien Pulang (Resume Medis)**:
+   - Ringkasan Pasien Pulang (Resume Medis) harus diselesaikan dan ditandatangani secara sah oleh DPJP **maksimal dalam kurun waktu 1x24 jam sejak pasien dinyatakan boleh pulang atau keluar dari rumah sakit**.
+   - Salinan resume medis wajib diserahkan kepada pasien/keluarga sebagai arsip kontrol dan rujukan tindak lanjut.
+7. **Pos 7: Hak Pulang Atas Permintaan Sendiri (PAPS / APS)**:
+   - Bila pasien/keluarga memutuskan menghentikan perawatan dan meminta pulang atas kehendak sendiri sebelum diizinkan DPJP:
+     - DPJP dan perawat wajib memberikan edukasi mendalam mengenai risiko medis, komplikasi penyakit, hingga bahaya kematian akibat penghentian pengobatan.
+     - Pasien/keluarga berhak menandatangani **Formulir Pernyataan Pulang Atas Permintaan Sendiri (PAPS)** resmi bermaterai/berkekuatan hukum.
+     - Pasien tetap dibekali resume medis sementara, resep obat pulang yang aman, dan edukasi fasilitas kesehatan terdekat jika kondisi darurat memburuk di rumah.
+8. **Pos 8: Tata Kelola & Respon Cepat Pasien Melarikan Diri (*Absconding Patient*)**:
+   - Jika pasien rawat inap meninggalkan ruang perawatan tanpa izin (*absconding/kabur*):
+     - Perawat jaga segera melakukan penyisiran dan pencarian internal di seluruh lingkungan bangsal dan rumah sakit.
+     - Melaporkan kejadian segera kepada Supervisor Keperawatan (MOD) dan petugas keamanan Rumah Sakit (Satpam / Satuan Pengamanan POM AU).
+     - Menghubungi pihak keluarga untuk mengonfirmasi keberadaan pasien.
+     - Mendokumentasikan seluruh kronologi pencarian secara terperinci pada lembar Catatan Perkembangan Pasien Terintegrasi (CPPT).
+
+---
+
+### 🎮 2. Desain Level MAP 13 (`AKP_LEVEL`)
+- **Visual & Atmosfer Biru Samudra & Sian Cerah**:
+  - Lantai platform ubin porselen biru samudra dengan lis aksen biru sian bercahaya (`accentFloor: #0369a1`, `accentBorder: #38bdf8`).
+  - Langit gradien biru samudra pekat (`#082f49` -> `#0284c7` -> `#7dd3fc`).
+  - Siluet gedung faskes dengan lambang palang medis biru sian bercahaya (`#7dd3fc`).
+  - Banner dinding koridor: `🚑 AKP: TRIASE IGD • KRITERIA ICU • RUJUKAN SISRUTE • DISCHARGE PLANNING • PAPS`.
+  - Gerbang finish surveyor berwarna biru samudra (`#0284c7`).
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6600 px x 540 px.
+  - 9 Platform koridor utama (Triase IGD & Area Skrining Visual, Koridor Prioritas Masuk ICU 1-4, Unit Edukasi Penundaan Layanan & Waktu Tunggu, Koridor Rujukan Antarfaskes SISRUTE, Ruang Discharge Planning Terintegrasi Ranap, Ruang Penyelesaian Resume Medis 1x24 Jam, Unit Konseling Pulang Permintaan Sendiri PAPS, Koridor Pengamanan Pasien Kabur POM AU, dan Exit Conference Surveyor POKJA AKP).
+  - 7 Platform bergerak vertikal dan horizontal.
+- **Kolektibel Khusus**:
+  - `kartu_triase_ats`: Kartu triase 4 strip warna vertikal berstandar IGD (Merah untuk resusitasi darurat, Kuning untuk darurat tidak gawat, Hijau untuk rawat jalan, dan Hitam untuk meninggal dunia) dengan lambang palang putih di bagian atas.
+  - `surat_rujukan_sisrute`: Lembar berkas rujukan antarfaskes terpadu dengan bingkai biru sian, header instansi, garis-garis teks resume kondisi medis, dan cap stempel resmi faskes biru di pojok kanan bawah.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`AKP_QUIZ_BANK`)**:
+  - 8 Pos QuizTerminal interaktif berstandar STARKES dengan opsi jawaban edukatif seimbang dan penjelasan komprehensif.
+
+---
+
+### ✅ 3. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_akp_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaAKP`.
+  - Berhasil mengaktifkan `currentLevel = AKP_LEVEL`, mengubah teks tombol menu menjadi `▶ MULAI TELUSUR MAP 13: POKJA AKP`, serta menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay AKP dengan render kanvas tanpa kendala.
+  - Membuka Pos 1 Kuis STARKES AKP, menjawab opsi B (Triase IGD Merah, Kuning, Hijau, Hitam), dan menerima umpan balik positif beserta penjelasan lengkap.
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur akses & kontinuitas pelayanan terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
 
 
