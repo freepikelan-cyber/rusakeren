@@ -2189,6 +2189,22 @@
             this.playQuizWrong();
         }
 
+        playScrubTick() {
+            if (this.muted || !this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(360, now);
+            osc.frequency.exponentialRampToValueAtTime(180, now + 0.05);
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+            osc.connect(gain);
+            gain.connect(this.masterGain);
+            osc.start(now);
+            osc.stop(now + 0.055);
+        }
+
         playMudSplash() {
             if (this.muted || !this.ctx) return;
             const now = this.ctx.currentTime;
@@ -6776,6 +6792,46 @@
                 };
             }
 
+            // Interactive Hand Scrubbing via Mouse / Touch Drag on Canvas
+            if (this.cuciCanvas) {
+                const onScrubStart = (e) => {
+                    this.cuci.isDragging = true;
+                    const rect = this.cuciCanvas.getBoundingClientRect();
+                    const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+                    this.cuci.lastDragX = clientX - rect.left;
+                    this.cuci.lastDragY = clientY - rect.top;
+                };
+
+                const onScrubMove = (e) => {
+                    if (!this.cuci.isDragging) return;
+                    const rect = this.cuciCanvas.getBoundingClientRect();
+                    const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                    const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
+                    const curX = clientX - rect.left;
+                    const curY = clientY - rect.top;
+                    const dist = Math.hypot(curX - this.cuci.lastDragX, curY - this.cuci.lastDragY);
+
+                    if (dist > 6) {
+                        this.cuci.animPhase += dist * 0.04;
+                        this.cuci.lastDragX = curX;
+                        this.cuci.lastDragY = curY;
+                    }
+                };
+
+                const onScrubEnd = () => {
+                    this.cuci.isDragging = false;
+                };
+
+                this.cuciCanvas.addEventListener("mousedown", onScrubStart);
+                window.addEventListener("mousemove", onScrubMove);
+                window.addEventListener("mouseup", onScrubEnd);
+
+                this.cuciCanvas.addEventListener("touchstart", onScrubStart, { passive: true });
+                window.addEventListener("touchmove", onScrubMove, { passive: true });
+                window.addEventListener("touchend", onScrubEnd);
+            }
+
             // Etika Batuk Step Buttons
             for (let i = 1; i <= 4; i++) {
                 const btnB = document.getElementById(`btnPpiBatukStep${i}`);
@@ -7010,6 +7066,9 @@
                 this.cuci.lastTickTime = now;
                 const maxH = (this.cuci.mode === "handwash") ? 6 : 4;
                 this.cuci.count++;
+                if (typeof sound !== "undefined" && sound.playScrubTick) {
+                    sound.playScrubTick();
+                }
                 if (this.cuci.count > maxH) {
                     this.cuci.count = 1;
                     this.cuci.step = (this.cuci.step % 11) + 1;
@@ -7067,16 +7126,94 @@
             const cardH = 190;
             const cardX = Math.floor((w - cardW) / 2);
             const cardY = 22;
+            const cardMidX = cardX + cardW / 2;
+            const cardMidY = cardY + cardH / 2;
 
             // Outer Glow & Shadow
             ctx.save();
             ctx.shadowColor = themeColor;
-            ctx.shadowBlur = 16;
+            ctx.shadowBlur = 18;
             ctx.fillStyle = "#091422";
             ctx.beginPath();
             ctx.roundRect(cardX, cardY, cardW, cardH, 16);
             ctx.fill();
             ctx.restore();
+
+            // Hitung Kinematika Gerak Tangan Berdasarkan Langkah Cuci Tangan
+            const phase = this.cuci.animPhase;
+            let handOffsetX = 0;
+            let handOffsetY = 0;
+            let handRot = 0;
+            let handScale = 1.15; // Skala diperbesar agar saat bergerak tidak tampak tepian kosong
+
+            switch (this.cuci.step) {
+                case 1: // Basahi tangan: Menadah air kran sambil bergoyang santai
+                    handOffsetX = Math.sin(phase * 4) * 11;
+                    handOffsetY = Math.cos(phase * 4) * 5;
+                    handRot = Math.sin(phase * 4) * 0.04;
+                    handScale = 1.15 + Math.sin(phase * 4) * 0.02;
+                    break;
+                case 2: // Tuang sabun: Gerak telapak menadah dan sedikit tertekan pompa
+                    handOffsetX = Math.sin(phase * 3) * 6;
+                    handOffsetY = Math.sin(phase * 6) * 8;
+                    handRot = Math.sin(phase * 3) * 0.03;
+                    handScale = 1.15;
+                    break;
+                case 3: // Telapak tangan (WHO 1): Gerak memutar sirkuler penuh kedua telapak
+                    handOffsetX = Math.cos(phase * 7) * 14;
+                    handOffsetY = Math.sin(phase * 7) * 9;
+                    handRot = Math.sin(phase * 7) * 0.07;
+                    handScale = 1.15 + Math.sin(phase * 14) * 0.02;
+                    break;
+                case 4: // Punggung tangan (WHO 2): Gerak menggesek maju-mundur serong
+                    handOffsetX = Math.sin(phase * 6.5) * 16;
+                    handOffsetY = Math.sin(phase * 6.5) * 8;
+                    handRot = Math.sin(phase * 6.5) * 0.08;
+                    handScale = 1.15;
+                    break;
+                case 5: // Sela-sela jari (WHO 3): Gerak menggesek cepat sela-sela jari bertaut
+                    handOffsetX = Math.sin(phase * 9.5) * 11;
+                    handOffsetY = Math.cos(phase * 9.5) * 6;
+                    handRot = Math.sin(phase * 9.5) * 0.05;
+                    handScale = 1.15 + Math.sin(phase * 19) * 0.025;
+                    break;
+                case 6: // Punggung jari mengunci (WHO 4): Gerak translasi mengait horizontal
+                    handOffsetX = Math.sin(phase * 7.5) * 15;
+                    handOffsetY = Math.cos(phase * 7.5) * 5;
+                    handRot = Math.sin(phase * 7.5) * 0.05;
+                    handScale = 1.15;
+                    break;
+                case 7: // Ibu jari memutar (WHO 5): Rotasi kuat mengelilingi ibu jari
+                    handOffsetX = Math.sin(phase * 6.5) * 10;
+                    handOffsetY = Math.cos(phase * 6.5) * 8;
+                    handRot = Math.sin(phase * 6.5) * 0.14; // Rotasi memutar terlihat jelas
+                    handScale = 1.15 + Math.cos(phase * 6.5) * 0.025;
+                    break;
+                case 8: // Ujung kuku di telapak (WHO 6): Putaran spiral konsentris kuncup kuku
+                    handOffsetX = Math.cos(phase * 9) * 12;
+                    handOffsetY = Math.sin(phase * 9) * 10;
+                    handRot = Math.sin(phase * 9) * 0.09;
+                    handScale = 1.15 + Math.sin(phase * 18) * 0.025;
+                    break;
+                case 9: // Bilas air: Sapuan lebar menggosok di bawah aliran air
+                    handOffsetX = Math.sin(phase * 5) * 15;
+                    handOffsetY = Math.cos(phase * 5) * 7;
+                    handRot = Math.sin(phase * 5) * 0.04;
+                    handScale = 1.15;
+                    break;
+                case 10: // Keringkan: Sapuan mengusap vertikal handuk/tisu
+                    handOffsetX = Math.cos(phase * 5.5) * 6;
+                    handOffsetY = Math.sin(phase * 5.5) * 14;
+                    handRot = Math.sin(phase * 5.5) * 0.045;
+                    handScale = 1.15;
+                    break;
+                case 11: // Tangan bersih siap aktivitas: Mengayun ceria & bernapas
+                    handOffsetX = Math.sin(phase * 3) * 5;
+                    handOffsetY = Math.sin(phase * 4) * 9;
+                    handRot = Math.sin(phase * 3) * 0.035;
+                    handScale = 1.15 + Math.sin(phase * 4) * 0.04;
+                    break;
+            }
 
             // Draw Real Hand Image (Clipped inside rounded rectangle)
             ctx.save();
@@ -7086,25 +7223,47 @@
 
             const img = this.cuciImages[this.cuci.step];
             if (img && img.complete && img.naturalWidth > 0) {
-                ctx.drawImage(img, cardX, cardY, cardW, cardH);
+                // Bayangan Gerak / Faint Motion Blur Ghosting
+                ctx.save();
+                ctx.globalAlpha = 0.28;
+                ctx.translate(cardMidX + handOffsetX * 0.4, cardMidY + handOffsetY * 0.4);
+                ctx.rotate(handRot * 0.5);
+                const ghostW = cardW * handScale;
+                const ghostH = cardH * handScale;
+                ctx.drawImage(img, -ghostW / 2, -ghostH / 2, ghostW, ghostH);
+                ctx.restore();
+
+                // Tangan Utama Bergerak Menggosok
+                ctx.save();
+                ctx.translate(cardMidX + handOffsetX, cardMidY + handOffsetY);
+                ctx.rotate(handRot);
+                const drawW = cardW * handScale;
+                const drawH = cardH * handScale;
+                ctx.drawImage(img, -drawW / 2, -drawH / 2, drawW, drawH);
+                ctx.restore();
             } else {
                 ctx.fillStyle = "#091422";
                 ctx.fillRect(cardX, cardY, cardW, cardH);
                 ctx.fillStyle = "#94a3b8";
                 ctx.font = "bold 12px sans-serif";
                 ctx.textAlign = "center";
-                ctx.fillText(`Memuat Ilustrasi Tangan ${this.cuci.step}...`, cardX + cardW / 2, cardY + cardH / 2);
+                ctx.fillText(`Memuat Ilustrasi Tangan ${this.cuci.step}...`, cardMidX, cardMidY);
             }
 
             // Top-left floating badge inside card
-            ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
+            ctx.fillStyle = "rgba(15, 23, 42, 0.88)";
             ctx.beginPath();
             ctx.roundRect(cardX + 10, cardY + 10, 115, 22, 6);
             ctx.fill();
+            ctx.strokeStyle = "rgba(56, 189, 248, 0.3)";
+            ctx.stroke();
             ctx.fillStyle = themeColor;
             ctx.font = "bold 10px sans-serif";
             ctx.textAlign = "left";
             ctx.fillText(`Langkah ${this.cuci.step} / 11`, cardX + 16, cardY + 25);
+
+            // Panah Panduan Gerakan Menggosok Interaktif
+            this.renderMotionGuide(ctx, cardMidX, cardMidY, phase, themeColor);
 
             ctx.restore();
 
@@ -7289,6 +7448,100 @@
                     ctx.lineWidth = 1.5;
                     ctx.stroke();
                 }
+            }
+            ctx.restore();
+        }
+
+        renderMotionGuide(ctx, cx, cy, phase, color) {
+            const step = this.cuci.step;
+            ctx.save();
+            if (step === 3 || step === 7 || step === 8) {
+                // Panah melingkar sirkuler berputar dinamis
+                const radius = (step === 8) ? 38 : (step === 7 ? 48 : 56);
+                const rotAngle = phase * 3.5;
+                ctx.translate(cx, cy);
+                ctx.rotate(rotAngle);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3.5;
+                ctx.lineCap = "round";
+                ctx.setLineDash([14, 8]);
+                ctx.beginPath();
+                ctx.arc(0, 0, radius, 0, Math.PI * 1.5);
+                ctx.stroke();
+
+                // Kepala panah berputar
+                ctx.setLineDash([]);
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                const ax = Math.cos(Math.PI * 1.5) * radius;
+                const ay = Math.sin(Math.PI * 1.5) * radius;
+                ctx.moveTo(ax - 9, ay - 5);
+                ctx.lineTo(ax + 3, ay);
+                ctx.lineTo(ax - 9, ay + 7);
+                ctx.closePath();
+                ctx.fill();
+            } else if (step === 4 || step === 6) {
+                // Panah geser bolak-balik horizontal / serong
+                const arrowOffset = Math.sin(phase * 6.5) * 20;
+                ctx.translate(cx, cy + (step === 4 ? -20 : 0));
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3.5;
+                ctx.lineCap = "round";
+                ctx.beginPath();
+                ctx.moveTo(-52, 0);
+                ctx.lineTo(52, 0);
+                ctx.stroke();
+
+                // Kepala panah ganda
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(42 + arrowOffset * 0.3, -6);
+                ctx.lineTo(56 + arrowOffset * 0.3, 0);
+                ctx.lineTo(42 + arrowOffset * 0.3, 6);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(-42 - arrowOffset * 0.3, -6);
+                ctx.lineTo(-56 - arrowOffset * 0.3, 0);
+                ctx.lineTo(-42 - arrowOffset * 0.3, 6);
+                ctx.fill();
+            } else if (step === 5) {
+                // Panah sela-sela jari berdenyut ke dalam
+                const pulse = Math.sin(phase * 9.5) * 8;
+                ctx.translate(cx, cy);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3;
+                ctx.lineCap = "round";
+                for (let dir = -1; dir <= 1; dir += 2) {
+                    ctx.beginPath();
+                    ctx.moveTo(dir * (44 + pulse), -16);
+                    ctx.lineTo(dir * (16 + pulse), 0);
+                    ctx.lineTo(dir * (44 + pulse), 16);
+                    ctx.stroke();
+                }
+            } else if (step === 10) {
+                // Panah usap vertikal handuk/tisu
+                const wipeY = Math.sin(phase * 5.5) * 20;
+                ctx.translate(cx + 80, cy);
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 3.5;
+                ctx.beginPath();
+                ctx.moveTo(0, -35);
+                ctx.lineTo(0, 35);
+                ctx.stroke();
+
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.moveTo(-6, wipeY - 6);
+                ctx.lineTo(0, wipeY - 14);
+                ctx.lineTo(6, wipeY - 6);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.moveTo(-6, wipeY + 6);
+                ctx.lineTo(0, wipeY + 14);
+                ctx.lineTo(6, wipeY + 6);
+                ctx.fill();
             }
             ctx.restore();
         }

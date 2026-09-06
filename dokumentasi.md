@@ -1388,6 +1388,11 @@ Berdasarkan tinjauan dan arahan pengguna, dilakukan tiga pemutakhiran besar pada
   9. **Langkah 9**: Bilas tangan dengan air mengalir hingga bersih tanpa sisa busa.
   10. **Langkah 10**: Keringkan tangan dengan handuk bersih sekali pakai atau tisu.
   11. **Langkah 11**: Tangan bersih, bebas kuman patogen, dan siap melayani pasien!
+- **Animasi Gerak Tangan Nyata (Kinematika Aktif)**:
+  - Tangan tidak lagi diam, melainkan **bergerak menggosok secara dinamis dan berirama** mengikuti aksi setiap langkah (gerakan sirkuler memutar untuk telapak dan kuku, gesekan menyilang serong untuk punggung tangan, shearing bertaut cepat untuk sela-sela jari, putaran rotasi kuat untuk ibu jari, dan usapan vertikal untuk pengeringan tisu).
+  - Dilengkapi efek *faint motion blur ghost trail* (bayangan gerak berkecepatan) yang membuat pergerakan terasa halus dan hidup.
+  - **Panah Petunjuk Gerak Interaktif (WHO Motion Guide)**: Menampilkan panah neon melingkar berputar (untuk langkah 3, 7, 8), panah bolak-balik berdenyut (langkah 4, 6), dan panah sela-sela bertaut (langkah 5) sebagai panduan visual arah menggosok.
+  - **Interaktivitas Usap Langsung**: Pemain dapat mengusap atau men-drag kursor mouse / layar sentuh smartphone pada kanvas cuci tangan untuk menggosok lebih cepat dengan respons akselerasi kinetik dan efek suara audio (*scrub audio tick*).
 - **Aksen Prosedural Dinamis**:
   - Aliran air kristal biru mengalir untuk langkah 1 dan 9.
   - Tetesan sabun cair dinamis untuk langkah 2.
