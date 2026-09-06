@@ -316,6 +316,93 @@
         </div>
     </div>
 
+    <!-- MODAL 1B: ABA-ABA TELUSUR (APAKAH ANDA SIAP?) -->
+    <div id="readyModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/90 backdrop-blur-md z-50 p-3 sm:p-4 overflow-y-auto hidden">
+        <div class="glass-panel max-w-lg w-full p-5 sm:p-7 rounded-3xl border-amber-400/50 text-center shadow-2xl relative overflow-hidden my-auto animate-fade-in">
+            <!-- Header Badge & Alert -->
+            <div class="flex items-center justify-center gap-2 mb-2.5">
+                <span class="px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-400/40 text-amber-300 text-[11px] font-bold tracking-wider uppercase flex items-center gap-1.5 shadow">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+                    ABA-ABA PERSIAPAN TELUSUR
+                </span>
+            </div>
+
+            <!-- Map Title & Mode Badge -->
+            <div class="text-4xl sm:text-5xl mb-1 filter drop-shadow-md" id="readyModalIcon">🦅</div>
+            <h2 id="readyModalMapTitle" class="text-xl sm:text-2xl font-black text-white tracking-tight">
+                MAP 1: POKJA TKRS
+            </h2>
+            <div id="readyModalSubtitle" class="text-[11px] sm:text-xs font-semibold text-sky-300 mt-0.5 mb-3">
+                Tata Kelola Rumah Sakit & Hospital Corporate Bylaws
+            </div>
+
+            <!-- Mode Badge & Briefing Card -->
+            <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 border border-slate-700/60 text-left space-y-2.5 mb-4 shadow-inner">
+                <div class="flex items-center justify-between border-b border-slate-700/60 pb-2">
+                    <span class="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase">MODEL MINI GAME:</span>
+                    <span id="readyModalModeBadge" class="px-2.5 py-0.5 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-extrabold border border-sky-400/30">
+                        🦅 FLAPPY BIRD RIDER
+                    </span>
+                </div>
+
+                <!-- Guidance & Mission -->
+                <div>
+                    <div class="text-[10px] sm:text-xs font-bold text-amber-300 uppercase tracking-wide flex items-center gap-1 mb-1">
+                        <span>🎯</span> MISI TELUSUR & RINTANGAN:
+                    </div>
+                    <p id="readyModalMissionText" class="text-xs text-slate-200 leading-relaxed">
+                        Tunggangi <strong>Burung Elang Dirgantara</strong> bersama Kapten Erik! Kepakkan sayap melewati pilar regulasi udara tanpa menabrak, dan masuki <strong>Radar Kuis Gate</strong> untuk menjawab verifikasi Corporate Bylaws!
+                    </p>
+                </div>
+
+                <!-- Controls Guide -->
+                <div class="p-2.5 rounded-xl bg-slate-950/80 border border-sky-500/20">
+                    <div class="text-[10px] font-bold text-sky-400 uppercase tracking-wide mb-1 flex items-center gap-1">
+                        <span>🎮</span> PANDUAN KONTROL:
+                    </div>
+                    <div id="readyModalControlsText" class="text-xs text-slate-300 font-medium leading-normal">
+                        Tekan <strong>[ SPASI ]</strong> atau <strong>[ TAP LAYAR / TOMBOL KEPAK ]</strong> untuk mengepakkan sayap elang.
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Big Question -->
+            <div class="py-2.5 px-3 rounded-2xl bg-gradient-to-r from-amber-500/20 via-yellow-500/15 to-amber-500/20 border border-amber-400/50 mb-4 shadow-md">
+                <div class="text-[11px] text-amber-200/90 font-bold uppercase tracking-wider">KONFIRMASI KESIAPAN TELUSUR</div>
+                <div class="text-base sm:text-lg font-black text-amber-300 mt-0.5 flex items-center justify-center gap-1.5">
+                    <span>⚡</span> Apakah Anda siap memulai sekarang?
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="space-y-2">
+                <button id="btnConfirmReady" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-base sm:text-lg shadow-xl shadow-emerald-500/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <span>🚀</span> SAYA SIAP, MULAI SEKARANG! ▶
+                </button>
+                <div class="flex gap-2">
+                    <button id="btnReadyChangeMap" class="glass-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-slate-200 hover:text-white flex items-center justify-center gap-1">
+                        <span>🗺️</span> Ganti Map
+                    </button>
+                    <button id="btnReadyBackHome" class="glass-btn flex-1 py-2.5 px-3 rounded-xl text-xs font-bold text-slate-300 hover:text-white flex items-center justify-center gap-1">
+                        <span>🏠</span> Menu Utama
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COUNTDOWN ABA-ABA OVERLAY -->
+    <div id="readyCountdownOverlay" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/50 backdrop-blur-sm z-50 pointer-events-none hidden">
+        <div class="p-8 sm:p-10 rounded-3xl bg-slate-900/95 border-2 border-amber-400 text-center shadow-2xl">
+            <div id="readyCountdownText" class="text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 font-mono tracking-tight animate-pulse">
+                3
+            </div>
+            <div id="readyCountdownSub" class="text-xs sm:text-sm font-black text-sky-300 uppercase tracking-widest mt-2">
+                BERSIAP-SIAP...
+            </div>
+        </div>
+    </div>
+
     <!-- MODAL 2: INTERACTIVE QUIZ TERMINAL (POS AKREDITASI TKRS) -->
     <div id="quizModal" class="absolute inset-0 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg z-50 p-2 sm:p-4 overflow-y-auto hidden">
         <div class="glass-panel max-w-xl w-full max-h-[92vh] sm:max-h-[88vh] rounded-2xl sm:rounded-3xl border-sky-400/40 shadow-2xl flex flex-col overflow-hidden relative my-auto">
@@ -3300,6 +3387,7 @@
 
     const GAME_STATE = {
         MENU: "menu",
+        READY: "ready",
         PLAYING: "playing",
         QUIZ: "quiz",
         TAKESHI_CHALLENGE: "takeshi_challenge",
@@ -8580,6 +8668,183 @@
 
     window.addEventListener("resize", resizeCanvas);
 
+    function openReadyModal(pokjaId) {
+        if (pokjaId) {
+            setPokja(pokjaId);
+        }
+
+        // Hide other modals
+        document.getElementById("menuModal")?.classList.add("hidden");
+        document.getElementById("pokjaSelectModal")?.classList.add("hidden");
+        document.getElementById("assessmentModal")?.classList.add("hidden");
+        document.getElementById("quizModal")?.classList.add("hidden");
+        document.getElementById("howToModal")?.classList.add("hidden");
+        document.getElementById("takeshiOverlayBanner")?.classList.add("hidden");
+        document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
+
+        const readyModal = document.getElementById("readyModal");
+        if (!readyModal) {
+            restartGame();
+            return;
+        }
+
+        const iconEl = document.getElementById("readyModalIcon");
+        const titleEl = document.getElementById("readyModalMapTitle");
+        const subtitleEl = document.getElementById("readyModalSubtitle");
+        const badgeEl = document.getElementById("readyModalModeBadge");
+        const missionEl = document.getElementById("readyModalMissionText");
+        const controlsEl = document.getElementById("readyModalControlsText");
+
+        const mode = (currentLevel && currentLevel.gameMode) ? currentLevel.gameMode : "PLATFORMER";
+        const mapNameClean = currentLevel.name.includes("•") ? currentLevel.name.split("•")[1].trim() : currentLevel.name;
+
+        if (titleEl) titleEl.innerText = `${currentLevel.shortName}: ${mapNameClean}`;
+        if (subtitleEl) subtitleEl.innerText = "Standar Akreditasi Rumah Sakit Kemenkes RI (STARKES) • RSAU dr. Esnawan Antariksa";
+
+        if (mode === "FLAPPY_GLIDER") {
+            if (iconEl) iconEl.innerText = "🦅";
+            if (badgeEl) {
+                badgeEl.innerText = "🦅 FLAPPY BIRD RIDER";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-sky-500/20 text-sky-300 text-xs font-extrabold border border-sky-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = "Tunggangi <strong>Burung Elang Dirgantara</strong> bersama Kapten Erik! Kepakkan sayap melewati celah pilar regulasi udara tanpa menabrak, dan masuki <strong>Radar Kuis Gate</strong> untuk verifikasi standar Corporate Bylaws!";
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Tekan <strong>[ SPASI ]</strong> atau <strong>[ TAP LAYAR / TOMBOL KEPAK ]</strong> untuk mengepakkan sayap elang ke atas.";
+            }
+        } else if (mode === "MOTO_RUNNER") {
+            if (iconEl) iconEl.innerText = "🏍️";
+            if (badgeEl) {
+                badgeEl.innerText = "🏍️ MOTO PATROL RUNNER";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-extrabold border border-emerald-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = "Kendarai <strong>Motor Patroli Medis RSAU</strong>! Lompati tumpahan B3, kerucut & barikade K3, serta terobos pos <strong>Drive-Thru Checkpoint SI IMUT</strong> untuk menjawab kuis mutu!";
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Tekan <strong>[ SPASI ]</strong> atau <strong>[ TAP LAYAR / TOMBOL LOMPAT ]</strong> untuk melompat di atas motor patroli.";
+            }
+        } else if (currentLevel.id === "MRMIK") {
+            if (iconEl) iconEl.innerText = "🍄";
+            if (badgeEl) {
+                badgeEl.innerText = "🍄 MARIO BROS RETRO (KHUSUS)";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 text-xs font-extrabold border border-emerald-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = "Format <strong>Retro Platformer Mario Bros (Satu-satunya di Game!)</strong>: Melompat di atas balok bata, pipa SIMRS, dan platform rekam medis untuk menelusuri RME, Hak Akses PPA, Retensi 3 Tahun, dan KLPCM!";
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Gunakan tombol <strong>[ ◄ / ► / A-D ]</strong> untuk berjalan, dan <strong>[ ▲ / W / SPASI / TOMBOL LOMPAT ]</strong> untuk melompat.";
+            }
+        } else if (currentLevel.id === "SKP") {
+            if (iconEl) iconEl.innerText = "🩺";
+            if (badgeEl) {
+                badgeEl.innerText = "🏃 TELUSUR SASARAN KESELAMATAN";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 text-xs font-extrabold border border-indigo-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri 6 Sasaran Keselamatan Pasien, mengumpulkan 5 warna gelang identifikasi, dan memverifikasi 7 Prinsip Benar Pemberian Obat!";
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Gunakan tombol <strong>[ ◄ / ► / A-D ]</strong> untuk berjalan, dan <strong>[ ▲ / W / SPASI / TOMBOL LOMPAT ]</strong> untuk melompat.";
+            }
+        } else if (currentLevel.id === "MFK") {
+            if (iconEl) iconEl.innerText = "🚒";
+            if (badgeEl) {
+                badgeEl.innerText = "🏃 TELUSUR FASILITAS & K3";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-orange-500/20 text-orange-300 text-xs font-extrabold border border-orange-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = "Telusuri fasilitas keselamatan, proteksi kebakaran APAR & Hydrant, serta 8 kode darurat rumah sakit bersama <strong>Kapten RUSA ERIK</strong>!";
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Gunakan tombol <strong>[ ◄ / ► / A-D ]</strong> untuk berjalan, dan <strong>[ ▲ / W / SPASI / TOMBOL LOMPAT ]</strong> untuk melompat.";
+            }
+        } else {
+            if (iconEl) iconEl.innerText = "🏃";
+            if (badgeEl) {
+                badgeEl.innerText = "🏃 TELUSUR AKREDITASI";
+                badgeEl.className = "px-2.5 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 text-xs font-extrabold border border-indigo-400/30";
+            }
+            if (missionEl) {
+                missionEl.innerHTML = `Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri pos akreditasi ${currentLevel.shortName}, kumpulkan berkas resmi, dan jawab kuis verifikasi surveyor!`;
+            }
+            if (controlsEl) {
+                controlsEl.innerHTML = "Gunakan tombol <strong>[ ◄ / ► / A-D ]</strong> untuk berjalan, dan <strong>[ ▲ / W / SPASI / TOMBOL LOMPAT ]</strong> untuk melompat.";
+            }
+        }
+
+        // Place player safely at starting point so background looks alive and calm
+        player.reset(currentLevel.playerStart.x, currentLevel.playerStart.y);
+        camera.x = 0;
+        camera.currentLookahead = 50;
+        updateHud();
+
+        readyModal.classList.remove("hidden");
+        currentState = GAME_STATE.READY;
+    }
+
+    let readyCountdownInterval = null;
+    function startCountdownAndPlay() {
+        if (readyCountdownInterval) {
+            clearInterval(readyCountdownInterval);
+            readyCountdownInterval = null;
+        }
+
+        const readyModal = document.getElementById("readyModal");
+        if (readyModal) readyModal.classList.add("hidden");
+
+        sound.initContext();
+
+        // Reset game state
+        player.reset(currentLevel.playerStart.x, currentLevel.playerStart.y);
+        camera.x = 0;
+        camera.currentLookahead = 50;
+        player.lives = 3;
+        quizVerifiedCount = 0;
+        docsCollectedCount = 0;
+        totalScore = 0;
+        currentLevel.terminals.forEach(t => { t.isAnswered = false; t.isCorrect = false; });
+        currentLevel.collectibles.forEach(c => { c.collected = false; });
+        updateHud();
+
+        // Aba-aba Countdown Overlay
+        const overlay = document.getElementById("readyCountdownOverlay");
+        const countText = document.getElementById("readyCountdownText");
+        const subText = document.getElementById("readyCountdownSub");
+
+        if (overlay && countText) {
+            overlay.classList.remove("hidden");
+            let count = 3;
+            countText.innerText = count;
+            if (subText) subText.innerText = "BERSIAP-SIAP...";
+            sound.playJump();
+
+            readyCountdownInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countText.innerText = count;
+                    if (subText) subText.innerText = "BERSIAP-SIAP...";
+                    sound.playJump();
+                } else if (count === 0) {
+                    countText.innerText = "MULAI!";
+                    if (subText) subText.innerText = "TELUSUR DIMULAI!";
+                    sound.playDoc();
+                } else {
+                    clearInterval(readyCountdownInterval);
+                    readyCountdownInterval = null;
+                    overlay.classList.add("hidden");
+                    startTime = performance.now();
+                    currentState = GAME_STATE.PLAYING;
+                }
+            }, 500);
+        } else {
+            startTime = performance.now();
+            currentState = GAME_STATE.PLAYING;
+        }
+    }
+
     function restartGame() {
         player.reset(currentLevel.playerStart.x, currentLevel.playerStart.y);
         camera.x = 0;
@@ -9091,16 +9356,18 @@
                 if (badgeTKRS) { badgeTKRS.innerText = "🦅 BIRD RIDER AKTIF"; badgeTKRS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 text-[9px] font-bold"; }
             }
         }
-
-        if (currentState === GAME_STATE.PLAYING) {
-            restartGame();
-        }
     }
 
     // UI Buttons Binding
     const bindTab = (id, pokja) => {
         const el = document.getElementById(id);
-        if (el) el.onclick = () => setPokja(pokja);
+        if (el) el.onclick = () => {
+            if (currentState === GAME_STATE.PLAYING) {
+                openReadyModal(pokja);
+            } else {
+                setPokja(pokja);
+            }
+        };
     };
     bindTab("tabSelectTKRS", "TKRS");
     bindTab("tabSelectPMKP", "PMKP");
@@ -9125,150 +9392,76 @@
             document.getElementById("pokjaSelectModal").classList.remove("hidden");
         };
     }
-    document.getElementById("selectPokjaTKRS").onclick = () => {
-        setPokja("TKRS");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaPMKP").onclick = () => {
-        setPokja("PMKP");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaSKP").onclick = () => {
-        setPokja("SKP");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaMFK").onclick = () => {
-        setPokja("MFK");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaPROGNAS").onclick = () => {
-        setPokja("PROGNAS");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaPAP").onclick = () => {
-        setPokja("PAP");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaPPI").onclick = () => {
-        setPokja("PPI");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
-    document.getElementById("selectPokjaKPS").onclick = () => {
-        setPokja("KPS");
-        document.getElementById("pokjaSelectModal").classList.add("hidden");
-    };
+    document.getElementById("selectPokjaTKRS").onclick = () => openReadyModal("TKRS");
+    document.getElementById("selectPokjaPMKP").onclick = () => openReadyModal("PMKP");
+    document.getElementById("selectPokjaSKP").onclick = () => openReadyModal("SKP");
+    document.getElementById("selectPokjaMFK").onclick = () => openReadyModal("MFK");
+    document.getElementById("selectPokjaPROGNAS").onclick = () => openReadyModal("PROGNAS");
+    document.getElementById("selectPokjaPAP").onclick = () => openReadyModal("PAP");
+    document.getElementById("selectPokjaPPI").onclick = () => openReadyModal("PPI");
+    document.getElementById("selectPokjaKPS").onclick = () => openReadyModal("KPS");
     const selectMRMIK = document.getElementById("selectPokjaMRMIK");
-    if (selectMRMIK) {
-        selectMRMIK.onclick = () => {
-            setPokja("MRMIK");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectMRMIK) selectMRMIK.onclick = () => openReadyModal("MRMIK");
     const selectPPK = document.getElementById("selectPokjaPPK");
-    if (selectPPK) {
-        selectPPK.onclick = () => {
-            setPokja("PPK");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectPPK) selectPPK.onclick = () => openReadyModal("PPK");
     const selectHPK = document.getElementById("selectPokjaHPK");
-    if (selectHPK) {
-        selectHPK.onclick = () => {
-            setPokja("HPK");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectHPK) selectHPK.onclick = () => openReadyModal("HPK");
     const selectPP = document.getElementById("selectPokjaPP");
-    if (selectPP) {
-        selectPP.onclick = () => {
-            setPokja("PP");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectPP) selectPP.onclick = () => openReadyModal("PP");
     const selectAKP = document.getElementById("selectPokjaAKP");
-    if (selectAKP) {
-        selectAKP.onclick = () => {
-            setPokja("AKP");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectAKP) selectAKP.onclick = () => openReadyModal("AKP");
     const selectPKPO = document.getElementById("selectPokjaPKPO");
-    if (selectPKPO) {
-        selectPKPO.onclick = () => {
-            setPokja("PKPO");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectPKPO) selectPKPO.onclick = () => openReadyModal("PKPO");
     const selectKE = document.getElementById("selectPokjaKE");
-    if (selectKE) {
-        selectKE.onclick = () => {
-            setPokja("KE");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectKE) selectKE.onclick = () => openReadyModal("KE");
     const selectETIK = document.getElementById("selectPokjaETIK");
-    if (selectETIK) {
-        selectETIK.onclick = () => {
-            setPokja("ETIK");
-            document.getElementById("pokjaSelectModal").classList.add("hidden");
-        };
-    }
+    if (selectETIK) selectETIK.onclick = () => openReadyModal("ETIK");
+
     document.getElementById("btnNextPokja").onclick = () => {
-        if (currentLevel.id === "TKRS") {
-            setPokja("PMKP");
-        } else if (currentLevel.id === "PMKP") {
-            setPokja("SKP");
-        } else if (currentLevel.id === "SKP") {
-            setPokja("MFK");
-        } else if (currentLevel.id === "MFK") {
-            setPokja("PROGNAS");
-        } else if (currentLevel.id === "PROGNAS") {
-            setPokja("PAP");
-        } else if (currentLevel.id === "PAP") {
-            setPokja("PPI");
-        } else if (currentLevel.id === "PPI") {
-            setPokja("KPS");
-        } else if (currentLevel.id === "KPS") {
-            setPokja("MRMIK");
-        } else if (currentLevel.id === "MRMIK") {
-            setPokja("PPK");
-        } else if (currentLevel.id === "PPK") {
-            setPokja("HPK");
-        } else if (currentLevel.id === "HPK") {
-            setPokja("PP");
-        } else if (currentLevel.id === "PP") {
-            setPokja("AKP");
-        } else if (currentLevel.id === "AKP") {
-            setPokja("PKPO");
-        } else if (currentLevel.id === "PKPO") {
-            setPokja("KE");
-        } else if (currentLevel.id === "KE") {
-            setPokja("ETIK");
-        } else {
-            setPokja("TKRS");
-        }
-        restartGame();
+        let nextId = "PMKP";
+        if (currentLevel.id === "TKRS") nextId = "PMKP";
+        else if (currentLevel.id === "PMKP") nextId = "SKP";
+        else if (currentLevel.id === "SKP") nextId = "MFK";
+        else if (currentLevel.id === "MFK") nextId = "PROGNAS";
+        else if (currentLevel.id === "PROGNAS") nextId = "PAP";
+        else if (currentLevel.id === "PAP") nextId = "PPI";
+        else if (currentLevel.id === "PPI") nextId = "KPS";
+        else if (currentLevel.id === "KPS") nextId = "MRMIK";
+        else if (currentLevel.id === "MRMIK") nextId = "PPK";
+        else if (currentLevel.id === "PPK") nextId = "HPK";
+        else if (currentLevel.id === "HPK") nextId = "PP";
+        else if (currentLevel.id === "PP") nextId = "AKP";
+        else if (currentLevel.id === "AKP") nextId = "PKPO";
+        else if (currentLevel.id === "PKPO") nextId = "KE";
+        else if (currentLevel.id === "KE") nextId = "ETIK";
+        else nextId = "TKRS";
+
+        openReadyModal(nextId);
     };
 
     document.getElementById("btnPlayTKRS").onclick = () => {
         sound.initContext();
-        restartGame();
+        openReadyModal(currentLevel ? currentLevel.id : "TKRS");
     };
-    document.getElementById("btnRestartTKRS").onclick = () => restartGame();
+    document.getElementById("btnRestartTKRS").onclick = () => openReadyModal(currentLevel.id);
     document.getElementById("btnBackToMenu").onclick = () => {
         document.getElementById("assessmentModal").classList.add("hidden");
         document.getElementById("takeshiOverlayBanner").classList.add("hidden");
+        document.getElementById("readyModal")?.classList.add("hidden");
         document.getElementById("menuModal").classList.remove("hidden");
         currentState = GAME_STATE.MENU;
     };
     document.getElementById("btnOpenPokjaSelect").onclick = () => {
+        if (currentState === GAME_STATE.PLAYING) currentState = GAME_STATE.PAUSED;
         document.getElementById("pokjaSelectModal").classList.remove("hidden");
     };
     document.getElementById("btnPokjaList").onclick = () => {
+        if (currentState === GAME_STATE.PLAYING) currentState = GAME_STATE.PAUSED;
         document.getElementById("pokjaSelectModal").classList.remove("hidden");
     };
     document.getElementById("btnClosePokjaSelect").onclick = () => {
         document.getElementById("pokjaSelectModal").classList.add("hidden");
+        if (currentState === GAME_STATE.PAUSED) currentState = GAME_STATE.PLAYING;
     };
     document.getElementById("btnOpenHowTo").onclick = () => {
         document.getElementById("howToModal").classList.remove("hidden");
@@ -9282,12 +9475,33 @@
     };
     document.getElementById("btnPauseToggle").onclick = () => togglePause();
 
+    // Ready Confirmation Modal Action Listeners
+    const btnConfirmReady = document.getElementById("btnConfirmReady");
+    if (btnConfirmReady) {
+        btnConfirmReady.onclick = () => startCountdownAndPlay();
+    }
+    const btnReadyChangeMap = document.getElementById("btnReadyChangeMap");
+    if (btnReadyChangeMap) {
+        btnReadyChangeMap.onclick = () => {
+            document.getElementById("readyModal")?.classList.add("hidden");
+            document.getElementById("pokjaSelectModal")?.classList.remove("hidden");
+        };
+    }
+    const btnReadyBackHome = document.getElementById("btnReadyBackHome");
+    if (btnReadyBackHome) {
+        btnReadyBackHome.onclick = () => {
+            document.getElementById("readyModal")?.classList.add("hidden");
+            document.getElementById("menuModal")?.classList.remove("hidden");
+            currentState = GAME_STATE.MENU;
+        };
+    }
+
     // Evaluasi Terhenti Modal Action Listeners
     const btnUlangiTelusur = document.getElementById("btnUlangiTelusur");
     if (btnUlangiTelusur) {
         btnUlangiTelusur.onclick = () => {
             document.getElementById("evaluasiTerhentiModal")?.classList.add("hidden");
-            restartGame();
+            openReadyModal(currentLevel.id);
         };
     }
     const btnEvaluasiPilihMap = document.getElementById("btnEvaluasiPilihMap");
