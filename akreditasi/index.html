@@ -214,9 +214,9 @@
 
             <!-- Action: Jump -->
             <div class="pointer-events-auto">
-                <button id="btnJump" class="touch-control w-20 h-20 rounded-3xl bg-gradient-to-tr from-sky-600 to-teal-500 border border-sky-300/40 backdrop-blur-md flex flex-col items-center justify-center text-xl shadow-2xl active:scale-95 text-slate-950 font-bold" aria-label="Lompat">
-                    <span>▲</span>
-                    <span class="text-[10px] uppercase font-extrabold tracking-widest mt-0.5">Lompat</span>
+                <button id="btnJump" class="touch-control w-20 h-20 rounded-3xl bg-gradient-to-tr from-sky-600 to-teal-500 border border-sky-300/40 backdrop-blur-md flex flex-col items-center justify-center text-xl shadow-2xl active:scale-95 text-slate-950 font-bold" aria-label="Aksi Game">
+                    <span id="btnJumpIcon">▲</span>
+                    <span id="btnJumpLabel" class="text-[10px] uppercase font-extrabold tracking-widest mt-0.5">Lompat</span>
                 </button>
             </div>
         </div>
@@ -3821,6 +3821,22 @@
             input.jumpReleased = true;
             input.jumpHeld = false;
         });
+
+        // Direct Canvas Pointer / Tap Support for Flappy Glider & Moto Runner
+        const canvasElem = document.getElementById("gameCanvas");
+        if (canvasElem) {
+            canvasElem.addEventListener("pointerdown", (e) => {
+                sound.initContext();
+                if (currentState === GAME_STATE.PLAYING) {
+                    input.jumpPressed = true;
+                    input.jumpHeld = true;
+                }
+            });
+            canvasElem.addEventListener("pointerup", () => {
+                input.jumpReleased = true;
+                input.jumpHeld = false;
+            });
+        }
     }
 
     /* ==========================================================================
@@ -3844,6 +3860,12 @@
             this.lives = 3;
             this.isDead = false;
             this.savedHospitalPos = null;
+
+            // Multi-Genre Adaptive Properties
+            this.flightAngle = 0;
+            this.bikePitch = 0;
+            this.wheelRot = 0;
+            this.invulnerableTimer = 0;
         }
 
         reset(x, y) {
@@ -3855,11 +3877,27 @@
             this.isGrounded = false;
             this.isDead = false;
             this.runCycle = 0;
+            this.flightAngle = 0;
+            this.bikePitch = 0;
+            this.wheelRot = 0;
+            this.invulnerableTimer = 0;
         }
 
         update(platforms, movingPlatforms, deathY) {
             if (this.isDead) return;
+            if (this.invulnerableTimer > 0) this.invulnerableTimer--;
 
+            const mode = (currentLevel && currentLevel.gameMode) ? currentLevel.gameMode : "PLATFORMER";
+
+            if (mode === "FLAPPY_GLIDER") {
+                this.updateFlappyGlider(deathY);
+                return;
+            } else if (mode === "MOTO_RUNNER") {
+                this.updateMotoRunner(deathY);
+                return;
+            }
+
+            // --- STANDARD PLATFORMER PHYSICS (MAP 3-16) ---
             // 1. Horizontal Movement
             if (input.left && !input.right) {
                 this.vx -= PHYSICS.acceleration;
@@ -3973,6 +4011,163 @@
             }
         }
 
+        updateFlappyGlider(deathY) {
+            // Auto horizontal cruise with responsive steering
+            let targetVx = 4.0;
+            if (input.right) targetVx = 5.4;
+            else if (input.left) targetVx = 2.4;
+            this.vx += (targetVx - this.vx) * 0.1;
+            this.x += this.vx;
+            this.facing = 1;
+
+            // Flap / Thrust
+            if (input.jumpPressed) {
+                this.vy = -6.4;
+                input.jumpPressed = false;
+                sound.playJump();
+                createParticles(this.x - 6, this.y + this.height * 0.6, "#38bdf8", 4);
+            }
+            if (input.jumpReleased) {
+                if (this.vy < -2.5) this.vy *= 0.65;
+                input.jumpReleased = false;
+            }
+
+            // Air Gravity
+            this.vy += 0.28;
+            if (this.vy > 7.5) this.vy = 7.5;
+            this.y += this.vy;
+
+            // Dynamic aerodynamic tilt angle
+            const targetAngle = Math.max(-0.45, Math.min(0.65, this.vy * 0.08));
+            this.flightAngle += (targetAngle - this.flightAngle) * 0.2;
+
+            // Ceiling radar limit
+            if (this.y < 20) {
+                this.y = 20;
+                this.vy = 0;
+            }
+
+            // Floor boundary crash
+            if (this.y + this.height > (deathY || 515)) {
+                this.die();
+                return;
+            }
+
+            // Flappy Pillars collision
+            if (currentLevel.flappyPillars && this.invulnerableTimer <= 0) {
+                for (const p of currentLevel.flappyPillars) {
+                    // Check upper pillar
+                    if (this.checkOverlap(this.x, this.y, this.width, this.height, p.x, 0, p.w, p.gapTop)) {
+                        this.takePillarHit();
+                        break;
+                    }
+                    // Check lower pillar
+                    if (this.checkOverlap(this.x, this.y, this.width, this.height, p.x, p.gapBottom, p.w, 540 - p.gapBottom)) {
+                        this.takePillarHit();
+                        break;
+                    }
+                }
+            }
+
+            // Thruster particle trail
+            if (Math.random() < 0.3) {
+                createParticles(this.x - 8, this.y + this.height * 0.65, "#7dd3fc", 1);
+            }
+        }
+
+        takePillarHit() {
+            this.invulnerableTimer = 60;
+            this.lives--;
+            updateHud();
+            sound.playQuizWrong();
+            createParticles(this.x + this.width / 2, this.y + this.height / 2, "#f43f5e", 14);
+            createFloatingText("-1 NYAWA!", this.x, this.y - 20, "#f43f5e");
+            this.vy = -3.5;
+            this.x -= 30;
+            if (this.lives <= 0) {
+                this.die();
+            }
+        }
+
+        updateMotoRunner(deathY) {
+            // High-speed road cruising
+            let targetVx = 6.2;
+            if (input.right) targetVx = 8.5;
+            else if (input.left) targetVx = 3.4;
+            this.vx += (targetVx - this.vx) * 0.12;
+            this.x += this.vx;
+            this.facing = 1;
+
+            const roadY = 390;
+
+            // Jump
+            if (input.jumpPressed) {
+                input.jumpPressed = false;
+                if (this.isGrounded) {
+                    this.vy = -10.5;
+                    this.isGrounded = false;
+                    sound.playJump();
+                    createParticles(this.x + 10, this.y + this.height, "#fbbf24", 5);
+                }
+            }
+
+            // Air & ground physics
+            if (!this.isGrounded) {
+                this.vy += 0.48;
+                if (this.vy > 12) this.vy = 12;
+                this.y += this.vy;
+
+                if (this.y >= roadY) {
+                    this.y = roadY;
+                    this.vy = 0;
+                    this.isGrounded = true;
+                    createParticles(this.x + this.width / 2, this.y + this.height, "#94a3b8", 4);
+                }
+            } else {
+                this.y = roadY;
+                this.vy = 0;
+            }
+
+            // Wheel rotation & bike pitch
+            this.wheelRot += this.vx * 0.12;
+            if (!this.isGrounded) {
+                const targetPitch = Math.max(-0.25, Math.min(0.25, this.vy * 0.03));
+                this.bikePitch += (targetPitch - this.bikePitch) * 0.15;
+            } else {
+                this.bikePitch *= 0.8;
+            }
+
+            // Exhaust smoke
+            if (Math.random() < 0.35) {
+                createParticles(this.x - 14, this.y + this.height - 8, "#cbd5e1", 1);
+            }
+
+            // Obstacle collision
+            if (currentLevel.motoObstacles && this.invulnerableTimer <= 0) {
+                for (const obs of currentLevel.motoObstacles) {
+                    if (this.checkOverlap(this.x + 8, this.y + 10, this.width - 16, this.height - 10, obs.x, obs.y, obs.w, obs.h)) {
+                        this.takeMotoHit(obs);
+                        break;
+                    }
+                }
+            }
+        }
+
+        takeMotoHit(obs) {
+            this.invulnerableTimer = 60;
+            this.lives--;
+            updateHud();
+            sound.playQuizWrong();
+            createParticles(this.x + this.width / 2, this.y + this.height / 2, "#f97316", 14);
+            createFloatingText(obs.name ? "AWAS " + obs.name + "!" : "-1 NYAWA!", this.x, this.y - 20, "#f97316");
+            this.vy = -5.0;
+            this.isGrounded = false;
+            this.x -= 30;
+            if (this.lives <= 0) {
+                this.die();
+            }
+        }
+
         die() {
             if (this.isDead) return;
             this.isDead = true;
@@ -3994,6 +4189,17 @@
         }
 
         draw(ctx) {
+            const mode = (currentLevel && currentLevel.gameMode) ? currentLevel.gameMode : "PLATFORMER";
+
+            if (mode === "FLAPPY_GLIDER") {
+                this.drawFlappyGlider(ctx);
+                return;
+            } else if (mode === "MOTO_RUNNER") {
+                this.drawMotoRunner(ctx);
+                return;
+            }
+
+            // Standard Platformer draw
             ctx.save();
             const cx = this.x + this.width / 2;
             const cy = this.y + this.height;
@@ -4024,6 +4230,277 @@
                 ctx.fillRect(-this.width / 2, -this.height + bob, this.width, this.height);
             }
 
+            ctx.restore();
+        }
+
+        drawFlappyGlider(ctx) {
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height / 2;
+            ctx.translate(cx, cy);
+            ctx.rotate(this.flightAngle);
+
+            // Invulnerability blink
+            if (this.invulnerableTimer > 0 && Math.floor(performance.now() / 80) % 2 === 0) {
+                ctx.globalAlpha = 0.4;
+            }
+
+            // 1. Back Glider Wing (Aerodynamic Swept Titanium)
+            ctx.fillStyle = "#0284c7";
+            ctx.beginPath();
+            ctx.moveTo(-12, -4);
+            ctx.lineTo(-42, -26);
+            ctx.lineTo(-24, -26);
+            ctx.lineTo(8, -8);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Wing Nav Light
+            const strobe = Math.sin(performance.now() * 0.01) > 0;
+            ctx.fillStyle = strobe ? "#22c55e" : "#14532d";
+            ctx.beginPath();
+            ctx.arc(-40, -25, 3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 2. Micro Jet Thrusters (Twin Cyan Flame Jets)
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(-22, 4, 10, 14);
+            ctx.fillStyle = "#64748b";
+            ctx.fillRect(-24, 6, 4, 10);
+
+            const flameLen = 14 + Math.sin(performance.now() * 0.04) * 6;
+            const gradFlame = ctx.createLinearGradient(-24, 11, -24 - flameLen, 11);
+            gradFlame.addColorStop(0, "#38bdf8");
+            gradFlame.addColorStop(0.5, "#06b6d4");
+            gradFlame.addColorStop(1, "rgba(56, 189, 248, 0)");
+            ctx.fillStyle = gradFlame;
+            ctx.beginPath();
+            ctx.moveTo(-24, 6);
+            ctx.lineTo(-24 - flameLen, 11);
+            ctx.lineTo(-24, 16);
+            ctx.closePath();
+            ctx.fill();
+
+            // 3. Flowing Dirgantara Flight Scarf
+            const wave = Math.sin(performance.now() * 0.015) * 5;
+            const wave2 = Math.cos(performance.now() * 0.012) * 6;
+            ctx.fillStyle = "#f8fafc";
+            ctx.beginPath();
+            ctx.moveTo(-6, -10);
+            ctx.quadraticCurveTo(-20, -12 + wave, -34, -8 + wave2);
+            ctx.lineTo(-32, -3 + wave2);
+            ctx.quadraticCurveTo(-18, -7 + wave, -4, -5);
+            ctx.closePath();
+            ctx.fill();
+
+            // 4. Kapten Erik Sprite (Preserved Deer Identity & Antlers!)
+            if (isPlayerImageLoaded) {
+                const spriteImg = playerImages.jump || playerImages.idle;
+                const srcW = spriteImg.naturalWidth || 360;
+                const srcH = spriteImg.naturalHeight || 540;
+                const targetH = this.height * PLAYER_CONFIG.scale;
+                const targetW = (srcW / srcH) * targetH;
+                ctx.drawImage(spriteImg, 0, 0, srcW, srcH, -targetW / 2, -targetH / 2 - 4, targetW, targetH);
+            } else {
+                ctx.fillStyle = "#0284c7";
+                ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+            }
+
+            // 5. Aviator Flight Goggles over Eyes
+            ctx.strokeStyle = "#475569";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(-16, -20);
+            ctx.lineTo(14, -20);
+            ctx.stroke();
+
+            // Glowing Cyan Goggle Lenses
+            ctx.fillStyle = "#0284c7";
+            ctx.fillRect(-4, -24, 8, 8);
+            ctx.fillRect(6, -24, 8, 8);
+            ctx.strokeStyle = "#38bdf8";
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(-4, -24, 8, 8);
+            ctx.strokeRect(6, -24, 8, 8);
+            ctx.fillStyle = "#e0f2fe";
+            ctx.fillRect(-2, -23, 3, 2);
+            ctx.fillRect(8, -23, 3, 2);
+
+            // 6. Fore Glider Wing (Foreground Perspective)
+            ctx.fillStyle = "rgba(14, 165, 233, 0.9)";
+            ctx.beginPath();
+            ctx.moveTo(-4, 0);
+            ctx.lineTo(-24, 20);
+            ctx.lineTo(-10, 22);
+            ctx.lineTo(12, 4);
+            ctx.closePath();
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        drawMotoRunner(ctx) {
+            ctx.save();
+            const cx = this.x + this.width / 2;
+            const cy = this.y + this.height;
+            ctx.translate(cx, cy);
+            ctx.rotate(this.bikePitch);
+
+            // Subtle engine vibration on ground
+            const vibe = this.isGrounded ? Math.sin(performance.now() * 0.04) * 0.8 : 0;
+            ctx.translate(0, vibe);
+
+            // Invulnerability blink
+            if (this.invulnerableTimer > 0 && Math.floor(performance.now() / 80) % 2 === 0) {
+                ctx.globalAlpha = 0.4;
+            }
+
+            // 1. Forward Headlight Conical Beam (Illuminates Road)
+            const lightGrad = ctx.createRadialGradient(28, -20, 5, 120, -10, 110);
+            lightGrad.addColorStop(0, "rgba(254, 240, 138, 0.45)");
+            lightGrad.addColorStop(0.6, "rgba(254, 240, 138, 0.12)");
+            lightGrad.addColorStop(1, "rgba(254, 240, 138, 0)");
+            ctx.fillStyle = lightGrad;
+            ctx.beginPath();
+            ctx.moveTo(28, -24);
+            ctx.lineTo(130, -35);
+            ctx.lineTo(140, 8);
+            ctx.lineTo(26, -14);
+            ctx.closePath();
+            ctx.fill();
+
+            // 2. Rear Medical Patrol Utility Box (P3K Box & Strobe)
+            ctx.fillStyle = "#0f172a";
+            ctx.fillRect(-36, -28, 18, 16);
+            ctx.fillStyle = "#e2e8f0";
+            ctx.fillRect(-34, -26, 14, 12);
+            // Red Medical Cross
+            ctx.fillStyle = "#ef4444";
+            ctx.fillRect(-29, -24, 4, 8);
+            ctx.fillRect(-31, -22, 8, 4);
+
+            // Emergency Patrol Strobe Beacon
+            const strobeRed = Math.floor(performance.now() / 150) % 2 === 0;
+            ctx.fillStyle = strobeRed ? "#ef4444" : "#3b82f6";
+            ctx.beginPath();
+            ctx.arc(-27, -32, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 3. Exhaust Pipe (Chrome)
+            ctx.fillStyle = "#94a3b8";
+            ctx.fillRect(-30, -8, 26, 5);
+            ctx.fillStyle = "#475569";
+            ctx.fillRect(-32, -9, 4, 7);
+
+            // 4. Motorcycle Body & Fairing (Teal RSAU Theme)
+            ctx.fillStyle = "#0f766e";
+            ctx.beginPath();
+            ctx.moveTo(-16, -14);
+            ctx.lineTo(12, -26);
+            ctx.lineTo(26, -22);
+            ctx.lineTo(24, -12);
+            ctx.lineTo(6, -6);
+            ctx.lineTo(-20, -6);
+            ctx.closePath();
+            ctx.fill();
+            ctx.strokeStyle = "#14b8a6";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Fuel tank & seat
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(-18, -20, 16, 8);
+            // Headlamp casing
+            ctx.fillStyle = "#fef08a";
+            ctx.fillRect(25, -23, 4, 8);
+
+            // 5. Spinning Spoked Alloy Wheels
+            const drawWheel = (wx, wy) => {
+                ctx.save();
+                ctx.translate(wx, wy);
+                ctx.rotate(this.wheelRot);
+
+                // Rubber Tire
+                ctx.fillStyle = "#1e293b";
+                ctx.beginPath();
+                ctx.arc(0, 0, 13, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#475569";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+
+                // Rim
+                ctx.fillStyle = "#94a3b8";
+                ctx.beginPath();
+                ctx.arc(0, 0, 8, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Spokes
+                ctx.strokeStyle = "#f8fafc";
+                ctx.lineWidth = 1.5;
+                for (let i = 0; i < 4; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(-8, 0);
+                    ctx.lineTo(8, 0);
+                    ctx.stroke();
+                    ctx.rotate(Math.PI / 4);
+                }
+
+                // Hub
+                ctx.fillStyle = "#0f172a";
+                ctx.beginPath();
+                ctx.arc(0, 0, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.restore();
+            };
+
+            // Rear wheel at (-22, -2), Front wheel at (24, -2)
+            drawWheel(-22, -2);
+            drawWheel(24, -2);
+
+            // 6. Kapten Erik in Riding Stance with Safety Helmet!
+            ctx.save();
+            ctx.translate(-4, -18);
+            ctx.rotate(-0.08); // Slight forward lean
+
+            if (isPlayerImageLoaded) {
+                const spriteImg = playerImages.idle;
+                const srcW = spriteImg.naturalWidth || 360;
+                const srcH = spriteImg.naturalHeight || 540;
+                const targetH = (this.height - 4) * PLAYER_CONFIG.scale;
+                const targetW = (srcW / srcH) * targetH;
+                ctx.drawImage(spriteImg, 0, 0, srcW, srcH, -targetW / 2, -targetH + 8, targetW, targetH);
+            } else {
+                ctx.fillStyle = "#0284c7";
+                ctx.fillRect(-12, -38, 24, 38);
+            }
+
+            // RSAU Medical Patrol Safety Helmet (Antlers protrude proudly!)
+            ctx.fillStyle = "#f8fafc";
+            ctx.beginPath();
+            ctx.arc(0, -42, 13, Math.PI, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = "#14b8a6";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Helmet Visor Shield
+            ctx.fillStyle = "#0284c7";
+            ctx.fillRect(2, -43, 9, 6);
+
+            // Handlebars grip
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(8, -12);
+            ctx.lineTo(18, -18);
+            ctx.stroke();
+
+            ctx.restore();
             ctx.restore();
         }
     }
@@ -4064,11 +4541,11 @@
     }
 
     class QuizTerminal {
-        constructor(x, y, quizData) {
+        constructor(x, y, quizData, w = 54, h = 60) {
             this.x = x;
             this.y = y;
-            this.w = 54;
-            this.h = 60;
+            this.w = w;
+            this.h = h;
             this.quizData = quizData;
             this.isAnswered = false;
             this.isCorrect = false;
@@ -4077,6 +4554,15 @@
 
         draw(ctx, time) {
             this.glowPulse = Math.sin(time * 0.005) * 0.5 + 0.5;
+
+            const mode = (currentLevel && currentLevel.gameMode) ? currentLevel.gameMode : "PLATFORMER";
+            if (mode === "FLAPPY_GLIDER") {
+                this.drawRadarGate(ctx, time);
+                return;
+            } else if (mode === "MOTO_RUNNER") {
+                this.drawDriveThruGantry(ctx, time);
+                return;
+            }
 
             // Meja Terminal
             ctx.fillStyle = "#1e293b";
@@ -4122,6 +4608,146 @@
                 ctx.font = "bold 10px 'Press Start 2P', monospace";
                 ctx.fillText("KUIS", this.x + 27, this.y - 12 + bounceY);
             }
+        }
+
+        drawRadarGate(ctx, time) {
+            const centerX = this.x + this.w / 2;
+            const centerY = this.y + this.h / 2;
+            const pulse = this.glowPulse;
+
+            ctx.save();
+
+            // 1. Dual Vertical Scanner Pylons
+            ctx.fillStyle = "#0f172a";
+            ctx.fillRect(this.x, this.y, 8, this.h);
+            ctx.fillRect(this.x + this.w - 8, this.y, 8, this.h);
+
+            ctx.strokeStyle = this.isAnswered ? (this.isCorrect ? "#10b981" : "#f59e0b") : "#38bdf8";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(this.x, this.y, 8, this.h);
+            ctx.strokeRect(this.x + this.w - 8, this.y, 8, this.h);
+
+            // 2. Holographic Radar Ring / Gateway
+            ctx.shadowColor = this.isAnswered ? (this.isCorrect ? "#10b981" : "#f59e0b") : "#38bdf8";
+            ctx.shadowBlur = 12 + pulse * 8;
+            ctx.strokeStyle = this.isAnswered ? (this.isCorrect ? "rgba(16, 185, 129, 0.8)" : "rgba(245, 158, 11, 0.8)") : `rgba(56, 189, 248, ${0.5 + pulse * 0.4})`;
+            ctx.lineWidth = 3;
+
+            ctx.beginPath();
+            ctx.ellipse(centerX, centerY, (this.w / 2) - 4, (this.h / 2) - 10, 0, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Inner scanning sweep line if not answered
+            if (!this.isAnswered) {
+                const angle = time * 0.003;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(centerX + Math.cos(angle) * ((this.w / 2) - 6), centerY + Math.sin(angle) * ((this.h / 2) - 12));
+                ctx.strokeStyle = "rgba(56, 189, 248, 0.9)";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            ctx.shadowBlur = 0;
+
+            // 3. Center Hologram Icon
+            ctx.fillStyle = this.isAnswered ? (this.isCorrect ? "#10b981" : "#f59e0b") : "#ffffff";
+            ctx.font = "bold 16px 'Outfit', sans-serif";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(this.isAnswered ? (this.isCorrect ? "✓" : "!") : "?", centerX, centerY);
+
+            // 4. Pos Title Banner
+            ctx.fillStyle = "#0f172a";
+            const labelW = 90;
+            ctx.fillRect(centerX - labelW / 2, this.y - 18, labelW, 16);
+            ctx.strokeStyle = this.isAnswered ? (this.isCorrect ? "#10b981" : "#f59e0b") : "#38bdf8";
+            ctx.lineWidth = 1.5;
+            ctx.strokeRect(centerX - labelW / 2, this.y - 18, labelW, 16);
+
+            ctx.fillStyle = this.isAnswered ? "#a7f3d0" : "#38bdf8";
+            ctx.font = "bold 9px 'Outfit', sans-serif";
+            const posShort = (this.quizData && this.quizData.posName) ? this.quizData.posName.split(":")[0] : "RADAR";
+            ctx.fillText(posShort, centerX, this.y - 9);
+
+            ctx.restore();
+        }
+
+        drawDriveThruGantry(ctx, time) {
+            const roadY = 440;
+            const gantryTop = this.y;
+            const gantryH = roadY - gantryTop;
+            const gantryW = this.w;
+
+            ctx.save();
+
+            // 1. Checkpoint Gantry Posts (Left & Right)
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(this.x, gantryTop, 10, gantryH);
+            ctx.fillRect(this.x + gantryW - 10, gantryTop, 10, gantryH);
+
+            // Hazard stripes on posts
+            ctx.fillStyle = "#f59e0b";
+            for (let sy = gantryTop + 10; sy < roadY; sy += 24) {
+                ctx.fillRect(this.x, sy, 10, 8);
+                ctx.fillRect(this.x + gantryW - 10, sy, 10, 8);
+            }
+
+            // 2. Overhead Digital Checkpoint Signboard
+            ctx.fillStyle = "#0f172a";
+            ctx.fillRect(this.x - 12, gantryTop, gantryW + 24, 28);
+            ctx.strokeStyle = this.isAnswered ? (this.isCorrect ? "#10b981" : "#f59e0b") : "#14b8a6";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(this.x - 12, gantryTop, gantryW + 24, 28);
+
+            // Signboard text
+            ctx.fillStyle = this.isAnswered ? "#34d399" : "#38bdf8";
+            ctx.font = "bold 9px 'Outfit', sans-serif";
+            ctx.textAlign = "center";
+            const posName = (this.quizData && this.quizData.posName) ? this.quizData.posName.split(":")[0] : "CHECKPOINT";
+            ctx.fillText("SI IMUT • " + posName, this.x + gantryW / 2, gantryTop + 12);
+
+            // Traffic LED Light
+            const ledX = this.x + gantryW / 2;
+            const ledY = gantryTop + 22;
+            ctx.beginPath();
+            ctx.arc(ledX, ledY, 3.5, 0, Math.PI * 2);
+            ctx.fillStyle = this.isAnswered ? "#22c55e" : "#ef4444";
+            ctx.fill();
+
+            // 3. Barrier Gate Arm
+            const pivotX = this.x + 8;
+            const pivotY = roadY - 14;
+
+            ctx.save();
+            ctx.translate(pivotX, pivotY);
+            if (this.isAnswered) {
+                ctx.rotate(-Math.PI / 3);
+            }
+
+            // Arm pole with red/white stripes
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, -3, gantryW - 14, 6);
+            ctx.fillStyle = "#ef4444";
+            for (let ax = 6; ax < gantryW - 14; ax += 14) {
+                ctx.fillRect(ax, -3, 7, 6);
+            }
+            ctx.restore();
+
+            // Gate Pivot Base
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(this.x + 4, roadY - 20, 10, 20);
+
+            // Status prompt if not answered
+            if (!this.isAnswered) {
+                const bounce = Math.sin(time * 0.007) * 3;
+                ctx.fillStyle = "#fbbf24";
+                ctx.font = "bold 9px 'Press Start 2P', monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("STOP!", this.x + gantryW / 2, gantryTop - 8 + bounce);
+            }
+
+            ctx.restore();
         }
     }
 
@@ -4919,148 +5545,121 @@
     }
 
     /* ==========================================================================
-       7. DEFINISI DUNIA POKJA TKRS & CORPORATE BYLAWS (LEVEL 1)
+       7. DEFINISI DUNIA POKJA TKRS & CORPORATE BYLAWS (LEVEL 1 / FLAPPY GLIDER)
        ========================================================================== */
     const TKRS_LEVEL = {
         id: "TKRS",
         shortName: "POKJA TKRS",
-        name: "Pokja TKRS • Tata Kelola Rumah Sakit & Corporate Bylaws",
-        accentFloor: "#0d9488",
+        name: "Pokja TKRS • Flappy Glider Dirgantara (Tata Kelola RS & Corporate Bylaws)",
+        gameMode: "FLAPPY_GLIDER",
+        accentFloor: "#0284c7",
         accentBorder: "#38bdf8",
         width: 6500,
         height: 540,
-        playerStart: { x: 80, y: 350 },
-        deathY: 530,
+        playerStart: { x: 100, y: 220 },
+        deathY: 515,
         platforms: [
-            // Koridor Visi (x: 0 - 800)
-            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
-            // Tangga & Lantai 2 Pos Motto (x: 940 - 1280)
-            { x: 940, y: 330, w: 280, h: 24, type: "solid" },
-            // Koridor Pos Falsafah (x: 1320 - 1920)
-            { x: 1320, y: 440, w: 600, h: 100, type: "solid" },
-            // Jembatan Satu Arah Misi (x: 1960 - 2380)
-            { x: 1960, y: 380, w: 140, h: 18, type: "one-way" },
-            { x: 2140, y: 330, w: 240, h: 24, type: "solid" },
-            // Koridor Pos Tujuan (x: 2540 - 3150)
-            { x: 2540, y: 440, w: 620, h: 100, type: "solid" },
-            // Sayap Regulasi Corporate Bylaws:
-            // Jembatan Skybridge Koorporat (x: 3200 - 3360)
-            { x: 3200, y: 380, w: 160, h: 18, type: "one-way" },
-            // Pos 6: Definisi Corporate Bylaws (x: 3400 - 4020)
-            { x: 3400, y: 440, w: 650, h: 100, type: "solid" },
-            // Pos 7: Pemilik Rumah Sakit (x: 4180 - 4550)
-            { x: 4180, y: 380, w: 160, h: 22, type: "solid" },
-            { x: 4380, y: 330, w: 260, h: 24, type: "solid" },
-            // Pos 8: Alamat Resmi (x: 4800 - 5400)
-            { x: 4800, y: 440, w: 600, h: 100, type: "solid" },
-            // Pos 9: Pengangkatan Ka RSAU (x: 5500 - 6050)
-            { x: 5500, y: 440, w: 550, h: 100, type: "solid" },
-            // Area Finish Asesmen Surveyor (x: 6150 - 6500)
-            { x: 6150, y: 440, w: 450, h: 100, type: "solid" }
+            // Landasan Pacu Takeoff Awal (x: 0 - 380)
+            { x: 0, y: 440, w: 380, h: 100, type: "solid" },
+            // Landasan Pendaratan Finish Surveyor (x: 6100 - 6500)
+            { x: 6100, y: 440, w: 400, h: 100, type: "solid" }
         ],
-        movingPlatforms: [
-            new MovingPlatform(820, 410, 100, 20, 0, -80, 1.3),
-            new MovingPlatform(2400, 390, 110, 20, 100, 0, 1.4),
-            new MovingPlatform(4660, 390, 110, 20, 0, -70, 1.2)
+        movingPlatforms: [],
+        flappyPillars: [
+            { x: 700, gapTop: 140, gapBottom: 315, w: 75, label: "VISI & MISI" },
+            { x: 1280, gapTop: 200, gapBottom: 375, w: 75, label: "FALSAFAH" },
+            { x: 1880, gapTop: 130, gapBottom: 305, w: 75, label: "MOTTO RS" },
+            { x: 2480, gapTop: 210, gapBottom: 385, w: 75, label: "TUJUAN RS" },
+            { x: 3080, gapTop: 140, gapBottom: 315, w: 75, label: "BYLAWS" },
+            { x: 3680, gapTop: 220, gapBottom: 395, w: 75, label: "PEMILIK RS" },
+            { x: 4280, gapTop: 140, gapBottom: 315, w: 75, label: "ALAMAT RESMI" },
+            { x: 4880, gapTop: 200, gapBottom: 375, w: 75, label: "KA RSAU" },
+            { x: 5480, gapTop: 150, gapBottom: 325, w: 75, label: "EVALUASI" }
         ],
         terminals: [
-            new QuizTerminal(520, 380, TKRS_QUIZ_BANK[0]),  // Pos 1: Visi
-            new QuizTerminal(1080, 270, TKRS_QUIZ_BANK[1]), // Pos 2: Motto
-            new QuizTerminal(1620, 380, TKRS_QUIZ_BANK[2]), // Pos 3: Falsafah
-            new QuizTerminal(2240, 270, TKRS_QUIZ_BANK[3]), // Pos 4: Misi
-            new QuizTerminal(2850, 380, TKRS_QUIZ_BANK[4]), // Pos 5: Tujuan
-            new QuizTerminal(3680, 380, TKRS_QUIZ_BANK[5]), // Pos 6: Definisi Corporate Bylaws
-            new QuizTerminal(4480, 270, TKRS_QUIZ_BANK[6]), // Pos 7: Pemilik Rumah Sakit
-            new QuizTerminal(5100, 380, TKRS_QUIZ_BANK[7]), // Pos 8: Alamat Resmi
-            new QuizTerminal(5780, 380, TKRS_QUIZ_BANK[8])  // Pos 9: Pengangkatan Ka RSAU
+            new QuizTerminal(500, 180, TKRS_QUIZ_BANK[0], 70, 130),  // Pos 1: Visi
+            new QuizTerminal(1040, 230, TKRS_QUIZ_BANK[1], 70, 130), // Pos 2: Motto
+            new QuizTerminal(1620, 170, TKRS_QUIZ_BANK[2], 70, 130), // Pos 3: Falsafah
+            new QuizTerminal(2220, 240, TKRS_QUIZ_BANK[3], 70, 130), // Pos 4: Misi
+            new QuizTerminal(2820, 170, TKRS_QUIZ_BANK[4], 70, 130), // Pos 5: Tujuan
+            new QuizTerminal(3420, 240, TKRS_QUIZ_BANK[5], 70, 130), // Pos 6: Definisi Corporate Bylaws
+            new QuizTerminal(4020, 180, TKRS_QUIZ_BANK[6], 70, 130), // Pos 7: Pemilik Rumah Sakit
+            new QuizTerminal(4620, 240, TKRS_QUIZ_BANK[7], 70, 130), // Pos 8: Alamat Resmi
+            new QuizTerminal(5220, 190, TKRS_QUIZ_BANK[8], 70, 130)  // Pos 9: Pengangkatan Ka RSAU
         ],
         collectibles: [
-            new CollectibleDoc(260, 390, "sk_doc"),
-            new CollectibleDoc(400, 370, "badge_tni"),
-            new CollectibleDoc(1180, 240, "star_mutu"),
-            new CollectibleDoc(1500, 390, "badge_tni"),
-            new CollectibleDoc(1750, 390, "sk_doc"),
-            new CollectibleDoc(2160, 250, "sk_doc"),
-            new CollectibleDoc(2320, 270, "star_mutu"),
-            new CollectibleDoc(2980, 390, "star_mutu"),
-            new CollectibleDoc(3520, 390, "sk_doc"),
-            new CollectibleDoc(3880, 390, "badge_tni"),
-            new CollectibleDoc(4300, 300, "sk_doc"),
-            new CollectibleDoc(4540, 240, "badge_tni"),
-            new CollectibleDoc(5220, 390, "sk_doc"),
-            new CollectibleDoc(5920, 390, "star_mutu")
+            new CollectibleDoc(260, 220, "sk_doc"),
+            new CollectibleDoc(400, 200, "badge_tni"),
+            new CollectibleDoc(950, 250, "star_mutu"),
+            new CollectibleDoc(1500, 190, "badge_tni"),
+            new CollectibleDoc(1750, 220, "sk_doc"),
+            new CollectibleDoc(2120, 260, "sk_doc"),
+            new CollectibleDoc(2320, 210, "star_mutu"),
+            new CollectibleDoc(2950, 190, "star_mutu"),
+            new CollectibleDoc(3520, 230, "sk_doc"),
+            new CollectibleDoc(3880, 250, "badge_tni"),
+            new CollectibleDoc(4350, 200, "sk_doc"),
+            new CollectibleDoc(4540, 230, "badge_tni"),
+            new CollectibleDoc(5150, 210, "sk_doc"),
+            new CollectibleDoc(5800, 220, "star_mutu")
         ],
         finishX: 6300
     };
 
     /* ==========================================================================
-       7B. DEFINISI DUNIA POKJA PMKP (LEVEL 2 / MAP 2)
+       7B. DEFINISI DUNIA POKJA PMKP (LEVEL 2 / MOTO RUNNER)
        ========================================================================== */
     const PMKP_LEVEL = {
         id: "PMKP",
         shortName: "POKJA PMKP",
-        name: "Pokja PMKP • Peningkatan Mutu & Keselamatan Pasien (SI IMUT)",
+        name: "Pokja PMKP • Moto Patrol Runner (SI IMUT & Keselamatan Pasien)",
+        gameMode: "MOTO_RUNNER",
         accentFloor: "#059669",
         accentBorder: "#10b981",
         width: 6200,
         height: 540,
-        playerStart: { x: 80, y: 350 },
+        playerStart: { x: 80, y: 390 },
         deathY: 530,
         platforms: [
-            // Koridor 1: Patient Safety (x: 0 - 800)
-            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
-            // Koridor 2: 5 Jenis Insiden IKP (x: 940 - 1450)
-            { x: 940, y: 330, w: 320, h: 24, type: "solid" },
-            // Koridor 3: Kasus KTC vs KTD vs KNC (x: 1550 - 2150)
-            { x: 1550, y: 440, w: 600, h: 100, type: "solid" },
-            // Koridor 4: Portal SI IMUT (Skybridge Digital) (x: 2220 - 2800)
-            { x: 2220, y: 380, w: 160, h: 18, type: "one-way" },
-            { x: 2420, y: 330, w: 320, h: 24, type: "solid" },
-            // Koridor 5: Jadwal Pelaporan Kemenkes (x: 2900 - 3550)
-            { x: 2900, y: 440, w: 650, h: 100, type: "solid" },
-            // Koridor 6: 3 Macam Indikator Mutu (x: 3650 - 4300)
-            { x: 3650, y: 380, w: 160, h: 18, type: "one-way" },
-            { x: 3850, y: 330, w: 340, h: 24, type: "solid" },
-            // Koridor 7: Alur Cepat 2x24 Jam (x: 4450 - 5100)
-            { x: 4450, y: 440, w: 650, h: 100, type: "solid" },
-            // Koridor 8: Grading Risiko & RCA (x: 5200 - 5800)
-            { x: 5200, y: 440, w: 600, h: 100, type: "solid" },
-            // Koridor 9: Exit Conference Surveyor PMKP (x: 5900 - 6200)
-            { x: 5900, y: 440, w: 300, h: 100, type: "solid" }
+            // Jalur Jalan Raya Aspal Terusan Patroli Medis RSAU (x: 0 - 6200)
+            { x: 0, y: 440, w: 6200, h: 100, type: "solid" }
         ],
-        movingPlatforms: [
-            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
-            new MovingPlatform(2160, 390, 110, 20, 90, 0, 1.4),
-            new MovingPlatform(3570, 390, 110, 20, 0, -70, 1.2),
-            new MovingPlatform(5110, 420, 80, 20, 80, 0, 1.3)
+        movingPlatforms: [],
+        motoObstacles: [
+            { x: 820, y: 418, w: 50, h: 22, type: "spill", name: "TUMPAHAN B3" },
+            { x: 1460, y: 400, w: 34, h: 40, type: "cone", name: "KERUCUT K3" },
+            { x: 2160, y: 406, w: 46, h: 34, type: "spill", name: "IKP CAIRAN" },
+            { x: 2860, y: 396, w: 54, h: 44, type: "barrier", name: "BARIKADE K3" },
+            { x: 3560, y: 400, w: 34, h: 40, type: "cone", name: "KERUCUT K3" },
+            { x: 4320, y: 418, w: 52, h: 22, type: "spill", name: "TUMPAHAN IKP" },
+            { x: 5060, y: 396, w: 54, h: 44, type: "barrier", name: "BARIKADE K3" }
         ],
         terminals: [
-            new QuizTerminal(500, 380, PMKP_QUIZ_BANK[0]),  // Pos 1: Definisi Patient Safety
-            new QuizTerminal(1160, 270, PMKP_QUIZ_BANK[1]), // Pos 2: 5 Jenis Insiden
-            new QuizTerminal(1850, 380, PMKP_QUIZ_BANK[2]), // Pos 3: Contoh Kasus KTC vs KTD vs KNC
-            new QuizTerminal(2580, 270, PMKP_QUIZ_BANK[3]), // Pos 4: Integrasi Portal SI IMUT
-            new QuizTerminal(3250, 380, PMKP_QUIZ_BANK[4]), // Pos 5: Jadwal Pelaporan Kemenkes
-            new QuizTerminal(4000, 270, PMKP_QUIZ_BANK[5]), // Pos 6: 3 Macam Indikator Mutu
-            new QuizTerminal(4780, 380, PMKP_QUIZ_BANK[6]), // Pos 7: Alur Tanggap & Batas 2x24 Jam
-            new QuizTerminal(5500, 380, PMKP_QUIZ_BANK[7])  // Pos 8: Grading Risiko & Analisis RCA
+            new QuizTerminal(500, 310, PMKP_QUIZ_BANK[0], 70, 130),  // Pos 1: Definisi Patient Safety
+            new QuizTerminal(1150, 310, PMKP_QUIZ_BANK[1], 70, 130), // Pos 2: 5 Jenis Insiden
+            new QuizTerminal(1800, 310, PMKP_QUIZ_BANK[2], 70, 130), // Pos 3: Contoh Kasus KTC vs KTD vs KNC
+            new QuizTerminal(2500, 310, PMKP_QUIZ_BANK[3], 70, 130), // Pos 4: Integrasi Portal SI IMUT
+            new QuizTerminal(3200, 310, PMKP_QUIZ_BANK[4], 70, 130), // Pos 5: Jadwal Pelaporan Kemenkes
+            new QuizTerminal(3950, 310, PMKP_QUIZ_BANK[5], 70, 130), // Pos 6: 3 Macam Indikator Mutu
+            new QuizTerminal(4700, 310, PMKP_QUIZ_BANK[6], 70, 130), // Pos 7: Alur Tanggap & Batas 2x24 Jam
+            new QuizTerminal(5400, 310, PMKP_QUIZ_BANK[7], 70, 130)  // Pos 8: Grading Risiko & Analisis RCA
         ],
         collectibles: [
             new CollectibleDoc(240, 390, "si_imut"),
             new CollectibleDoc(400, 370, "star_mutu"),
-            new CollectibleDoc(1040, 250, "badge_tni"),
-            new CollectibleDoc(1300, 250, "si_imut"),
+            new CollectibleDoc(820, 310, "star_mutu"),  // Lompati tumpahan B3 di 820
+            new CollectibleDoc(1050, 390, "badge_tni"),
+            new CollectibleDoc(1460, 300, "si_imut"),   // Lompati kerucut K3 di 1460
             new CollectibleDoc(1700, 390, "star_mutu"),
-            new CollectibleDoc(2000, 390, "sk_doc"),
-            new CollectibleDoc(2480, 250, "si_imut"),
-            new CollectibleDoc(2700, 250, "star_mutu"),
-            new CollectibleDoc(3100, 390, "badge_tni"),
+            new CollectibleDoc(2160, 300, "badge_tni"), // Lompati cairan IKP di 2160
+            new CollectibleDoc(2400, 390, "si_imut"),
+            new CollectibleDoc(2860, 290, "star_mutu"), // Lompati barikade K3 di 2860
             new CollectibleDoc(3400, 390, "si_imut"),
-            new CollectibleDoc(3920, 250, "sk_doc"),
-            new CollectibleDoc(4150, 250, "star_mutu"),
-            new CollectibleDoc(4650, 390, "badge_tni"),
-            new CollectibleDoc(4950, 390, "si_imut"),
-            new CollectibleDoc(5350, 390, "star_mutu"),
-            new CollectibleDoc(5680, 390, "si_imut")
+            new CollectibleDoc(3560, 300, "star_mutu"), // Lompati kerucut K3 di 3560
+            new CollectibleDoc(4150, 390, "star_mutu"),
+            new CollectibleDoc(4320, 310, "badge_tni"), // Lompati tumpahan IKP di 4320
+            new CollectibleDoc(5060, 290, "star_mutu"), // Lompati barikade K3 di 5060
+            new CollectibleDoc(5650, 390, "si_imut")
         ],
         finishX: 6000
     };
@@ -6971,37 +7570,293 @@
         }
     }
 
+    function drawFlappyEnvironment(ctx, cx) {
+        // 1. Airway Boundary Rails (Ceiling & Floor)
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(cx - 50, 0, camera.width + 100, 16);
+        ctx.fillStyle = "#0284c7";
+        ctx.fillRect(cx - 50, 14, camera.width + 100, 2);
+
+        // Ceiling marker beacons
+        for (let bx = Math.floor((cx - 50) / 120) * 120; bx < cx + camera.width + 50; bx += 120) {
+            const strobe = Math.sin(performance.now() * 0.006 + bx) > 0;
+            ctx.fillStyle = strobe ? "#38bdf8" : "#0369a1";
+            ctx.fillRect(bx, 2, 16, 6);
+        }
+
+        // Floor safety barrier at y=515
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(cx - 50, 515, camera.width + 100, 25);
+        ctx.fillStyle = "#ef4444";
+        ctx.fillRect(cx - 50, 515, camera.width + 100, 3);
+
+        // 2. Takeoff Runway (0 - 380) & Landing Runway (6100 - 6500)
+        for (const p of currentLevel.platforms) {
+            if (p.x + p.w < cx - 50 || p.x > cx + camera.width + 50) continue;
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(p.x, p.y, p.w, p.h);
+            ctx.fillStyle = "#38bdf8";
+            ctx.fillRect(p.x, p.y, p.w, 6);
+
+            // Runway stripes
+            ctx.fillStyle = "#ffffff";
+            for (let rx = p.x + 20; rx < p.x + p.w - 20; rx += 50) {
+                ctx.fillRect(rx, p.y + 20, 28, 6);
+            }
+
+            ctx.fillStyle = "#facc15";
+            ctx.font = "bold 12px 'Outfit', sans-serif";
+            ctx.fillText(p.x === 0 ? "🛫 RUNWAY TAKEOFF TKRS" : "🛬 RUNWAY FINISH TELUSUR", p.x + 20, p.y + 60);
+        }
+
+        // 3. Flappy Pillars (Accreditation Regulatory Columns)
+        if (currentLevel.flappyPillars) {
+            for (const p of currentLevel.flappyPillars) {
+                if (p.x + p.w < cx - 50 || p.x > cx + camera.width + 50) continue;
+
+                // --- Upper Pillar (0 to gapTop) ---
+                const gradUpper = ctx.createLinearGradient(p.x, 0, p.x + p.w, 0);
+                gradUpper.addColorStop(0, "#0f172a");
+                gradUpper.addColorStop(0.5, "#1e293b");
+                gradUpper.addColorStop(1, "#0f172a");
+                ctx.fillStyle = gradUpper;
+                ctx.fillRect(p.x, 0, p.w, p.gapTop);
+
+                // Neon cyan border
+                ctx.fillStyle = "#38bdf8";
+                ctx.fillRect(p.x, 0, 3, p.gapTop);
+                ctx.fillRect(p.x + p.w - 3, 0, 3, p.gapTop);
+
+                // Upper Pillar Cap (Hazard Caution Stripe)
+                ctx.fillStyle = "#f59e0b";
+                ctx.fillRect(p.x - 4, p.gapTop - 16, p.w + 8, 16);
+                ctx.fillStyle = "#0f172a";
+                for (let sx = p.x - 4; sx < p.x + p.w + 8; sx += 14) {
+                    ctx.beginPath();
+                    ctx.moveTo(sx, p.gapTop);
+                    ctx.lineTo(sx + 7, p.gapTop);
+                    ctx.lineTo(sx + 14, p.gapTop - 16);
+                    ctx.lineTo(sx + 7, p.gapTop - 16);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                // Label on upper pillar
+                ctx.save();
+                ctx.fillStyle = "#7dd3fc";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText(p.label || "REGULASI", p.x + p.w / 2, p.gapTop - 24);
+                ctx.restore();
+
+                // --- Lower Pillar (gapBottom to 540) ---
+                const lowerH = 540 - p.gapBottom;
+                const gradLower = ctx.createLinearGradient(p.x, 0, p.x + p.w, 0);
+                gradLower.addColorStop(0, "#0f172a");
+                gradLower.addColorStop(0.5, "#1e293b");
+                gradLower.addColorStop(1, "#0f172a");
+                ctx.fillStyle = gradLower;
+                ctx.fillRect(p.x, p.gapBottom, p.w, lowerH);
+
+                // Neon cyan border
+                ctx.fillStyle = "#38bdf8";
+                ctx.fillRect(p.x, p.gapBottom, 3, lowerH);
+                ctx.fillRect(p.x + p.w - 3, p.gapBottom, 3, lowerH);
+
+                // Lower Pillar Cap (Hazard Caution Stripe)
+                ctx.fillStyle = "#f59e0b";
+                ctx.fillRect(p.x - 4, p.gapBottom, p.w + 8, 16);
+                ctx.fillStyle = "#0f172a";
+                for (let sx = p.x - 4; sx < p.x + p.w + 8; sx += 14) {
+                    ctx.beginPath();
+                    ctx.moveTo(sx, p.gapBottom + 16);
+                    ctx.lineTo(sx + 7, p.gapBottom + 16);
+                    ctx.lineTo(sx + 14, p.gapBottom);
+                    ctx.lineTo(sx + 7, p.gapBottom);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                // Strobe lights on pillar tip
+                const strobe = Math.sin(performance.now() * 0.008 + p.x) > 0;
+                ctx.fillStyle = strobe ? "#ef4444" : "#7f1d1d";
+                ctx.beginPath();
+                ctx.arc(p.x + p.w / 2, p.gapBottom + 8, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(p.x + p.w / 2, p.gapTop - 8, 3.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+    }
+
+    function drawMotoEnvironment(ctx, cx) {
+        // 1. Continuous Asphalt Roadway
+        for (const p of currentLevel.platforms) {
+            if (p.x + p.w < cx - 50 || p.x > cx + camera.width + 50) continue;
+
+            // Road surface
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(p.x, p.y, p.w, p.h);
+
+            // Sidewalk concrete curb
+            ctx.fillStyle = "#e2e8f0";
+            ctx.fillRect(p.x, p.y, p.w, 6);
+
+            // Yellow dashed dividing lane markers
+            ctx.fillStyle = "#facc15";
+            for (let rx = 0; rx < p.w; rx += 90) {
+                if (rx + 45 >= cx - 50 && rx <= cx + camera.width + 50) {
+                    ctx.fillRect(rx, p.y + 45, 45, 5);
+                }
+            }
+
+            // Bottom emerald green verge / grass trim
+            ctx.fillStyle = "#065f46";
+            ctx.fillRect(p.x, p.y + 80, p.w, 20);
+            ctx.fillStyle = "#10b981";
+            ctx.fillRect(p.x, p.y + 80, p.w, 2);
+
+            // Road kilometer milestones
+            ctx.fillStyle = "#94a3b8";
+            ctx.font = "bold 9px monospace";
+            for (let mx = 500; mx < p.w; mx += 500) {
+                if (mx >= cx - 50 && mx <= cx + camera.width + 50) {
+                    ctx.fillText(`KM ${(mx / 1000).toFixed(1)}`, mx, p.y + 70);
+                }
+            }
+        }
+
+        // 2. Moto Obstacles
+        if (currentLevel.motoObstacles) {
+            for (const obs of currentLevel.motoObstacles) {
+                if (obs.x + obs.w < cx - 50 || obs.x > cx + camera.width + 50) continue;
+
+                if (obs.type === "spill") {
+                    // Tumpahan Bahan Berbahaya & Beracun (B3) / Cairan IKP
+                    ctx.fillStyle = "rgba(132, 204, 22, 0.85)";
+                    ctx.beginPath();
+                    ctx.ellipse(obs.x + obs.w / 2, obs.y + obs.h / 2 + 4, obs.w / 2, obs.h / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.strokeStyle = "#a3e635";
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+
+                    // Biohazard Warning Icon floating above
+                    ctx.fillStyle = "#facc15";
+                    ctx.font = "bold 13px sans-serif";
+                    ctx.textAlign = "center";
+                    ctx.fillText("☣", obs.x + obs.w / 2, obs.y + 8);
+                } else if (obs.type === "cone") {
+                    // Kerucut Lalu Lintas K3 (Traffic Cone Orange + Reflektif Putih)
+                    ctx.fillStyle = "#ea580c";
+                    ctx.beginPath();
+                    ctx.moveTo(obs.x + obs.w / 2, obs.y);
+                    ctx.lineTo(obs.x, obs.y + obs.h);
+                    ctx.lineTo(obs.x + obs.w, obs.y + obs.h);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // Reflective white stripe
+                    ctx.fillStyle = "#ffffff";
+                    ctx.beginPath();
+                    ctx.moveTo(obs.x + obs.w * 0.35, obs.y + obs.h * 0.4);
+                    ctx.lineTo(obs.x + obs.w * 0.65, obs.y + obs.h * 0.4);
+                    ctx.lineTo(obs.x + obs.w * 0.75, obs.y + obs.h * 0.65);
+                    ctx.lineTo(obs.x + obs.w * 0.25, obs.y + obs.h * 0.65);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // Rubber base
+                    ctx.fillStyle = "#1e293b";
+                    ctx.fillRect(obs.x - 2, obs.y + obs.h - 4, obs.w + 4, 4);
+                } else if (obs.type === "barrier") {
+                    // Barikade K3 / Perbaikan Jalan Medis (Zebra Kuning-Hitam)
+                    // Steel legs
+                    ctx.fillStyle = "#475569";
+                    ctx.fillRect(obs.x + 4, obs.y + 16, 4, obs.h - 16);
+                    ctx.fillRect(obs.x + obs.w - 8, obs.y + 16, 4, obs.h - 16);
+
+                    // Cross bar with diagonal yellow/black hazard stripes
+                    ctx.fillStyle = "#f59e0b";
+                    ctx.fillRect(obs.x, obs.y + 6, obs.w, 18);
+                    ctx.fillStyle = "#0f172a";
+                    for (let bx = obs.x; bx < obs.x + obs.w; bx += 14) {
+                        ctx.beginPath();
+                        ctx.moveTo(bx, obs.y + 24);
+                        ctx.lineTo(bx + 6, obs.y + 24);
+                        ctx.lineTo(bx + 12, obs.y + 6);
+                        ctx.lineTo(bx + 6, obs.y + 6);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+
+                    // Flashing Amber Warning Beacon on top
+                    const strobe = Math.sin(performance.now() * 0.01 + obs.x) > 0;
+                    ctx.fillStyle = strobe ? "#f59e0b" : "#78350f";
+                    ctx.beginPath();
+                    ctx.arc(obs.x + obs.w / 2, obs.y + 3, 4.5, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+    }
+
+    function drawSurveyorFinish(ctx, cx) {
+        const fx = currentLevel.finishX;
+        ctx.fillStyle = currentLevel.id === "ETIK" ? "#f59e0b" : (currentLevel.id === "KE" ? "#10b981" : (currentLevel.id === "PKPO" ? "#7c3aed" : (currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))))))));
+        ctx.fillRect(fx, 240, 20, 200);
+        ctx.fillRect(fx + 100, 240, 20, 200);
+        ctx.fillRect(fx - 10, 220, 140, 25);
+        ctx.fillStyle = "#f59e0b";
+        ctx.font = "bold 11px 'Outfit', sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText("SURVEYOR " + currentLevel.id, fx + 60, 237);
+
+        // Karpet Merah Finish
+        ctx.fillStyle = "#e11d48";
+        ctx.fillRect(fx - 40, 436, 200, 4);
+    }
+
     function drawPlatforms(ctx) {
         const cx = Math.round(camera.x);
         ctx.save();
         ctx.translate(-cx, 0);
 
-        for (const p of currentLevel.platforms) {
-            if (p.x + p.w < cx - 50 || p.x > cx + camera.width + 50) continue;
+        const mode = (currentLevel && currentLevel.gameMode) ? currentLevel.gameMode : "PLATFORMER";
 
-            if (p.type === "one-way") {
-                // Jembatan skybridge stainless steel medis
-                ctx.fillStyle = "#334155";
-                ctx.fillRect(p.x, p.y, p.w, p.h);
-                ctx.fillStyle = currentLevel.accentBorder || "#38bdf8";
-                ctx.fillRect(p.x, p.y, p.w, 4);
-            } else {
-                // Lantai ubin keramik bersih rumah sakit
-                ctx.fillStyle = "#f8fafc";
-                ctx.fillRect(p.x, p.y, p.w, p.h);
+        if (mode === "FLAPPY_GLIDER") {
+            drawFlappyEnvironment(ctx, cx);
+        } else if (mode === "MOTO_RUNNER") {
+            drawMotoEnvironment(ctx, cx);
+        } else {
+            for (const p of currentLevel.platforms) {
+                if (p.x + p.w < cx - 50 || p.x > cx + camera.width + 50) continue;
 
-                // Lis lantai hijau toska / emerald PMKP
-                ctx.fillStyle = currentLevel.accentFloor || "#0d9488";
-                ctx.fillRect(p.x, p.y, p.w, 10);
+                if (p.type === "one-way") {
+                    // Jembatan skybridge stainless steel medis
+                    ctx.fillStyle = "#334155";
+                    ctx.fillRect(p.x, p.y, p.w, p.h);
+                    ctx.fillStyle = currentLevel.accentBorder || "#38bdf8";
+                    ctx.fillRect(p.x, p.y, p.w, 4);
+                } else {
+                    // Lantai ubin keramik bersih rumah sakit
+                    ctx.fillStyle = "#f8fafc";
+                    ctx.fillRect(p.x, p.y, p.w, p.h);
 
-                // Garis nat keramik halus
-                ctx.strokeStyle = "#cbd5e1";
-                ctx.lineWidth = 1;
-                for (let tx = p.x; tx < p.x + p.w; tx += 60) {
-                    ctx.beginPath();
-                    ctx.moveTo(tx, p.y + 10);
-                    ctx.lineTo(tx, p.y + p.h);
-                    ctx.stroke();
+                    // Lis lantai hijau toska / emerald PMKP
+                    ctx.fillStyle = currentLevel.accentFloor || "#0d9488";
+                    ctx.fillRect(p.x, p.y, p.w, 10);
+
+                    // Garis nat keramik halus
+                    ctx.strokeStyle = "#cbd5e1";
+                    ctx.lineWidth = 1;
+                    for (let tx = p.x; tx < p.x + p.w; tx += 60) {
+                        ctx.beginPath();
+                        ctx.moveTo(tx, p.y + 10);
+                        ctx.lineTo(tx, p.y + p.h);
+                        ctx.stroke();
+                    }
                 }
             }
         }
@@ -7022,19 +7877,7 @@
         }
 
         // Gambar Gerbang Finish Surveyor
-        const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "ETIK" ? "#f59e0b" : (currentLevel.id === "KE" ? "#10b981" : (currentLevel.id === "PKPO" ? "#7c3aed" : (currentLevel.id === "AKP" ? "#0284c7" : (currentLevel.id === "PP" ? "#0d9488" : (currentLevel.id === "HPK" ? "#9333ea" : (currentLevel.id === "PPK" ? "#2563eb" : (currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))))))))))))));
-        ctx.fillRect(fx, 240, 20, 200);
-        ctx.fillRect(fx + 100, 240, 20, 200);
-        ctx.fillRect(fx - 10, 220, 140, 25);
-        ctx.fillStyle = "#f59e0b";
-        ctx.font = "bold 11px 'Outfit', sans-serif";
-        ctx.textAlign = "center";
-        ctx.fillText("SURVEYOR " + currentLevel.id, fx + 60, 237);
-
-        // Karpet Merah Finish
-        ctx.fillStyle = "#e11d48";
-        ctx.fillRect(fx - 40, 436, 200, 4);
+        drawSurveyorFinish(ctx, cx);
 
         // Player & Partikel
         player.draw(ctx);
@@ -7600,6 +8443,8 @@
 
     function restartGame() {
         player.reset(currentLevel.playerStart.x, currentLevel.playerStart.y);
+        camera.x = 0;
+        camera.currentLookahead = 50;
         player.lives = 3;
         quizVerifiedCount = 0;
         docsCollectedCount = 0;
@@ -7668,7 +8513,26 @@
         }
 
         const hudWorld = document.getElementById("hudWorld");
-        if (hudWorld) hudWorld.innerText = `${currentLevel.shortName} • Kapten RUSA ERIK`;
+        if (hudWorld) {
+            const mode = currentLevel.gameMode || "PLATFORMER";
+            const modeBadge = mode === "FLAPPY_GLIDER" ? "✈️ FLAPPY GLIDER" : (mode === "MOTO_RUNNER" ? "🏍️ MOTO RUNNER" : "🏃 PLATFORMER");
+            hudWorld.innerHTML = `<span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[10px] mr-1">${modeBadge}</span> ${currentLevel.shortName} • Kapten RUSA ERIK`;
+        }
+
+        const btnJumpLabel = document.getElementById("btnJumpLabel");
+        const btnJumpIcon = document.getElementById("btnJumpIcon");
+        if (btnJumpLabel && btnJumpIcon) {
+            if (currentLevel.gameMode === "FLAPPY_GLIDER") {
+                btnJumpLabel.innerText = "KEPAK";
+                btnJumpIcon.innerText = "🪽";
+            } else if (currentLevel.gameMode === "MOTO_RUNNER") {
+                btnJumpLabel.innerText = "LOMPAT";
+                btnJumpIcon.innerText = "🏍️";
+            } else {
+                btnJumpLabel.innerText = "LOMPAT";
+                btnJumpIcon.innerText = "▲";
+            }
+        }
 
         const hudQuizLabel = document.getElementById("hudQuizLabel");
         if (hudQuizLabel) hudQuizLabel.innerText = `📋 KUIS ${currentLevel.id}:`;
@@ -7752,11 +8616,11 @@
         // Reset all cards
         if (cardTKRS) {
             cardTKRS.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all";
-            if (badgeTKRS) { badgeTKRS.innerText = "SIAP DITELUSURI"; badgeTKRS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
+            if (badgeTKRS) { badgeTKRS.innerText = "✈️ FLAPPY GLIDER • SIAP"; badgeTKRS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
         }
         if (cardPMKP) {
             cardPMKP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-emerald-950/40 transition-all";
-            if (badgePMKP) { badgePMKP.innerText = "SIAP DITELUSURI"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold"; }
+            if (badgePMKP) { badgePMKP.innerText = "🏍️ MOTO RUNNER • SIAP"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold"; }
         }
         if (cardSKP) {
             cardSKP.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-indigo-950/40 transition-all";
@@ -8056,37 +8920,41 @@
         } else if (currentLevel.id === "PMKP") {
             if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
-                menuSubtitle.innerText = "POKJA PMKP • MAP 2 (AKTIF)";
+                menuSubtitle.innerText = "POKJA PMKP • MAP 2 (MOTO PATROL RUNNER)";
                 menuSubtitle.className = "text-xs text-emerald-400 font-bold uppercase tracking-wider";
             }
             if (menuDesc) {
-                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja PMKP (<strong>Patient Safety</strong>, <strong>SI IMUT</strong>, Insiden <strong>KTD/KNC/KTC</strong>, & <strong>Alur Grading RCA</strong>). Jika salah menjawab, taklukkan <strong>Tantangan Benteng Takeshi</strong>!";
+                menuDesc.innerHTML = "Kendarai <strong>Motor Patroli Medis RSAU</strong> bersama <strong>Kapten RUSA ERIK</strong>! Lompati tumpahan B3 & barikade K3 dengan <strong>Spasi/Tap Layar</strong>, terobos <strong>Drive-Thru Checkpoint SI IMUT</strong> untuk menjawab kuis mutu!";
             }
             if (btnPlay) {
-                btnPlay.innerText = "▶ MULAI TELUSUR MAP 2: POKJA PMKP";
+                btnPlay.innerText = "🏍️ GAS MOTOR: MAP 2 POKJA PMKP";
                 btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-emerald-500/30 transition-all active:scale-98";
             }
             if (cardPMKP) {
                 cardPMKP.className = "p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-emerald-500/30 transition-all";
-                if (badgePMKP) { badgePMKP.innerText = "TELUSUR AKTIF"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
+                if (badgePMKP) { badgePMKP.innerText = "🏍️ MOTO RUNNER AKTIF"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
             }
         } else {
             if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
-                menuSubtitle.innerText = "POKJA TKRS • MAP 1 (AKTIF)";
+                menuSubtitle.innerText = "POKJA TKRS • MAP 1 (FLAPPY GLIDER DIRGANTARA)";
                 menuSubtitle.className = "text-xs text-sky-400 font-bold uppercase tracking-wider";
             }
             if (menuDesc) {
-                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja TKRS (Visi, Misi, Falsafah, & <strong>Hospital Corporate Bylaws</strong>). Jika salah menjawab, taklukkan <strong>Tantangan Benteng Takeshi</strong> untuk kembali ke RS!";
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> terbang melintasi pilar regulasi akreditasi dengan sayap titanium & thruster ala <strong>Flappy Bird</strong>! Tekan <strong>Spasi / Tap Layar</strong> untuk mengepak & tembus <strong>Radar Kuis Gate</strong>!";
             }
             if (btnPlay) {
-                btnPlay.innerText = "▶ MULAI TELUSUR MAP 1: POKJA TKRS";
+                btnPlay.innerText = "✈️ TERBANG GLIDER: MAP 1 POKJA TKRS";
                 btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-base md:text-lg shadow-lg shadow-sky-500/30 transition-all active:scale-98";
             }
             if (cardTKRS) {
                 cardTKRS.className = "p-3 rounded-xl bg-sky-500/20 border border-sky-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-sky-500/30 transition-all";
-                if (badgeTKRS) { badgeTKRS.innerText = "TELUSUR AKTIF"; badgeTKRS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
+                if (badgeTKRS) { badgeTKRS.innerText = "✈️ FLAPPY GLIDER AKTIF"; badgeTKRS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 text-[9px] font-bold"; }
             }
+        }
+
+        if (currentState === GAME_STATE.PLAYING) {
+            restartGame();
         }
     }
 

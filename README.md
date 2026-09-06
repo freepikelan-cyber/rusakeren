@@ -6,20 +6,16 @@ Media edukasi dan gamifikasi interaktif **Akreditasi Rumah Sakit (Standar STARKE
 
 ## 🌟 Fitur Utama
 
-### 1. 🗺️ Pemetaan 4 Dunia Pokja Akreditasi
-- **MAP 1: POKJA TKRS (Tata Kelola Rumah Sakit)**:
-  - Visi, Misi, Falsafah, dan Motto *"Melayani Dengan Ikhlas Tanpa Batas"*.
-  - **Hospital Corporate Bylaws (HBL)**: Regulasi tata kelola antara Pemilik (Kasau / Kapuskesau) dengan Kepala RSAU dr. Esnawan Antariksa.
-- **MAP 2: POKJA PMKP (Peningkatan Mutu & Keselamatan Pasien)**:
-  - 5 Klasifikasi Insiden Keselamatan Pasien (KTD, KNC, KTC, KPC, Sentinel).
-  - Alur Pelaporan SI IMUT (`https://imut.rsauesnawan.com/`), batas waktu pelaporan Kemenkes, dan Analisis Akar Masalah (RCA).
-- **MAP 3: POKJA SKP (Sasaran Keselamatan Pasien)**:
-  - Prosedur 2 parameter identifikasi pasien (Nama Lengkap & Tanggal Lahir).
-  - 5 Warna Gelang Pasien (Biru Muda, Pink, Kuning Risiko Jatuh, Merah Alergi, Ungu DNR).
-  - 7 Prinsip Benar Pemberian Obat & Site Marking Operasi checklist `(√)`.
-- **MAP 4: POKJA MFK (Manajemen Fasilitas & Keselamatan)**:
-  - 5 Titik Kumpul Evakuasi Resmi di RSAU dr. Esnawan Antariksa.
-  - 8 Kode Warna Darurat (Red, Blue, Green, Orange, Black, Pink, Purple, Grey).
+### 1. 🎮 Sistem Permainan Multi-Genre per MAP (Karakter Kapten Erik Tetap Dipertahankan)
+Setiap MAP memiliki genre mini game unik yang disesuaikan dengan tema Pokja, sambil mempertahankan 100% identitas karakter **Kapten RUSA ERIK**:
+- **MAP 1: POKJA TKRS ➔ FLAPPY GLIDER DIRGANTARA**:
+  - Kapten Erik mengenakan sayap glider titanium-cyan, kacamata goggle penerbang, syal dirgantara berkibar, dan *dual micro jet thrusters*.
+  - Mekanik terbang ala *Flappy Bird*: tap layar atau tekan Spasi untuk mengepak sayap melewati 9 pilar regulasi HBL/Corporate Bylaws dan menerobos 9 **Radar Accreditation Gateways**.
+- **MAP 2: POKJA PMKP ➔ MOTO PATROL RUNNER**:
+  - Kapten Erik mengendarai **Motor Patroli Medis RSAU** lengkap dengan helm keselamatan berslot tanduk emas, lampu sorot depan, knalpot berasap, dan sirine darurat P3K.
+  - Mekanik *high-speed obstacle runner*: melompati genangan tumpahan B3/IKP (`☣`), kerucut lalu lintas K3, dan barikade proyek K3, serta memasuki 8 **Drive-Thru Checkpoint Gantries SI IMUT**.
+- **MAP 3 - 16: POKJA LAINNYA ➔ CLASSIC 2D PLATFORMER**:
+  - Telusur koridor dan ruangan rumah sakit, tangga medis, jembatan skybridge, dan tantangan Benteng Takeshi saat remedial.
 
 ### 2. 🧯 Lab Simulator Proteksi Kebakaran (APAR & Hydrant)
 - **Simulasi APAR Metode P.A.S.S.**:

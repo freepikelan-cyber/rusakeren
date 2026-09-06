@@ -23,6 +23,7 @@
 17. [Gamifikasi Akreditasi Map 7 (Pokja PPI - Simulasi Cuci Tangan, Etika Batuk, APD & Limbah)](#-bagian-17-implementasi-khusus-gamifikasi-akreditasi-map-7-pokja-ppi---pencegahan-dan-pengendalian-infeksi)
 18. [Gamifikasi Akreditasi Map 8 (Pokja KPS - Uraian Jabatan, Kredensial, Rekredensial, SPK & RKK)](#-bagian-18-implementasi-khusus-gamifikasi-akreditasi-map-8-pokja-kps---kualifikasi-dan-pendidikan-staf)
 19. [Arsitektur Halaman Utama: Mukadimah, Misi Kapten Erik, Kreator Herlani & Sistem Pilih Map](#-bagian-19-arsitektur-halaman-utama-mukadimah-misi-kapten-erik-kreator-herlani--sistem-pilih-map)
+20. [Sistem Multi-Genre Mini Games per Map: Flappy Glider (TKRS) & Moto Patrol Runner (PMKP)](#31-sistem-multi-genre-mini-games-per-map-flappy-glider-tkrs--moto-patrol-runner-pmkp)
 
 ---
 
@@ -2097,10 +2098,74 @@ Modul ke-6 di *Master Simulation Hub* mengimplementasikan algoritma resusitasi h
 Dengan penambahan BHD, *Master Simulation Hub* kini mencakup seluruh kompetensi wajib rumah sakit:
 1. 🧯 **Lab APAR**: Metode P.A.S.S (*Pull, Aim, Squeeze, Sweep*) dengan fisika api & dry chemical powder dinamis.
 2. 🚒 **Lab Hydrant**: Kompartemen selang gedung (Hose Reel) & Pilar Lapangan, formasi *two-man hold*, tekanan 4.5-7 Bar.
-3. 🧼 **Lab Cuci Tangan WHO**: 11 Langkah ilustrasi tangan manusia nyata, mode Handwash (40-60 detik) & Handrub (20-40 detik), partikel busa sabun.
-4. 🤧 **Lab Etika Batuk**: 4 Protokol baku droplet (lengan atas bagian dalam, tisu medis, kantung kuning infeksius, hand hygiene).
-5. 🥼 **Lab Donning & Doffing APD**: Urutan standar pemasangan dan pelepasan hazmat/gown, masker bedah/N95, kacamata goggle, dan sarung tangan steril tanpa kontaminasi silang.
-6. 💓 **Lab BHD / RJP & AED**: 7 Tahapan BHD Kemenkes/AHA, metronom 110 BPM, depth gauge 5-6 cm, eksekusi shock defibrilator dan pemantauan gelombang ROSC.
+---
+
+## 31. Sistem Multi-Genre Mini Games per Map: Flappy Glider (TKRS) & Moto Patrol Runner (PMKP)
+
+### 🎮 1. Filosofi & Latar Belakang Desain Multi-Genre
+Untuk menghadirkan pengalaman bermain yang lebih dinamis, variatif, dan edukatif, arsitektur permainan dikembangkan melampaui pakem *2D platformer* seragam (*Mario Bros style*). Setiap Pokja dirancang memiliki **genre mini game unik** yang merefleksikan nuansa dan materi akreditasinya, dengan syarat mutlak: **Identitas karakter Kapten RUSA ERIK (wajah rusa, tanduk emas, seragam surveyor, dan kepribadiannya) tetap dipertahankan 100% di semua mode permainan**.
+
+```text
+Sistem Multi-Genre Akreditasi:
+├── MAP 1 : Pokja TKRS ➔ FLAPPY GLIDER DIRGANTARA (Gaya Flappy Bird / Penerbangan Udara)
+├── MAP 2 : Pokja PMKP ➔ MOTO PATROL RUNNER (Patroli Motor Medis SI IMUT & Road Hazards)
+└── MAP 3 - 16        ➔ CLASSIC PLATFORMER (Petualangan Telusur Koridor & Ruangan Rumah Sakit)
+```
+
+---
+
+### ✈️ 2. MAP 1: Pokja TKRS • Flappy Glider Dirgantara
+
+#### A. Karakter Kapten Erik (Mode Aviator Glider)
+* **Kacamata Goggle Aviator**: Kacamata penerbang militer berlisensi cyan bercahaya di matanya.
+* **Syal Penerbang Dirgantara**: Syal putih berkibar anggun di leher Kapten Erik ditiup angin kencang.
+* **Sayap Glider Titanium-Cyan**: Sayap aerodinamis modern di punggung dengan lampu navigasi *starboard* (hijau) & *port* (merah).
+* **Dual Micro Jet Thrusters**: Sepasang nosel pendorong di bawah ransel harness yang menyemburkan api jet biru/cyan saat mengepakkan sayap.
+* **Tanduk Emas Rusa**: Tetap tegak berdiri dan bergoyang mengikuti turbulensi udara.
+
+#### B. Mekanik Fisika Penerbangan (Flappy Physics)
+* **Auto-Horizontal Cruise**: Terbang maju otomatis dengan kecepatan adaptif (`vx ≈ 4.0 - 5.4`).
+* **Kepak Sayap / Thrust**: Sentuhan layar kanvas, klik mouse, atau tombol Spasi/W menghasilkan gaya angkat seketika (`vy = -6.4`) diiringi desis jet partikel.
+* **Aerodynamic Dynamic Tilt**: Sudut kemiringan badan (`flightAngle`) bergerak halus mengikuti laju vertikal (menukik saat jatuh, mendongak saat mengepak).
+* **Pilar Regulasi Akreditasi**: 9 pasang pilar tiang kokoh dengan celah lapang (*gap* 175px) bertuliskan Visi, Misi, Falsafah, Motto, Corporate Bylaws, dan Ka RSAU.
+* **Radar Gateway Kuis**: 9 Pos Kuis ditampilkan sebagai **Gerbang Radar Akreditasi Melayang** dengan cincin pemindai hologram berputar.
+
+---
+
+### 🏍️ 3. MAP 2: Pokja PMKP • Moto Patrol Runner (SI IMUT)
+
+#### A. Karakter Kapten Erik (Mode Rider Motor Medis)
+* **Helm Keselamatan RSAU**: Helm dinas putih berlis hijau toska dengan slot khusus tempat tanduk emas Kapten Erik menjulang kokoh.
+* **Posisi Berkendara Sportif**: Kapten Erik membungkuk mantap memegang stang kemudi motor patroli.
+* **Motor Patroli Medis RSAU dr. Esnawan Antariksa**:
+  * Roda *alloy spoked* berputar kencang dengan tapak ban karet hitam.
+  * *Fairing* aerodinamis teal/emerald dengan lambang Palang Merah Medis RSAU.
+  * Lampu sorot depan (*LED Headlight Beam*) memancarkan berkas cahaya kerucut kuning yang menyinari aspal jalanan di depan.
+  * Boks utilitas darurat (P3K) di bagian belakang dilengkapi strobo sirine darurat patroli merah-biru yang berkedip cepat.
+  * Knalpot krom yang mengepulkan asap partikel putih secara berkala.
+
+#### B. Mekanik Balap Motor & Rintangan (Runner Physics)
+* **Cruising Speed**: Motor melaju kencang di atas jalan aspal mulus (`vx ≈ 6.2 - 8.5`).
+* **Lompatan Motor (Road Jump)**: Menekan Spasi, Panah Atas, atau tap layar membuat motor melompat tinggi (`vy = -10.5`) dengan rotasi *pitch* suspensi dinamis.
+* **Rintangan Jalan K3/IKP (Moto Obstacles)**:
+  1. *Tumpahan B3 / Cairan IKP*: Genangan limbah kimia beracun dengan ikon bahaya `☣`.
+  2. *Kerucut Lalu Lintas K3*: Kerucut oranye dengan pita ganda reflektif putih.
+  3. *Barikade K3*: Penghalang zebra kuning-hitam berlampu sirine amber berkedip.
+* **Drive-Thru Checkpoint Gantries**: 8 Pos Kuis PMKP berdiri megah melintangi jalan raya sebagai **Gerbang Pemeriksaan Drive-Thru SI IMUT** lengkap dengan papan LED digital, lampu lalu lintas merah/hijau, dan palang pintu otomatis yang terbuka saat kuis dijawab benar.
+
+---
+
+### 🕹️ 4. Kompatibilitas Multi-Platform & Kontrol Responsif
+1. **Direct Canvas Pointer Support**: Menyentuh atau mengklik area kanvas game di mana saja secara langsung mengepakkan sayap glider (Flappy) atau melompatkan motor (Moto).
+2. **Dynamic Virtual Buttons (Mobile)**: Tombol aksi mobile di pojok kanan bawah otomatis berganti ikon dan label:
+   * Mode Flappy: `🪽 KEPAK`
+   * Mode Moto: `🏍️ LOMPAT`
+   * Mode Platform: `▲ LOMPAT`
+3. **HUD Multi-Genre Badges**: Bar status atas menampilkan badge jenis permainan aktif:
+   * `✈️ FLAPPY GLIDER | POKJA TKRS`
+   * `🏍️ MOTO RUNNER | POKJA PMKP`
+   * `🏃 PLATFORMER | POKJA SKP / MAP LAINNYA`
+
 
 
 
