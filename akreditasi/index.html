@@ -236,23 +236,23 @@
 
             <!-- Active Map Selector Tabs (6 Pokja Aktif) -->
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-1.5 sm:gap-2 mt-1 mb-3">
-                <button id="tabSelectTKRS" class="py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow">
-                    <span>🏛️</span> MAP 1: TKRS
+                <button id="tabSelectTKRS" class="py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow">
+                    MAP 1: TKRS
                 </button>
-                <button id="tabSelectPMKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
-                    <span>🛡️</span> MAP 2: PMKP
+                <button id="tabSelectPMKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 2: PMKP
                 </button>
-                <button id="tabSelectSKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
-                    <span>🏷️</span> MAP 3: SKP
+                <button id="tabSelectSKP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 3: SKP
                 </button>
-                <button id="tabSelectMFK" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
-                    <span>🧯</span> MAP 4: MFK
+                <button id="tabSelectMFK" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 4: MFK
                 </button>
-                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
-                    <span>💊</span> MAP 5: PROGNAS
+                <button id="tabSelectPROGNAS" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 5: PROGNAS
                 </button>
-                <button id="tabSelectPAP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all">
-                    <span>🩺</span> MAP 6: PAP
+                <button id="tabSelectPAP" class="py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all">
+                    MAP 6: PAP
                 </button>
             </div>
 
@@ -4016,12 +4016,12 @@
         const badgePAP = document.getElementById("badgePAP");
 
         // Reset all tabs
-        if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
-        if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
-        if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
-        if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
-        if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
-        if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all";
+        if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-indigo-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-orange-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-purple-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -4050,7 +4050,7 @@
         }
 
         if (currentLevel.id === "PAP") {
-            if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-rose-400/80 bg-rose-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-3 rounded-xl border border-rose-400/80 bg-rose-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PAP • MAP 6 (AKTIF)";
                 menuSubtitle.className = "text-xs text-rose-400 font-bold uppercase tracking-wider";
@@ -4067,7 +4067,7 @@
                 if (badgePAP) { badgePAP.innerText = "TELUSUR AKTIF"; badgePAP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "PROGNAS") {
-            if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabPROGNAS) tabPROGNAS.className = "py-2 px-2 sm:px-3 rounded-xl border border-purple-400/80 bg-purple-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PROGNAS • MAP 5 (AKTIF)";
                 menuSubtitle.className = "text-xs text-purple-400 font-bold uppercase tracking-wider";
@@ -4084,7 +4084,7 @@
                 if (badgePROGNAS) { badgePROGNAS.innerText = "TELUSUR AKTIF"; badgePROGNAS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "MFK") {
-            if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-orange-400/80 bg-orange-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabMFK) tabMFK.className = "py-2 px-2 sm:px-3 rounded-xl border border-orange-400/80 bg-orange-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA MFK • MAP 4 (AKTIF)";
                 menuSubtitle.className = "text-xs text-orange-400 font-bold uppercase tracking-wider";
@@ -4101,7 +4101,7 @@
                 if (badgeMFK) { badgeMFK.innerText = "TELUSUR AKTIF"; badgeMFK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-orange-500/20 text-orange-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "SKP") {
-            if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-indigo-400/80 bg-indigo-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabSKP) tabSKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-indigo-400/80 bg-indigo-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA SKP • MAP 3 (AKTIF)";
                 menuSubtitle.className = "text-xs text-indigo-400 font-bold uppercase tracking-wider";
@@ -4118,7 +4118,7 @@
                 if (badgeSKP) { badgeSKP.innerText = "TELUSUR AKTIF"; badgeSKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[9px] font-bold"; }
             }
         } else if (currentLevel.id === "PMKP") {
-            if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabPMKP) tabPMKP.className = "py-2 px-2 sm:px-3 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA PMKP • MAP 2 (AKTIF)";
                 menuSubtitle.className = "text-xs text-emerald-400 font-bold uppercase tracking-wider";
@@ -4135,7 +4135,7 @@
                 if (badgePMKP) { badgePMKP.innerText = "TELUSUR AKTIF"; badgePMKP.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
             }
         } else {
-            if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center gap-1 transition-all shadow";
+            if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-3 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[11px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA TKRS • MAP 1 (AKTIF)";
                 menuSubtitle.className = "text-xs text-sky-400 font-bold uppercase tracking-wider";
