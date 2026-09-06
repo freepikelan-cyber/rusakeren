@@ -407,12 +407,12 @@
                     <span id="badgeMFK" class="inline-block mt-2 px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
-                <!-- 5. MRMIK -->
-                <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/40 opacity-75">
-                    <div class="text-[10px] font-bold text-slate-400">DUNIA 5</div>
-                    <div class="text-xs md:text-sm font-bold text-slate-200">MRMIK</div>
-                    <div class="text-[11px] text-slate-400 leading-tight mt-0.5">Manajemen Rekam Medis & Info Kesehatan</div>
-                    <span class="inline-block mt-2 px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 text-[9px]">Terkunci 🔒</span>
+                <!-- 5. MRMIK (ACTIVE) -->
+                <div id="selectPokjaMRMIK" class="p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-emerald-950/40 transition-all">
+                    <div class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">MAP 9 / DUNIA 5</div>
+                    <div class="text-xs md:text-sm font-bold text-white">MRMIK</div>
+                    <div class="text-[11px] text-slate-300 leading-tight mt-0.5">Manajemen Rekam Medis & Info Kesehatan (RME SIMRS, 4 Identitas PPA, Retensi 3 Thn & KLPCM)</div>
+                    <span id="badgeMRMIK" class="inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold">SIAP DITELUSURI</span>
                 </div>
 
                 <!-- 6. PPI (ACTIVE) -->
@@ -2206,6 +2206,486 @@
     ];
 
     /* ==========================================================================
+       POKJA MRMIK (MANAJEMEN REKAM MEDIS & INFORMASI KESEHATAN) - 8 POS RESMI
+       Standar Akreditasi Kemenkes RI (STARKES) & Regulasi RSAU dr. Esnawan Antariksa
+       ========================================================================== */
+    const MRMIK_QUIZ_BANK = [
+        {
+            id: "mrmik_identitas_ppa",
+            posName: "Pos 1: Komponen Identitas Wajib Penulisan Rekam Medis",
+            question: "Berdasarkan standar MRMIK, apa saja 4 komponen identitas yang wajib dicantumkan oleh PPA pada setiap catatan rekam medis?",
+            options: [
+                "Nomor registrasi rawat inap, gelar kebangsawanan, stempel basah ruangan, dan paraf dokter pendamping.",
+                "Nama jelas, tanda tangan (atau paraf), tanggal, dan waktu (jam) penulisan.",
+                "Nomor induk pegawai PPA, tanggal verifikasi surveior, cap dinas kepala rumah sakit, dan unit kerja.",
+                "Nama panggilan perawat, nomor surat izin praktik, tanggal pengembalian berkas, dan nomor telepon seluler."
+            ],
+            correct: 1,
+            explanation: "Tepat sekali! Sesuai standar MRMIK di RSAU dr. Esnawan Antariksa, setiap catatan asuhan PPA wajib mencantumkan 4 komponen: Nama Jelas, Tanda Tangan (atau Paraf), Tanggal, dan Waktu (Jam) penulisan."
+        },
+        {
+            id: "mrmik_rme_simrs_keamanan",
+            posName: "Pos 2: Ruang Lingkup & Keamanan RME SIMRS",
+            question: "Di manakah Rekam Medis Elektronik (RME) dilaksanakan di RSAU dr. Esnawan Antariksa serta bagaimana keamanannya dijaga?",
+            options: [
+                "Dilaksanakan di Unit Rawat Jalan, Rawat Inap, dan Penunjang, tersimpan aman di server SIMRS dengan hak akses berjenjang.",
+                "Hanya diterapkan pada loket kasir pendaftaran, disimpan di komputer lokal kasir tanpa backup pusat terpadu.",
+                "Khusus di ruang komite medik untuk telaah administratif, disimpan dalam flashdisk yang dipegang ketua komite.",
+                "Diterapkan di kantin dan koperasi rumah sakit, menggunakan sambungan internet publik tanpa kata sandi akun."
+            ],
+            correct: 0,
+            explanation: "Sangat Benar! RME di RSAU dr. Esnawan Antariksa diterapkan terpadu di Unit Rawat Jalan, Rawat Inap, dan Penunjang, dengan database terpusat aman di server SIMRS yang dilindungi hak akses akun berjenjang."
+        },
+        {
+            id: "mrmik_hak_akses_proteksi_fisik",
+            posName: "Pos 3: Hak Akses Data & Proteksi Fisik Ruang Rekam Medis",
+            question: "Siapakah yang berhak mengakses dan mengisi rekam medis, serta apa bukti perlindungan fisik berkas di RSAU?",
+            options: [
+                "Seluruh staf non-medis dan keluarga pasien, berkas disimpan di ruang terbuka tanpa kunci pengaman khusus.",
+                "Tenaga keamanan satpam rumah sakit, berkas disimpan di pos jaga utama gerbang pangkalan udara.",
+                "PPA berwenang dengan akun masing-masing; ruang RM diproteksi akses biometrik sidik jari (fingerprint) dan rak roll-o-pack.",
+                "Hanya surveior akreditasi eksternal saat kunjungan visitasi, berkas disimpan dalam brankas khusus bendahara."
+            ],
+            correct: 2,
+            explanation: "Hebat! Pengisian dan akses data rekam medis hanya diperuntukkan bagi PPA yang memiliki akun masing-masing. Bukti perlindungan fisik meliputi pintu masuk biometrik sidik jari (fingerprint) dan rak roll-o-pack."
+        },
+        {
+            id: "mrmik_pprm_kualifikasi_kepala",
+            posName: "Pos 4: Tata Kerja Unit Rekam Medis & Kualifikasi Kepala Unit",
+            question: "Apa landasan tata kerja unit pengelola Rekam Medis dan kualifikasi kepala unit di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Dikelola berdasar PPRM, Pedoman Organisasi, Program Kerja, serta dipimpin personel berijazah D3 Rekam Medis bersertifikasi.",
+                "Menggunakan tata tertib internal piket jaga harian dan dipimpin oleh staf administrasi logistik perbengkelan pangkalan.",
+                "Berdasarkan pedoman pengelolaan inventaris alat berat dan dipimpin oleh teknisi instalasi pemeliharaan sarana.",
+                "Tidak memerlukan pedoman tertulis khusus dan kepemimpinan unit digilir setiap pekan antar perawat pelaksana."
+            ],
+            correct: 0,
+            explanation: "Tepat! Unit Rekam Medis berpedoman pada PPRM (Pedoman Pelayanan Rekam Medis), Pedoman Organisasi, dan Program Kerja, serta Kepala Unit Rekam Medis wajib berijazah minimal D3 Rekam Medis bersertifikasi."
+        },
+        {
+            id: "mrmik_unit_numbering_bundle",
+            posName: "Pos 5: Prinsip Satu Pasien Satu Nomor RM (Unit Numbering System)",
+            question: "Apakah bukti sah bahwa setiap pasien yang berobat di rumah sakit hanya memiliki 1 (satu) nomor Rekam Medis?",
+            options: [
+                "Buku catatan pendaftaran harian yang nomor antreannya diperbarui secara acak setiap pergantian bulan dinas.",
+                "Kepemilikan Kartu Berobat pasien dan regulasi sistem penomoran unit (Unit Numbering System) yang ditetapkan di PPRM.",
+                "Kuitansi pembayaran biaya pendaftaran yang mencantumkan nomor seri pembayaran bendahara penerimaan negara.",
+                "Surat izin keluar asrama prajurit dan bukti pembayaran retribusi kebersihan lingkungan perumahan rumah sakit."
+            ],
+            correct: 1,
+            explanation: "Benar sekali! Prinsip 1 pasien 1 nomor RM (Unit Numbering System) dibuktikan lewat Kartu Berobat pasien dan regulasi penataan susunan bundle rekam medis yang ditetapkan resmi dalam PPRM."
+        },
+        {
+            id: "mrmik_simbol_singkatan_klpcm",
+            posName: "Pos 6: Regulasi Simbol, Singkatan & Monitoring KLPCM",
+            question: "Bagaimana rumah sakit memonitor kepatuhan regulasi penulisan simbol, singkatan yang dilarang, dan kelengkapan berkas RM?",
+            options: [
+                "Dilakukan evaluasi berkala oleh kepala gudang farmasi saat pemeriksaan stok obat kadaluarsa setiap akhir tahun.",
+                "Menunggu adanya laporan keluhan tertulis dari keluarga pasien yang disampaikan melalui kotak saran poliklinik.",
+                "Melalui evaluasi KLPCM (Ketidaklengkapan Pengisian Catatan Medis) bulanan yang dilaporkan ke pimpinan dan unit pelayanan.",
+                "Melakukan pemeriksaan acak oleh staf keuangan rumah sakit saat perhitungan pembagian insentif jasa pelayanan staf."
+            ],
+            correct: 2,
+            explanation: "Tepat! Monitoring regulasi diagnosis, kode prosedur, simbol baku, singkatan terlarang, serta kelengkapan berkas dilakukan melalui evaluasi KLPCM bulanan dan dilaporkan ke pimpinan serta unit rawat jalan dan rawat inap."
+        },
+        {
+            id: "mrmik_pelepasan_informasi_retensi",
+            posName: "Pos 7: Pelepasan Informasi Medis & Kebijakan Retensi Berkas",
+            question: "Bagaimana regulasi pelepasan informasi medis dan penetapan masa retensi berkas rekam medis di RSAU dr. Esnawan Antariksa?",
+            options: [
+                "Informasi medis boleh disebarkan bebas di media sosial; berkas rekam medis dimusnahkan setiap enam bulan sekali.",
+                "Wajib mengisi Formulir Pelepasan Informasi resmi; masa retensi aktif berkas ditetapkan minimal 3 tahun sesuai PPRM.",
+                "Pelepasan informasi cukup secara lisan tanpa bukti tanda tangan; berkas wajib disimpan selamanya tanpa pemilahan retensi.",
+                "Hanya boleh dilepas kepada pihak kepolisian militer; seluruh berkas rekam medis dibakar setiap pergantian direktur."
+            ],
+            correct: 1,
+            explanation: "Sangat Benar! Pelepasan informasi medis wajib menggunakan Formulir Pelepasan Informasi resmi, dan masa retensi berkas rekam medis aktif di RSAU dr. Esnawan Antariksa ditetapkan minimal 3 tahun berdasarkan regulasi PPRM."
+        },
+        {
+            id: "mrmik_review_downtime",
+            posName: "Pos 8: Pelaksanaan Tim Review Rekam Medis & Prosedur Down Time",
+            question: "Berapa bulan sekali pelaksanaan review rekam medis dilaporkan, dan apa prosedur yang disiapkan saat sistem RME henti (Down Time)?",
+            options: [
+                "Laporan review dibuat setiap 5 tahun sekali; pelayanan pasien wajib dihentikan total sampai server SIMRS menyala kembali.",
+                "Laporan review per semester; petugas dipersilakan pulang ke rumah masing-masing selama jaringan internet terputus.",
+                "Laporan review dibuat setahun sekali; seluruh data pasien yang masuk selama server mati tidak perlu dicatat kembali.",
+                "Laporan review dilaksanakan per 3 bulan; disiapkan 2 prosedur Down Time yaitu Terencana (Planned) dan Tidak Terencana."
+            ],
+            correct: 3,
+            explanation: "Luar Biasa! Tim Review Rekam Medis melaporkan hasil auditnya setiap 3 bulan. Rumah sakit menyiapkan 2 prosedur penanganan waktu henti data (Down Time): Terencana (pemeliharaan rutin) dan Tidak Terencana (kendala teknis)."
+        }
+    ];
+
+    /* ==========================================================================
+       POKJA REFERENSI STARKES (PPK, HPK, PP, KE, PKPO) - BANK SOAL STANDAR
+       ========================================================================== */
+    const PPK_QUIZ_BANK = [
+        {
+            id: "ppk_pengertian_rs_pendidikan",
+            posName: "Pos 1: Pengertian Rumah Sakit Pendidikan",
+            question: "Berdasarkan UU RI No. 20 Tahun 2013, apakah definisi dari Rumah Sakit Pendidikan?",
+            options: [
+                "RS yang khusus menyelenggarakan seminar ilmiah bulanan bagi dokter spesialis pensiunan.",
+                "RS dengan fungsi tempat pendidikan, penelitian, dan pelayanan kesehatan terpadu bidang kedokteran & multiprofesi.",
+                "RS swasta yang menyediakan asrama inap bagi mahasiswa kedokteran tingkat pertama.",
+                "Fasilitas pangkalan militer yang bertugas menyelenggarakan pelatihan baris-berbaris bagi tenaga kesehatan."
+            ],
+            correct: 1,
+            explanation: "Sesuai UU No. 20/2013, RS Pendidikan adalah RS yang mempunyai fungsi sebagai tempat pendidikan, penelitian, dan pelayanan kesehatan secara terpadu bidang kedokteran dan tenaga kesehatan lainnya secara multiprofesi."
+        },
+        {
+            id: "ppk_jenis_rs_pendidikan",
+            posName: "Pos 2: Jenis RS Pendidikan & Peran RSAU",
+            question: "Apa saja jenis RS Pendidikan, dan apa status peran RSAU dr. Esnawan Antariksa?",
+            options: [
+                "RS Pendidikan Utama, Satelit, dan Afiliasi; RSAU sebagai RS Pendidikan Utama FK Gunadarma dan Satelit FK Unkrida.",
+                "RS Pendidikan Tingkat 1, 2, dan 3; RSAU berstatus RS Pendidikan Pembantu Perawatan Pasien Darurat.",
+                "RS Pendidikan Nasional dan Daerah; RSAU berstatus pusat penguji ujian masuk perguruan tinggi negeri.",
+                "RS Khusus Militer dan Sipil; RSAU berstatus tempat praktik dokter cadangan matra udara."
+            ],
+            correct: 0,
+            explanation: "Jenis RS Pendidikan meliputi Utama, Satelit, dan Afiliasi. RSAU dr. Esnawan Antariksa adalah RS Pendidikan Utama bagi FK Universitas Gunadarma dan RS Pendidikan Satelit untuk FK Unkrida."
+        },
+        {
+            id: "ppk_komkordik",
+            posName: "Pos 3: Komite Koordinasi Pendidikan (Komkordik)",
+            question: "Apakah fungsi utama Komkordik (Komite Koordinasi Pendidikan) di RS Pendidikan?",
+            options: [
+                "Mengatur penyewaan kantin kampus kedokteran di dalam area perumahan prajurit.",
+                "Unit fungsional di RS Pendidikan yang mengoordinasikan seluruh proses pembelajaran klinik peserta didik.",
+                "Menentukan kelulusan ujian skripsi mahasiswa kedokteran tingkat sarjana.",
+                "Mengawasi anggaran pembelanjaan alat tulis dinas rektorat universitas mitra."
+            ],
+            correct: 1,
+            explanation: "Komkordik adalah unit fungsional yang berkedudukan di RS Pendidikan untuk melakukan koordinasi terhadap seluruh pembelajaran klinik peserta didik."
+        },
+        {
+            id: "ppk_kewenangan_peserta_didik",
+            posName: "Pos 4: Batasan Kewenangan Peserta Didik",
+            question: "Apakah tindakan medis yang dilakukan peserta didik klinis di rumah sakit harus disupervisi?",
+            options: [
+                "Peserta didik bebas melakukan tindakan operatif besar mandiri tanpa persetujuan DPJP.",
+                "Tindakan medis peserta didik wajib berada dalam supervisi pendidik klinis sesuai tingkat supervisinya.",
+                "Hanya disupervisi bila keluarga pasien mengajukan permintaan tertulis bermaterai.",
+                "Peserta didik tidak diperkenankan sama sekali menyentuh pasien maupun rekam medis."
+            ],
+            correct: 1,
+            explanation: "Tindakan medis peserta didik merupakan bagian proses pendidikan yang wajib berada dalam supervisi pendidik klinis sesuai tingkat supervisinya."
+        },
+        {
+            id: "ppk_tingkat_supervisi",
+            posName: "Pos 5: Empat Tingkat Supervisi Peserta Didik",
+            question: "Apa saja 4 tingkat supervisi peserta didik dalam pelayanan klinis rumah sakit?",
+            options: [
+                "Supervisi Formal, Informal, Khusus, dan Terbuka.",
+                "Supervisi Rendah, Supervisi Moderat, Supervisi Moderat Tinggi, dan Supervisi Tinggi.",
+                "Supervisi Harian, Mingguan, Bulanan, dan Tahunan.",
+                "Supervisi Tingkat Dokter Muda, Residen, Spesialis, dan Konsultan."
+            ],
+            correct: 1,
+            explanation: "Empat tingkat supervisi peserta didik adalah: 1. Supervisi Rendah, 2. Supervisi Moderat, 3. Supervisi Moderat Tinggi, dan 4. Supervisi Tinggi (asesmen belum sahih, pencatatan RM wajib DPJP)."
+        },
+        {
+            id: "ppk_level_kompetensi",
+            posName: "Pos 6: Empat Level Kompetensi Supervisi",
+            question: "Pada level kompetensi berapakah peserta didik telah kompeten dan dapat membantu serta mengajar yang lain?",
+            options: [
+                "Level 1: Masih butuh bimbingan lanjut dan supervisi intensif.",
+                "Level 2: Pengembangan kompetensi dengan bantuan dan supervisi.",
+                "Level 3: Hampir tidak membutuhkan bantuan.",
+                "Level 4: Kompeten, tidak butuh bantuan, dan dapat membantu serta mengajar yang lain."
+            ],
+            correct: 3,
+            explanation: "Level 4 merupakan tingkatan di mana peserta didik dinilai kompeten mandiri, tidak memerlukan bantuan, serta mampu mendampingi dan mengajar peserta didik lain."
+        }
+    ];
+
+    const HPK_QUIZ_BANK = [
+        {
+            id: "hpk_hak_pasien_uu44",
+            posName: "Pos 1: Hak Pasien Rumah Sakit (UU 44/2009)",
+            question: "Manakah yang merupakan salah satu hak pasien di rumah sakit sesuai UU RI No. 44 Tahun 2009?",
+            options: [
+                "Pasien berhak menentukan besaran tagihan rumah sakit secara sepihak tanpa rujukan tarif.",
+                "Pasien berhak memperoleh layanan kesehatan bermutu, manusiawi, adil, jujur, dan tanpa diskriminasi.",
+                "Pasien berhak membawa pulang seluruh peralatan medis kamar operasi ke rumah pribadi.",
+                "Pasien berhak menolak segala bentuk aturan jam besuk kunjungan dan membawa rombongan bebas."
+            ],
+            correct: 1,
+            explanation: "Sesuai UU 44/2009, pasien berhak memperoleh layanan yang manusiawi, adil, jujur, tanpa diskriminasi, serta bermutu sesuai standar profesi dan keselamatan."
+        },
+        {
+            id: "hpk_informed_consent",
+            posName: "Pos 2: Prosedur Persetujuan Tindakan Kedokteran (Informed Consent)",
+            question: "Kapan Informed Consent wajib diperoleh dari pasien atau keluarga?",
+            options: [
+                "Hanya setelah tindakan operasi selesai dilakukan di ruang pemulihan.",
+                "Sebelum tindakan operasi, anestesi, sedasi, produk darah, dan tindakan berisiko tinggi dilakukan.",
+                "Hanya bila pasien dirawat di ruang VIP dan meminta penjelasan tambahan.",
+                "Cukup dengan persetujuan lisan perawat saat pasien mendaftar di loket depan."
+            ],
+            correct: 1,
+            explanation: "Informed consent wajib diperoleh sebelum operasi, anestesi, penggunaan darah/produk darah, serta tindakan dan pengobatan lain yang berisiko tinggi."
+        },
+        {
+            id: "hpk_hirarki_persetujuan",
+            posName: "Pos 3: Kriteria Pemberi Persetujuan Tindakan Medis",
+            question: "Siapakah yang berhak memberikan persetujuan tindakan medis bagi pasien yang belum berusia 21 tahun dan belum menikah?",
+            options: [
+                "Pasien sendiri secara mandiri tanpa memerlukan izin keluarga.",
+                "Ayah/Ibu kandung atau saudara kandung bila orang tua berhalangan.",
+                "Kepala lingkungan RT/RW tempat tinggal pasien.",
+                "Pihak asuransi kesehatan yang menanggung biaya perawatan."
+            ],
+            correct: 1,
+            explanation: "Bagi pasien di bawah 21 tahun dan belum menikah, hak persetujuan/penolakan diberikan oleh ayah/ibu kandung, atau saudara kandung sesuai urutan hak perundang-undangan."
+        },
+        {
+            id: "hpk_privasi_dan_kekerasan",
+            posName: "Pos 4: Perlindungan Privasi Pasien & Pencegahan Kekerasan",
+            question: "Bagaimana rumah sakit melindungi privasi dan keamanan pasien dari potensi kekerasan fisik?",
+            options: [
+                "Membatasi konsultasi antar pasien dengan tirai penyekat serta mewajibkan pemakaian tanda pengenal (gelang/nametag/visitor).",
+                "Menutup seluruh jendela poliklinik dengan papan triplek permanen tanpa ventilasi.",
+                "Melarang seluruh keluarga pasien memasuki lingkungan rumah sakit selama 24 jam.",
+                "Memasang kamera pengawas di dalam toilet pasien ruang rawat inap."
+            ],
+            correct: 0,
+            explanation: "Privasi dijaga dengan pembatas tirai saat pemeriksaan/tatalaksana, dan proteksi kekerasan ditegakkan lewat gelang identitas pasien, kartu visitor, dan nametag karyawan."
+        },
+        {
+            id: "hpk_barang_milik_pasien",
+            posName: "Pos 5: Perlindungan Barang Milik Pasien",
+            question: "Kategori pasien manakah yang barang berharganya wajib dilindungi oleh rumah sakit?",
+            options: [
+                "Seluruh pengunjung kantin rumah sakit saat jam makan siang.",
+                "Pasien dengan kesadaran menurun, gangguan mental, cedera berat, operasi, atau tanpa pendamping.",
+                "Staf medis yang sedang menjalankan tugas jaga dinas malam.",
+                "Pengemudi ambulans yang sedang beristirahat di pangkalan."
+            ],
+            correct: 1,
+            explanation: "Perlindungan barang berharga (uang, logam mulia, dokumen penting) difokuskan bagi pasien kesadaran menurun, cedera berat, pasien operasi, atau tanpa keluarga pendamping."
+        },
+        {
+            id: "hpk_penolakan_resusitasi_dnr",
+            posName: "Pos 6: Penolakan Resusitasi & Formulir Do Not Resuscitate (DNR)",
+            question: "Apa langkah rumah sakit apabila pasien atau keluarga memutuskan menolak tindakan resusitasi (DNR)?",
+            options: [
+                "Mengabaikan keputusan keluarga dan tetap melakukan RJP paksa tanpa penjelasan.",
+                "Menghormati keputusan, mengisi lengkap Formulir DNR, mencatat di rekam medis, dan mengomunikasikannya ke tim rawat.",
+                "Meminta pasien segera keluar dari rumah sakit saat itu juga.",
+                "Melaporkan keputusan penolakan ke pihak kepolisian sebagai tindak pidana."
+            ],
+            correct: 1,
+            explanation: "Rumah sakit menghormati hak pasien; keputusan DNR wajib dicatat lengkap di rekam medis dan formulir Do Not Resuscitate (DNR) serta dikomunikasikan ke seluruh tim asuhan."
+        }
+    ];
+
+    const PP_QUIZ_BANK = [
+        {
+            id: "pp_waktu_pengkajian_awal",
+            posName: "Pos 1: Batas Waktu Penyelesaian Pengkajian Awal",
+            question: "Kapan pengkajian awal medis dan keperawatan pasien rawat inap harus diselesaikan?",
+            options: [
+                "Dalam waktu 24 jam pertama sejak pasien masuk sebagai pasien rawat inap.",
+                "Boleh diselesaikan saat pasien sudah dinyatakan sembuh dan akan pulang.",
+                "Paling lambat 7 hari kerja setelah konfirmasi hasil laboratorium rujukan.",
+                "Tidak ada batas waktu baku selama pasien masih mendapatkan infus cairan."
+            ],
+            correct: 0,
+            explanation: "Pengkajian awal medis dan keperawatan harus diselesaikan dalam waktu 24 jam pertama sejak pasien masuk rawat inap (untuk gawat darurat harus segera)."
+        },
+        {
+            id: "pp_skrining_gizi_mst",
+            posName: "Pos 2: Skrining Status Gizi Pasien (MST & Strong Kids)",
+            question: "Perangkat skrining gizi apa yang digunakan untuk pasien dewasa dan anak di rumah sakit?",
+            options: [
+                "Skala Braden untuk dewasa dan Skala Humpty Dumpty untuk anak.",
+                "MST (Malnutrition Screening Tools) untuk dewasa dan Strong Kids untuk pasien anak.",
+                "Uji fungsi hati untuk dewasa dan tes Mantoux untuk anak.",
+                "Kuesioner kepuasan makanan kantin rumah sakit."
+            ],
+            correct: 1,
+            explanation: "Status gizi dinilai dengan MST (Malnutrition Screening Tools) untuk dewasa dan Strong Kids untuk anak, dilakukan oleh perawat dalam waktu <= 24 jam pertama."
+        },
+        {
+            id: "pp_skala_pengkajian_nyeri",
+            posName: "Pos 3: Skala Pengkajian Rasa Nyeri Pasien",
+            question: "Skala apakah yang digunakan untuk mengkaji derajat nyeri pada pasien bayi usia di bawah 1 tahun?",
+            options: [
+                "Numeric Rating Scale (NRS).",
+                "Wong Baker Faces Rating Scale.",
+                "Neonatal Infants Pain Scale (NIPS).",
+                "Visual Analogue Scale (VAS)."
+            ],
+            correct: 2,
+            explanation: "NIPS (Neonatal Infants Pain Scale) digunakan untuk usia < 1 tahun, FLACCS untuk usia 1-3 tahun, Wong Baker Faces > 3 tahun, dan Numeric Scale untuk dewasa."
+        },
+        {
+            id: "pp_alur_nilai_kritis_lab",
+            posName: "Pos 4: Waktu Pelaporan Nilai Kritis Laboratorium",
+            question: "Berapa batas waktu maksimal pelaporan hasil nilai kritis laboratorium kepada dokter penanggung jawab (DPJP)?",
+            options: [
+                "Maksimal dalam waktu <= 30 menit setelah hasil diverifikasi dokter patologi klinik.",
+                "Boleh dilaporkan keesokan harinya saat jam visite pagi dokter ruangan.",
+                "Dalam waktu 24 jam bersamaan dengan rekapitulasi keuangan pasien.",
+                "Tidak ada batas waktu khusus selama pasien tidak mengeluh pusing."
+            ],
+            correct: 0,
+            explanation: "Hasil pemeriksaan kategori nilai kritis wajib diulang pemeriksaannya, diverifikasi dokter patklin, dan dilaporkan ke perawat/DPJP dalam waktu <= 30 menit."
+        },
+        {
+            id: "pp_nilai_kritis_spesifik",
+            posName: "Pos 5: Rentang Nilai Kritis Pemeriksaan Laboratorium",
+            question: "Manakah hasil pemeriksaan glukosa darah dan elektrolit yang tergolong Nilai Kritis?",
+            options: [
+                "Glukosa 100 mg/dl dan Natrium 140 mmol/L.",
+                "Glukosa darah < 50 mg/dl atau > 500 mg/dl, dan Kalium <= 3 mmol/L.",
+                "Glukosa 120 mg/dl dan Kalium 4.5 mmol/L.",
+                "Hemoglobin 14 g/dl dan Trombosit 250.000/mm3."
+            ],
+            correct: 1,
+            explanation: "Nilai kritis kimia klinik mencakup Glukosa < 50 mg/dl atau > 500 mg/dl, Natrium <= 120 mmol/L, Kalium <= 3 mmol/L, dan Hemoglobin <= 5 g/dl atau >= 18 g/dl."
+        },
+        {
+            id: "pp_komponen_asesmen_awal",
+            posName: "Pos 6: Komponen Lengkap Pengkajian Pasien Baru",
+            question: "Apa saja komponen data yang dikaji saat penerimaan pasien baru rawat inap/jalan?",
+            options: [
+                "Nomor polis kendaraan bermotor dan catatan rekening koran bank keluarga.",
+                "Riwayat kesehatan, keadaan fisik, skrining nutrisi, nyeri, risiko jatuh, dekubitus, dan psikososiospiritual.",
+                "Tingkat popularitas pasien di media sosial dan keikutsertaan partai politik.",
+                "Daftar menu makanan favorit dan riwayat belanja online tiga bulan terakhir."
+            ],
+            correct: 1,
+            explanation: "Pengkajian awal mencakup riwayat kesehatan, fisik, skrining nutrisi, nyeri, risiko jatuh, risiko dekubitus, serta status psikologis, sosial, ekonomi, dan spiritual."
+        }
+    ];
+
+    const KE_QUIZ_BANK = [
+        {
+            id: "ke_petugas_edukasi",
+            posName: "Pos 1: Petugas Berkompeten Pemberi Edukasi",
+            question: "Siapa sajakah staf rumah sakit yang berwenang memberikan informasi dan edukasi terpadu kepada pasien?",
+            options: [
+                "Hanya staf administrasi loket karcis parkir rumah sakit.",
+                "PPA berkompeten: Dokter, Perawat, Bidan, Apoteker/Farmasi, Nutrisionis, dan Fisioterapis.",
+                "Petugas kebersihan ruang rawat inap dan pengemudi ambulans pangkalan.",
+                "Hanya direktur rumah sakit saat acara seremonial pelepasan pasien sembuh."
+            ],
+            correct: 1,
+            explanation: "Edukasi pasien dan keluarga diberikan secara kolaboratif oleh PPA berkompeten: Dokter, Perawat, Bidan, Apoteker, Nutrisionis, dan Fisioterapis sesuai kebutuhan asuhan."
+        },
+        {
+            id: "ke_asesmen_sebelum_edukasi",
+            posName: "Pos 2: Asesmen Pra-Edukasi Pasien & Keluarga",
+            question: "Faktor apa saja yang harus diasesmen sebelum memberikan edukasi kepada pasien dan keluarga?",
+            options: [
+                "Keyakinan/nilai, kemampuan baca, bahasa yang dipahami, hambatan emosional/fisik, dan kesediaan menerima informasi.",
+                "Status kepemilikan rumah pribadi dan saldo tabungan rekening bank pasien.",
+                "Koleksi kendaraan bermotor keluarga dan riwayat perjalanan liburan ke luar negeri.",
+                "Nilai rapor sekolah dasar dan ijazah perguruan tinggi seluruh anggota keluarga."
+            ],
+            correct: 0,
+            explanation: "Asesmen edukasi meliputi nilai/keyakinan, kemampuan baca, bahasa, hambatan emosional/kognitif/fisik, serta kesediaan pasien menerima informasi edukasi."
+        },
+        {
+            id: "ke_verifikasi_pemahaman",
+            posName: "Pos 3: Verifikasi Keberhasilan Edukasi Pasien",
+            question: "Bagaimana cara PPA memastikan bahwa edukasi yang diberikan telah berhasil diterima oleh pasien?",
+            options: [
+                "Meminta pasien menandatangani kuitansi pembayaran edukasi di kasir.",
+                "Melakukan verifikasi (re-demonstrasi atau tanya jawab) bahwa pasien dan keluarga memahami materi yang disampaikan.",
+                "Mengecek apakah pasien tertidur pulas saat penjelasan berlangsung.",
+                "Mengasumsikan pasien pasti paham tanpa perlu bertanya kembali."
+            ],
+            correct: 1,
+            explanation: "PPA melakukan verifikasi pemahaman dengan meminta pasien mengulang penjelasan atau memperagakan kembali (teach-back / re-demonstrasi) materi edukasi."
+        },
+        {
+            id: "ke_bukti_pendokumentasian",
+            posName: "Pos 4: Bukti Pendokumentasian Edukasi Pasien",
+            question: "Apakah bukti sah bahwa edukasi kesehatan telah diberikan kepada pasien di rumah sakit?",
+            options: [
+                "Brosur materi yang diberikan serta formulir edukasi terintegrasi bertandatangan PPA dan pasien di rekam medis.",
+                "Foto selfie perawat bersama pasien yang diunggah ke status media sosial.",
+                "Struk pembelian obat bebas di minimarket terdekat rumah sakit.",
+                "Catatan lisan antar petugas saat pergantian shift jaga ruangan."
+            ],
+            correct: 0,
+            explanation: "Bukti edukasi adalah materi/leaflet yang diberikan serta pengisian Formulir Pemberian Informasi & Edukasi Terintegrasi yang ditandatangani pemberi dan penerima edukasi di berkas RM."
+        }
+    ];
+
+    const PKPO_QUIZ_BANK = [
+        {
+            id: "pkpo_obat_lasa_tallman",
+            posName: "Pos 1: Pengelolaan Obat LASA/NORUM & Tall Man Lettering",
+            question: "Bagaimana standar penyimpanan dan penulisan obat LASA (Look Alike Sound Alike) / NORUM di rumah sakit?",
+            options: [
+                "Diberi label lingkaran hijau LASA, diberi jarak minimal 2 obat non-LASA, dan ditulis dengan Tall Man Lettering.",
+                "Diletakkan berdampingan langsung dalam satu wadah tanpa pemisah untuk menghemat ruang rak.",
+                "Seluruh obat LASA dilarang disimpan di rumah sakit dan harus diganti dengan obat herbal.",
+                "Ditulis dengan huruf kecil seluruhnya tanpa menggunakan stiker penanda khusus."
+            ],
+            correct: 0,
+            explanation: "Obat LASA diberi stiker lingkaran hijau bertuliskan LASA, diselingi minimal 2 obat non-LASA, dan obat yang dipindahkan kemasannya ditulis dengan Tall Man Lettering (contoh: DIAzepam, LORAzepam)."
+        },
+        {
+            id: "pkpo_elektrolit_pekat",
+            posName: "Pos 2: Penyimpanan Cairan Elektrolit Pekat",
+            question: "Di manakah cairan elektrolit pekat (seperti KCl 7,46% dan NaCl 3%) boleh disimpan di rumah sakit?",
+            options: [
+                "Bebas disimpan di seluruh laci meja perawat ruang rawat inap biasa.",
+                "Hanya di area akses terbatas: Gudang Farmasi, ICU, IGD, Kamar Operasi (OK), dan Hemodialisa dengan label High Alert.",
+                "Diletakkan di meja pendaftaran poliklinik rawat jalan dekat dispenser air minum.",
+                "Disimpan di ruang tunggu pasien agar keluarga mudah mengambilnya saat darurat."
+            ],
+            correct: 1,
+            explanation: "Elektrolit pekat hanya boleh disimpan di area dengan akses terbatas (IFRS, ICU, IGD, OK, HD) dengan stiker High Alert dan peringatan 'Wajib diencerkan sebelum digunakan'."
+        },
+        {
+            id: "pkpo_troli_emergensi",
+            posName: "Pos 3: Kunci & Pengelolaan Troli Obat Emergensi",
+            question: "Bagaimana prosedur pengelolaan troli dan wadah obat emergensi di ruang perawatan pasien?",
+            options: [
+                "Troli dibiarkan tidak terkunci agar siapa saja boleh mengambil obat kapan saja.",
+                "Troli terkunci/disegel, kunci diserahterimakan tiap shift dinas, dan penggunaan diganti resep ke IFRS dalam <= 2 jam.",
+                "Obat emergensi yang terpakai baru boleh diganti saat pemeriksaan audit tahunan pangkalan.",
+                "Kunci troli disimpan oleh keluarga pasien tertua di ruangan rawat inap."
+            ],
+            correct: 1,
+            explanation: "Troli emergensi wajib disegel/terkunci, kunci diserahterimakan setiap shift dinas, penggunaan segera dimintakan penggantian resep ke IFRS dalam 2 jam, dan disupervisi berkala tiap 3 bulan."
+        },
+        {
+            id: "pkpo_pelaporan_medication_error",
+            posName: "Pos 4: Pelaporan Insiden Medication Error",
+            question: "Siapa yang wajib melaporkan insiden keselamatan apabila terjadi medication error (kejadian kesalahan obat)?",
+            options: [
+                "Hanya apoteker kepala gudang farmasi pusat setelah berkoordinasi dengan pengacara rumah sakit.",
+                "Baik dokter maupun perawat yang menemukan kejadian wajib segera melapor sesuai SPO Pelaporan Insiden RS.",
+                "Insiden kesalahan obat tidak perlu dilaporkan bila pasien tidak sampai meninggal dunia.",
+                "Hanya dilaporkan bila keluarga pasien mengajukan tuntutan ganti rugi secara hukum."
+            ],
+            correct: 1,
+            explanation: "Baik dokter, perawat, maupun tenaga kefarmasian yang menemukan medication error wajib segera melaporkannya ke Komite Keselamatan Pasien sesuai SPO Pelaporan Insiden."
+        },
+        {
+            id: "pkpo_kelengkapan_resep",
+            posName: "Pos 5: Persyaratan Resep Obat yang Lengkap",
+            question: "Apa saja unsur yang wajib dicantumkan dalam penulisan resep obat yang lengkap dan legal?",
+            options: [
+                "Identitas pasien (nama, umur, no RM), nama obat formularium, dosis, aturan pakai, BB anak, dan riwayat alergi.",
+                "Cukup nama obat saja tanpa perlu mencantumkan dosis, umur, maupun aturan minum.",
+                "Nomor kartu ATM pasien dan nomor telepon kerabat yang dapat dihubungi saat penagihan.",
+                "Tanda tangan saksi minimal dua orang warga sekitar rumah sakit."
+            ],
+            correct: 0,
+            explanation: "Resep lengkap wajib mencantumkan identitas pasien (nama, umur, no RM), nama obat formularium, kekuatan/dosis, aturan pakai, berat badan untuk anak, dan riwayat alergi obat."
+        }
+    ];
+
+    /* ==========================================================================
        2. KONFIGURASI PLAYER, SPRITE & FISIKA
        ========================================================================== */
     const PLAYER_CONFIG = {
@@ -3169,6 +3649,34 @@
                 ctx.fillStyle = "#0284c7";
                 ctx.fillRect(-6, 2, 6, 1.5);
                 ctx.fillRect(-6, 5, 5, 1.5);
+            } else if (this.type === "mrmik_folder") {
+                // Berkas Map Rekam Medis (Folder Hijau Toska / Mint dengan Nomor RM)
+                ctx.fillStyle = "#047857"; // folder hijau tua
+                ctx.fillRect(-12, -14, 24, 28);
+                ctx.fillStyle = "#10b981"; // flap depan folder
+                ctx.fillRect(-10, -10, 20, 22);
+                ctx.fillStyle = "#ffffff"; // lembar rekam medis putih
+                ctx.fillRect(-7, -8, 14, 17);
+                // Barcode / Nomor RM
+                ctx.fillStyle = "#022c22";
+                ctx.fillRect(-5, -5, 10, 2);
+                ctx.fillRect(-5, -1, 7, 2);
+                ctx.fillRect(-5, 3, 10, 2);
+                // Tab label merah kecil di kanan atas
+                ctx.fillStyle = "#ef4444";
+                ctx.fillRect(5, -13, 5, 4);
+            } else if (this.type === "simrs_chip") {
+                // Kartu Chip Biometrik / Server Data SIMRS
+                ctx.fillStyle = "#0f172a";
+                ctx.fillRect(-11, -8, 22, 16);
+                ctx.fillStyle = "#38bdf8"; // layar/strip cyber
+                ctx.fillRect(-9, -6, 18, 12);
+                ctx.fillStyle = "#facc15"; // chip emas
+                ctx.fillRect(-4, -3, 8, 6);
+                ctx.fillStyle = "#0284c7";
+                ctx.font = "bold 5px monospace";
+                ctx.textAlign = "center";
+                ctx.fillText("SIMRS", 0, 14);
             } else {
                 // Bintang Mutu Paripurna
                 ctx.fillStyle = "#fbbf24";
@@ -3836,6 +4344,83 @@
         finishX: 6300
     };
 
+    /* ==========================================================================
+       MAP 9: POKJA MRMIK (MANAJEMEN REKAM MEDIS & INFORMASI KESEHATAN)
+       Laboratorium Server SIMRS, Berkas Rekam Medis & Arsip Roll-o-Pack
+       ========================================================================== */
+    const MRMIK_LEVEL = {
+        id: "MRMIK",
+        shortName: "POKJA MRMIK",
+        name: "Pokja MRMIK • Manajemen Rekam Medis & Informasi Kesehatan (RME, Hak Akses, Retensi & KLPCM)",
+        accentFloor: "#065f46",
+        accentBorder: "#10b981",
+        width: 6800,
+        height: 540,
+        playerStart: { x: 80, y: 350 },
+        deathY: 530,
+        platforms: [
+            // Koridor 1: Loket Pendaftaran & 4 Komponen Identitas PPA (x: 0 - 800)
+            { x: 0, y: 440, w: 800, h: 100, type: "solid" },
+            // Koridor 2: Server SIMRS & Implementasi RME Terpadu (x: 940 - 1520)
+            { x: 940, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 3: Hak Akses PPA & Pintu Biometrik Ruang RM (x: 1660 - 2280)
+            { x: 1660, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 4: PPRM, Pedoman Organisasi & Kualifikasi D3 (x: 2360 - 2980)
+            { x: 2360, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 2560, y: 330, w: 340, h: 24, type: "solid" },
+            // Koridor 5: Unit Numbering System (1 Pasien 1 Nomor RM) & Roll-o-Pack (x: 3100 - 3740)
+            { x: 3100, y: 440, w: 640, h: 100, type: "solid" },
+            // Koridor 6: Regulasi Singkatan/Simbol & Monitoring KLPCM (x: 3860 - 4500)
+            { x: 3860, y: 380, w: 160, h: 18, type: "one-way" },
+            { x: 4060, y: 330, w: 350, h: 24, type: "solid" },
+            // Koridor 7: Pelepasan Informasi Medis & Retensi Aktif 3 Tahun (x: 4620 - 5280)
+            { x: 4620, y: 440, w: 660, h: 100, type: "solid" },
+            // Koridor 8: Tim Review Rekam Medis (3 Bln) & Prosedur Down Time (x: 5400 - 6050)
+            { x: 5400, y: 440, w: 650, h: 100, type: "solid" },
+            // Koridor 9: Exit Conference Surveyor MRMIK (x: 6200 - 6800)
+            { x: 6200, y: 440, w: 600, h: 100, type: "solid" }
+        ],
+        movingPlatforms: [
+            new MovingPlatform(820, 400, 100, 20, 0, -80, 1.3),
+            new MovingPlatform(1540, 410, 100, 20, 80, 0, 1.4),
+            new MovingPlatform(2990, 400, 95, 20, 0, -70, 1.2),
+            new MovingPlatform(3750, 400, 95, 20, 70, 0, 1.3),
+            new MovingPlatform(4510, 410, 95, 20, 0, -60, 1.2),
+            new MovingPlatform(5300, 410, 85, 20, 60, 0, 1.2)
+        ],
+        terminals: [
+            new QuizTerminal(500, 380, MRMIK_QUIZ_BANK[0]),  // Pos 1: Komponen Identitas Wajib Penulisan RM
+            new QuizTerminal(1150, 270, MRMIK_QUIZ_BANK[1]), // Pos 2: Ruang Lingkup & Keamanan RME SIMRS
+            new QuizTerminal(1950, 380, MRMIK_QUIZ_BANK[2]), // Pos 3: Hak Akses Data & Proteksi Fisik
+            new QuizTerminal(2720, 270, MRMIK_QUIZ_BANK[3]), // Pos 4: Tata Kerja Unit RM & Kualifikasi D3
+            new QuizTerminal(3420, 380, MRMIK_QUIZ_BANK[4]), // Pos 5: Unit Numbering System & Roll-o-Pack
+            new QuizTerminal(4220, 270, MRMIK_QUIZ_BANK[5]), // Pos 6: Regulasi Singkatan & Evaluasi KLPCM
+            new QuizTerminal(4950, 380, MRMIK_QUIZ_BANK[6]), // Pos 7: Pelepasan Info Medis & Retensi 3 Tahun
+            new QuizTerminal(5720, 380, MRMIK_QUIZ_BANK[7])  // Pos 8: Tim Review 3 Bln & Prosedur Down Time
+        ],
+        collectibles: [
+            new CollectibleDoc(240, 390, "mrmik_folder"),
+            new CollectibleDoc(420, 370, "simrs_chip"),
+            new CollectibleDoc(660, 390, "badge_tni"),
+            new CollectibleDoc(1040, 250, "mrmik_folder"),
+            new CollectibleDoc(1380, 250, "star_mutu"),
+            new CollectibleDoc(1800, 390, "simrs_chip"),
+            new CollectibleDoc(2120, 390, "mrmik_folder"),
+            new CollectibleDoc(2650, 250, "simrs_chip"),
+            new CollectibleDoc(2850, 250, "star_mutu"),
+            new CollectibleDoc(3250, 390, "mrmik_folder"),
+            new CollectibleDoc(3580, 390, "simrs_chip"),
+            new CollectibleDoc(4120, 250, "mrmik_folder"),
+            new CollectibleDoc(4380, 250, "star_mutu"),
+            new CollectibleDoc(4780, 390, "simrs_chip"),
+            new CollectibleDoc(5100, 390, "mrmik_folder"),
+            new CollectibleDoc(5550, 390, "simrs_chip"),
+            new CollectibleDoc(5880, 390, "mrmik_folder"),
+            new CollectibleDoc(6120, 390, "star_mutu")
+        ],
+        finishX: 6300
+    };
+
     let currentLevel = TKRS_LEVEL;
     const player = new Player();
 
@@ -4402,7 +4987,12 @@
 
         // 1. Langit & Gradien Atmosfer
         const skyGrad = ctx.createLinearGradient(0, 0, 0, camera.height);
-        if (currentLevel.id === "KPS") {
+        if (currentLevel.id === "MRMIK") {
+            // Suasana Laboratorium Server SIMRS & Rekam Medis Elektronik Terpadu
+            skyGrad.addColorStop(0, "#022c22");
+            skyGrad.addColorStop(0.5, "#065f46");
+            skyGrad.addColorStop(1, "#34d399");
+        } else if (currentLevel.id === "KPS") {
             // Suasana Birokrasi & Tata Kelola Medis Profesional
             skyGrad.addColorStop(0, "#0f172a");
             skyGrad.addColorStop(0.5, "#1e3a8a");
@@ -4444,7 +5034,7 @@
         ctx.fillRect(0, 0, camera.width, camera.height);
 
         // Siluet Awan Halus
-        ctx.fillStyle = currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)"))));
+        ctx.fillStyle = currentLevel.id === "MRMIK" ? "rgba(167, 243, 208, 0.4)" : (currentLevel.id === "KPS" ? "rgba(224, 231, 255, 0.4)" : (currentLevel.id === "PPI" ? "rgba(204, 251, 241, 0.45)" : (currentLevel.id === "PAP" ? "rgba(254, 205, 211, 0.4)" : (currentLevel.id === "PROGNAS" ? "rgba(233, 213, 255, 0.4)" : (currentLevel.id === "MFK" ? "rgba(254, 215, 170, 0.35)" : "rgba(255, 255, 255, 0.4)")))));
         const cloudOffset = (cx * 0.1) % 600;
         for (let i = -1; i < 4; i++) {
             const bx = i * 600 - cloudOffset;
@@ -4457,7 +5047,7 @@
 
         // 2. Siluet Gedung Utama RSAU dr. Esnawan Antariksa (Parallax 0.25x)
         const bOffset = (cx * 0.25) % 800;
-        ctx.fillStyle = currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))));
+        ctx.fillStyle = currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))));
         for (let i = -1; i < 4; i++) {
             const gx = i * 800 - bOffset;
             ctx.fillRect(gx + 50, 160, 240, 280);
@@ -4479,15 +5069,15 @@
             }
 
             // Lambang Palang Medis di Gedung
-            ctx.fillStyle = currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8"))))));
+            ctx.fillStyle = currentLevel.id === "MRMIK" ? "#34d399" : (currentLevel.id === "KPS" ? "#60a5fa" : (currentLevel.id === "PPI" ? "#2dd4bf" : (currentLevel.id === "PAP" ? "#fb7185" : (currentLevel.id === "PROGNAS" ? "#d8b4fe" : (currentLevel.id === "MFK" ? "#fb923c" : (currentLevel.id === "SKP" ? "#a5b4fc" : (currentLevel.id === "PMKP" ? "#34d399" : "#38bdf8")))))));
             ctx.fillRect(gx + 165, 125, 10, 30);
             ctx.fillRect(gx + 155, 135, 30, 10);
-            ctx.fillStyle = currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e"))))));
+            ctx.fillStyle = currentLevel.id === "MRMIK" ? "#022c22" : (currentLevel.id === "KPS" ? "#0f172a" : (currentLevel.id === "PPI" ? "#042f2e" : (currentLevel.id === "PAP" ? "#4c0519" : (currentLevel.id === "PROGNAS" ? "#2e1065" : (currentLevel.id === "MFK" ? "#431407" : (currentLevel.id === "SKP" ? "#312e81" : (currentLevel.id === "PMKP" ? "#064e3b" : "#0c4a6e")))))));
         }
 
         // 3. Koridor Rumah Sakit & Papan Petunjuk (Parallax 0.5x)
         const cOffset = (cx * 0.5) % 500;
-        ctx.fillStyle = currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)"))))));
+        ctx.fillStyle = currentLevel.id === "MRMIK" ? "rgba(2, 44, 34, 0.6)" : (currentLevel.id === "KPS" ? "rgba(15, 23, 42, 0.6)" : (currentLevel.id === "PPI" ? "rgba(4, 47, 46, 0.6)" : (currentLevel.id === "PAP" ? "rgba(76, 5, 25, 0.55)" : (currentLevel.id === "PROGNAS" ? "rgba(46, 16, 101, 0.55)" : (currentLevel.id === "MFK" ? "rgba(124, 45, 18, 0.55)" : (currentLevel.id === "SKP" ? "rgba(49, 46, 129, 0.55)" : (currentLevel.id === "PMKP" ? "rgba(6, 95, 70, 0.55)" : "rgba(14, 116, 144, 0.55)")))))));
         for (let i = -1; i < 5; i++) {
             const kx = i * 500 - cOffset;
             ctx.fillRect(kx + 20, 260, 40, 180);
@@ -4495,7 +5085,15 @@
             ctx.fillRect(kx, 260, 500, 15);
 
             // Banner dinding koridor
-            if (currentLevel.id === "KPS") {
+            if (currentLevel.id === "MRMIK") {
+                ctx.fillStyle = "rgba(5, 150, 105, 0.85)";
+                ctx.fillRect(kx + 20, 280, 280, 24);
+                ctx.fillStyle = "#ffffff";
+                ctx.font = "bold 9px 'Outfit', sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("📁 MRMIK: RME SIMRS • 4 IDENTITAS PPA • RETENSI 3 THN • KLPCM", kx + 160, 296);
+                ctx.fillStyle = "rgba(2, 44, 34, 0.6)";
+            } else if (currentLevel.id === "KPS") {
                 ctx.fillStyle = "rgba(30, 58, 138, 0.85)";
                 ctx.fillRect(kx + 20, 280, 280, 24);
                 ctx.fillStyle = "#ffffff";
@@ -4607,7 +5205,7 @@
 
         // Gambar Gerbang Finish Surveyor
         const fx = currentLevel.finishX;
-        ctx.fillStyle = currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7"))));
+        ctx.fillStyle = currentLevel.id === "MRMIK" ? "#059669" : (currentLevel.id === "KPS" ? "#2563eb" : (currentLevel.id === "PPI" ? "#0d9488" : (currentLevel.id === "PAP" ? "#e11d48" : (currentLevel.id === "PROGNAS" ? "#9333ea" : (currentLevel.id === "MFK" ? "#ea580c" : (currentLevel.id === "SKP" ? "#4f46e5" : (currentLevel.id === "PMKP" ? "#059669" : "#0284c7")))))));
         ctx.fillRect(fx, 240, 20, 200);
         ctx.fillRect(fx + 100, 240, 20, 200);
         ctx.fillRect(fx - 10, 220, 140, 25);
@@ -4811,9 +5409,27 @@
         const msgElem = document.getElementById("assessmentMessage");
         const btnNext = document.getElementById("btnNextPokja");
 
-        if (currentLevel.id === "KPS") {
+        if (currentLevel.id === "MRMIK") {
             btnNext.innerText = "🏛️ KEMBALI TELUSUR MAP 1: POKJA TKRS ➔";
-            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-teal-400 hover:from-sky-400 hover:to-teal-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
+
+            if (finalScoreGrade >= 85) {
+                predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
+                predikatElem.className = "text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-amber-300";
+                starsElem.innerText = "⭐⭐⭐⭐⭐";
+                msgElem.innerText = "Luar biasa! Kapten RUSA ERIK berhasil membawa RSAU dr. Esnawan Antariksa memenuhi standar Pokja MRMIK (Manajemen Rekam Medis dan Informasi Kesehatan), kepatuhan 4 komponen identitas penulisan RM oleh PPA (Nama jelas, tanda tangan/paraf, tanggal, dan waktu/jam penulisan), implementasi Rekam Medis Elektronik (RME) terintegrasi SIMRS di Rawat Jalan, Rawat Inap, dan Penunjang, proteksi fisik biometrik finger & rak roll-o-pack, Unit Numbering System (1 pasien 1 nomor RM), evaluasi singkatan/simbol terstandar dan audit KLPCM bulanan, regulasi pelepasan info medis formulir 69, retensi aktif 3 tahun, tim review 3 bulanan, serta prosedur kesiapsiagaan Down Time terencana & tidak terencana paripurna!";
+            } else if (finalScoreGrade >= 70) {
+                predikatElem.innerText = "LULUS UTAMA (BINTANG 4)";
+                starsElem.innerText = "⭐⭐⭐⭐";
+                msgElem.innerText = "Hasil sangat baik! Tata kelola Rekam Medis Elektronik SIMRS, kepatuhan identitas 4 komponen PPA, dan pengarsipan roll-o-pack berjalan prima dengan rekomendasi tindak lanjut kelengkapan audit KLPCM bulanan.";
+            } else {
+                predikatElem.innerText = "LULUS MADYA (BINTANG 3)";
+                starsElem.innerText = "⭐⭐⭐";
+                msgElem.innerText = "Standar minimal tercapai. Perlu peningkatan kepatuhan penulisan nama/paraf/tanggal/jam PPA, pengendalian singkatan terlarang, dan sosialisasi alur formulir 69 pelepasan informasi medis.";
+            }
+        } else if (currentLevel.id === "KPS") {
+            btnNext.innerText = "🚀 LANJUT KE MAP 9: POKJA MRMIK ➔";
+            btnNext.className = "w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs md:text-sm shadow-lg transition-all active:scale-98";
 
             if (finalScoreGrade >= 85) {
                 predikatElem.innerText = "LULUS PARIPURNA (BINTANG 5)";
@@ -5073,7 +5689,9 @@
 
     // UI Level Switching & State Sync
     function setPokja(pokjaId) {
-        if (pokjaId === "KPS") {
+        if (pokjaId === "MRMIK") {
+            currentLevel = MRMIK_LEVEL;
+        } else if (pokjaId === "KPS") {
             currentLevel = KPS_LEVEL;
         } else if (pokjaId === "PPI") {
             currentLevel = PPI_LEVEL;
@@ -5105,6 +5723,7 @@
         const tabPAP = document.getElementById("tabSelectPAP");
         const tabPPI = document.getElementById("tabSelectPPI");
         const tabKPS = document.getElementById("tabSelectKPS");
+        const tabMRMIK = document.getElementById("tabSelectMRMIK");
         const menuSubtitle = document.getElementById("menuWorldSubtitle");
         const menuDesc = document.getElementById("menuDescText");
         const btnPlay = document.getElementById("btnPlayTKRS");
@@ -5122,6 +5741,7 @@
         const cardPAP = document.getElementById("selectPokjaPAP");
         const cardPPI = document.getElementById("selectPokjaPPI");
         const cardKPS = document.getElementById("selectPokjaKPS");
+        const cardMRMIK = document.getElementById("selectPokjaMRMIK");
         const badgeTKRS = document.getElementById("badgeTKRS");
         const badgePMKP = document.getElementById("badgePMKP");
         const badgeSKP = document.getElementById("badgeSKP");
@@ -5130,6 +5750,7 @@
         const badgePAP = document.getElementById("badgePAP");
         const badgePPI = document.getElementById("badgePPI");
         const badgeKPS = document.getElementById("badgeKPS");
+        const badgeMRMIK = document.getElementById("badgeMRMIK");
 
         // Reset all tabs
         if (tabTKRS) tabTKRS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
@@ -5140,6 +5761,7 @@
         if (tabPAP) tabPAP.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-rose-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabPPI) tabPPI.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-teal-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
         if (tabKPS) tabKPS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-sky-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
+        if (tabMRMIK) tabMRMIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-slate-700/60 bg-slate-900/50 text-slate-400 hover:text-emerald-300 font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all";
 
         // Reset all cards
         if (cardTKRS) {
@@ -5174,8 +5796,29 @@
             cardKPS.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-sky-950/40 transition-all";
             if (badgeKPS) { badgeKPS.innerText = "SIAP DITELUSURI"; badgeKPS.className = "inline-block mt-2 px-2 py-0.5 rounded bg-sky-500/10 text-sky-400 text-[9px] font-semibold"; }
         }
+        if (cardMRMIK) {
+            cardMRMIK.className = "p-3 rounded-xl bg-slate-900/60 border border-slate-700/60 shadow relative overflow-hidden cursor-pointer hover:bg-emerald-950/40 transition-all";
+            if (badgeMRMIK) { badgeMRMIK.innerText = "SIAP DITELUSURI"; badgeMRMIK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-[9px] font-semibold"; }
+        }
 
-        if (currentLevel.id === "KPS") {
+        if (currentLevel.id === "MRMIK") {
+            if (tabMRMIK) tabMRMIK.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-emerald-400/80 bg-emerald-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
+            if (menuSubtitle) {
+                menuSubtitle.innerText = "POKJA MRMIK • MAP 9 (AKTIF)";
+                menuSubtitle.className = "text-xs text-emerald-400 font-bold uppercase tracking-wider";
+            }
+            if (menuDesc) {
+                menuDesc.innerHTML = "Pimpin <strong>Kapten RUSA ERIK</strong> menelusuri Pokja MRMIK (<strong>4 Komponen Identitas PPA</strong>, <strong>Rekam Medis Elektronik SIMRS</strong> di Rajal/Ranap/Penunjang, <strong>Biometrik Finger & Roll-o-pack</strong>, <strong>Kualifikasi D3 Rekam Medis</strong>, <strong>Unit Numbering System</strong>, <strong>Audit KLPCM Bulanan</strong>, <strong>Retensi 3 Tahun</strong>, <strong>Tim Review 3 Bln</strong>, & <strong>Prosedur Down Time</strong>). Jika salah, taklukkan <strong>Benteng Takeshi</strong>!";
+            }
+            if (btnPlay) {
+                btnPlay.innerText = "▶ MULAI TELUSUR MAP 9: POKJA MRMIK";
+                btnPlay.className = "w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-base md:text-lg shadow-lg shadow-emerald-500/30 transition-all active:scale-98";
+            }
+            if (cardMRMIK) {
+                cardMRMIK.className = "p-3 rounded-xl bg-emerald-500/20 border border-emerald-400/60 shadow-lg relative overflow-hidden cursor-pointer hover:bg-emerald-500/30 transition-all";
+                if (badgeMRMIK) { badgeMRMIK.innerText = "TELUSUR AKTIF"; badgeMRMIK.className = "inline-block mt-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[9px] font-bold"; }
+            }
+        } else if (currentLevel.id === "KPS") {
             if (tabKPS) tabKPS.className = "py-2 px-2 sm:px-2.5 rounded-xl border border-sky-400/80 bg-sky-500/20 text-white font-bold text-[10px] sm:text-xs flex items-center justify-center text-center transition-all shadow";
             if (menuSubtitle) {
                 menuSubtitle.innerText = "POKJA KPS • MAP 8 (AKTIF)";
@@ -5327,6 +5970,7 @@
     bindTab("tabSelectPAP", "PAP");
     bindTab("tabSelectPPI", "PPI");
     bindTab("tabSelectKPS", "KPS");
+    bindTab("tabSelectMRMIK", "MRMIK");
 
     const btnQuickMap = document.getElementById("btnQuickPilihMap");
     if (btnQuickMap) {
@@ -5366,6 +6010,13 @@
         setPokja("KPS");
         document.getElementById("pokjaSelectModal").classList.add("hidden");
     };
+    const selectMRMIK = document.getElementById("selectPokjaMRMIK");
+    if (selectMRMIK) {
+        selectMRMIK.onclick = () => {
+            setPokja("MRMIK");
+            document.getElementById("pokjaSelectModal").classList.add("hidden");
+        };
+    }
     document.getElementById("btnNextPokja").onclick = () => {
         if (currentLevel.id === "TKRS") {
             setPokja("PMKP");
@@ -5381,6 +6032,8 @@
             setPokja("PPI");
         } else if (currentLevel.id === "PPI") {
             setPokja("KPS");
+        } else if (currentLevel.id === "KPS") {
+            setPokja("MRMIK");
         } else {
             setPokja("TKRS");
         }

@@ -1448,4 +1448,98 @@ Berdasarkan tinjauan dan arahan pengguna, dilakukan tiga pemutakhiran besar pada
     - Menjaga integritas siklus hidup game (`GAME_STATE.SIMULATION` saat praktikum, dan restorasi aman ke `GAME_STATE.PLAYING` tanpa glitch fisika saat simulator ditutup).
 
 ---
+
+## 22. Implementasi MAP 9 / DUNIA 5: POKJA MRMIK (Manajemen Rekam Medis & Informasi Kesehatan) Serta Bank Soal STARKES Lengkap (PPK, HPK, PP, KE, PKPO)
+
+Berdasarkan dokumen resmi telusur survei akreditasi STARKES dan regulasi internal RSAU dr. Esnawan Antariksa, modul **MAP 9 / DUNIA 5 (POKJA MRMIK)** telah diaktifkan secara penuh sebagai map platformer playable dengan bank soal terverifikasi, aset grafis bertema rekam medis, dan sistem evaluasi kelulusan.
+
+### 📁 1. Inti Regulasi & Standar Pokja MRMIK
+Modul MRMIK mengintegrasikan 15 instrumen telusur rekam medis dan informasi kesehatan rumah sakit:
+1. **4 Komponen Identitas Wajib PPA**: Setiap Profesional Pemberi Asuhan (PPA) yang mencatat asuhan pasien wajib membubuhkan:
+   - Nama Jelas
+   - Tanda Tangan (atau Paraf)
+   - Tanggal Penulisan
+   - Waktu (Jam) Penulisan
+2. **Implementasi Rekam Medis Elektronik (RME)**: RME telah diselenggarakan secara menyeluruh di Unit Rawat Jalan, Unit Rawat Inap, serta Unit Penunjang, dengan seluruh data medis tersimpan aman di server SIMRS terpusat.
+3. **Hak Akses & Proteksi Fisik**:
+   - Hak akses data, informasi, dan pengisian rekam medis hanya diberikan secara sah kepada PPA dengan akun terautentikasi masing-masing.
+   - Proteksi fisik berkas dan data: Ruang arsip dilindungi pintu akses biometrik sidik jari (*fingerprint access*), rak penyimpanan berkas mekanis *roll-o-pack*, serta pencadangan berkala (*server backup*).
+4. **Kualifikasi & Tata Kerja Unit**: Dipimpin oleh personel yang memiliki sertifikasi kompetensi dan berijazah minimal D3 Rekam Medis, didukung Pedoman Pengorganisasian Rekam Medis (PPRM) dan Program Kerja tahunan.
+5. **Unit Numbering System**: Setiap pasien hanya diberikan **1 (satu) nomor Rekam Medis** yang berlaku seumur hidup untuk seluruh episode perawatan.
+6. **Regulasi Singkatan & Simbol Terstandar**: Rumah sakit menetapkan daftar singkatan dan simbol baku yang boleh digunakan dan yang dilarang digunakan (termuat dalam PPRM). Kepatuhan dipantau setiap bulan melalui audit **KLPCM** (Ketidaklengkapan Pengisian Catatan Medis) pada rawat jalan dan rawat inap.
+7. **Pelepasan Informasi Medis**: Mengikuti prosedur resmi PPRM dengan bukti penandatanganan **Formulir Pelepasan Informasi Medis (Formulir 69)**.
+8. **Jadwal Retensi Rekam Medis**: Ditetapkan minimal **3 tahun** masa retensi aktif dengan pertimbangan efektivitas ruang simpan dan volume pasien aktif.
+9. **Tim Review Rekam Medis**: Memiliki Surat Perintah (SP) Tim Review dan melaksanakan telaah berkala dengan **Laporan Review per 3 (tiga) bulan**.
+10. **Prosedur Waktu Henti Sistem (Down Time)**: Memiliki 2 prosedur kesiapsiagaan kontinuitas pelayanan saat SIMRS henti kerja:
+    - *Down Time Terencana (Planned Down Time)*: Misalnya saat pemeliharaan terjadwal server.
+    - *Down Time Tidak Terencana (Unplanned Down Time)*: Misalnya saat insiden jaringan atau mati listrik, dengan formulir manual cadangan.
+
+---
+
+### 🎮 2. Desain Level MAP 9 (`MRMIK_LEVEL`)
+- **Visual & Atmosfer Server Room / Arsip Rekam Medis**:
+  - Lantai platform ubin keramik bersih dengan lis hijau toska tua (`accentFloor: #065f46`, `accentBorder: #10b981`).
+  - Langit gradien laboratorium digital server data medis (`#022c22` -> `#065f46` -> `#34d399`).
+  - Siluet gedung rumah sakit dengan lambang palang hijau neon bercahaya.
+  - Banner dinding koridor: `📁 MRMIK: RME SIMRS • 4 IDENTITAS PPA • RETENSI 3 THN • KLPCM`.
+- **Dimensi Koridor & Rintangan**:
+  - Panjang koridor 6800 px x 540 px.
+  - 9 Platform koridor utama (Loket pendaftaran, Ruang server SIMRS, Koridor biometrik, Meja PPRM, Kompartemen Roll-o-pack, Area KLPCM, Meja Pelepasan Informasi 69, dan Exit Conference).
+  - 6 Platform bergerak vertikal & horizontal melintasi lantai void rumah sakit.
+- **Kolektibel Khusus**:
+  - `mrmik_folder`: Berkas map rekam medis hijau toska berlabel tab nomor RM dan barcode.
+  - `simrs_chip`: Kartu cip sirkuit cyber SIMRS terenkripsi dengan indikator koneksi server.
+  - `badge_tni` & `star_mutu`.
+- **Pos Telusur Kuis (`MRMIK_QUIZ_BANK`)**:
+  - Terdiri dari 8 QuizTerminal interaktif berstandar STARKES dengan kunci jawaban yang terdistribusi seimbang dan opsi berbobot edukatif setara.
+
+---
+
+### 📚 3. Bank Soal Lengkap Pokja Terkait Lainnya (PPK, HPK, PP, KE, PKPO)
+Seluruh bank soal berikut telah ditambahkan ke basis data permainan untuk modul ekspansi telusur berikutnya:
+1. **POKJA PPK (Pendidikan dalam Pelayanan Kesehatan)**:
+   - Landasan UU RI No. 20/2013 Pasal 1 butir 15 tentang RS Pendidikan multi-profesi.
+   - Klasifikasi RS Pendidikan (Utama, Satelit, Afiliasi) dan status RSAU dr. Esnawan Antariksa (RS Pendidikan Utama FK Universitas Gunadarma & RS Pendidikan Satelit FK Unkrida).
+   - Komite Koordinasi Pendidikan (Komkordik).
+   - Batasan kewenangan klinis peserta didik dokter dan mahasiswa keperawatan/nakes.
+   - 4 Tingkat Supervisi: Rendah, Moderat, Moderat Tinggi, dan Tinggi.
+   - 4 Level Kompetensi supervisi klinis (Level 1–4).
+2. **POKJA HPK (Hak Pasien & Keluarga)**:
+   - 17 Hak Pasien sesuai UU RI No. 44/2009 tentang Rumah Sakit.
+   - Prosedur pemberian informasi dan edukasi terstruktur oleh PPA kompeten.
+   - *Informed Consent* Permenkes No. 290/2008 untuk tindakan pembedahan, anestesi, darah, dan tindakan berisiko tinggi.
+   - *General Consent* saat admisi pendaftaran rawat jalan dan rawat inap.
+   - Urutan hak penandatanganan persetujuan medis bagi pasien usia <21 tahun dan kondisi khusus.
+   - Pemenuhan privasi tirai pemeriksaan, bimbingan kerohanian rutin/permintaan, perlindungan kekerasan fisik, proteksi barang berharga pasien rentan, dan formulir *Do Not Resuscitate* (DNR).
+3. **POKJA PP (Pelayanan Pasien)**:
+   - Batas waktu penyelesaian pengkajian awal medis & keperawatan (1x24 jam rawat inap, segera untuk gawat darurat, masa berlaku 30 hari).
+   - Komponen pengkajian rawat jalan dan rawat inap.
+   - Skrining gizi: MST (*Malnutrition Screening Tools*) untuk dewasa dan *Strong Kids* untuk anak (waktu <= 24 jam).
+   - Asesmen skala nyeri: NIPS (<1 tahun), FLACCS (1–3 tahun), Wong-Baker (>3 tahun), dan Numeric Scale (dewasa).
+   - Wewenang flebotomi / pengambilan sampel darah oleh perawat dan analis kesehatan.
+   - Alur pelaporan nilai kritis laboratorium (pengulangan, lapor dokter patklin, lapor perawat ruangan dan DPJP dalam waktu <= 30 menit).
+   - Nilai kritis baku laboratorium (Kimia darah, Elektrolit K/Na/Cl, Hematologi Hb/Trombosit/HDT, dan Faal Hemostasis PT/APTT).
+4. **POKJA KE (Komunikasi & Edukasi)**:
+   - Multi-profesi edukator PPA: Dokter, Perawat, Bidan, Apoteker/Farmasi, Nutrisionis, Fisioterapis.
+   - 5 Asesmen awal pra-edukasi (keyakinan/nilai, tingkat pendidikan/bahasa, emosional/motivasi, keterbatasan fisik/kognitif, dan kesediaan).
+   - Alur pelaksanaan dan dokumentasi edukasi pada Formulir Edukasi Terintegrasi di Rekam Medis.
+   - Verifikasi pemahaman melalui teknik *teach-back* / demonstrasi ulang.
+5. **POKJA PKPO (Pelayanan Kefarmasian & Penggunaan Obat)**:
+   - Obat LASA/NORUM (*Look Alike Sound Alike / Nama Obat Rupa Ucapan Mirip*), label lingkaran hijau, jarak seling 2 obat non-LASA, dan sistem penulisan *Tall Man Lettering* (contoh: DIAzepam vs LORAzepam, CeFOTAxim vs cefuroxime).
+   - Penyimpanan cairan elektrolit pekat (KCl 7.46%, NaCl 3%), label High Alert, pengenceran wajib, dan akses terbatas (IFRS, ICU, IGD, OK, HD).
+   - Pengelolaan troli emergency berpengunci segel disposable, pencatatan buku pemakaian, penggantian obat dalam 2 jam, dan supervisi farmasi berkala 3 bulan.
+   - Alur pelaporan insiden *medication error* (KNC/KTC/KTD/Sentinel).
+   - Persyaratan kelengkapan resep obat legal, aturan dosis anak berbobot badan, serta pencatatan riwayat alergi.
+
+---
+
+### ✅ 4. Verifikasi Mutu & Hasil Pengujian CDP
+- **Pengujian Headless Chrome CDP (`scratch/test_mrmik_level.mjs`)**:
+  - Membuka halaman akreditasi, membuka modal pemilih map, dan mengklik `selectPokjaMRMIK`.
+  - Berhasil mengaktifkan `currentLevel = MRMIK_LEVEL`, mengubah judul tombol menjadi `▶ MULAI TELUSUR MAP 9: POKJA MRMIK`, dan menampilkan kartu aktif di modal menu.
+  - Menjalankan gameplay MRMIK dengan render kanvas tanpa error runtime.
+  - Membuka Pos 1 Kuis STARKES MRMIK, menjawab opsi B (4 komponen identitas PPA), dan menerima umpan balik positif beserta penjelasan lengkap.
+  - Memvalidasi Berita Acara Exit Conference Surveyor: Predikat **LULUS PARIPURNA (BINTANG 5)** dengan pesan hasil telusur rekam medis elektronik terinci dan tombol kelanjutan loop ke `MAP 1: POKJA TKRS`.
+
+---
 *Dokumentasi ini disusun sebagai panduan arsitektur komprehensif bagi pengembang agar proyek mini game platformer ini dapat dikembangkan secara berkelanjutan menjadi media edukasi dan gamifikasi Akreditasi Rumah Sakit yang interaktif, menyenangkan, dan berbobot.*
